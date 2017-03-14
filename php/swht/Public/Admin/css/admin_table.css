@@ -1,0 +1,45 @@
+@charset "utf-8";
+/*  
+ * @Description: global css  
+ * @Author:      mike+hu<mikeshin@126.com>  
+ * @Update:      mike+hu(2012-09-01 12:22)  
+ */ 
+
+.mod{ margin-top:10px;}
+.mod h2{ background:#f0f0f0; padding:7px 0 7px 20px; color:#333; font-size:16px; font-weight:bold;}
+/*Reset*/
+
+.zc_for input,select,textarea {margin-left: 5px;}
+.zc_for input{border:1px solid #ccc;height:28px; padding:0 10px; width:650px;}
+.zc_for{ padding:12px 0;}
+/*.zc_for table{ margin: 0px auto; }*/
+.zc_for td{ padding:15px 0;}
+.zc_for td.l{ width:140px; text-align:right}
+.zc_for td.r{ text-align:left}
+.zc_for td.r input.txt{border:1px solid #ccc; height:25px; width:250px; padding:5px; font-size:14px;}
+.zc_for .tj{background:#e02222; width:80px; height:35px; line-height:35px;display:inline-block; text-align:center; color:#FFF; margin-right:10px;}
+.zc_for .tjbnt{background:#e02222; width:80px; height:35px; line-height:35px;display:inline-block; text-align:center; color:#FFF; margin-right:10px; border:0px;}
+.zc_for td.r select{height:35px; width:260px; font-size:14px;}
+.zc_for td.r select option{ line-height:1.8;}
+.zc_for tbody tr td .inp_radio{
+    width: 17px;
+    height: 15px;
+    margin-right: 10px;
+}
+
+
+#form .txt_title {
+    width: 655px;
+}
+
+#form .txt_area {
+    width: 665px; height: 200px;
+}
+
+#form .txt_area1 {
+    width: 665px; height: 100px;
+}
+
+#form .txt_area2 {
+    width: 258px; height: 150px;
+}

@@ -1,0 +1,34 @@
+{
+    "name": "jpush/jpush",
+    "type": "library",
+    "description": "JPush API PHP Client",
+    "homepage": "http://docs.jpush.cn/display/dev/Push-API-v3",
+    "license": "Apache",
+    "authors": [
+        {
+            "name": "JPush",
+            "email": "support@jpush.cn",
+            "homepage": "https://www.jpush.cn/",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": ">=5.1",
+        "ext-curl": "*"
+    },
+    "autoload" : {
+        "psr-0":{"jpush":"src/"},
+        "files": [
+            "src/JPush/core/JPush.php",
+            "src/JPush/core/DevicePayload.php",
+            "src/JPush/core/JPushException.php",
+            "src/JPush/core/PushPayload.php",
+            "src/JPush/core/ReportPayload.php",
+            "src/JPush/core/SchedulePayload.php"
+        ]
+
+    },
+    "require-dev": {
+        "phpunit/phpunit": "*"
+    }
+}

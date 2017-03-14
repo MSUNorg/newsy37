@@ -1,0 +1,386 @@
+<extend name="Public/bases" />
+<block name="body" >
+<link href="__CSS__/home_index.css"rel="stylesheet" >
+<div class="g-index-wrapper"> 
+  <!-- 轮播图 -->
+  <div class="m-banner" id="topBanner">
+    <ul class="pics" style="">
+      <advert:advlists name="vo" pos_name="'slider_media'" sort="" limit="4">
+        <li data-src="{$vo.data|get_cover='path'}" style="width: 1903px; background-image: url({$vo.data|get_cover='path'}); background-size:100% 100%;"> <a href="{$vo.url}" target="_self"></a> </li>
+      </advert:advlists>
+    </ul>
+    <ul class="navs" style="margin-left: -44px;">
+    </ul>
+  </div>
+  <!-- 轮播图 END-->`
+  <div class="g-hot-see clear-fix">
+    <div class="g-inner"> 
+      <!---
+        <div class="m-weal">
+          <div class="m-subtitle-bar">
+            <h2>平台福利</h2>
+          </div>
+          <ul class="weal-list">
+            <li class="customers-item">
+              <a href="#" class="customers">专属客服</a>
+              <a class="customers tips">敬请期待</a>
+            </li>
+            <li class="gifts-item">
+              <a href="{:U('Gift/gift')}" class="gifts" target="_self">礼包专区</a>
+            </li>
+            <li class="registration-item">
+              <a href="#" class="registration">签到奖励</a>
+              <a class="registration tips">敬请期待</a>
+            </li>
+            <li class="get-weal-item">
+              <a href="#" class="get-weal">领取福利</a>
+              <a class="get-weal tips">敬请期待</a>
+            </li>
+            <li class="activities-item">
+              <a href="{:U('News/index')}" class="activities" target="_self">平台活动</a>
+            </li>
+            <li class="vip-center-item">
+              <a href="#" class="vip-center">VIP中心</a>
+              <a class="vip-center tips">敬请期待</a>
+            </li>
+          </ul>
+        </div>-->
+      
+      <div class="m-game-reco">
+        <div class="m-subtitle-bar"> 
+          <!--             <a href="#" class="change" id="change"> 换一组<i></i></a> --> 
+          <a href="#" class="change" id="change" page="1" onclick="change(this)"> 换一组<i></i></a>
+          <h2>游戏推荐</h2>
+        </div>
+        <div class="reco-list-wrap" id="recoListWrap" page="1" >
+          <ul class="reco-list" style="width: 3756px;" id="change1">
+            <game:recommends name="vo" recommend_status="1"  limit="1" child="true">
+              <li style="display:;">
+                <div class="imgwrap" style="width:300px;height: 190px;"> <img src="{$vo.cover|get_cover='path'}" class="gpic">
+                  <div class="down-slide">
+                    <div class="code"> <img src="{:U('Game/dow_url_generate?game_id='.$vo['game_id'])}"></div>
+                    <div class="code-desc">
+                      <p class="down-txt">扫描下载</p>
+                      <p>类型：{:get_game_type($vo['game_type_id'])}</p>
+                      <p>大小：{$vo.game_size}</p>
+                    </div>
+                  </div>
+                </div>
+                <p class="title"> <a href="{:U('Game/detail?id='.$vo['id'])}" target="_self">{$vo.game_name}</a> </p>
+                <p class="text">{$vo.features}</p>
+                <p class="operation-bar"> <a href="{:U('Gift/lists?id='.$vo['id'].'')}" target="_self">礼包</a> <a href="{:U('Down/down_file?game_id='.$vo['id'].'&type=1')}">下载</a> </p>
+              </li>
+            </game:recommends>
+          </ul>
+          <ul class="reco-list" style="width: 3756px;" id="change2">
+            <game:recommends name="vo" recommend_status="1"  limit="2" child="true">
+              <li style="display:list-item;">
+                <div class="imgwrap" style="width: 300px;height: 190px;"> <img src="{$vo.cover|get_cover='path'}" class="gpic">
+                  <div class="down-slide">
+                    <div class="code"> <img src="{:U('Game/dow_url_generate?game_id='.$vo['game_id'])}"></div>
+                    <div class="code-desc">
+                      <p class="down-txt">扫描下载</p>
+                      <p>类型：{:get_game_type($vo['game_type_id'])}</p>
+                      <p>大小：{$vo.game_size}</p>
+                    </div>
+                  </div>
+                </div>
+                <p class="title"> <a href="{:U('Game/detail?id='.$vo['id'])}" target="_self">{$vo.game_name}</a> </p>
+                <p class="text">{$vo.features}</p>
+                <p class="operation-bar"> <a href="{:U('Gift/lists?id='.$vo['id'].'')}" target="_self">礼包</a> <a href="{:U('Down/down_file?game_id='.$vo['id'].'&type=1')}">下载</a> </p>
+              </li>
+            </game:recommends>
+          </ul>
+        </div>
+        <div class="reco-list-wrap" id="recoListWrap" page="2"> </div>
+      </div>
+    </div>
+  </div>
+  <div class="g-inner">
+    <div class="g-hot-news">
+      <div class="m-hot-game">
+        <div class="m-subtitle-bar"> <a href="{:U('Game/index?recommend=2')}" target="_self" class="more">更多+</a>
+          <h2> <a href="{:U('Game/index?recommend=2')}" target="_self">热门游戏</a> </h2>
+        </div>
+        <ul class="game-list">
+          <volist name="data" id="vo">
+            <li> <a href="{:U('Game/detail?id='.$vo['id'])}" target="_self"> <img src="{$vo.icon|get_cover='path'}" id="{$vo.icon}"></a>
+              </dt>
+              </a>
+              <div class="img-desc">
+                <p class="title"> <a href="{:U('Game/detail?id='.$vo['id'])}" target="_self">{$vo.game_name}</a> </p>
+                <p class="txt"> {:get_game_type($vo['game_type_id'])}&nbsp;&nbsp;|&nbsp;&nbsp;{$vo.game_size} </p>
+                <p class="operation"> <a href="<if condition='$vo.dow_status eq 0'>#<else/>{:U('Down/down_file?game_id='.$vo['id'].'&type=1')}</if>">下载</a> <a href="{:U('Gift/lists?id='.$vo['id'].'')}" target="_self">礼包</a> </p>
+              </div>
+            </li>
+          </volist>
+        </ul>
+      </div>
+      
+      <!--最新开服-->
+      
+      <div class="m-reco m-server-game-reco">
+        <div class="m-subtitle-bar">
+          <h2>最新开服表</h2>
+        </div>
+        <ul class="sever-list">
+          <volist name="server_list" id="at">
+            <li> <a href="{:U('Game/detail?id='.$at['game_id'])}" class="server-game-link" target="_self"> <img src="{$at.icon|get_cover='path'}"></a> <span class="name"> <a href="{:U('Game/detail?id='.$at['game_id'])}" target="_self">{$at.game_name}</a> </span> <span class="server">{$at.server_name}</span> <span class="time">
+            
+              {$at.start_time|date="m.d",###}</span> <a href="{:U('Gift/lists',array('id'=>$at['game_id']))}" target="_self" class="link">礼包</a> <a href="{:U('Down/down_file?game_id='.$at['game_id'].'&type=1')}" class="link ">下载</a> </li>
+          </volist>
+        </ul>
+      </div>
+      <!--最新开服结束--> 
+      
+      <!--   <div class="g-inner">
+      <div class="g-hot-news">
+        <div class="m-hot-game">
+          <div class="m-subtitle-bar">
+            <a href="{:U('Game/index?recommend=2')}" target="_self" class="more">更多+</a>
+            <h2>
+              <a href="{:U('Game/index?recommend=2')}" target="_self">热门游戏</a>
+            </h2>
+          </div>
+          <ul class="game-list">
+            <game:recommend name="vo" recommend_status="2" limit="5" child="true">
+            <li>
+              <a href="{:U('Game/detail?id='.$vo['id'])}" target="_self"><img src="{$vo.icon|get_cover='path'}"></a>
+              <div class="img-desc">
+                <p class="title">
+                  <a href="{:U('Game/detail?id='.$vo['id'])}" target="_self">{$vo.game_name}</a>
+                </p>
+                <p class="txt">
+                  {:get_game_type($vo['game_type'])}&nbsp;&nbsp;|&nbsp;&nbsp;{$vo.game_size}
+                </p>
+                <p class="operation">
+                  <a href="<if condition='$vo.dow_status eq 0'>#<else/>{:U('Down/down_file?game_id='.$vo['id'].'&type=1')}</if>">下载</a>
+                  <a href="{:U('Gift/lists?id='.$vo['id'].'')}" target="_self">礼包</a>
+                </p>
+              </div>
+            </li>
+            </game:recommend>
+          </ul>
+        </div> --> 
+      
+    </div>
+    
+    <!--       <div class="g-pic-banner">
+        <a href="{$indexad.slideurl}" target="_self">
+          <img data-original="{$indexad.cover|get_cover='path'}" src="{$indexad.cover|get_cover='path'}">
+        </a>
+      </div> --> 
+    <!--左侧-->
+    <div class="inleft">
+      <div class="g-gifts">
+        <div class="m-subtitle-bar"> <a href="{:U('Gift/index')}" class="more" target="_self">更多+</a>
+          <h2> <a href="{:U('Gift/index')}" target="_self">热门礼包</a> </h2>
+        </div>
+        <ul class="gifts-box">
+          <gift:recommend name="vo" recommend_status="2" limit="15" child="true">
+            <li> <a href="{:U('Gift/detail',array('id'=>
+                $vo['id']))}" target="_self"> <img src="{$vo.icon|get_cover='path'}" id="{$vo.icon}"></a>
+              <div class="gift-desc">
+                <p class="title"> <a style="text-decoration:none;" href="{:U('Gift/detail',array('id'=>
+                    $vo['id']))}" target="_self" title="">{$vo.game_name} </a> </p>
+                <p class="txt">{$vo.giftbag_name}</p>
+                <p class="txt "> 剩余： <span class="oran">
+                  <?php if($vo['novice']>0) echo count(explode(",",$vo['novice']));else echo 0 ?>
+                  </span> </p>
+              </div>
+            </li>
+          </gift:recommend>
+        </ul>
+      </div>
+      <div class="g-recommend">
+        <div class="content">
+          <div class="m-reco-l m-new-game-reco">
+            <div class="m-subtitle-bar">
+              <h2>新游推荐榜</h2>
+            </div>
+            <ul class="game-list" id="newGameReco">
+              <game:recommend name="vo" recommend_status="3" limit="10" child="true">
+                <li class="clear-fix <if condition='$key eq 0'>active</if>">
+                  <div class="default">
+                    <switch name="key">
+                      <case value="0"><span class="num so-hot">{$i}</span></case>
+                      <case value="1"><span class="num hot">{$i}</span></case>
+                      <case value="2"><span class="num little-hot">{$i}</span></case>
+                      <default />
+                      <span class="num ">{$i}</span> </switch>
+                    <div class="direc-title"> <a href="{:U('Game/detail?id='.$vo['id'])}" target="_self">{$vo.game_name}</a> </div>
+                    <div class="direc-desc"> {:get_game_type($vo['game_type_id'])}&nbsp;|&nbsp;{$vo.game_size} </div>
+                  </div>
+                  <div class="hover">
+                    <switch name="key">
+                      <case value="0"><span class="num so-hot">{$i}</span></case>
+                      <case value="1"><span class="num hot">{$i}</span></case>
+                      <case value="2"><span class="num little-hot">{$i}</span></case>
+                      <default />
+                      <span class="num ">{$i}</span> </switch>
+                    <a href="{:U('Game/detail?id='.$vo['id'])}" target="_self"><img src="{$vo.icon|get_cover='path'}"></a>
+                    <div class="desc">
+                      <p class="title"> <a href="{:U('Game/detail?id='.$vo['id'])}" target="_self">{$vo.game_name}</a> </p>
+                      <p class="txt"> {:get_game_type($vo['game_type_id'])}&nbsp;|&nbsp;{$vo.game_size} </p>
+                    </div>
+                    <div class="operation"> <a href="{:U('Gift/lists',array('id'=>$vo['id']))}" target="_self" class="gift-link"></a> <a href="<if condition='$vo.dow_status eq 0'>#<else/>{:U('Down/down_file?game_id='.$vo['id'].'&type=1')}</if>" class="down-link"></a> </div>
+                  </div>
+                </li>
+              </game:recommend>
+            </ul>
+          </div>
+          <div class="m-reco-l m-hot-game-reco">
+            <div class="m-subtitle-bar">
+              <h2>热门游戏榜</h2>
+            </div>
+            <ul class="game-list" id="hotGameReco">
+              <game:recommend name="vo" recommend_status="2" limit="10" child="true">
+                <li class="clear-fix <if condition='$key eq 0'>active</if>">
+                  <div class="default">
+                    <switch name="key">
+                      <case value="0"><span class="num so-hot">{$i}</span></case>
+                      <case value="1"><span class="num hot">{$i}</span></case>
+                      <case value="2"><span class="num little-hot">{$i}</span></case>
+                      <default />
+                      <span class="num ">{$i}</span> </switch>
+                    <div class="direc-title"> <a href="{:U('Game/detail?id='.$vo['id'])}" target="_self">{$vo.game_name}</a> </div>
+                    <div class="direc-desc"> {:get_game_type($vo['game_type_id'])}&nbsp;|&nbsp;{$vo.game_size} </div>
+                  </div>
+                  <div class="hover">
+                    <switch name="key">
+                      <case value="0"><span class="num so-hot">{$i}</span></case>
+                      <case value="1"><span class="num hot">{$i}</span></case>
+                      <case value="2"><span class="num little-hot">{$i}</span></case>
+                      <default />
+                      <span class="num ">{$i}</span> </switch>
+                    <a href="{:U('Game/detail?id='.$vo['id'])}" target="_self"><img src="{$vo.icon|get_cover='path'}"></a>
+                    <div class="desc">
+                      <p class="title"> <a href="{:U('Game/detail?id='.$vo['id'])}" target="_self">{$vo.game_name}</a> </p>
+                      <p class="txt"> {:get_game_type($vo['game_type_id'])}&nbsp;|&nbsp;{$vo.game_size} </p>
+                    </div>
+                    <div class="operation"> <a href="{:U('Gift/lists',array('id'=>$vo['id']))}" target="_self" class="gift-link"></a> <a href="<if condition='$vo.dow_status eq 0'>#<else/>{:U('Down/down_file?game_id='.$vo['id'].'&type=1')}</if>" class="down-link"></a> </div>
+                  </div>
+                </li>
+              </game:recommend>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--左侧结束--> 
+    
+    <!--右侧-->
+    
+    <div class="inright">
+      <div class="m-subtitle-bar" style="margin-top:27px;"> <a href="{:U('News/index')}" target="_self" class="more">更多+</a>
+        <h2> <a href="{:U('News/index')}" target="_self">新闻资讯</a> </h2>
+      </div>
+
+ <!--      <article:entity name="vo" category="43" limit="1" child="true">
+              <eq name="key" value="1">
+              <div class="head-new">
+                <h3><a target="_self" href="{:U('News/detail',array('id'=>$vo['id']))}">{:msubstr($vo['title'],0,15)}</a></h3>
+                <p>{:cutstr_html($vo['content'],35)}</p>           
+              </div>
+              </eq>
+              </article:entity> -->
+
+      <div class="news_wrap">
+        <div class="news_show" style="border-bottom:1px dashed #eee;margin-bottom:5px;">
+           <article:entity name="vo" category="42" limit="1" child="true">
+            <div class="news_show_img" style=""><a href="{:U('News/detail',array('id'=>$vo['id']))}s"><img src="{$vo.cover_id|get_cover='path'}" />
+            </a></div>
+            <a href="{:U('News/detail',array('id'=>$vo['id']))}"><h3 class="news_show_title">{:msubstr($vo['title'],0,15)}</h3></a>
+            <p class="news_show_content">{:cutstr_html($vo['content'],75)}</p>
+            </article:entity>
+        </div>
+        <ul>
+
+           <foreach name="newslist" item="vo" > 
+               <li>
+                  <span>[{$vo.cate_title}]</span>
+                  <a href="{:U('News/detail',array('id'=>$vo['id']))}" target="_blank">{$vo.title}</a>
+               </li>
+           </foreach>
+
+        </ul>
+      </div>
+      <advert:advlists name="vo" pos_name="'index_bottom_media'" sort="" limit="1">
+          <div class="newimg"><a href="{$vo.url}"><img src="{$vo.data|get_cover='path'}"></a></div>
+      </advert:advlists>
+<!--                         <switch name="vo.category_id">
+                            <case value="42">[公告]</case>
+                            <case value="43">[新闻]</case>
+                            <case value="44">[活动]</case>
+                        <default />default
+                        </switch> -->
+      
+      <!---新闻中心  <div class="m-news-wrap">
+          <div class="m-subtitle-bar">
+            <a href="{:U('News/index')}" target="_self" class="more">更多+</a>
+            <h2>
+              <a href="{:U('News/index')}" target="_self">新闻资讯</a>
+            </h2>
+          </div>
+          
+           <div class="newimg"><a href=""><img src="溪谷手游运营平台_files/5779fba45c0db.jpg"></a></div>
+          <div class="news">
+            <div class="content">
+              <article:entity name="vo" category="43" limit="1" child="true">
+              <eq name="key" value="1">
+              <div class="head-new">
+                <h3><a target="_self" href="{:U('News/detail',array('id'=>$vo['id']))}">{:msubstr($vo['title'],0,15)}</a></h3>
+                <p>{:cutstr_html($vo['content'],35)}</p>           
+              </div>
+              </eq>
+              </article:entity>
+              <ul class="news-list">
+                <article:limits name="vo" category="43" limit="10" child="true">
+                  <li>
+                    <a target="_self" style="line-height:18px;" href="{:U('News/detail',array('id'=>$vo['id']))}">{$vo.title}</a>
+                  </li>
+                </article:limits>
+              </ul>
+            </div>
+          </div>
+        </div>新闻结束--> 
+      
+    </div>
+    
+    <!--右侧结束--> 
+    
+  </div>
+  <div class="m-friend-links clear-fix">
+    <div class="g-inner">
+      <div class="m-subtitle-bar">
+        <h2>友情链接</h2>
+      </div>
+      <ul class="link-list">
+        <volist name="links" id="vo">
+          <li> <a title="{$vo.title}" href="{$vo.link_url}" target="_blank">{$vo.title}</a> </li>
+        </volist>
+      </ul>
+    </div>
+  </div>
+  <div class="new-year-float"> <a href="#" target="_self" class="join-btn"></a> <a href="javascript:void(0)" class="close"></a> </div>
+</div>
+<script type="text/javascript">
+    function change(id){
+      $('.reco-list li').attr('style',''); 
+      var page = $(id).attr('page');
+        if(page == 1){
+          $('#change1').hide();
+          $(id).attr('page','2');
+        } 
+        if(page == 2){
+          $('#change1').show();
+          $(id).attr('page','1');
+        }  
+    }
+$(function(){ 
+  $('.reco-list li').attr('style',''); 
+}); 
+</script> 
+<script src="__JS__/jquery.lazyload.min.js"></script> 
+<script src="__JS__/home_index.js"></script>
+</block>

@@ -1,0 +1,79 @@
+<extend name="Public/base" />
+<block name="body">
+<link rel="stylesheet" type="text/css" media="all" href="__CSS__/home.css">
+<link rel="stylesheet" type="text/css" media="all" href="__CSS__/pay.css">
+<script type="text/javascript" src="__STATIC__/datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
+<style>
+    .pagelist{height:41px;}
+    .tab-pane td{border-bottom:1px solid #cfd3d2;} 
+    .tab-pane .tct1{background:#f9f9f9 none repeat scroll 0 0}
+</style>
+<div class="wrap_w">
+	<div class="crumbs"><em>当前位置：</em><a href="{:U('Index/index')}" target="_blank">溪谷游戏</a>
+		<span> &gt; </span><a href="{:U('Subscriber/record')}">用户中心</a>
+	</div>
+    <div id="member" class="clearfix">
+	    <!--左边导航-->
+	    <div id="member_l">
+	      <include file="Base" />
+	    </div>
+	    <!--左边导航END-->            
+		<div id="member_r">
+			<div class="other_s">
+            
+				<div id="main_con">
+					<div class="infor">
+						<span class="line"></span>
+						<div id="tab-content">
+                            <h3 class="clearfix"><span>最近10笔平台币充值记录</span></h3>
+							<div id="tab1" class="tab-pane in tab1">
+								<table cellspacing="0" cellpadding="0" class="tap1-01 hide1">
+									<tbody>
+										<tr>
+											<th>时间</th><th>订单号</th><th>充值金额</th><th>充值方式</th>
+										</tr>
+										<volist name='list_data' id="vo">
+                                            <tr class="tct{$key%2}">
+											<td>{$vo.pay_time|date='Y-m-d',###}</td>
+											<td>{$vo.pay_order_number}</td>
+											<td>{$vo.pay_amount}</td>
+											<td>
+												<switch name="$vo['pay_way']" >
+													<case value="0">支付宝</case>
+													<case value="1">微信</case>
+													<case value="2">平台币</case>
+													<default />支付宝
+												</switch>
+											</td>
+                                            </tr>
+										</volist>
+									</tbody>
+								</table>
+							</div>
+                            <h3 class="clearfix"><span>最近10笔平台币使用记录</span></h3>
+							<div id="tab2" class="tab-pane in tab2">
+								<table cellspacing="0" cellpadding="0" class="tap1-01 hide1">
+									<tbody>
+										<tr>
+											<th>时间</th><th>充值金额</th><th>充值游戏</th>
+										</tr>
+										<volist name='agent_data' id="vo">
+                                            <tr class="tct{$key%2}">
+											<td>{$vo.create_time|date='Y-m-d H:i:s',###}</td>
+											<td>{$vo.amount}</td>
+											<td>{$vo['game_name']}</td>
+                                            </tr>
+										</volist>
+									</tbody>
+								</table>
+								<div class="pagelist" style="margin:0 auto;"><ul class="pls"></ul></div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+	    </div>
+	</div>
+	<div class="clear"></div>
+</div>
+</block>

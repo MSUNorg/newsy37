@@ -1,0 +1,138 @@
+<extend name="Public/base" />
+<block name="body">
+<div class="wrap_w">
+  <div class="crumbs"><em>当前位置：</em><a href="{:U('Index/index')}" target="_blank">溪谷游戏</a>
+	 <span> &gt; </span><a href="{:U('Subscriber/record')}">用户中心</a>
+  </div>
+  <div id="member" class="clearfix">
+    <div id="member_l">
+      <include file='Base' />
+    </div>
+    
+    <div id="member_r">
+      <div class="other_s">
+          <h3 class="clearfix"><span>实名认证</span></h3>
+          <link rel="stylesheet" href="__CSS__/safe.css" />
+        <empty name="istrue">
+          <div class="m-allineone-validatePass" id="mav">
+            <div class="validate-pass-wrap">
+                <span id="notice1" class="notice"></span>
+                <p class="tips">该操作需要验证登录密码</p>
+                <div class="input-optimize">
+                    <input type="password" style="display: none;">
+                    <input type="password" class="pass-input" id="validatePass" >
+                    <span class="error-msg"></span>
+                </div>
+                <div class="operation-bar">
+                    <a href="#" class="confirm" id="mavbtn">确定</a>
+                </div>
+                <p style="color:red;font-size:14px;line-height:20px;padding:20px 0;">* 用于帐号归属确认以及防沉迷验证，一旦设置，则无法更改</p>
+            </div>
+          </div>
+          
+          <div class="binded-wrap hidden" id="bw">
+            <form action="">
+                <span id="notice" class="notice"></span>
+                <div class="m-binded-id">
+                <p >注意：您未填写防沉迷信息，按国家相关规定被纳入防沉迷系统。</p>
+                <p>建议您马上填写防沉迷信息，以更好地获得网络服务。</p>
+                <p class="red">此帐号的身份证信息只能填写一次，是判断帐号归属的重要依据。</p>
+                
+                <div class="input-optimize">
+                    <label>真实姓名：</label>
+                    <input type="text" id="realName">
+                    <span class="star red">*</span>
+                    <span class="error-msg"></span>
+                </div>
+                <div class="input-optimize">
+                    <label>身份证号：</label>
+                    <input type="text" id="idNumber">
+                    <span class="star red">*</span>
+                    <span class="error-msg"></span>
+                </div>
+                <div class="operation-bar">
+                    <a href="#" class="confirm" id="bwbtn">确定</a>
+                    <a href="" class="cancel">取消</a>
+                </div>
+                </div>
+            </form>           
+          </div>
+        <else />
+            <div class="m-allineone-validatePass" >
+                <div class="validate-pass-wrap">
+                <div style="font-size:18px;color:red;">您已实名认证过，无需重复认证！</div>
+                </div>
+            </div>
+        </empty>
+      </div>
+    </div>
+    <script src="__JS__/idcard.js"></script>
+    <script>
+        $(function() {
+            $('#mavbtn').on('click',function() {
+                var jvp = $('#validatePass'),vp = $.trim(jvp.val());
+                if (vp == '') {$('.error-msg').text('必填项');return false;}
+                $.ajax({
+                    type:'post',
+                    dataType:'json',
+                    data:'pwd='+vp,
+                    url:'{:U("safe")}',
+                    success:function(data) {
+                        if (parseInt(data.status) == 1 ) {
+                            $('#notice1').removeClass('fail').addClass('success').text('密码正确，正在跳转。。。');
+                            setTimeout(function() {
+                                $('#mav').addClass('hidden');
+                                $('#bw').removeClass('hidden');
+                            },1000);
+                        } else {
+                            $('#notice1').removeClass('success').addClass('fail').text('密码错误');
+                        }
+                    },
+                    error:function() {
+                        alert('服务器故障，请稍候再试。。。。');
+                    }
+                });
+            });
+        
+            $('.input-optimize input').on('blur',function() {
+                var val = $(this).val();
+                if (val == ''){$(this).siblings('.error-msg').text('必填项');return;} else {$(this).siblings('.error-msg').text('');}                                
+            });           
+            
+            $('#bwbtn').on('click',function() {
+                var jrealName = $('#realName'),realName = $.trim(jrealName.val()),
+                    jidNumber =$('#idNumber'), idNumber = $.trim(jidNumber.val()),                   
+                    that = $(this);
+                if (realName == '') {jrealName.siblings('.error-msg').text('必填项');return false;}
+                if (idNumber == '') {jidNumber.siblings('.error-msg').text('必填项');return false;}
+                if (!(/^[\u4E00-\u9FA5]{2,10}$/.test(realName))) {jrealName.siblings('.error-msg').text('请填写正确的姓名');return false;}
+                if (!(IdentityCodeValid(idNumber))) {jidNumber.siblings('.error-msg').text('请填写正确的身份证号码');return false;}  
+                
+                $.ajax({
+                    type:'post',
+                    dataType:'json',
+                    data:'real_name='+realName+'&idcard='+idNumber,
+                    url:'{:U("card")}',
+                    success:function(data) {
+                        if (parseInt(data.status) == 1 ) {
+                            $('#notice').removeClass('fail').addClass('success').text(data.msg);
+                            setTimeout(function() {
+                                window.location.href='{:U("profile")}';
+                            },2000);
+                        } else {
+                            $('#notice').removeClass('success').addClass('fail').text(data.msg);
+                        }
+                    },
+                    error:function() {
+                        alert('服务器故障，请稍候再试。。。。');
+                    }
+                });
+            });
+            $('.cancel').on('click',function() {
+                window.location.reload();
+            });
+        });
+    </script>
+  </div>
+</div>
+</block>

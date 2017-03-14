@@ -1,0 +1,109 @@
+<extend name="Public/base"/>
+
+<block name="body">
+	<div class="main-title">
+		<h2>支付设置</h2>
+	</div>
+	<div class="tab-wrap">
+		<ul class="tab-nav nav">
+			<li data-tab="tab1" class="current"><a href="javascript:void(0);" >支付宝</a></li>
+			<li data-tab="tab2"><a href="javascript:void(0);" >微信</a></li>
+		</ul>
+		<div class="tab-content">
+		<div id="tab1" class="tab-pane in tab1">
+		<form action="{:U('saveTool')}" method="post" class="form-horizontal alipay">
+			<div class="form-item">
+				<label class="item-label">合作身份者id<span class="check-tips">（合作身份者id，以2088开头的16位纯数字）</span> </label>
+				<div class="controls">
+					<input type="text" class="text input-large" name="config[appid]" value="{$alipay_pay['appid']}">
+				</div>
+			</div>
+			<div class="form-item">
+				<label class="item-label">安全检验码<span class="check-tips">（安全检验码，以数字和字母组成的32位字符）</span> </label>
+				<div class="controls">
+					<input type="text" class="text input-large" name="config[key]" value="{$alipay_pay['key']}">
+				</div>
+			</div>
+			<div class="form-item">
+				<label class="item-label">收款帐户<span class="check-tips">（卖家支付宝帐户）</span> </label>
+				<div class="controls">
+					<input type="text" class="text input-large" name="config[account]" value="{$alipay_pay['account']}">
+				</div>
+			</div>
+			<div class="form-item">
+				<label class="item-label">启用状态<span class="check-tips">（OSS和七牛同时开启的话默认OSS）</span> </label>
+				<div class="controls">
+					<input type="radio" class="inp_radio" value="0" name="status" <eq name="alipay_pay_data['statue']" value="0">checked="checked"</eq>>禁用
+                    <input type="radio" class="inp_radio" value="1" name="status" <eq name="alipay_pay_data['status']" value="1">checked="checked"</eq>>启用
+				</div>
+			</div>
+			<div class="form-item">
+				<div class="controls">
+					<input type="hidden" name="name" value="alipay_pay"></input>
+					<!-- <button type="submit" class="btn submit-btn" target-form="form-horizontal-oss">确 定</button> -->
+					<button type="submit" class="btn submit-btn ajax-post" target-form="alipay">确 定</button>
+					<button class="btn btn-return" onclick="javascript:history.back(-1);return false;">返 回</button>
+				</div>
+			</div>
+		</form>
+		</div>
+		</div>
+
+		<div class="tab-content">
+		<div id="tab2" class="tab-pane tab2">
+		<form action="{:U('saveTool')}" method="post" class="form-horizontal weixin">
+			<div class="form-item">
+				<label class="item-label">公众号ID<span class="check-tips">（微信提供的唯一识别码）</span> </label>
+				<div class="controls">
+					<input type="text" class="text input-large" name="config[appid]" value="{$weixin_pay['appid']}">
+				</div>
+			</div>
+			<div class="form-item">
+				<label class="item-label">商户号<span class="check-tips">（）</span> </label>
+				<div class="controls">
+					<input type="text" class="text input-large" name="config[mchid]" value="{$weixin_pay['mchid']}">
+				</div>
+			</div>
+			<div class="form-item">
+				<label class="item-label">微信key<span class="check-tips">（key）</span> </label>
+				<div class="controls">
+					<input type="text" class="text input-large" name="config[key]" value="{$weixin_pay['key']}">
+				</div>
+			</div>
+			<div class="form-item">
+				<label class="item-label">APPSECRET	<span class="check-tips">（）</span> </label>
+				<div class="controls">
+					<input type="text" class="text input-large" name="config[appsecret]" value="{$weixin_pay['appsecret']}">
+				</div>
+			</div>
+			<div class="form-item">
+				<label class="item-label">启用状态<span class="check-tips">（）</span> </label>
+				<div class="controls">
+					<input type="radio" class="inp_radio" value="0" name="status" <eq name="weixin_pay_data['statue']" value="0">checked="checked"</eq>>禁用
+                    <input type="radio" class="inp_radio" value="1" name="status" <eq name="weixin_pay_data['status']" value="1">checked="checked"</eq>>启用
+				</div>
+			</div>
+			<div class="form-item">
+				<div class="controls">
+					<input type="hidden" name="name" value="weixin_pay"></input>
+					<!-- <button type="submit" disabled class="btn submit-btn disabled" target-form="form-horizontal">确 定</button> -->
+					<button type="submit" class="btn submit-btn ajax-post" target-form="weixin">确 定</button>
+					<button class="btn btn-return" onclick="javascript:history.back(-1);return false;">返 回</button>
+				</div>
+			</div>
+		</form>
+		</div>
+		</div>
+	</div>
+</block>
+
+<block name="script">
+<script type="text/javascript">
+	//导航高亮
+	highlight_subnav('{:U('Tool/payset')}');
+	$(function(){
+		//支持tab
+		showTab();
+	})
+</script>
+</block>

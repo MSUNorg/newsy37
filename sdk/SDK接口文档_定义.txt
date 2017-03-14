@@ -1,0 +1,281 @@
+全部接口都要带着的参数：
+
+appid IOS:bundleId Android:packagename
+versionCode app版本号
+sdkver sdk版本号
+pf(平台) 
+ch(渠道) 
+device_idfa 设备标识 IOS：idfa Android：udid ？
+device_sys_version 设备版本
+device_model 设备型号
+device_isroot 设备是否越狱（root）
+
+登录用户必带参数
+token
+username
+
+1、初始化：
+	整合接口，获取紧急通告&替换&更新信息&广告
+
+	iOS:/IOSApi/Update/
+	Android:/AndroidApi/Update
+
+2、标准登录：
+	整合接口，执行账号登录&子账号登录&消息；登录成功后需返回游戏子账号信息（是否游戏账号，因为本地有可能没有保存过子账号信息，不如都返回）及小球信息
+
+	iOS:/IOSApi/User/Login
+	Android:/AndroidApi/User/Login
+
+	username password
+
+3、游戏账号登录：
+	整合接口，如果绑定了此账号，则登录此账号，返回是否有消息，返回绑定信息，返回小球信息（如果已绑定）
+
+	iOS:/IOSApi/User/LoginGameAccount
+	Android:/AndroidApi/User/LoginGameAccount
+
+	game_username
+
+4、手机号注册：
+	a、获取验证码；
+
+	iOS:/IOSApi/User/SendVerificode
+	Android:/AndroidApi/User/SendVerificode
+
+	act:register phone
+
+	b、检查验证码；
+
+	iOS:/IOSApi/User/CheckBoundPhone
+	Android:/AndroidApi/User/CheckBoundPhone
+
+	phone code
+
+	c、整合接口，设置密码完成注册（要包含是否有消息，小球信息）(带上验证码)
+
+	iOS:/IOSApi/User/Register
+	Android:/AndroidApi/User/Register
+
+	phone code password
+
+
+5、账号注册：
+	整合接口，账号注册接口（要包含是否有消息，小球信息）
+	
+	iOS:/IOSApi/User/Register
+	Android:/AndroidApi/User/Register
+
+	username password
+
+6、找回密码：
+	a、获取验证码；
+
+	iOS:/IOSApi/User/SendVerificode
+	Android:/AndroidApi/User/SendVerificode
+
+	act:reset password phone
+
+	b、检查验证码；
+
+	iOS:/IOSApi/User/CheckBoundPhone
+	Android:/AndroidApi/User/CheckBoundPhone
+
+	phone code
+
+	c、设置新密码（此3接口是否同手机号注册接口）
+
+	iOS:/IOSApi/User/Resetpassword
+	Android:/AndroidApi/User/Resetpassword
+
+	phone code new password
+
+7、支付模块：
+	a、获取订单（支付主界面）
+
+	iOS:/IOSApi/Pay/PlaceOrder
+	Android:/AndroidApi/Pay/PlaceOrder
+
+	game(游戏id) subject fee dealSeq
+	可选参数
+	gamesvr uid notifyUrl pkgid
+
+	b、余额支付（如果需要支付密码）
+
+	iOS:/IOSApi/Pay/PayOrder
+	Android:/AndroidApi/Pay/PayOrder
+
+	paytoken(上一步获取订单中返回的token字段) couponId payPassword
+
+	c、获取充值下单
+
+	iOS:/IOSApi/Pay/PlaceRechargeOrder
+	Android:/AndroidApi/Pay/PlaceRechargeOrder
+
+	fee payType（获取订单接口中返回的支付方式里的code）
+
+	d、检查余额
+
+	同获取用户信息
+	
+	e、使用订单检查支付结果
+
+	iOS:/IOSApi/Pay/CheckOrder
+	Android:/AndroidApi/Pay/CheckOrder
+
+	game dealSeq
+
+	f、获取红包信息
+
+	iOS:/IOSApi/Pay/GetCoupons
+	Android:/AndroidApi/Pay/GetCoupons
+
+	status(0未使用) game 
+
+返回值
+
+	参数名称	描述
+couponId	交易时用到的红包ID
+couponName	红包名称
+fee	红包有效金额
+effectDateStart	红包有效期开始日期
+effectDateEnd	红包有效期结束日期
+chids	红包支持的渠道ID。0表示全部渠道，其他会用,分隔
+platforms	红包支持的平台。0表示全部平台，其他会用,分隔
+games	支持的游戏名称列表
+
+
+8、小球：（如果是游戏账号登录，登录结果会返回是否绑定）
+	a、检查绑定接口（同游戏账号登录后检查绑定）；
+	b、点小球后获取各子模块信息（子模块是否显示是可配置的，另外还要知道是否显示红点）
+
+	iOS:/IOSApi/Float/GetConf
+	Android:/AndroidApi/Float/GetConf
+
+9、消息：
+	获取链接
+
+10、礼包：
+	获取链接
+
+11、活动：
+	获取链接
+
+12、充值：
+	获取链接
+
+13、邀请：
+	a、获取邀请界面信息（主要是自己对应的邀请码）；
+
+	iOS:/IOSApi/User/GetInviteInfo
+	Android:/AndroidApi/User/GetInviteInfo
+
+	b、确认邀请（别人邀请自己）
+
+	iOS:/IOSApi/User/SendInviteInfo
+	Android:/AndroidApi/User/SendInviteInfo
+
+14、钱包：
+	获取钱包界面相关链接
+
+15、子账号管理：
+	a、创建小号；
+
+	iOS:/IOSApi/User/RegisterSub
+	Android:/AndroidApi/User/RegisterSub
+
+	sub_user_name
+
+	b、整合接口，切换小号（当前小号注销，新小号登录）
+
+	iOS:/IOSApi/User/LoginSub
+	Android:/AndroidApi/User/LoginSub
+
+	sub_guid
+
+16、密码管理：
+	获取界面信息（密保手机号、支付信息、子帐号列表等）
+
+	iOS:/IOSApi/User/GetInfo
+	Android:/AndroidApi/User/GetInfo
+
+17、更改密保手机：
+	a、界面信息（旧手机号，收不到验证码的链接）；
+	b、旧手机号获取验证码；
+
+	iOS:/IOSApi/User/SendVerificode
+	Android:/AndroidApi/User/SendVerificode
+
+	act:checkboundphone phone 
+
+	c、旧手机号验证码验证；
+
+	iOS:/IOSApi/User/CheckBoundPhone
+	Android:/AndroidApi/User/CheckBoundPhone
+
+	phone code
+	
+	d、新手机号获取验证码；
+
+	iOS:/IOSApi/User/SendVerificode
+	Android:/AndroidApi/User/SendVerificode
+
+	act:bindphone phone
+
+	e、新手机号验证码验证（执行绑定）
+
+	iOS:/IOSApi/User/BindPhone
+	Android:/AndroidApi/User/BindPhone
+
+	old phone old code phone code
+
+18、修改登录密码：
+	修改登录密码
+
+	iOS:/IOSApi/User/Resetpassword
+	Android:/AndroidApi/User/Resetpassword
+oldpassword newpassword 
+19、修改支付密码：
+	修改支付密码
+
+	iOS:/IOSApi/Pay/ResetPayPass
+	Android:/AndroidApi/Pay/ResetPayPass
+oldpassword newpassword 
+20、找回交易密码
+
+
+20、小额免密：
+	a、获取界面信息；
+
+	iOS:/IOSApi/Pay/GetNoPassPay
+	Android:/AndroidApi/Pay/GetNoPassPay
+
+	b、保存用户设置
+
+	iOS:/IOSApi/Pay/SetNoPassPay
+	Android:/AndroidApi/Pay/SetNoPassPay
+
+	switch: on/off paylimit(免密额度) pay passport（支付密码）
+
+21、注销：
+	注销
+
+	iOS:/IOSApi/User/Logout
+	Android:/AndroidApi/User/Logout
+
+	sub_guid
+
+22、登录并绑定：
+	整合接口，对应登录接口的登录绑定，同步整合小球结果
+
+	同登录，需要多带一个game_username 参数
+
+23、注册并绑定：
+	整合接口，对应注册接口的注册绑定，同步整合小球结果
+
+	同注册，需要多带一个game_username 参数
+
+24、验证密码：
+	验证密码接口，功能参数近似于登录，没有子账号的信息
+
+	iOS:/IOSApi/User/QuickLogin
+	Android:/AndroidApi/User/QucikLogin

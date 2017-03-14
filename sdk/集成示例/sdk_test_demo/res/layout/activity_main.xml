@@ -1,0 +1,45 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/mch_menghuan_index_bg"
+    android:orientation="vertical" >
+
+    <Button
+        android:id="@+id/btnExit"
+        android:layout_width="151dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:background="#88434343"
+        android:gravity="center"
+        android:text="退出" />
+
+    <Button
+        android:id="@+id/btn_setTestParams"
+        android:layout_width="151dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:background="#88434343"
+        android:text="设置测试参数" />
+
+    <Button
+        android:id="@+id/login"
+        android:layout_width="151dp"
+        android:layout_height="30dp"
+        android:layout_centerInParent="true"
+        android:background="#88434343"
+        android:text="登录" />
+
+    <Button
+        android:id="@+id/btnPay"
+        android:layout_width="151dp"
+        android:layout_height="30dp"
+        android:layout_below="@+id/login"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10px"
+        android:background="#88434343"
+        android:text="充值" />
+
+</RelativeLayout>

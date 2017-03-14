@@ -1,0 +1,100 @@
+<extend name="Public/bases" />
+<block name="body" >
+<link rel="stylesheet" href="__CSS__/gift.css">
+<link rel="stylesheet" href="__CSS__/platform.css">
+<script type="text/javascript" src="__JS__/jquery.zclip.min.js"></script>
+<div class="crumbs-box">
+  <div class="crumbs"><a href="{:U('index')}">礼包中心</a>&gt;<span>我的礼包</span></div>
+</div>
+<div class="wrap clear-fix m60">
+  <div class="myGift-box">
+    <h3 class="common-title">我的礼包<span class="common-title-ico"></span></h3>
+	<div class="myGift-content">
+		<div class="myGift-content-title">
+			<div class="myGift-content-title-t1">礼包名称</div>
+			<div class="myGift-content-title-t2">领取时间</div>
+			<div class="myGift-content-title-t3">礼包码</div>
+			<div class="myGift-content-title-t4">其他</div>
+		</div>
+		<div class="myGift-content-list-box" id="mygift-list">
+			<volist name="activation" id="vo">
+			<div class="myGift-content-list">
+				<div class="myGift-content-list-c1">
+					<div class="c1">
+						<a target="_blank" href="{:U('detail?id='.$vo['gift_id'])}">
+							<div class="icon">
+								<img src="{$vo.icon|get_cover='path'}">
+							</div>
+							<em>{$vo.game_name}</em>
+						</a>
+					</div>
+				</div>
+				<div class="myGift-content-list-c2">{$vo.create_time|date='Y-m-d H:i:s',###}</div>
+				<div class="myGift-content-list-c3">
+					<span id="copyText">{$vo.novice}</span>
+					<a href="javascript:void(0);"  class="copy">复制</a>
+				</div>
+				<div class="myGift-content-list-c4">
+					<a href="{$vo.and_dow_address}">下载游戏</a>
+					<!-- <span>|</span>
+					<a target="_blank" href="">前往论坛</a> -->
+				</div>
+			</div>
+			</volist>
+		</div>
+		<script>
+			$(function() {
+				function i(i) {
+					i.zclip({
+						path: "__JS__/ZeroClipboard.swf",
+						copy: function() {
+							return $(this).siblings('#copyText').text()
+						},
+						beforeCopy: function() {
+							$(this).addClass('copy-active').closest('.myGift-content-list').siblings()
+							.each(function() {
+								$(this).find('.copy').removeClass('copy-active');
+							});
+						},
+						afterCopy: function() {
+							var text = $(this).siblings('#copyText').text();
+							var i = $('<div class="copy-tips"><div class="copy-tips-wrap">☺ 复制成功，激活码：'+text+'</div></div>');
+							$('body').find('.copy-tips').remove().end().append(i),
+							$('.copy-tips').fadeOut(3e3)
+						}
+					})
+				}
+				
+				$('.copy').each(function() {
+					i($(this));
+				});
+			});
+		</script>
+	</div>
+  </div>
+  <div class="myGift-grab">
+    <div class="gift_grab">
+      <h3 class="common-title">大家都在抢<span class="common-title-ico"></span></h3>
+      <div class="gift_grab_content">
+        <ul id="" style="margin-top: -9px;">
+		<volist name="qgift" id="vo">
+        <li>
+          <div class="grab-box">
+            <div class="grab-icon"><a target="_blank" href="{:U('Gift/detail',array('id'=>$vo['id']))}">
+			<img src="__ROOT__{$vo.icon|get_cover='path'}"></a></div>
+            <div class="grab-msg">
+              <div class="m1"><span>{$vo.account}</span><span>刚刚领取了</span></div>
+              <div class="m2">{$vo.giftbag_name}</div>
+            </div>
+            <a target="_blank" href="{:U('Gift/detail',array('id'=>$vo['id']))}" class="grab-button">抢</a></div>
+        </li>
+        </volist>
+         
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+<script type="text/javascript" src="__JS__/gift-grab.js"></script> 
+<script type="text/javascript" src="__JS__/jquery.scroll.js"></script>
+</block>

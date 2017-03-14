@@ -1,0 +1,132 @@
+<extend name="Public/bases" />
+<block name="body" >
+<link rel="stylesheet" href="__CSS__/gift.css">
+<link rel="stylesheet" href="__CSS__/platform.css">
+<div class="crumbs-box">
+  <div class="crumbs"><a href="{:U('index')}">礼包中心</a>&gt;<span>全部礼包</span></div>
+</div>
+<div class="wrap clear-fix m60">
+  <div class="all-gift-l">
+    <div class="all-gift-select">
+      <div class="all-gift-select-1 sg" id="gametype">
+        <div class="select-type">游戏类型:</div>
+        <div class="select-result selectgame" id="select-result">
+          <ul>
+			<li data-id="0" class="<if condition='$typeid eq 0'>active</if>">不限</li>
+			<li data-id="1" class="<if condition='$typeid eq 1'>active</if>">网络游戏</li>
+			<li data-id="2" class="<if condition='$typeid eq 2'>active</if>">体育竞速</li>
+			<li data-id="3" class="<if condition='$typeid eq 3'>active</if>">角色扮演</li>
+			<li data-id="4" class="<if condition='$typeid eq 4'>active</if>">飞行射击</li>
+			<li data-id="5" class="<if condition='$typeid eq 5'>active</if>">策略经营</li>
+			<li data-id="6" class="<if condition='$typeid eq 6'>active</if>">卡片棋牌</li>
+			<li data-id="7" class="<if condition='$typeid eq 7'>active</if>">动作冒险</li>
+			<li data-id="8" class="<if condition='$typeid eq 8'>active</if>">单机游戏</li>
+			<li data-id="9" class="<if condition='$typeid eq 9'>active</if>">棋牌天地</li>
+			<li data-id="10" class="<if condition='$typeid eq 10'>active</if>">休闲益智</li>
+          </ul>
+        </div>
+      </div>
+      <div class="all-gift-select-2 sg" id="gamename">
+        <div class="select-name">游戏名称:</div>
+        <div class="select-az selectgame" id="select-az">
+          <ul>
+            <li data-id="-1" class="<if condition='($nameid eq -1)'>active</if>">不限</li>
+            <li data-id="a" class="<if condition='($nameid eq a)'>active</if>">A</li>
+            <li data-id="b" class="<if condition='($nameid eq b)'>active</if>">B</li>
+            <li data-id="c" class="<if condition='($nameid eq c)'>active</if>">C</li>
+            <li data-id="d" class="<if condition='($nameid eq d)'>active</if>">D</li>
+            <li data-id="e" class="<if condition='($nameid eq e)'>active</if>">E</li>
+            <li data-id="f" class="<if condition='($nameid eq f)'>active</if>">F</li>
+            <li data-id="g" class="<if condition='($nameid eq g)'>active</if>">G</li>
+            <li data-id="h" class="<if condition='($nameid eq h)'>active</if>">H</li>
+            <li data-id="i" class="<if condition='($nameid eq i)'>active</if>">I</li>
+            <li data-id="j" class="<if condition='($nameid eq j)'>active</if>">J</li>
+            <li data-id="k" class="<if condition='($nameid eq k)'>active</if>">K</li>
+            <li data-id="l" class="<if condition='($nameid eq l)'>active</if>">L</li>
+            <li data-id="m" class="<if condition='($nameid eq m)'>active</if>">M</li>
+            <li data-id="n" class="<if condition='($nameid eq n)'>active</if>">N</li>
+            <li data-id="o" class="<if condition='($nameid eq o)'>active</if>">O</li>
+            <li data-id="p" class="<if condition='($nameid eq p)'>active</if>">P</li>
+            <li data-id="q" class="<if condition='($nameid eq q)'>active</if>">Q</li>
+            <li data-id="r" class="<if condition='($nameid eq r)'>active</if>">R</li>
+            <li data-id="s" class="<if condition='($nameid eq s)'>active</if>">S</li>
+            <li data-id="t" class="<if condition='($nameid eq t)'>active</if>">T</li>
+            <li data-id="u" class="<if condition='($nameid eq u)'>active</if>">U</li>
+            <li data-id="v" class="<if condition='($nameid eq v)'>active</if>">V</li>
+            <li data-id="w" class="<if condition='($nameid eq w)'>active</if>">W</li>
+            <li data-id="x" class="<if condition='($nameid eq x)'>active</if>">X</li>
+            <li data-id="y" class="<if condition='($nameid eq y)'>active</if>">Y</li>
+            <li data-id="z" class="<if condition='($nameid eq z)'>active</if>">Z</li>
+          </ul>
+        </div>
+      </div>
+	  <script>
+			$('#gametype li').on('click',function() {
+				$(this).addClass('active').siblings().removeClass('active');
+				$type = $(this).attr('data-id');
+				$theme = $('#gamename li.active').attr('data-id');
+/*				window.location='__CONTROLLER__/lists/category/'+$type+'/nameid/'+$theme+'.html';*/
+			});
+			$('#gamename li').on('click',function() {
+				$(this).addClass('active').siblings().removeClass('active');
+				var theme = $(this).attr('data-id');
+				var type = $('#gametype li.active').attr('data-id');
+				window.location='__CONTROLLER__/lists/category/'+type+'/nameid/'+theme+'.html';
+			});			
+		</script>
+    </div>
+    <div class="all-gift-box">
+      <div class="gift_title">
+        <h2>全部礼包</h2>
+      </div>
+      <div class="all-gift-c clear-fix">
+        <notempty name="gift">
+        <ul>
+          <volist name="gift" id="vo">
+          <li>
+            <div class="icon"><a target="_self" href="{:U('Gift/detail',array('id'=>$vo['id']))}">
+			<img src="{$vo.icon|get_cover='path'}"></a></div>
+            <div class="gamemsg">
+              <div class="m1">{$vo.game_name}</div>
+              <div class="m2">{$vo.giftbag_name}</div>
+              <div class="m3"><a target="_self" href="{:U('Gift/detail',array('id'=>$vo['id']))}"><i class="gift-icon"></i><em>领取</em></a></div>
+            </div>
+          </li>
+          </volist>
+        </ul>
+        <else /> 
+          <div style="text-align:center;font-size:20px;"> 暂无符合条件的数据
+          </div>
+      </notempty>
+      </div>
+      <div class="pagination">{$_page}</div>
+    </div>
+  </div>
+  <div class="all-gift-r">
+    <div class="gift_grab">
+      <div class="gift_title">
+        <h2>大家都在抢</h2>
+      </div>
+      <div class="gift_grab_content">
+        <ul id="" style="margin-top: -9px;">
+		<volist name="everybody" id="vo">
+        <li>
+          <div class="grab-box">
+            <div class="grab-icon"><a target="_self" href="{:U('Gift/detail',array('id'=>$vo['id']))}">
+			<img src="{$vo.icon|get_cover='path'}"></a></div>
+            <div class="grab-msg">
+              <div class="m1"><span>{$vo.account}</span><span>刚刚领取了</span></div>
+              <div class="m2">{$vo.gift_name}</div>
+            </div>
+            <a target="_self" href="{:U('Gift/detail',array('id'=>$vo['gift_id']))}" class="grab-button">抢</a></div>
+        </li>
+        </volist>
+         
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+<script type="text/javascript" src="__JS__/gift-grab.js"></script> 
+<script type="text/javascript" src="__JS__/jquery.scroll.js"></script>
+</block>

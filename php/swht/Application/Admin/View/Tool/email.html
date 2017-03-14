@@ -1,0 +1,75 @@
+<extend name="Public/base"/>
+
+<block name="body">
+	<div class="main-title">
+		<h2>短信设置设置</h2>
+	</div>
+	<div class="tab-wrap">
+		<ul class="tab-nav nav">
+			<li class="current"><a href="javascript:" >短信设置</a></li>
+		</ul>
+		<div class="tab-content">
+		<form action="{:U('saveTool')}" method="post" class="form-horizontal">
+			<div class="form-item">
+				<label class="item-label">SMTP 服务器<span class="check-tips">（SMTP服务器）</span> </label>
+				<div class="controls">
+					<input type="text" class="text input-large" name="config[smtp]" value="{$email_set['smtp']}">
+				</div>
+			</div>
+			<div class="form-item">
+				<label class="item-label">SMTP服务器端口<span class="check-tips">（默认25）</span> </label>
+				<div class="controls">
+					<input type="text" class="text input-small" name="config[smtp_port]" value="{$email_set['smtp_port']}">
+				</div>
+			</div>
+			<div class="form-item">
+				<label class="item-label">SMTP服务器用户名<span class="check-tips">（填写完整用户名）</span> </label>
+				<div class="controls">
+					<input type="text" class="text input-large" name="config[smtp_account]" value="{$email_set['smtp_account']}">
+				</div>
+			</div>
+			<div class="form-item">
+				<label class="item-label">SMTP服务器密码<span class="check-tips">（填写您的密码）</span> </label>
+				<div class="controls">
+					<input type="text" class="text input-large" name="config[smtp_password]" value="{$email_set['smtp_password']}">
+				</div>
+			</div>
+			<div class="form-item">
+				<label class="item-label">邮件发送测试<span class="check-tips">（填写测试邮件地址）</span> </label>
+				<div class="controls">
+					<input type="text" class="text input-large" name="config[smtp_test]" value="{$email_set['smtp_test']}">
+				</div>
+			</div>
+			<div class="form-item">
+				<label class="item-label">启用状态<span class="check-tips">（填写测试邮件地址）</span> </label>
+				<div class="controls">
+					<input type="radio" class="inp_radio" value="0" name="status" <eq name="email_set_data['statue']" value="0">checked="checked"</eq>>禁用
+                    <input type="radio" class="inp_radio" value="1" name="status" <eq name="email_set_data['status']" value="1">checked="checked"</eq>>启用
+				</div>
+			</div>
+			<div class="form-item">
+				<label class="item-label">邮件模板<span class="check-tips">（邮件模板）</span> </label>
+				<div class="controls">
+					<textarea name="template">{$email_set['template']}</textarea>
+					{:hook('adminArticleEdit', array('name'=>'template','value'=>$email_set_data['template']))}
+				</div>
+			</div>
+			<div class="form-item">
+				<div class="controls">
+					<input type="hidden" name="name" value="sms_set"></input>
+					<!-- <button type="submit" disabled class="btn submit-btn disabled" target-form="form-horizontal">确 定</button> -->
+					<button type="submit" class="btn submit-btn ajax-post" target-form="form-horizontal">确 定</button>
+					<button class="btn btn-return" onclick="javascript:history.back(-1);return false;">返 回</button>
+				</div>
+			</div>
+		</form>
+		</div>
+	</div>
+</block>
+
+<block name="script">
+<script type="text/javascript">
+	//导航高亮
+	highlight_subnav('{:U('Tool/email')}');
+</script>
+</block>

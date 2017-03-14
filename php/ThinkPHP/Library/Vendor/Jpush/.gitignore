@@ -1,0 +1,17 @@
+*.pyc
+log/
+build/
+bin/
+.pydevproject
+.tar
+.zip
+.buildpath
+.project
+.settings/
+.idea
+composer.lock
+vendor/
+*.log
+vendor.tar.gz
+composer.phar
+vendor.zip

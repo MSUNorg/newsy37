@@ -1,0 +1,249 @@
+<extend name="Public/base"/>
+<script src="http://pc.vlcms.com/Public/Media/js/vivo-common.js"></script>
+
+<block name="body" >
+<div class="main wrap_w">
+    <div class="col_1 clearfix">
+        <div class="l">
+            <div class="slide" id="slide">
+                <ul class="slide-cont">
+				<volist name="carousel" id="vo" >
+                <li class="slide-item" > 
+                    <a href="{$vo.url}" target="_blank" title="{$vo.title}"> 
+                        <img src="__ROOT__{$vo.data|get_cover='path'}" alt="{$vo.title}">
+                        <span class="slide-txt"> 
+                            <span class="slide-tit">{$vo.title}</span> 
+                            <span class="slide-des"></span> 
+                        </span> 
+                        <span class="slide-mask"></span>
+                    </a>
+                </li>
+				</volist>  
+				</ul>
+                <div class="slide-nav">
+                    <a href="javascript:" class="">1</a>
+                    <a href="javascript:" class="nownav">2</a>
+                    <a href="javascript:" class="">3</a>
+                    <a href="javascript:" class="">4</a>
+                    <div class="nav-mask"></div>
+                </div>
+                <a href="javascript:;" title="" id="next"></a> 
+                <a href="javascript:;" title="" id="prev"></a> 
+            </div>
+        </div>
+
+        <div class="headlines"> 
+			<article:limits name="list" category="43" child="true" limit="2">				        
+            <h3>
+                <a href="{:U('Article/detail?id='.$list['id'])}" title="{$list.title}" target="_blank">{$list.title}</a>
+            </h3>
+            <p>
+                <span>{$list.description}
+                    <a href="{:U('Article/detail?id='.$list['id'])}">详情&gt;</a>
+                </span>
+            </p>
+			</article:limits>
+            <div class="hl3">
+                <ul> 
+					<article:limits name="list" category="42" child="true" limit="2">
+                    <li>
+                        <em class='ev'>公告</em>
+                        <a href="{:U('Article/detail?id='.$list['id'])}" target="_blank" title="{$list.title}">{$list.title}</a>
+                    </li>
+					</article:limits>
+                    <article:limits name="list" category="44" child="true" limit="2">
+                    <li>
+                        <em class='ns'>活动</em>
+                        <a href="{:U('Article/detail?id='.$list['id'])}" target="_blank" title="{$list.title}">{$list.title}</a>
+                    </li>
+                    </article:limits>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+
+    <!--推荐游戏-->
+    <div class="col_2">
+
+        <div class="title">
+            <span>推荐游戏</span> <em><a href="{:U('Game/game_list')}">更多&gt;&gt;</a></em> 
+        </div>
+        <ul class="clearfix">
+			<volist name="recommend" id="vo" >
+            <li> 
+                <a href="{:U('Game/game_detail?id='.$vo['id'].'')}" target="_blank">
+                    <img src="__ROOT__{$vo.cover|get_cover='path'}" class="gpic">
+                </a>
+                <p>{$vo.game_name}</p>
+                <div class="img_hover"> 
+                    <a href="{:U('Game/game_detail?id='.$vo['id'].'')}">
+                        <div class="l">
+                            <img src="{:U('Game/dow_url_generate?game_id='.$vo['id'])}">
+                        </div>
+                    </a>
+                    <div class="r">
+                        <a href="{:U('Game/game_detail?id='.$vo['id'].'')}">
+                            <h3>{:msubstr(strip_tags($vo['game_name']),0,5,'utf-8',false)}</h3>
+                            <div class="info"></div>
+                            <div class="star {$vo.recommend_level}">推荐:</div>
+                        </a>
+                        <div class="dl">
+                            <a href="{:U('Game/game_detail?id='.$vo['id'].'')}"></a>
+                            <a style="color: #0ab837;" href="<if condition='$vo.dow_status eq 0'>#<else/>{:U('Down/down_file?game_id='.$vo['id'].'&type=1')}</if>"> 立即下载 </a>
+                        </div>
+                    </div>  
+                    <div class="clear"></div>
+                    <div class="notice"></div>
+                </div>
+                <div class="bg" style="opacity: 0.85;"></div>
+            </li>
+			</volist>
+        </ul>
+    </div>
+
+
+
+        <!--热门游戏-->
+
+    <div class="col_3 clearfix">
+        <div class="l">
+            <div class="title"> <span>热门游戏</span> <em><a href="{:U('Game/game_list')}">更多&gt;&gt;</a></em> </div>
+            <div class="mcs clearfix">
+                <volist name="hot" id="vo" >
+                <dl>
+                    <dt>
+                        <a href="{:U('Game/game_detail?id='.$vo['id'].'')}" target="_blank">
+						  <img src="__ROOT__{$vo.icon|get_cover='path'}">
+                        </a>
+                    </dt>
+                    <dd>
+                        <h3><a href="{:U('Game/game_detail?id='.$vo['id'].'')}" target="_blank">{$vo.game_name}</a></h3>
+                        <p class="gamestyle">
+                            <span></span>
+                            <span>{:get_game_type($vo['game_type'])}</span>
+                        </p>                    
+                        <div class="gamedown"><a href="<if condition='$vo.dow_status eq 0'>#<else/>{:U('Down/down_file?game_id='.$vo['id'].'&type=1')}</if>" class="down">下载</a>
+							<a href="{:U('Game/gift_list?game_id='.$vo['id'].'')}" class="gift">独家礼包</a> </div>
+                    </dd>
+                </dl>
+				</volist>                            
+            </div>
+        </div>
+        <div class="r">
+            <div class="tabs">
+                <ul class="tabNavigation clearfix">
+                    <li class="big">礼包开服</li>
+                    <li class="nor"><a href="#gift" class="on">游戏礼包</a></li>
+                    <li class="nor"><a href="#kaifu">最新开服</a></li>
+                </ul>
+                <div class="tabcon" id="gift" style="display: block;">
+                    <ul class="clearfix">
+						<volist name="gift" id="vo">
+                        <li class="">
+                            <div class="game-package-now">
+                                <span><a href="" class="get">领取</a></span>
+							    <a onclick="XGUC.get_game_gift(707, &#39; $vo['giftbag_name'] &#39;)" class="name">
+							         {$vo.giftbag_name}
+                                </a>
+                            </div>
+                            <dl>
+                                <dt>
+                                    <a href="{:U('Game/detail?id='.$vo['game_id'].'')}" target="_blank">
+                                        <img src="__ROOT__{$vo.icon|get_cover='path'}">
+                                    </a>
+                                </dt>
+                                <dd>
+                                    <h3><a href="{:U('Game/gift_list?game_id='.$vo['game_id'].'')}" target="_blank">{$vo['giftbag_name']}</a></h3>
+                                    <p>{:get_gift_type($vo['giftbag_type'])}</p>
+                                    <a class="package-btn" onclick="XGUC.get_game_gift({$vo['gift_id']}, &#39;{$vo['giftbag_name']}&#39;)">领取</a> 
+                                </dd>
+                            </dl>
+                        </li>
+						</volist>
+                    </ul>
+                </div>
+                <div class="tabcon" id="kaifu" style="display: none;">
+                    <ul>
+					<volist name="area" id="at" >
+                        <li>
+                            <dl>
+                                <dt><a href="{:U('Game/game_detail?id='.$at['game_id'].'')}" target="_blank">
+								<img src="__ROOT__{$at.icon|get_cover='path'}"></a></dt>
+                                <dd>
+                                    <h3><a href="{:U('Game/game_detail?id='.$at['game_id'].'')}" target="_blank">{$at.game_name}</a></h3>
+                                    <p>
+                                        {$at.area_name}<br>
+                                        开服时间：{$at['start_time']|date="m.d H:i",###}
+									</p>
+                                </dd>
+                            </dl>
+                        </li>
+                     </volist>                           
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--活动-->
+    <div class="col_4 clearfix">
+        <div class="l">
+            <div class="title"> 
+                <span>游戏活动</span> 
+                <em><a href="{:U('Article/lists/category/media_activity')}" target="_blank">更多&gt;&gt;</a></em> 
+            </div>
+            <div class="lcons">
+                <ul class="clearfix">
+				<article:limits name="list" category="44" child="true" limit="3">
+					<li> <a href="{:U('Article/detail?id='.$list['id'])}" target="_blank">
+					<img src="__ROOT__{$list.cover_id|get_cover='path'}" class="gpic"></a>
+                        <p><a href="{:U('Article/detail?id='.$list['id'])}" target="_blank">{$list.title}</a></p>
+                        <div class="cover"></div>
+                    </li>
+				</article:limits>
+                </ul>
+            </div>
+        </div>
+
+
+        <div class="r">
+            <div class="title"> <span>游戏客服</span></div>                    
+            <div class="cons">
+                <div class="mc">                    
+                    <span>{:C('PC_SET_SERVER_TEL')}</span>
+                    <p>工作时间：{:C('PC_WORK_TIME');}</p>
+                </div>
+
+
+                <div class="ot">
+                    客服QQ：{:C('PC_SET_SERVER_QQ')}<br> 
+                    客服邮箱:{:C('PC_SET_SERVER_EMAIL')}<br>
+                    投诉邮箱:{:C('PC_T_EMAIL')}<br>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--悬浮窗口-->
+<div id="vivo-head">
+	<div class="vivo-search">
+      <div style="margin:0 auto; width:1000px; height:100px;"><div class="guide-app-link"><a href="{:U('download')}" target="_blank"><img src="http://pc.vlcms.com/Public/Media/images/foot-link_3625020.png" ></a></div></div>
+		<div class="search-box">
+			<a class="close"></a>
+		</div>
+	</div>
+	<div class="vivo-nav cl" style="display:none">
+		<div class="search-user">
+			<a href="#" class="search"><b></b></a>
+			<a href="#" class="user"><b></b></a>
+		</div>
+	</div>
+</div>
+
+<!--悬浮窗口结束-->
+</block>
+<block name='script'>
+</block>
+

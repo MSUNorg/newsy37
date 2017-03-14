@@ -1,0 +1,173 @@
+﻿<extend name="Public/promote_base"/>
+
+<block name="body">
+        <div id="query">
+        <div id="add_son" class="mod">
+          <h2>账户信息</h2>
+          <div class="tabs">
+            <ul class="tab_nav tabNavigation clearfix">
+              <li><a  class='<if condition="$type eq 0">on</if>'>基本信息</a></li>
+              <li><a  class='<if condition="$type eq 1">on</if>'>结算账户信息</a></li>
+              <li><a  class='<if condition="$type eq 2">on</if>'>修改密码</a></li>
+            </ul>
+            <div class="son_box" style='<if condition="$type eq 0">display:block;<else/>display:none;</if>' >
+              <form id="form_users" action="{:U('Promote/base_info?type=0')}" method="post" novalidate="novalidate" class="base_info">
+                <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                  <tbody>
+                  <tr>
+                    <td class="l">用户名：</td>
+                    <td class="r">{$data.account}</td>
+                  </tr>
+                  <tr>
+                    <td class="l"><span class="req">*</span>昵称：</td>
+                    <td class="r">
+                      <input type="text" class="input" name="nickname" id="nickname" value="{$data.nickname}">
+                      <span id="nickname_tip"></span>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="l"><span class="req">*</span>联系人：</td>
+                    <td class="r">
+                      <input type="text" class="input" name="real_name" id="name" value="{$data.real_name}"><span id="name_tip"></span>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="l"><span class="req">*</span>电子邮箱：</td>
+                    <td class="r">
+                      <input type="text" class="input" name="email" id="email" value="{$data.email}">
+                      <span id="email_tip"></span>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="l"></td>
+                    <td class="r">
+                      <input type="hidden" name="id" value="{$data.id}">
+                      <input type="submit" class="tj btn ajax-post" value="确认修改" title="" target-form="base_info">
+                    </td>
+                  </tr>
+                </tbody>
+                </table>
+              </form>
+            </div>
+            <div class="son_box"  style='<if condition="$type eq 1">display:block;<else/>display:none;</if>'>
+              <form id="form_users_content" action="{:U('Promote/base_info?type=1')}" method="post" novalidate="novalidate" class="sett_info">
+                <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                  <tbody>
+                  <tr>
+                    <td class="l"><span class="req">*</span>结算电话：</td>
+                    <td class="r"><input type="text" class="input" name="mobile_phone" id="mobile_phone" value="{$data.mobile_phone}"><span id="balance_tel_tip"></span></td>
+                  </tr>
+                
+                  <tr>
+                    <td class="l"><span class="req">*</span>开户银行：</td>
+                    <td class="r">
+                      <input type="text" class="input" name="bank_name" id="bank_name" value="{$data.bank_name}">
+                      <span id="bank_name_tip"></span>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="l"><span class="req">*</span>银行账号：</td>
+                    <td class="r">
+                      <input type="text" class="input" name="bank_card" id="bank_card" value="{$data.bank_card}">
+                      <span id="bank_card_tip"></span>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="l"></td>
+                    <td class="r">
+            				  <input type="submit" class="tj btn ajax-post" value="确认修改" title="" target-form="sett_info">
+            				  <input type="hidden" name="id" value="{$data.id}">
+                      <input type="hidden" name="town"  id="town" value="">
+            				</td>
+                  </tr>
+                </tbody>
+                </table>
+              </form>
+            </div>
+      			<div class="son_box" style='<if condition="$type eq 2">display:block;<else/>display:none;</if>'>
+      				<form id="form_users_password" action="{:U('Promote/base_info?type=2')}" method="post" novalidate="novalidate" class="paw_info">
+      					<table width="100%" border="0" cellspacing="0" cellpadding="0">
+      					  <tbody>
+      						<tr>
+      						  <td class="l">用户名：</td>
+      						  <td class="r">{$data.account}</td>
+      						</tr>
+      						<tr>
+      						  <td class="l"><span class="req">*</span>旧密码：</td>
+      						  <td class="r"><input type="password" class="input" name="old_password" id="old_password" placeholder="输入您的旧密码">
+      							<span id="old_password_tip"></span></td>
+      						</tr>
+      						<tr>
+      						  <td class="l"><span class="req">*</span>新密码：</td>
+      						  <td class="r"><input type="password" class="input" name="password" id="password" placeholder="输入您的新密码">
+      							<span id="password_tip"></span></td>
+      						</tr>
+      						<tr>
+      						  <td class="l"><span class="req">*</span>确认密码：</td>
+      						  <td class="r"><input type="password" class="input" name="confirm_password" id="confirm_password">
+      							<span id="confirm_password_tip"></span></td>
+      						</tr>
+      						
+      						<tr>
+      						  <td class="l"></td>
+      						  <td class="r">
+                      <input type="hidden" name="id" value="{$data.id}">
+                      <input type="submit" class="tj btn ajax-post" value="确认修改" title="" target-form="paw_info">
+                    </td>
+      						</tr>
+      					  </tbody>
+      					</table>
+      				</form>
+            </div>
+          </div>
+        </div>
+      </div>
+	  <script type="text/javascript">
+    var ajaxurl="{:U('Account/getArea')}";
+    function loadArea(areaId,areaType) {
+    $.post(ajaxurl,{'areaId':areaId},function(data){
+        if(areaType=='city'){
+           $('#'+areaType).html('<option value="-1">市/县</option>');
+           $('#district').html('<option value="-1">镇/区</option>');
+        }else if(areaType=='district'){
+           $('#'+areaType).html('<option value="-1">镇/区</option>');
+        }
+        if(areaType!='null'){
+            $.each(data,function(no,items){
+                $('#'+areaType).append('<option value="'+items.area_id+'">'+items.area_name+'</option>');
+            });
+        }
+    });
+} 
+  var tot="";
+    $("#province").change(function() {
+        tot+=$("#province").val();
+  });
+      $("#city").change(function() {
+        tot+=","+$("#city").val()
+  });
+        $("#district").change(function() {
+         tot+=","+$("#district").val()
+  });
+  $(".btn").click(function() {
+    $("#town").val(tot);
+  });
+
+	  jQuery(function(){
+	jQuery(".tabs ul.tabNavigation a").hover(function(){
+		var indext=jQuery(".tabs ul.tabNavigation a").index(this);
+		jQuery(this).parent().parent().nextAll().hide();
+		jQuery(".tabs > div").eq(indext).show();
+		jQuery(this).parent().parent().find("li a").removeClass('on'); 
+		jQuery(this).addClass("on");
+		return false;
+	})
+	
+	AF.users.account_edit(1429); 
+	AF.users.account_content_edit(1429); 
+	_init_area();	
+		_reset_area('','','');
+	});
+</script>
+</block>
+  

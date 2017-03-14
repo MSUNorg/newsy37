@@ -1,0 +1,102 @@
+<extend name="Public/promote_base"/>
+
+<block name="body">
+       <div id="query">
+        <div id="search" class="mod">
+          <h2>查询</h2>
+          <form id="data_form" action="{:U('Query/son_list')}" method="post" enctype="multipart/form-data">
+            <ol>
+              <li class="other clearfix">
+               <div class="m"><em>开始时间：</em><span class="required">*</span>
+                  <input type="text" id="sdate" name="time-start" value="{:I('time-start')}">
+                </div>
+                <div class="r"><em>结束时间：</em><span class="required">*</span>
+                  <input type="text" id="edate" name="time-end" value="{:I('time-end')}">
+                </div>
+                <div class="">
+                  <select name="game_id" id="game_id" style="width:80px;">
+                    <option value="">全部游戏</option>
+                    <volist name=":get_game_list()" id ="s">
+                    <option value="{$s.id}">{$s.game_name}</option>
+                  </volist>
+                  </select>
+                </div>
+                <div>
+                  <select name="pattern" class="txts">
+                  <option <if condition="empty(I('pattern'))">selected="selected"</if> value="">请选择合作模式</option>
+                  <option <if condition="I('pattern') == '0'">selected="selected"</if> value="0" >CPS</option>
+                  <option <if condition="I('pattern') == '1'">selected="selected"</if> value="1">CPA</option>
+                </select>
+                </div>
+                <div class="search_btn">
+                  <input type="submit" value="查询">
+                </div>
+              </li>
+            </ol>
+          </form>
+        </div>
+        <div id="jiesuan" class="mod">
+          <h2>我的结算单</h2>
+          <div class="con">
+            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+              <thead>
+                <tr>
+                  <th>结算时间</th>
+                  <th>结算单号</th>
+                  <th>子账户</th>
+                  <th>游戏名</th>
+                  <th>合作模式</th>                   
+                  <th>充值总额</th>
+                  <th>注册人数</th>
+                  <th>分成比例</th>
+                  <th>注册单价</th>
+                  <th>结算金额</th>
+                </tr>
+              </thead>
+              <tbody>
+                <volist name="list_data" id="vo">
+                <tr>
+                <td>{$vo.settlement_start_time|date="Y-m-d",###}~{$vo.settlement_end_time|date="Y-m-d",###}</td>
+                  <td>{$vo.settlement_number} </td>
+                  <td>{$vo.promote_account}</td>                  
+                  <td>{$vo.game_name}</td>                  
+                  <td><eq name="vo.pattern" value="0">CPS<else />CPA</eq></td>
+                  <td><notempty name="vo.sum_money">{$vo.sum_money}<else />0</notempty></td>
+                  <td><notempty name="vo.reg_number">{$vo.reg_number}<else />0</notempty></td>
+                  <td><eq name="vo.pattern" value="0">{$vo.ratio}<else />---</eq></td>
+                  <td><eq name="vo.pattern" value="1">{$vo.money}<else />---</eq></td>
+                  <td>{$vo.jie_money}</td>
+                </tr>
+              </volist>
+                <tr>
+                    <td colspan="7">结算汇总(元)</td>
+                    <td>{$total}</td>
+                </tr>
+              </tbody>
+            </table>
+            <style>.con th,.con td {text-align:center;border:1px solid #eee;border-collapse:collapse;}</style>
+          </div>
+        </div>
+      </div>
+<link rel="stylesheet" type="text/css" href="__CSS__/p_jquery.datetimepicker.css">
+<script type="text/javascript" src="__JS__/jquery.datetimepicker.js"></script>
+<script type="text/javascript">
+$().ready(function(){
+  $('#sdate').datetimepicker({
+    lang:'ch',
+    format:'Y-m-d',
+    formatDate:'Y-m-d',
+    timepicker:false
+  });
+  
+  $('#edate').datetimepicker({
+    lang:'ch',
+    format:'Y-m-d',
+    formatDate:'Y-m-d',
+    timepicker:false
+  });
+
+});
+</script>
+</block>
+  

@@ -1,0 +1,30 @@
+<extend name="Public/bases" />
+<block name="body">
+    <div class="ctitle"><div class="section">所有精品应用</div></div>
+	<div class="game_list">
+		<ul class="list container">
+			<volist name="list_data" id="vo">
+			<li>
+				<div class="list1 fl">
+					<a href="<if condition='$vo.dow_status eq 0'>#<else/>{:U('Down/media_down_file?game_id='.$vo['id'].'&type=1')}</if>" target="_blank" class="gameslistl">   
+						<img src="__ROOT__{$vo.icon|get_cover='path'}">
+					</a>
+				</div>
+				<div class="list2 fl">
+					<h3>
+						<a href="<if condition='$vo.dow_status eq 0'>#<else/>{:U('Down/media_down_file?game_id='.$vo['id'].'&type=1')}</if>" target="_blank">
+							{$vo.game_name}
+						</a>
+					</h3>
+					<p>
+						<span>类型：{$vo['game_type_name']}</span>
+					</p>
+				</div>
+			</li>
+			</volist>
+		</ul>
+		<div class="page">
+			{$_page|default=''}
+		</div>
+	</div>
+</block>

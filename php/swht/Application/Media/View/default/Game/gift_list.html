@@ -1,0 +1,53 @@
+<extend name="Public/base" />
+<block name="body" >
+    <div class="main_sub wrap_w">
+    <div class="crumbs"><em>当前位置：</em><a href="{:U('Gift/index')}">独家礼包</a></div>
+    <div class="gameclass">
+        <h2 class="titi">礼包<span>分类</span></h2>
+        <ul class="gameclasslist">
+            <li><span>热门游戏</span>
+                <p> 
+					<a href="{:U('Game/gift_list')}" class="<if condition='$game_id == 0 '>curr</if>">不限</a>
+					<foreach name="gift_list" item="gl" >
+					<a href="{:U('Game/gift_list?game_id='.$gl['game_id'].'')}" class="<if condition='$game_id == $gl[game_id]'>curr</if>">
+                        {$gl.game_name}
+                    </a>					
+					</foreach>
+									
+				</p>
+            </li>
+        </ul>
+    </div>
+    <div id="giftlist">
+        <ul class="clearfix">
+        <volist name="list_data" id="vo">
+            <li>
+                <div class="l">
+                    <a href="{:U('Game/game_detail?id='.$vo['game_id'].'')}">
+                        <img src="__ROOT__{$vo.icon|get_cover='path'}">
+                    </a>
+                </div>
+                <div class="r">
+                    <h3>{$vo.giftbag_name}</h3>
+                    <p class="ct">
+                        {$vo.desribe}
+                    </p>
+                    <p class="cm">
+                        剩余有效期：{:ceil(($vo['end_time']-$vo['start_time'])/86400);}天
+						
+                    </p>
+                    <div class="bn">
+                        <a onclick="XGUC.get_game_gift({$vo.id}, &#39;{$vo.giftbag_name}&#39;)" target="_blank">
+                            领取礼包
+                        </a>
+                    </div>
+                </div>
+            </li>
+        </volist>    
+        </ul>
+    </div>
+    <div class="page">
+        {$_page|default=''}  
+	</div>
+</div>
+</block>

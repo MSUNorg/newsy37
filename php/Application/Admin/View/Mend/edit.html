@@ -1,0 +1,101 @@
+<extend name="Public/base" />
+
+<block name="body">
+<link rel="stylesheet" type="text/css" href="__CSS__/admin_table.css" media="all">
+<script type="text/javascript" src="__STATIC__/uploadify/jquery.uploadify.min.js"></script>
+    <div class="main-title cf">
+        <h2>编辑 [推广补链]</h2>
+    </div>
+    <!-- 标签页导航 -->
+<div class="tab-wrap">
+    <ul class="tab-nav nav">
+			<volist name=":parse_config_attr($model['field_group'])" id="group">
+			<li data-tab="tab{$key}" <eq name="key" value="1">class="current"</eq>><a href="javascript:void(0);">{$group}</a></li>
+			</volist>
+    </ul>
+    <div class="tab-content zc_for">
+    <!-- 表单 -->
+    <form id="form" action="{:U('edit?model='.$model['id'])}" method="post" class="form-horizontal">
+        <!-- 基础文档模型 -->
+		<div id="tab1" class="tab-pane in tab1 tab-look">
+            <table  border="0" cellspacing="0" cellpadding="0">
+                <tbody>
+                  <tr>
+                    <td class="l">用户账号：</td>
+                    <td class="r">
+                        <input type="text" class="txt" name="account" value="{$data['account']}" disabled="disabled">
+                    </td>
+
+                  </tr>
+                  <tr>
+                  <tr>
+                    <td class="l">修改前渠道：</td>
+                    <td class="r">
+                        <input type="text" class="txt" name="old_promote_id" value="{:get_promote_name($data['promote_id'])}" disabled="disabled">
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="l">补链后渠道：</td>
+                    <td class="r">
+                       <select id="prmoote_id_to" name="prmoote_id_to">
+                       <option value="0">自然注册</option>
+                       <volist name=":get_promote_list()" id="vo">
+                        <option value="{$vo.id}">{$vo.account}{:get_parent_promoteto($vo['id'])}</option>
+                       </volist>
+                       </select>
+                       <input type="hidden" name="promote_id" value='{$data.promote_id}'/>
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <td class="l">备注：</td>
+                    <td class="r" >
+                        <textarea name="remark" class="txt_area1">{$data['remark']}</textarea>
+                    </td>
+                  </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="form-item cf">
+            <input type="hidden" name="user_id" value="{$data.id}">
+            <input type="hidden" name="account" value="{$data.account}">
+            <button class="btn submit-btn ajax-post hidden" id="submit" type="submit" target-form="form-horizontal">确 定</button>
+            <a class="btn btn-return" onclick="javascript:history.back(-1);return false;">返 回</a>
+        </div>
+    </form>
+    </div>
+</div>
+</block>
+
+<block name="script">
+<link href="__STATIC__/datetimepicker/css/datetimepicker.css" rel="stylesheet" type="text/css">
+<php>if(C('COLOR_STYLE')=='blue_color') echo '<link href="__STATIC__/datetimepicker/css/datetimepicker_blue.css" rel="stylesheet" type="text/css">';</php>
+<link href="__STATIC__/datetimepicker/css/dropdown.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="__STATIC__/datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
+<script type="text/javascript" src="__STATIC__/datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js" charset="UTF-8"></script>
+<script type="text/javascript">
+//导航高亮
+highlight_subnav('{:U('Mend/lists')}');
+Think.setValue("prmoote_id_to", {$data.promote_id|default = 0});
+$('#submit').click(function(){
+    $('#form').submit();
+});
+
+$(function(){
+	$('.time').datetimepicker({
+        format: 'yyyy-mm-dd hh:ii',
+        language:"zh-CN",
+        minView:2,
+        autoclose:true
+    });
+    $('.date').datetimepicker({
+        format: 'yyyy-mm-dd',
+        language:"zh-CN",
+        minView:2,
+        autoclose:true
+    });
+    showTab();
+});
+</script>
+</block>

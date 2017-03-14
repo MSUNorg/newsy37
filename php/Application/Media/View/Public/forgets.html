@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>{:C('MT_SITE_TITLE')}</title>
+  <meta name="keywords" content="">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <link rel="shortcut icon" href="{:get_cover(C('PC_SET_ICO'),'path')}" >
+  <link href="__CSS__/base.css" rel="stylesheet">
+  <link href="__CSS__/global.css" rel="stylesheet">
+  <link href="__CSS__/platform-common.css"rel="stylesheet" >
+  <script type="text/javascript" src="__JS__/jquery-1.9.1.min.js"></script>
+
+  </head>
+<body>
+ <div class="g-top-nav clear-fix">
+    <div class="g-inner">
+      <div class="m-opration">
+        <div class="login-register widthoutLogin">
+          <div class="login-register-link logon-link hidden">
+            <a href="#" class="trigger" tabindex="0" id="topShowName"></a>
+<!-- 			<i class="js-vip-icon icon-m-vip-smaller icon-m-vip-smaller-0"></i>			
+			<i class="icon icon-arrow"></i> -->
+          </div>
+          <div class="login-register-link withoutLogon-link">
+            <a href="{:U('login')}" class="top-login-link">登录</a>
+            <a href="{:U('register')}" class="top-register-link">注册</a>
+          </div>
+        </div>
+        <div class="recommend">
+          <a href="#" class="trigger" tabindex="0">
+            推荐游戏 <i class="icon icon-arrow"></i>
+          </a>
+          <div class="recommend-box">
+            <div class="content clear-fix">
+              <ul class="hot-new">
+                <li class="title">新品推荐</li>
+                <volist name="newsgame" id="vo">
+                  <li>
+                    <a href="{:U('Game/detail',array('id'=>$vo['id']))}" title="{$vo.game_name}" target="_self">{$vo.game_name}</a>
+                    <i class="hot"></i>
+                  </li>
+                </volist>
+              </ul>
+              <ul class="hot-re">
+                <li class="title">热门推荐</li>
+                <volist name="recommend" id="vo">
+                  <li>
+                    <a href="{:U('Game/detail',array('id'=>$vo['id']))}" title="{$vo.game_name}" target="_self">{$vo.game_name}</a>
+                    <i class="hot"></i>
+                  </li>
+                </volist>
+              </ul>
+            </div>
+            <span class="arrow-inner"></span>
+            <span class="arrow-outter"></span>
+          </div>
+        </div>
+		<script>
+			$(function() {
+				$('.recommend').hover(function() {
+					$(this).addClass('active');
+					$('.recommend-box').addClass('active');
+				},function() {
+					$(this).removeClass('active');
+					$('.recommend-box').removeClass('active');
+				});
+			});
+		</script>
+      </div>
+      <ul class="m-link-list">
+        <li>
+          <a href="{:U('Index/index')}">网站首页</a>
+        </li>
+        <li>
+          <a href="{:U('Index/down')}" target="">APP助手</a>
+        </li>     
+        <li>
+          <a href="__ROOT__/index.php" target="_self">渠道中心</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="g-header">
+    <div class="g-inner">
+      <a href="{:U('Index/index')}">
+        <img src="<?php echo "http://".$_SERVER["HTTP_HOST"].get_cover(C('PC_SET_LOGO'),'path')?>" class="m-logo" width="150" height="40" /></a>
+      <ul class="m-header-nav" >
+        <li class="first <if condition='$Think.const.CONTROLLER_NAME eq Index'>active</if>">
+          <a href="{:U('Index/index')}">首页</a>
+        </li>
+        <li class="<if condition='$Think.const.CONTROLLER_NAME eq Game'>active</if>">
+          <a href="{:U('Game/index')}" target="_self">游戏中心</a>
+        </li>
+        <li class="<if condition='$Think.const.CONTROLLER_NAME eq Gift'>active</if>">
+          <a href="{:U('Gift/index')}" target="_self">礼包中心</a>
+        </li>
+        <li class="<if condition='$Think.const.CONTROLLER_NAME eq Recharge'>active</if>">
+          <a href="{:U('Recharge/index')}" target="_self">充值中心</a>
+        </li>
+        <li class="<if condition='$Think.const.CONTROLLER_NAME eq Service'>active</if>">
+          <a href="{:U('Service/index')}" target="_self">客服中心</a>
+        </li>
+      </ul>
+      <div class="m-search">
+        <form action="/phone.php/Search/index.html" target="_self" method="post">
+          <input type="text" placeholder="请输入要搜索游戏" name="keyword" value="" id="search">
+          <input type="submit" onclick="return sub();" class="icon-search">
+		</form>
+		<script>function sub() {var val = $('#search').val();if(val){return true;}return false;}</script>
+      </div>
+    </div>
+  </div>
+
+<div class="g-userSafe-header">
+	<div class="g-inner">
+		<div class="m-sign-wrap">
+			<div class="little-calender">
+				<p class="d-m">{$rl.day}</p>
+				<p class="w">周{$rl.week}</p>
+			</div>
+			<script>
+				
+			</script>
+			<!--<div class="sign-operator">
+			</div> -->
+		</div>
+		<div class="m-user-detail">
+			<div class="avatar-wrap "></div>
+			<ul class="user-desc">
+				<li class="user-nick-wrap">
+					<h2 class="nick-name"><span id="userDetailNickName">找回密码</span></h2>
+				</li>
+				<li class="user-name">
+                    用于忘记密码未登录状态下找回密码
+				</li>
+				<li class="user-name">
+					
+				</li>
+				<li class="user-name">
+					
+				</li>
+			</ul>
+		</div>
+	</div>
+</div>
+<div class="g-inner clear-fix">
+	<div class="g-userSafe-sider">
+		<ul>
+			<li id="accountInfoSideHook" class="<if condition='$Think.const.ACTION_NAME eq index' >active</if>">
+				<a href="{:U('index')}">帐号信息</a><i class="dot"></i><span class="line"></span></li>
+			<li id="giftSideHook" class="<if condition='$Think.const.ACTION_NAME eq gift' >active</if>">
+				<a href="{:U('Gift/gift')}" target="_self">我的礼包</a><i class="dot"></i><span class="line"></span></li>
+			<li id="userSafeSideHook" class="<if condition='$Think.const.ACTION_NAME eq safe or ($Think.const.ACTION_NAME eq set)' >active</if>">
+				<a href="{:U('safe')}">帐号安全</a><i class="dot"></i><span class="line"></span></li>
+			<li id="personalSideHook" class="<if condition='$Think.const.ACTION_NAME eq profile' >active</if>">
+				<a href="{:U('profile')}">个人资料</a><i class="dot"></i><span class="line"></span></li>
+			<li id="walletSideHook" class="<if condition='$Think.const.ACTION_NAME eq wallet' >active</if>">
+				<a href="{:U('wallet')}">我的钱包</a><i class="dot"></i><span class="line"></li>
+            <li id="walletSideHook" class="<if condition='$Think.const.ACTION_NAME eq pwd' >active</if>">
+				<a href="{:U('pwd')}">修改密码</a><i class="dot"></i></li>
+		</ul>
+	</div>
+	<block name="body"></block>
+</div>
+<div class="g-footer">
+  <div class="g-inner">
+    <ul class="helper">
+      <li>
+        <a href="{:U('News/detail/id/35')}" target="_self">关于我们</a>
+      </li>
+      <li>
+        <a href="{:U('News/detail/id/36')}" target="_self">商务合作</a>
+      </li>
+      <li class="last">
+        <a href="{:U('News/detail/id/37')}" target="_self">合作伙伴</a>
+      </li>
+      <li class="">
+        <a href="{:U('News/detail/id/38')}" target="_self">家长监督</a>
+      </li>
+      <li class="last">
+        <a href="{:U('Service/index')}" target="_self">客服帮助</a>
+      </li>
+    </ul>
+    <p>{:C('MT_SITE_B')}</p>
+<!--     <p>
+      <a target="_self">{:C('WEB_SITE_ICP')}</a>
+      <if condition="C('MT_SITE_LICENSE') neq ''">&nbsp;&nbsp;
+      <a target="_self">网络文化经营许可证编号：{:C('MT_SITE_LICENSE')}</a></if>
+    </p>
+    <p>
+      投诉邮箱：{:C('MT_SITE_TEMAIL')} 纠纷处理方式：联系客服或依《
+      <a href="user_agreement.html" target="_self">用户协议</a>
+      》约定方式处理
+    </p> -->
+    <p>
+       客服QQ：{:C('PC_SET_SERVER_QQ')}&nbsp;&nbsp;投诉邮箱：{:C('PC_T_EMAIL')} <br>
+       网络备案:{:C('PC_SET_FOR_THE_RECORD')} 版权所有:{:C('PC_SET_COPYRIGHT')}
+    </p>
+  </div>
+</div>
+<script src="__JS__/global.js"></script>
+</body>
+</html>

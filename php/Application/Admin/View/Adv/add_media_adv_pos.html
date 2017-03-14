@@ -1,0 +1,93 @@
+<extend name="Public/base"/>
+
+<block name="body">
+<link rel="stylesheet" type="text/css" href="__CSS__/admin_table.css" media="all">
+<script type="text/javascript" src="__STATIC__/uploadify/jquery.uploadify.min.js"></script>
+    <div class="main-title cf">
+        <h2> 新增 [媒体{$model[title]}]</h2>
+    </div>
+    <!-- 标签页导航 -->
+<div class="tab-wrap">
+    <ul class="tab-nav nav">
+		<li data-tab="tab1" class="current"><a href="javascript:void(0);">基础</a></li></li>
+    </ul>
+    <div class="tab-content zc_for">
+    <!-- 表单 -->
+    <form id="form" action="{:U('add_media_adv_pos?model='.$model['id'])}" method="post" class="form-horizontal">
+        <!-- 基础文档模型 -->
+        <div id="tab1" class="tab-pane in tab1 tab-look">
+            <table  border="0" cellspacing="0" cellpadding="0">
+                <tbody>
+                    <tr>
+                        <td class="l">模块：</td>
+                        <td class="r">
+                            <select name="module" id="module">
+                                <option value="media" selected>Media</option>
+                                <!-- <option value="app">APP</option> -->
+                           </select>
+                        </td>
+                        <td class="l"></td>
+                        <td class="r"></td>
+                    </tr>
+                    <tr>
+                        <td class="l">广告标题：</td>
+                        <td class="r">
+                           <input type="text" class="txt" name="title" value="{$data['title']}" >
+                        </td>
+                        <td class="l">广告标识：</td>
+                        <td class="r">
+                           <input type="text" class="txt time" name="name" value="{$data['name']}">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="l">状态：</td>
+                        <td class="r">
+                           <label class="inp_radio">
+                                <input type="radio" class="inp_radio" value="1" name="status" <eq name="data['status']" value="1">checked="checked"</eq>>启用
+                                <input type="radio" class="inp_radio" value="0" name="status" <eq name="data['status']" value="0">checked="checked"</eq>>禁用
+                            </label>
+                        </td>
+                        <td class="l">广告类型：</td>
+                        <td class="r">
+                            <label class="inp_radio">
+                                <input type="radio" class="inp_radio" value="1" name="type" <eq name="data['type']" value="1">checked="checked"</eq>>单图片
+                                <input type="radio" class="inp_radio" value="2" name="type" <eq name="data['type']" value="2">checked="checked"</eq>>多图片
+                                <input type="radio" class="inp_radio" value="3" name="type" <eq name="data['type']" value="3">checked="checked"</eq>>文字链接
+                                <input type="radio" class="inp_radio" value="4" name="type" <eq name="data['type']" value="4">checked="checked"</eq>>代码
+                            </label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="l">广告宽度：</td>
+                        <td class="r">
+                           <input type="text" class="txt" name="width" value="{$data['width']}">
+                        </td>
+                         <td class="l">广告高度：</td>
+                        <td class="r">
+                          <input type="text" class="txt" name="height" value="{$data['height']}">
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="form-item cf">
+            <button class="btn submit-btn ajax-post hidden" id="submit" type="submit" target-form="form-horizontal">确 定</button>
+            <a class="btn btn-return" href="javascript:history.back(-1);">返 回</a>
+        </div>
+    </form>
+    </div>
+</div>
+</block>
+
+<block name="script">
+<script type="text/javascript">
+//导航高亮
+highlight_subnav('{:U('Adv/media_adv_pos_lists')}');
+
+//Think.setValue("module", {$data.module|default = 'media'});
+
+$('#submit').click(function(){
+    $('#form').submit();
+});
+</script>
+</block>

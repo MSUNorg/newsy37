@@ -1,0 +1,131 @@
+<extend name="Public/base"/>
+
+<block name="body">
+    <!-- 标题栏 -->
+    <div class="main-title">
+        <h2>[补链] 列表</h2>
+    </div>
+	<div class="cf top_nav_list">
+		<!-- 高级搜索 -->
+		<div class="search-form fr cf">
+            {:W('Search/game_list')}
+            {:W('Search/promote_list')}
+			<div class="sleft">
+				<input type="text" name="account" class="search-input" value="{:I('account')}" placeholder="请输入玩家账号">
+				<!-- <a class="sch-btn" href="javascript:;" id="search" url="{:U('Mend/lists','model='.$model['name'],false)}"><i class="btn-search"></i></a> -->
+			</div>
+            <div class="input-list">
+                <a class="sch-btn" href="javascript:;" id="search" url="{:U('Mend/lists','model='.$model['name'],false)}">搜索</a>
+            </div>
+            <!-- <div class="btn-group-click adv-sch-pannel fl">
+                <button class="btn">高 级<i class="btn-arrowdown"></i></button>
+                <div class="dropdown cf">
+                    <div class="row">
+                        <label>创建时间：</label>
+                        <input type="text" id="time-start" name="time-start" class="text input-2x" value="" placeholder="起始时间" /> -                     
+                        <div class="input-append date" id="datetimepicker"  style="display:inline-block">
+                            <input type="text" id="time-end" name="time-end" class="text input-2x" value="" placeholder="结束时间" />
+                            <span class="add-on"><i class="icon-th"></i></span>
+                        </div>
+                    </div>
+                </div>
+            </div> -->
+		</div>
+	</div>
+
+
+    <!-- 数据列表 -->
+    <div class="data-table">
+        <div class="data-table table-striped">
+            <table>
+                <!-- 表头 -->
+                <thead>
+                    <tr>
+                        <th style="text-align:center" class="row-selected row-selected">
+                            <input class="check-all" type="checkbox">
+                        </th>
+                        <th style="text-align:center">用户id</th>
+                        <th style="text-align:center">用户账号</th>
+                        <th style="text-align:center">用户昵称</th>
+                        <th style="text-align:center">最后登陆时间</th>
+                        <th style="text-align:center">注册时间</th>
+                        <th style="text-align:center">所属渠道</th>
+                        <th style="text-align:center">操作</th>
+                    </tr>
+                </thead>
+
+                <!-- 列表 -->
+                <tbody>
+                    <volist name="list_data" id="data">
+                        <tr>
+                            <td style="border-right:1px solid #DDDDDD;text-align:center"><input class="ids" type="checkbox" value="{$data['uid']}" name="ids[]"></td>
+                            <td style="border-right:1px solid #DDDDDD;text-align:center">{$data.id}</td>
+                            <td style="border-right:1px solid #DDDDDD;text-align:center">{$data.account}</td>
+                            <td style="border-right:1px solid #DDDDDD;text-align:center">{$data.nickname}</td>
+                            <td style="border-right:1px solid #DDDDDD;text-align:center">{$data.login_time|date='Y-m-d H:i:s',###}</td>
+                            <td style="border-right:1px solid #DDDDDD;text-align:center">{$data.register_time|date='Y-m-d H:i:s',###}</td>
+                            <td style="border-right:1px solid #DDDDDD;text-align:center">
+                            <if condition="get_parent_promoteto($data['promote_id']) neq '' ">
+                               {$data['promote_account']}{:get_parent_promoteto($data['promote_id'])}
+                            <else/>
+                                {:get_promote_name($data['promote_id'])}
+                            </if></td>
+                            <td style="border-right:1px solid #DDDDDD;text-align:center"><a href="{:U('Mend/edit?id='.$data['id'])}">补链</a></td>
+                        </tr>
+                    </volist>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="page">
+        {$_page|default=''}
+    </div>
+</block>
+
+<block name="script">
+<link href="__STATIC__/datetimepicker/css/datetimepicker.css" rel="stylesheet" type="text/css">
+<php>if(C('COLOR_STYLE')=='blue_color') echo '<link href="__STATIC__/datetimepicker/css/datetimepicker_blue.css" rel="stylesheet" type="text/css">';</php>
+<link href="__STATIC__/datetimepicker/css/dropdown.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="__STATIC__/datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
+<script type="text/javascript" src="__STATIC__/datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js" charset="UTF-8"></script>
+<script type="text/javascript">
+//导航高亮
+highlight_subnav('{:U('Mend/lists')}');
+$(function(){
+	//搜索功能
+	$("#search").click(function(){
+		var url = $(this).attr('url');
+        var query  = $('.search-form').find('input').serialize();
+        query = query.replace(/(&|^)(\w*?\d*?\-*?_*?)*?=?((?=&)|(?=$))/g,'');
+        query = query.replace(/^&/g,'');
+        if( url.indexOf('?')>0 ){
+            url += '&' + query;
+        }else{
+            url += '?' + query;
+        }
+		window.location.href = url;
+	});
+
+    //回车自动提交
+    $('.search-form').find('input').keyup(function(event){
+        if(event.keyCode===13){
+            $("#search").click();
+        }
+    });
+    $('#time-start').datetimepicker({
+        format: 'yyyy-mm-dd',
+        language:"zh-CN",
+        minView:2,
+        autoclose:true
+    });
+
+    $('#datetimepicker').datetimepicker({
+       format: 'yyyy-mm-dd',
+        language:"zh-CN",
+        minView:2,
+        autoclose:true,
+        pickerPosition:'bottom-left'
+    })
+})
+</script>
+</block>

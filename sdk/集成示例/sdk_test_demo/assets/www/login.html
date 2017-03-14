@@ -1,0 +1,23 @@
+<style>  
+#all{  
+    margin:0px auto;  
+    width:100px; /* 韫囧懘銆忛崚璺虹暰鐎硅棄瀹�*/  
+    height:400px;  
+    background-color:white;
+    text-align:center; /* 閸ユ儳鍎氱仦鍛厬 */  
+    padding-top:200px; /* 閸ユ儳鍎氭稉濠傦綖閸忥拷*/  
+    padding-bottom:200px; /* 閸ユ儳鍎氭稉瀣綖閸忥拷*/  	
+}  
+</style> 
+<div id="all">
+<input type="button" value="login" onClick="AndroidLogin('loginKey')" /> 
+</div>
+<script type="text/javascript">  
+window.onload=function(){ 
+Android.LoginMengchuang(null,null);
+} 
+
+    function AndroidLogin(loginKey) {  
+        Android.dismis();   
+    } 
+</script>

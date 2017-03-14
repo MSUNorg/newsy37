@@ -1,0 +1,235 @@
+<extend name="Public/base"/>
+
+<block name="body">
+    <!-- 标题栏 -->
+    <div class="main-title">
+        <h2>[{$model['title']}] 列表</h2>
+    </div>
+	<div class="cf top_nav_list">
+		<!-- 高级搜索 -->
+		<div class="search-form fr cf">
+            <div class="input-list">
+                <label>注册时间：</label>
+                <input type="text" id="time-start" name="time-start" class="text input-2x" value="{:I('time-start')}" placeholder="起始时间" /> 
+                -
+                <div class="input-append date" id="datetimepicker"  style="display:inline-block">
+                <input type="text" id="time-end" name="time-end" class="text input-2x" value="{:I('time-end')}" placeholder="结束时间" />
+                <span class="add-on"><i class="icon-th"></i></span>
+                </div>
+            </div>
+            <div class="i_list">
+                 <div class="drop-down drop-down2">
+                    <if condition="I('promote_name') eq ''">
+                    <input type="text" id="promoteid" class="sort-txt" value="" placeholder="请选择所属渠道" />
+                    <else />
+                    <input type="text" id="promoteid" class="sort-txt" value="{:I('promote_name')}" placeholder="请选择所属渠道" />
+                    </if>
+                    <input type="hidden" id="promoteidh" name="promote_name" value="{:I('promote_name')}" />
+                    <i class="arrow arrow-down"></i>
+                    <ul id="promoteidlist" class="nav-list hidden i_list_li">
+                        <li><a href="javascript:;" value="" >全部</a></li>
+                        <li><a href="javascript:;" value="0" >自然注册</a></li>
+                        <volist name=":get_promote_all()" id="vo">                        
+                        <li><a href="javascript:;" value="{$vo.id}" >{$vo.account}</a></li>
+                        </volist>
+                    </ul>
+                </div>                
+            </div>
+            <div class="sleft">
+                <div class="drop-down drop-down1" style="width:100px">
+                    <span id="sch-sort-txt" class="sort-txt" data="{I('register_way')}" style="width:65px">
+                        <if condition="I('register_way') eq ''">注册方式
+                        <elseif  condition="I('register_way') eq 0" />WEB
+                        <elseif  condition="I('register_way') eq 1" />SDK
+                        <else/>APP
+                        </if>
+                    </span>
+                    <i class="arrow arrow-down"></i>
+                    <ul id="sub-sch-menu" class="nav-list hidden">
+                        <li><a href="javascript:;" value="" style="width:80px">全部</a></li>
+                        <li><a href="javascript:;" value="0" style="width:80px">WEB</a></li>
+                        <li><a href="javascript:;" value="1" style="width:80px">SDK</a></li>
+                        <li><a href="javascript:;" value="2" style="width:80px">APP</a></li>
+                    </ul>
+                </div>
+                <input type='hidden' id='register_way' name="register_way" value="{:I('register_way')}"></input>
+            </div>
+			<div class="sleft">
+				<input type="text" name="account" class="search-input" value="{:I('account')}" placeholder="请输入账号">
+				<!-- <a class="sch-btn" href="javascript:;" id="search" url="{:U('Member/user_info','model='.$model['name'],false)}">
+                    <i class="btn-search"></i>
+                </a> -->
+			</div>
+            <div class="input-list">
+                <a class="sch-btn" href="javascript:;" id="search" url="{:U('Member/user_info','model='.$model['name'],false)}">
+                搜索</a>
+            </div>
+            <div class="input-list">
+                <a class="sch-btn" href="{:U('Export/expUser',array(
+    'id'=>12,
+    'account'=>I('account'),
+    'register_way'=>I('register_way'),
+    'time-start'=>I('time-start'),
+    'time-end'=>I('time-end'),
+    'start'=>I('start'),
+    'end'=>I('end'),
+    ))}">导出</a>
+            </div>
+		</div>
+	</div>
+
+
+    <!-- 数据列表 -->
+    <div class="data-table">
+        <div class="data-table table-striped">
+            <table>
+                <!-- 表头 -->
+                <thead>
+                    <tr>
+                        <th class="row-selected row-selected">
+                            <input class="check-all" type="checkbox">
+                        </th>
+                        <th style="text-align:center" >用户id</th>
+                        <th style="text-align:center" >用户账号</th>
+                        <th style="text-align:center" >平台币余额</th>
+                        <th style="text-align:center" >用户状态</th>
+                        <th style="text-align:center" >最后登陆时间</th>
+                        <th style="text-align:center" >最后登陆IP</th>
+                        <th style="text-align:center" >所属渠道</th>
+                        <th style="text-align:center" >注册时间</th>
+                        <th style="text-align:center" >注册方式</th>
+                        <th style="text-align:center" >注册IP</th>
+                        <th style="text-align:center" >操作</th>
+                    </tr>
+                </thead>
+                <!-- 列表 -->
+                <tbody>
+                    <volist name="list_data" id="data">
+                        <tr>
+                            <td style="border-right:1px solid #DDDDDD;text-align:center"><input class="ids" type="checkbox" value="{$data['id']}" name="ids[]"></td>
+                            <td style="border-right:1px solid #DDDDDD;text-align:center">{$data.id}</td>
+                            <td style="border-right:1px solid #DDDDDD;text-align:center">{$data.account}</td>
+                            <td style="border-right:1px solid #DDDDDD;text-align:center">{$data.balance}</td>
+                            <td style="border-right:1px solid #DDDDDD;text-align:center">{:get_status_text(1,$data['lock_status'],4)}</td>
+                            <td style="border-right:1px solid #DDDDDD;text-align:center">
+                            <if condition="$data.login_time eq null">注册未登录
+                            <else/>{$data.login_time|date='Y-m-d H:i:s',###}
+                            </if></td>
+                            <td style="border-right:1px solid #DDDDDD;text-align:center"><if condition="$data.login_time eq null">注册未登录
+                            <else/>{$data.login_ip}
+                            </if></td>
+                           <td style="border-right:1px solid #DDDDDD;text-align:center"> <if condition="get_parent_promote_a(get_promote_name($data['promote_id'])) neq '' ">{:get_promote_name($data['promote_id'])}[{:get_parent_promote_a(get_promote_name($data['promote_id']))}]<else/>{:get_promote_name($data['promote_id'])}</if></td>
+                            <td style="border-right:1px solid #DDDDDD;text-align:center">{$data.register_time|date='Y-m-d H:i:s',###}</td>
+                            <td style="border-right:1px solid #DDDDDD;text-align:center">{$data.register_way|get_registertype=###}</td>
+                            <td style="border-right:1px solid #DDDDDD;text-align:center">{$data.register_ip}</td>
+                            <td style="border-right:1px solid #DDDDDD;text-align:center"><a href="{:U('Member/edit?id='.$data['id'])}">查看</a></td>
+                        </tr>
+                    </volist>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="page">
+        {$_page|default=''}
+    </div>
+    <!-- <span><a href="{:U('Export/expUser',array(
+    'id'=>12,
+    'account'=>I('account'),
+    'register_way'=>I('register_way'),
+    'time-start'=>I('time-start'),
+    'time-end'=>I('time-end'),
+    'start'=>I('start'),
+    'end'=>I('end'),
+    ))}">导出数据(excel格式)</a></span> -->
+</block>
+
+<block name="script">
+<link href="__STATIC__/datetimepicker/css/datetimepicker.css" rel="stylesheet" type="text/css">
+<php>if(C('COLOR_STYLE')=='blue_color') echo '<link href="__STATIC__/datetimepicker/css/datetimepicker_blue.css" rel="stylesheet" type="text/css">';</php>
+<link href="__STATIC__/datetimepicker/css/dropdown.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="__STATIC__/datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
+<script type="text/javascript" src="__STATIC__/datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js" charset="UTF-8"></script>
+<script type="text/javascript">
+//导航高亮
+highlight_subnav('{:U('Member/user_info')}');
+$(function(){
+	//搜索功能
+	$("#search").click(function(){
+		var url = $(this).attr('url');
+        var query  = $('.search-form').find('input').serialize();
+        query = query.replace(/(&|^)(\w*?\d*?\-*?_*?)*?=?((?=&)|(?=$))/g,'');
+        query = query.replace(/^&/g,'');
+        if( url.indexOf('?')>0 ){
+            url += '&' + query;
+        }else{
+            url += '?' + query;
+        }
+		window.location.href = url;
+	});
+
+    //回车自动提交
+    $('.search-form').find('input').keyup(function(event){
+        if(event.keyCode===13){
+            $("#search").click();
+        }
+    });
+    $('#time-start').datetimepicker({
+        format: 'yyyy-mm-dd',
+        language:"zh-CN",
+        minView:2,
+        autoclose:true
+    });
+
+    $('#datetimepicker').datetimepicker({
+       format: 'yyyy-mm-dd',
+        language:"zh-CN",
+        minView:2,
+        autoclose:true,
+        pickerPosition:'bottom-left'
+    })
+})
+
+/* 状态搜索子菜单 */
+    $(".search-form").find(".drop-down1").hover(function(){
+        $("#sub-sch-menu").removeClass("hidden");
+    },function(){
+        $("#sub-sch-menu").addClass("hidden");
+    });
+
+    $("#sub-sch-menu li").find("a").each(function(){
+        $(this).click(function(){
+            var text = $(this).text();
+            $("#sch-sort-txt").text(text).attr("data",$(this).attr("value"));
+            $("#sub-sch-menu").addClass("hidden");
+            $('#register_way').val($(this).attr('value'));
+        })
+    });
+    
+    $(".drop-down2").on('click',function(event) {
+        var navlist = $(this).find('.i_list_li');
+        if (navlist.hasClass('hidden')) {
+            navlist.removeClass('hidden');
+            $('#promoteid').focus().val('');            
+        } else {
+            navlist.addClass('hidden');
+        }
+        $(document).one("click", function(){
+            navlist.addClass('hidden');
+        });
+        event.stopPropagation();
+    });
+    var a = $('.i_list_li li a');
+    $('#promoteid').on('keyup',function(event) {
+        var val  = $.trim($(this).val()).toLowerCase();
+        $('#promoteidh').val(val);
+    });
+    
+    $("#promoteidlist").find("a").each(function(){
+        $(this).click(function(){
+            var text = $.trim($(this).text()).toLowerCase();
+            $("#promoteid").val(text);
+            $('#promoteidh').val(text);
+        })
+    });
+</script>
+</block>

@@ -1,0 +1,1352 @@
+
+.gray-gray-btn-small {
+    display: inline-block;
+    *display: inline;
+    *zoom:1;width: 75px;
+    height: 25px;
+    text-align: center;
+    line-height: 25px;
+    font-size: 12px;
+    color: #676767;
+    background: url(../images/btn-shorter.png) no-repeat;
+    background-position: 0 -25px
+}
+
+.gray-gray-btn-small:hover {
+    background-position: 0 0;
+    color: #fff
+}
+
+.user-center-title h2 {
+    border-left: 5px solid #00abf0;
+    text-indent: 19px;
+    color: #333;
+    font-size: 20px
+}
+
+.user-center-title {
+    margin: 18px 15px 0 23px;
+    padding-bottom: 11px;
+    border-bottom: 3px solid #f9f9f9
+}
+
+.g-slideMessage-pop {
+    display: none
+}
+
+.g-slideMessage-pop .m-mask {
+    display: none
+}
+
+.g-slideMessage-pop .m-box {
+    margin-left: -240px;
+    width: 480px;
+    top: auto;
+    left: auto;
+    top: 100%;
+    right: 0
+}
+
+.g-slideMessage-pop .opration-bar {
+    text-align: center;
+    margin-bottom: 60px
+}
+
+.g-slideMessage-pop .btn {
+    display: inline-block;
+    *display: inline;
+    *zoom:1;margin-left: 10px;
+    width: 200px;
+    height: 34px;
+    line-height: 34px;
+    background: #74B32E;
+    color: #fff;
+    font-size: 16px
+}
+
+.g-slideMessage-pop .message {
+    color: #676767;
+    font-size: 24px;
+    text-align: center;
+    margin: 72px 0
+}
+
+.select-optimize {
+    width: 260px;
+    height: 32px;
+    position: relative;
+    outline: 0;
+    border: 1px solid #e6e6e6
+}
+
+.select-optimize.select_disabled {
+    background: #d4d4d4
+}
+
+.select-optimize .show-window {
+    width: 100%;
+    height: 100%;
+    text-indent: 10px;
+    word-break: break-all;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis
+}
+
+.select-optimize .select-list {
+    display: none;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    margin-top: 1px;
+    overflow: auto;
+    border: 1px solid #e6e6e6;
+    background: #fff
+}
+
+.select-optimize.active .select-list {
+    display: block
+}
+
+.select-optimize .select-list li {
+    display: block;
+    height: 100%;
+    text-indent: 10px;
+    list-style: none;
+    white-space: nowrap;
+    border-top: 1px solid #e6e6e6
+}
+
+.select-optimize .select-list li:hover {
+    background: #f2f2f2
+}
+
+.select-optimize .select-icon-trigger {
+    position: absolute;
+    display: block;
+    height: 100%;
+    width: 30px;
+    background: url(../images/icon-trigger.png) no-repeat center;
+    top: 0;
+    right: 0;
+    cursor: pointer
+}
+
+.m-sign-calender {
+    display: none;
+    position: relative;
+    z-index: 5;
+    background: #fff;
+    width: 537px
+}
+
+.m-sign-calender .sign-success-txt-tips {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    z-index: 6;
+    margin-left: -160px;
+    margin-top: -12px;
+    font-size: 18px;
+    color: #74B32E
+}
+
+.m-sign-calender.active {
+    display: block
+}
+
+.m-sign-calender .close {
+    position: absolute;
+    right: 1px;
+    top: 1px;
+    width: 47px;
+    height: 28px;
+    background: url(../images/icon-calendar-close.jpg) no-repeat center
+}
+
+.m-sign-calender .calender-wrap {
+    width: 365px;
+    border: 1px solid #d9d9d9;
+    margin-right: 170px
+}
+
+@keyframes sign {
+    from {
+        padding-left: 25px
+    }
+
+    to {
+        padding-left: 0
+    }
+}
+
+@keyframes fade-sign {
+    from {
+        opacity: 1
+    }
+
+    to {
+        opacity: 0
+    }
+}
+
+.m-sign-calender .calender-wrap .title-bar {
+    color: #000;
+    font-size: 24px;
+    height: 50px;
+    line-height: 50px;
+    text-align: center;
+    background: #fff
+}
+
+.m-sign-calender .calender-wrap .week {
+    padding: 0 32px
+}
+
+.m-sign-calender .calender-wrap .week span {
+    display: block;
+    float: left;
+    width: 43px;
+    height: 42px;
+    line-height: 42px;
+    text-align: center;
+    background: #f3f3f3;
+    color: #a0a0a0
+}
+
+.m-sign-calender .calender-wrap .dates {
+    padding: 0 32px;
+    overflow: hidden
+}
+
+.m-sign-calender .calender-wrap .dates a {
+    position: relative;
+    display: block;
+    float: left;
+    width: 43px;
+    height: 43px;
+    line-height: 43px;
+    text-align: center
+}
+
+.m-sign-calender .calender-wrap .dates a.has-signed {
+    background: url(../images/bg-signed.jpg) no-repeat center
+}
+
+.m-sign-calender .calender-wrap .dates a.today-sign {
+    background: url(../images/bg-calendar-has-signed.jpg) no-repeat center
+}
+
+.m-sign-calender .calender-wrap .dates a .signing {
+    position: absolute;
+    width: 31px;
+    height: 31px;
+    top: 50%;
+    left: 50%;
+    margin: -16px 0 0 -16px;
+    overflow: hidden
+}
+
+.m-sign-calender .calender-wrap .dates a .signing .mask {
+    position: absolute;
+    top: 0;
+    left: auto;
+    right: 3px;
+    width: 0;
+    height: 15px;
+    background: #fff;
+    margin-top: 9px;
+    z-index: 2;
+    animation: sign .5s ease-in
+}
+
+.m-sign-calender .calender-wrap .dates a .correct-sign {
+    opacity: 1
+}
+
+.m-sign-calender .calender-wrap .dates a .correct-sign-fade {
+    -webkit-animation: fade-sign .3s ease-in-out;
+    -o-animation: fade-sign .3s ease-in-out;
+    animation: fade-sign .3s ease-in-out;
+    opacity: 0
+}
+
+.m-sign-calender .calender-wrap .dates a .signing img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1
+}
+
+.m-sign-calender .calender-wrap .tips {
+    margin: 11px 0 19px;
+    width: 100%;
+    text-align: center;
+    color: #939393;
+    font-size: 12px
+}
+
+.m-sign-calender .calender-wrap .tips p {
+    white-space: normal
+}
+
+.m-sign-calender .calender-wrap .tips .line-title {
+    position: relative;
+    color: #939393;
+    font-size: 12px
+}
+
+.m-sign-calender .calender-wrap .tips .line-title .txt {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    padding: 0 14px;
+    background: #fff
+}
+
+.m-sign-calender .calender-wrap .tips .line-title .line {
+    position: absolute;
+    left: 0;
+    top: 50%;
+    width: 100%;
+    border-top: 1px dashed #939393;
+    z-index: 0
+}
+
+.m-sign-calender .calender-wrap .tips .tips-con {
+    padding: 20px 0 0 32px
+}
+
+.m-sign-calender .calender-wrap .tips .tips-con li {
+    float: left;
+    width: 143px
+}
+
+.m-sign-calender .calender-wrap .tips .tips-con .deco-icon {
+    float: left;
+    width: 52px;
+    height: 52px
+}
+
+.m-sign-calender .calender-wrap .tips .tips-con .desc-title,.m-sign-calender .calender-wrap .tips .tips-con .desc-detail {
+    margin-left: 62px;
+    text-align: left
+}
+
+.m-sign-calender .calender-wrap .tips .tips-con .desc-title {
+    padding-top: 10px;
+    color: #333;
+    font-size: 16px;
+    line-height: 1;
+    margin-bottom: 6px;
+    margin-top: -4px
+}
+
+.m-sign-calender .calender-wrap .tips .tips-con .desc-title .question {
+    position: absolute;
+    top: 2px;
+    right: 3px;
+    width: 11px;
+    height: 11px;
+    background: url(../images/icon-sign-question.png) no-repeat center
+}
+
+.m-sign-calender .calender-wrap .tips .tips-con .desc-detail {
+    color: #939393;
+    font-size: 12px
+}
+
+.m-sign-calender .calender-wrap .tips .tips-con .accelerate-wrap {
+    position: relative;
+    z-index: 11
+}
+
+.m-sign-calender .calender-wrap .tips .tips-con .accelerate-wrap .deco-icon {
+    background: url(../images/img-sign-deco.png) no-repeat;
+    background-position: 0 0
+}
+
+.m-sign-calender .calender-wrap .tips .tips-con .meng-wrap {
+    width: 160px
+}
+
+.m-sign-calender .calender-wrap .tips .tips-con .meng-wrap .deco-icon {
+    background: url(../images/img-sign-deco.png) no-repeat;
+    background-position: -52px 0
+}
+
+.m-sign-calender .calender-wrap .tips .tips-con .tips-pop {
+    position: absolute;
+    top: -42px;
+    left: 0;
+    width: 190px;
+    padding: 2px;
+    color: #939393;
+    border: 1px solid #c99091;
+    background: #fff;
+    z-index: 11;
+    display: none
+}
+
+.m-sign-calender .calender-wrap .tips .accelerate-wrap .meng-wrap {
+    float: left
+}
+
+.m-sign-calender .lucky-day {
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 170px;
+    background: #5cd0fe;
+    margin-left: -1px;
+    border-right: 1px solid #4eb1d8;
+    border-bottom: 1px solid #4eb1d8;
+    border-top: 1px solid #4eb1d8;
+    height: 99.5%
+}
+
+.m-sign-calender .lucky-day .line {
+    position: absolute;
+    top: 1px;
+    left: 33px;
+    height: 99%;
+    border: 1px dashed #4fb2d9
+}
+
+.m-sign-calender .lucky-day .gbd-wrap {
+    margin-top: 39px
+}
+
+.m-sign-calender .lucky-day .gbd-3 {
+    position: relative;
+    padding: 0 0 0 60px
+}
+
+.m-sign-calender .lucky-day .gbd-3 .icon-gbded {
+    position: absolute;
+    width: 19px;
+    height: 17px;
+    top: 0;
+    left: 26px;
+    background: url(../images/img-sign-tips.png) no-repeat
+}
+
+.m-sign-calender .lucky-day .gbd-3 p {
+    font-size: 16px;
+    color: #fff;
+    line-height: 1;
+    margin: 24px 0 20px;
+    white-space: normal
+}
+
+.m-sign-calender .lucky-day .gbd-3 .getPrize {
+    color: #cbcbcb;
+    font-size: 12px;
+    padding: 6px 15px;
+    background: #f1f1f1;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px
+}
+
+.m-sign-calender .lucky-day .gbd-3.active .getPrize {
+    color: #333;
+    background: #f1f1f1
+}
+
+.m-sign-calender .lucky-day .gbd-3.active .getPrize:hover {
+    background: #fff
+}
+
+.g-new-platform {
+    display: none;
+    width: 100%;
+    height: 341px;
+    background: url(../images/new-platform.png) no-repeat center;
+    min-width: 1260px;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    z-index: 1000
+}
+
+.g-new-platform .go-target {
+    display: block;
+    width: 100%;
+    height: 100%
+}
+
+.g-new-platform .close {
+    position: absolute;
+    top: 15px;
+    left: 50%;
+    margin-left: 553px;
+    width: 60px;
+    height: 60px
+}
+
+.g-forgetPass-header {
+    position: relative;
+    height: 96px;
+    background: #fff
+}
+
+.m-forgetPass-header {
+    position: absolute;
+    left: 50%;
+    margin-left: -630px;
+    font-size: 32px;
+    color: #676767;
+    padding: 34px 0 13px
+}
+
+.m-forgetPass-header .forgetPass-logo {
+    font-size: 0;
+    float: left
+}
+
+.m-forgetPass-header .line {
+    display: inline-block;
+    height: 29px;
+    width: 1px;
+    background: #dcdcdc;
+    margin: 0 24px;
+    vertical-align: middle
+}
+
+.m-forgetPass-header img {
+    width: 177px
+}
+
+.g-header {
+    height: 100px;
+    min-width: 1260px;
+	border-bottom: 5px solid #74B32E;
+}
+
+.g-header .m-logo {
+    width: 177px;
+    height: 46px;
+    float: left;
+    margin: 30px 44px 24px 12px
+}
+
+.g-header .m-header-nav {
+    float: left;
+    margin-top: 28px;
+    margin-left: 14%;
+}
+
+.g-header .m-header-nav li {
+    float: left
+}
+
+.m-header-nav li.active{
+	 background:#74B32E;
+	
+	}
+.m-header-nav li.active  a{ color:#fff!important;}
+
+.g-header .m-header-nav a.hover,.g-header .m-header-nav li.active a {
+    color: #74B32E;
+}
+
+.g-header .m-header-nav a {
+    display: inline-block;
+    width: 95px;
+    padding: 30px 0 30px;
+    line-height: 1;
+    text-align: center;
+    color: #676767;
+    font-size: 16px
+}
+
+.g-header .m-search {
+    float: right;
+    height: 34px;
+    margin: 37px 0 0;
+    position: relative;
+    z-index: 999
+}
+
+.g-header .m-search input {
+    height: 32px;
+    line-height: 32px;
+    width: 237px;
+    border: 3px solid #74B32E;
+    text-indent: 12px;
+    color: #b6b6b6;
+    display: block;
+    font-family: "MICROSOFT YAHEI";
+    font-weight: 100
+}
+
+.g-header .m-search input:focus {
+    border-color: #FF8400
+}
+
+.g-header .m-search .icon-search {
+    text-indent: 0;
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    top: 6px;
+    right: 10px;
+    background: url(../images/img-search.png) no-repeat;
+    cursor: pointer;
+    border: 0;
+    font-size: 0;
+    background-color: #fff
+}
+
+.g-header .m-search .pop {
+    display: none;
+    position: absolute;
+    top: 34px;
+    left: 0;
+    width: 237px;
+    border: 1px solid #c2c9d1;
+    color: #676767;
+    background: #fff;
+    z-index: 2
+}
+
+.g-header .m-search .pop.active {
+    display: block
+}
+
+.g-header .m-search li {
+    padding: 0 17px;
+    overflow: hidden;
+    line-height: 30px
+}
+
+.g-header .m-search li a {
+    color: #676767
+}
+
+.g-header .m-search li a:hover {
+    color: #74B32E
+}
+
+.g-header .m-search .list-first {
+    padding: 8px 0 6px;
+    background: #f9f9f9
+}
+
+.g-header .m-search .second {
+    border-top: 1px dotted #cecece
+}
+
+.g-header .m-search .list-first img {
+    width: 36px;
+    height: 36px;
+    vertical-align: middle;
+    margin: 0 10px 0 15px
+}
+
+.g-header .m-search .down_btn {
+    display: inline-block;
+    margin-left: 54px;
+    width: 61px;
+    height: 25px;
+    line-height: 25px;
+    text-align: center;
+    color: #fff;
+    background: #74B32E;
+    float: right;
+    margin: 5px 6px 0 0
+}
+
+.g-header .m-search .down_btn:hover {
+    color: #fff
+}
+
+.page_nav_box {
+    width: 1200px;
+    margin: 0 auto;
+    height: 100px
+}
+
+.page_nav_box .page_nav_logo {
+    width: 177px;
+    height: 46px;
+    margin-top: 30px;
+    float: left
+}
+
+.page_nav_box .page_nav {
+    float: right;
+    font-size: 16px;
+    line-height: 100px
+}
+
+.page_nav_box .page_nav li {
+    float: left
+}
+
+.page_nav_box .page_nav li a {
+    padding: 0 15px 37px
+}
+
+.page_nav_box .page_nav li a:hover {
+    border-bottom: 5px solid #74B32E
+}
+
+.page_nav_box .page_nav li .cur {
+    border-bottom: 5px solid #74B32E
+}
+
+.g-register-login-footer {
+    position: relative;
+    min-height: 90px;
+    background: #fff;
+    font-size: 12px;
+    font-family: simsong
+}
+
+.g-register-login-footer .helper-list {
+    float: right;
+    font-size: 0
+}
+
+.g-register-login-footer .helper-list .fir {
+    border-left: 0
+}
+
+.g-register-login-footer .helper-list a {
+    font-size: 12px;
+    color: #676767;
+    padding: 0 8px;
+    border-left: 1px solid #676767
+}
+
+.g-register-login-footer .helper-list a:hover {
+    text-decoration: underline
+}
+
+.g-register-login-footer .helper-text {
+    margin-left: 50px;
+    white-space: normal
+}
+
+.g-register-header,.g-login-header {
+    position: relative;
+    height: 62px;
+    background: #fff
+}
+
+.m-register-header,.m-login-header {
+    position: absolute;
+    left: 50%;
+    margin-left: -630px;
+    font-size: 32px;
+    color: #676767;
+    padding: 3px 0 13px
+}
+
+.m-register-header .register-logo {
+    font-size: 0;
+    float: left
+}
+
+.m-login-header .login-logo {
+    font-size: 0;
+    float: left
+}
+
+.m-register-header .line {
+    display: inline-block;
+    height: 29px;
+    width: 1px;
+    background: #dcdcdc;
+    margin: 0 24px;
+    vertical-align: middle
+}
+
+.m-login-header .line {
+    display: inline-block;
+    height: 29px;
+    width: 1px;
+    background: #dcdcdc;
+    margin: 0 24px;
+    vertical-align: middle
+}
+
+.m-register-header img {
+    width: 177px
+}
+
+.m-login-header img {
+    width: 177px
+}
+
+.m-37box {
+    float: left;
+    width: 286px;
+    height: 591px;
+    background-color: #f5f5f5
+}
+
+.m-37box p {
+    line-height: 20px;
+    font-size: 14px;
+    color: #939393;
+    text-align: center
+}
+
+.m-37box .spec-item {
+    font-size: 20px;
+    color: #37b0e9;
+    line-height: 26px;
+    font-size: 700;
+    width: 145px;
+    margin: 54px auto 10px
+}
+
+.m-37box .beauty {
+    display: block;
+    width: 196px;
+    margin: 33px auto 27px
+}
+
+.m-37box .register-down {
+    display: block;
+    width: 141px;
+    height: 40px;
+    border-radius: 2px;
+    text-align: center;
+    line-height: 40px;
+    color: #fff;
+    background: #37b0e9;
+    margin: 0 auto
+}
+
+.g-userSafe-header {
+    background: #5cd0fe;
+    height: 195px;
+    min-width: 1260px;
+    position: relative;
+    z-index: 10
+}
+
+.g-userSafe-header i {
+    display: inline-block;
+    *display: inline;
+    *zoom:1}
+
+.g-userSafe-header .g-innner {
+    position: relative;
+    overflow: hidden
+}
+
+.g-userSafe-header .m-sign-wrap {
+    float: right;
+    margin-top: 43px;
+    width: 320px
+}
+
+.g-userSafe-header .m-user-detail {
+    float: left;
+    margin-top: 24px;
+    width: 936px
+}
+
+.g-userSafe-header .m-user-detail .user-desc {
+    float: left;
+    margin-left: 34px;
+    line-height: 1
+}
+
+.g-userSafe-header .m-user-detail .user-desc .nick-name {
+    color: #fff;
+    font-size: 22px;
+    font-weight: 700;
+    margin: 5px 0 13px
+}
+
+.g-userSafe-header .m-user-detail .user-desc .nick-name span {
+    vertical-align: middle
+}
+
+.g-userSafe-header .m-user-detail .user-desc .nick-name i {
+    vertical-align: middle
+}
+
+.g-userSafe-header .m-user-detail .user-desc .trigger-modify {
+    width: 13px;
+    height: 19px;
+    background: url(../images/icon-userSafe-header.png) no-repeat;
+    background-position: -85px 0;
+    cursor: pointer;
+    position: relative;
+    left: 17px
+}
+
+.g-userSafe-header .m-user-detail .user-desc .user-name {
+    height: 24px;
+    line-height: 24px;
+    font-size: 14px;
+    margin-bottom: 14px;
+    color: #fff
+}
+
+.g-userSafe-header .m-user-detail .user-desc .user-name .modify-pass {
+    display: inline-block;
+    *display: inline-block;
+    *zoom:1;width: 77px;
+    height: 24px;
+    line-height: 24px;
+    text-align: center;
+    color: #5cd0fe;
+    margin-left: 12px;
+    background: url(../images/icon-userSafe-header.png) no-repeat;
+    background-position: 0 0
+}
+
+.g-userSafe-header .m-user-detail .user-desc .icon-m-bigger {
+    vertical-align: middle
+}
+
+.g-userSafe-header .m-user-detail .user-desc .vip-wrap {
+    display: inline-block;
+    *display: inline;
+    *zoom:1;vertical-align: middle;
+    width: 289px;
+    height: 11px;
+    position: relative;
+    overflow: hidden;
+    margin: 0 11px;
+    background: #fff
+}
+
+.g-userSafe-header .m-user-detail .user-desc .vip-wrap-outter {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: url(../images/vip-bar-outter.png) no-repeat;
+    z-index: 2
+}
+
+.g-userSafe-header .m-user-detail .user-desc .vip-highlight {
+    position: absolute;
+    left: -98%;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: url(../images/vip-bar-inner.png) no-repeat;
+    z-index: 1
+}
+
+.g-userSafe-header .m-user-detail .user-desc .item-vip {
+    color: #fff;
+    font-size: 12px;
+    line-height: 1
+}
+
+.g-userSafe-header .m-user-detail .user-desc .line {
+    position: relative;
+    margin: 15px 0 15px -23px;
+    width: 767px;
+    border-bottom: 1px dotted #6cf3ff;
+    line-height: 1;
+    font-size: 0
+}
+
+.g-userSafe-header .m-user-detail .user-desc .btn {
+    display: inline-block;
+    *display: inline;
+    *zoom:1;width: 136px;
+    height: 24px;
+    line-height: 24px;
+    text-align: center;
+    color: #fff;
+    font-size: 14px;
+    background: url(../images/icon-userSafe-header.png) no-repeat;
+    background-position: -108px 0;
+    margin-right: 17px;
+    cursor: default
+}
+
+.g-userSafe-header .m-user-detail .user-desc .user-nick-wrap {
+    position: relative;
+    z-index: 5
+}
+
+.g-userSafe-header .m-user-detail .user-desc .modify-nickname-wrap {
+    position: absolute;
+    top: 0;
+    left: 0
+}
+
+.g-userSafe-header .m-user-detail .user-desc .modify-nickname-wrap input {
+    width: 163px;
+    height: 30px;
+    background: #9ae8ff;
+    border: 1px solid #fff;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 2px;
+    padding: 0 0 0 10px;
+    line-height: 30px;
+    margin: 0 10px 0 0;
+    font-size: 18px;
+    vertical-align: middle
+}
+
+.g-userSafe-header .m-user-detail .user-desc .modify-nickname-wrap a {
+    display: inline-block;
+    *display: inline;
+    *zoom:1;width: 54px;
+    height: 25px;
+    border: 1px solid #d4d4d4;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 2px;
+    line-height: 25px;
+    text-align: center;
+    background: #fff;
+    color: #5cd0fe;
+    vertical-align: middle
+}
+
+.g-userSafe-header .m-user-detail .user-desc .modify-nickname-wrap .cancel-btn {
+    border: 0;
+    background: 0 0;
+    color: #fff;
+    margin-left: 10px
+}
+
+.g-userSafe-header .m-user-detail .user-desc .modify-nickname-wrap .tip-wrap {
+    width: 342px;
+    height: 55px;
+    border: 1px solid #d9d9d9;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: #fff;
+    margin-top: 13px;
+    z-index: 5
+}
+
+.g-userSafe-header .m-user-detail .user-desc .modify-nickname-wrap .tip-wrap p {
+    padding: 11px;
+    line-height: 18px;
+    font-size: 12px;
+    color: #9c9c9c;
+    white-space: normal
+}
+
+.g-userSafe-header .m-user-detail .user-desc .modify-nickname-wrap .tip-wrap p.error {
+    color: red
+}
+
+.g-userSafe-header .m-user-detail .user-desc .modify-nickname-wrap .tip-wrap .arrow {
+    position: absolute;
+    top: -14px;
+    left: 22px;
+    border: 7px solid transparent;
+    border-bottom-color: #d9d9d9;
+    width: 0;
+    height: 0
+}
+
+.g-userSafe-header .m-user-detail .user-desc .modify-nickname-wrap .tip-wrap .arrow-outter {
+    top: -13px;
+    border-bottom-color: #fff
+}
+
+.g-userSafe-header .m-sign-wrap .little-calender {
+    float: left;
+    width: 100px;
+    height: 103px;
+    background: url(../images/img-calendar.png) no-repeat;
+    background-size: cover;
+    margin: -8px 14px 0 0;
+    text-align: center
+}
+
+.g-userSafe-header .m-sign-wrap .little-calender .d-m {
+    margin-top: 38px;
+    font-size: 14px;
+    font-weight: 700;
+    color: #603232
+}
+
+.g-userSafe-header .m-sign-wrap .little-calender .w {
+    font-size: 30px;
+    color: #ec352f;
+    font-weight: 700
+}
+
+.g-userSafe-header .m-sign-wrap .sign-operator {
+    float: left;
+    font-size: 16px;
+    line-height: 24px;
+    color: #fff
+}
+
+.g-userSafe-header .m-sign-wrap .sign-operator p {
+    margin-left: 20px
+}
+
+.g-userSafe-header .m-sign-wrap .sign-operator .sign-btn {
+    display: block;
+    width: 174px;
+    height: 42px;
+    font-size: 20px;
+    text-align: center;
+    line-height: 42px;
+    color: #fff;
+    background: url(../images/icon-userSafe-header.png) no-repeat;
+    background-position: -478px 0;
+    margin-bottom: 9px;
+    outline: 0
+}
+
+.g-userSafe-header .m-sign-wrap .sign-operator .sign-btn.active {
+    background-position: -295px 0
+}
+
+.g-userSafe-header .avatar-wrap {
+    width: 140px;
+    height: 140px;
+    float: left;
+    position: relative;
+    overflow: hidden;
+    outline: 0;
+    cursor: pointer
+}
+
+.g-userSafe-header .avatar-wrap .avatar {
+    z-index: 1
+}
+
+.g-userSafe-header .avatar-wrap .avatar,.g-userSafe-header .avatar-wrap .img-masker {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: block;
+    width: 100%
+}
+
+.g-userSafe-header .avatar-wrap .img-masker {
+    z-index: 3
+}
+
+.g-userSafe-header .avatar-wrap .float-tips {
+    position: absolute;
+    left: 0;
+    top: 100%;
+    width: 100%;
+    height: 36px;
+    color: #fff;
+    line-height: 36px;
+    text-align: center;
+    font-size: 14px;
+    z-index: 2;
+    transition: all .3s;
+    background: rgba(0,0,0,.5);
+    background: #000\9;
+    filter: alpha(opacity=50)\9
+}
+
+.g-userSafe-header .avatar-wrap:hover .float-tips {
+    top: 104px
+}
+
+.g-userSafe-header .modify-avatar-wrap {
+    display: none;
+    position: absolute;
+    top: 157px;
+    left: 50%;
+    margin-left: -497px;
+    width: 485px;
+    background: #fff;
+    z-index: 5;
+    border: 1px solid #d9d9d9
+}
+
+.g-userSafe-header .modify-avatar-wrap.active {
+    display: block
+}
+
+.g-userSafe-header .modify-avatar-wrap .close {
+    display: block;
+    position: absolute;
+    top: -1px;
+    right: 0;
+    background: url(../images/icon-close.jpg) no-repeat;
+    background-position: -47px 0;
+    width: 47px;
+    height: 28px;
+    cursor: pointer
+}
+
+.g-userSafe-header .modify-avatar-wrap .close:hover {
+    background-position: 0 0
+}
+
+.g-userSafe-header .modify-avatar-wrap .title-bar {
+    margin: 24px 35px 0;
+    border-bottom: 1px solid #cecece
+}
+
+.g-userSafe-header .modify-avatar-wrap .title-bar a {
+    display: block;
+    width: 140px;
+    height: 36px;
+    text-align: center;
+    line-height: 36px;
+    font-size: 18px;
+    color: #333;
+    border-top: 4px solid #00abf0;
+    border-bottom: 1px solid #fff;
+    border-right: 1px solid #cecece;
+    position: relative;
+    top: 1px
+}
+
+.g-userSafe-header .modify-avatar-wrap .title-bar a.active {
+    border-top-color: #00abf0
+}
+
+.g-userSafe-header .modify-avatar-wrap .img-wrap {
+    overflow: hidden;
+    margin: 30px 35px 0 25px
+}
+
+.g-userSafe-header .modify-avatar-wrap .img-wrap a {
+    display: block;
+    width: 50px;
+    float: left;
+    margin: 0 0 10px 10px;
+    position: relative
+}
+
+.g-userSafe-header .modify-avatar-wrap .img-wrap a.active .img-avatar-masker {
+    display: block
+}
+
+.g-userSafe-header .modify-avatar-wrap .img-wrap .img-avatar-masker {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    display: none
+}
+
+.g-userSafe-header .modify-avatar-wrap .img-wrap img {
+    display: block;
+    width: 100%
+}
+
+.g-userSafe-header .modify-avatar-wrap .save-avatar {
+    display: block;
+    width: 118px;
+    height: 34px;
+    margin: 20px auto 30px;
+    line-height: 34px;
+    text-align: center;
+    font-size: 16px;
+    color: #fff;
+    background: url(../images/icon-userSafe-header.png) no-repeat;
+    background-position: -658px 0
+}
+
+.g-userSafe-header .sign-calender {
+    position: absolute;
+    z-index: 5;
+    top: 176px;
+    left: 50%;
+    margin-left: -64px;
+    background: #fff
+}
+
+.g-userSafe-header .sign-calender.active {
+    display: block
+}
+
+.g-userSafe-header .sign-calender .close {
+    position: absolute;
+    right: 1px;
+    top: 1px;
+    width: 47px;
+    height: 28px;
+    background: url(../images/icon-calendar-close.jpg) no-repeat center
+}
+
+.g-user-center-wrap {
+    background: #f9f9f9;
+    padding: 0 0 40px
+}
+
+.m-user-center-content {
+    background: #fff;
+    float: left;
+    width: 1133px;
+    /* height: 943px; */
+    border: 1px solid #e7e7e7;
+    margin: 15px 0 0;
+    font-size: 14px;
+    min-height: 520px
+}
+
+.g-userSafe-sider {
+    float: left;
+    margin-top: 33px;
+    width: 125px
+}
+
+.g-userSafe-sider li {
+    margin-bottom: 42px;
+    position: relative;
+    height: 21px
+}
+
+.g-userSafe-sider li a {
+    font-size: 16px;
+    line-height: 1
+}
+
+.g-userSafe-sider li .dot {
+    position: absolute;
+    left: 83px;
+    top: 50%;
+    width: 14px;
+    height: 14px;
+    background: url(../images/icon-userSafe-header.png);
+    background-position: -276px 0;
+    float: right;
+    margin-top: -9px
+}
+
+.g-userSafe-sider li .line {
+    position: absolute;
+    top: 21px;
+    right: 34px;
+    display: block;
+    width: 1px;
+    height: 42px;
+    background: #00abf0
+}
+
+.g-userSafe-sider li.active a {
+    color: #00abf0
+}
+
+.g-userSafe-sider li.active .dot {
+    background-position: -255px 0
+}
+
+.g-userSafe-sider li.disabled {
+    display: none
+}

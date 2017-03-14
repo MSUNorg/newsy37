@@ -1,0 +1,26 @@
+<extend name="Public/subbases" />
+<block name="body" >
+<link href="__CSS__/accountInfo_accountInfo.css" rel="stylesheet" />
+<div class="m-account-info m-user-center-content">
+	<div class="user-center-title"><h2>我的帐号</h2></div>
+	<ul class="account-desc clear-fix">
+	<li>用户名：<span class="user-name">{$up.account}</span></li>
+	<li>帐号已经使用<span class="last-time">{$up.day}</span></li>
+	<li class="hidden">玩过的游戏<span class="game-count">0款</span></li></ul>
+	<div class="safe-level">帐号安全等级
+		<span class="safe-level-bar {$up.safelevel}">
+			<span class="progress-cube lowH middleH highH"></span>
+			<span class="progress-cube middleH highH"></span>
+			<span class="progress-cube highH"></span>
+			<span class="high">高</span>
+			<span class="middle">中</span>
+			<span class="low">低</span>
+		</span>
+	</div>
+	<div class="user-center-title"><h2>我的密保</h2></div>
+	<div class="mission "> 
+		<a href="{:U('safe')}" data-url="" data-desc="进行密保手机设置" class="btn undo get-mission">设置</a> <h4>设置密保手机</h4>                    <p>进行密保手机设置</p>                </div>
+	<div class="mission "> 
+		<a href="{:U('safe')}" data-url="" data-desc="进行密保邮箱设置" class="btn undo get-mission">设置</a> <h4>设置密保邮箱</h4>                    <p>进行密保邮箱设置</p>                </div>
+</div>
+</block>

@@ -1,0 +1,108 @@
+<extend name="Public/bases" />
+<block name="body" >
+<link rel="stylesheet" href="__CSS__/gift.css">
+<link rel="stylesheet" href="__CSS__/platform.css">
+<div class="gift_banner_box">
+	<notempty name="libao">
+  <div class="gift_banner">
+    <ul>
+		<foreach name="libao" item="vo">
+		<li class="l{$key+1}"><a target="_blank" href="#">
+			<img src="{$vo.cover|get_cover='path'}"></a>
+			<div class="gift_gamename">{$vo.slidetitle}</div>
+			<div class="receive_box"><em class="commo-mask"></em>
+				<div class="receive_name">{$vo.slidetitle}
+					<a target="_blank" href="{$vo.slideurl}" class="gift_receive">立即领取</a>
+				</div>
+			</div>
+		</li>
+		</foreach>
+    </ul>
+  </div>
+  </notempty>
+</div>
+<div class="wrap cl">
+  <div class="gift_center_box">
+    <div class="gift_title">
+      <h2><a target="_blank" href="#">热门礼包</a></h2>
+      <a target="_blank" href="{:U('lists')}" class="more">更多+</a></div>
+    <div class="gift_center_contont">
+      <ul>
+        <volist name="hotgift" id="vo">
+        <li>
+          <div class="gift_icon"><a target="_blank" href="{:U('Gift/detail',array('id'=>$vo['id']))}">
+		  <img src="__ROOT__{$vo.icon|get_cover='path'}"></a></div>
+          <div class="gift_info">
+            <div class="gift_info_t"><a target="_blank" href="#">{$vo.giftbag_name}</a></div>
+            <div class="gift_info_msg" id="m1">{$vo.game_name}</div>
+            <div class="gift_info_msg" id="m2">剩余:<span>{$vo.novicenum}</span></div>
+            <div class="gift_info_receive"><a target="_blank" href="{:U('Gift/detail',array('id'=>$vo['id']))}"><i class="gift-icon"></i><em>领取</em></a></div>
+          </div>
+        </li>
+        </volist>
+      </ul>
+    </div>
+  </div>
+</div>
+<div class="main_gift_bg_box">
+  <div class="main_gift_box">
+    <notempty name="giftad">
+    <a href="{$giftad.slideurl}"><img width="1260" height="200" data-src="{$giftad.cover|get_cover='path'}" src="{$giftad.cover|get_cover='path'}" ></a>
+    </notempty>
+  </div>
+</div>
+<div class="wrap cl m60">
+  <div class="gift_center_box gift_newst">
+    <div class="gift_title">
+      <h2><a target="_blank" href="#">最新礼包</a></h2>
+      <a target="_blank" href="{:U('lists')}" class="more">更多+</a></div>
+    <div class="gift_center_contont" >
+      <ul id="gift_newst">
+
+
+		<volist name="newsgift" id="vo">
+        <li>
+          <div class="gift_icon"><a target="_blank" href="{:U('Gift/detail',array('id'=>$vo['id']))}">
+			<img src="__ROOT__{$vo.icon|get_cover='path'}"></a></div>
+          <div class="gift_info">
+            <div class="gift_info_t"><a target="_blank" href="#">{:get_gift($vo['giftbag_type'])}</a></div>
+            <div class="gift_info_msg" id="m1">{$vo.game_name}</div>
+            <div class="gift_info_msg" id="m2">剩余:<span>{$vo.novicenum}</span></div>
+            <div class="gift_info_receive"><a target="_blank" href="{:U('Gift/detail',array('id'=>$vo['id']))}"><i class="gift-icon"></i><em>领取</em></a></div>
+          </div>
+        </li>
+        </volist>
+
+
+
+      </ul>
+    </div>
+  </div>
+
+  <div class="gift_grab">
+    <div class="gift_title">
+
+      <h2>大家都在抢</h2>
+    </div>
+    <div class="gift_grab_content">
+      <ul id="" style="margin-top: -64px;">
+
+    <volist name="qgift" id="vo">
+        <li>
+          <div class="grab-box">
+            <div class="grab-icon"><a target="_blank" href="{:U('Gift/detail',array('id'=>$vo['id']))}">
+			<img src="__ROOT__{$vo.icon|get_cover='path'}"></a></div>
+            <div class="grab-msg">
+              <div class="m1"><span>{$vo.account}</span><span>刚刚领取了</span></div>
+              <div class="m2">{$vo.giftbag_name}</div>
+            </div>
+            <a target="_blank" href="{:U('Gift/detail',array('id'=>$vo['id']))}" class="grab-button">抢</a></div>
+        </li>
+        </volist>
+      </ul>
+    </div>
+  </div>
+</div>
+<script type="text/javascript" src="__JS__/jquery.scroll.js"></script>
+<script type="text/javascript" src="__JS__/gift-grab.js"></script> 
+</block>

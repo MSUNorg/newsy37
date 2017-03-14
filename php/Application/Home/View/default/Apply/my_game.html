@@ -1,0 +1,139 @@
+<extend name="Public/promote_base"/>
+
+<block name="body">
+    <script src="__STATIC__/layer/layer.js" type="text/javascript"></script>
+    <script src='__STATIC__/zeroclipboard/jquery.zclip.min.js'></script>
+      <div id="query">
+        <div id="other_se" class="mod">
+          <h2>查询</h2>
+          <form  action="{:U('Apply/my_game')}" method="post" enctype="multipart/form-data">
+            <div>
+              <input type="text" placeholder="请输入游戏名称" class="txts" name="game_name" value="{:I('game_name')}">
+             <!--  <select name="pattern" class="txts">
+                <option <if condition="empty(I('pattern'))">selected="selected"</if> value="">请选择合作模式</option>
+                <option <if condition="I('pattern') == '0'">selected="selected"</if> value="0" >CPS</option>
+                <option <if condition="I('pattern') == '1'">selected="selected"</if> value="1">CPA</option>
+              </select> -->
+              <input type="submit" value="查询" class="btns">
+            </div><!-- <br>平台推广链接：{$url} -->
+          </form>
+        </div>
+        <div id="lg" class="mod">
+          <h2>游戏列表</h2>
+          <div class="tabs">
+           <ul class="tab_nav tabNavigation clearfix">
+              <li><a href="{:U('Apply/my_game?type=-1')}" class="on" id="all">全部</a></li>
+              <li><a href="{:U('Apply/my_game?type=1')}"  id="audit">已审核</a></li>
+              <li><a href="{:U('Apply/my_game?type=0')}"  id="wait">待审核</a></li>
+              <!-- <li><a href="{:U('Apply/mygameno')}">停止投放</a></li> -->
+            </ul>
+            <div id="tabcon01" class="tabcon" style="display: block;">
+              <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                <tbody>
+                  <tr>
+                    <th>应用名称</th>
+                    <!-- <th>合作模式</th> -->
+                    <th>最新版本号</th>
+                    <th>类型</th>
+                    <th>应用大小</th>
+                    <th>下载</th>
+                  </tr>
+  				        <volist name="list_data" id="vo">
+                  <tr>
+                  <td>
+                    <a href="javascript:;">
+                      <img src="__ROOT__{$vo.icon|get_cover='path'}" width="50" height="50" align="middle">
+                      <span class="name_a">{$vo.game_name}</span>
+                    </a>
+                  </td>
+                  <!-- <td>{:get_pattern($vo['pattern'])}</td> -->
+                  <td>{$vo.version}</td>
+                  <td>{$vo['game_type_name']}</td>
+                  <td>{$vo.game_size}</td>
+                  <td style="position: relative;">
+                    <switch name="vo.status">
+                      <case value="0"><a href="javascript:;" class="bts proc">审核中</a></case>
+                      <case value="1">
+                        <a href="<if condition='$vo.dow_status eq 0'>#<else/>{:U('Down/down_file?game_id='.$vo['id'].'&promote_id='.$vo['promote_id'])}</if>" class="bts" >下载</a>
+                        <a href="javascript:;" class="bts copy" data-url="{:get_apply_dow_url($vo['id'],$vo['promote_id'])}" >
+                          复制下载地址
+                        </a>
+                      </case>
+                      <case value="2"><a href="javascript:;" class="bts proc">审核失败</a></case>
+                    </switch>
+                  </td>
+                  </tr>
+                  </volist>                              
+                </tbody>
+              </table>
+              <div class="import">
+                <span>数据量：{$count}条数据</span><span>
+                </span>
+                <span><a href="{:U('Export/expUser',array(
+            'id'=>5,
+            'user_account'=>I('user_account'),
+            'game_id'=>I('game_id'),
+            'time-start'=>I('time-start'),
+            'time-end'=>I('time-end'),
+            'start'=>I('start'),
+            'end'=>I('end'),
+            'game_name'=>I('game_name'),
+            ))}" >导出数据(excel格式)</a>
+            </span>
+              </div>
+              <div id="pagehtml" class="pagenavi clearfix">{$_page}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+</block>
+<block name='script'>
+<script type="text/javascript">
+
+
+$(function(){
+  //导航高亮
+  highlight_subnav("{:U('Apply/my_game')}");
+
+  var type = "{:I('type',-1)}";
+
+  switch(type){
+    case "-1":
+      $("#all").addClass("on");
+      $("#audit").removeClass("on");
+      $("#wait").removeClass("on");
+    break;
+    case "1":
+      $("#all").removeClass("on");
+      $("#audit").addClass("on");
+      $("#wait").removeClass("on");
+    break;
+    case "0":
+      $("#all").removeClass("on");
+      $("#audit").removeClass("on");
+      $("#wait").addClass("on");
+    break;
+  }
+
+  $('a.copy').zclip({
+    path: "/Public/static/zeroclipboard/ZeroClipboard.swf",
+    copy: function(){
+        return $(this).attr('data-url');
+    },
+    beforeCopy:function(){
+      $(this).addClass("proc");
+    },
+    afterCopy:function(){
+      $(this).removeClass("copy");
+      if($(this).attr('data-url')=="" || $(this).attr('data-url')==null){
+        layer.msg("游戏原包暂未上传",{icon:2});
+      }
+      else{
+        layer.msg("复制成功",{icon:1});
+      }
+      
+    }
+  });
+})
+</script>
+</block>

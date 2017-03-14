@@ -1,0 +1,78 @@
+<extend name="Public/promote_base"/>
+
+<block name="body">
+<div id="query">
+  <div class="mod">
+    <h2>代充记录</h2>
+    <div id="zc_top">
+      <ul class="clearfix">
+        <li style="border:none;">
+          <h3 class="ftype">购买平台币，为玩家充值</h3>
+          <p><span>0.00</span>个 <i>1平台币=1元</i></p>
+          <div>
+            <a href="{:U('agent')}" class="btn01" style="float:left;">为玩家充值</a>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div id="other_se" class="mod">
+    <h2>查询</h2>
+    <form id="form"  action="{:U('agent_list')}" method="post">
+      <div>
+          <input type="text" placeholder="请输入游戏名称" class="txts" name="game_name" value="{:I('game_name')}">
+          <input type="submit" value="查询" class="btns">
+        </div>
+    </form>
+  </div>        
+  <div id="jiesuan" class="mod">
+    <h2>代充记录</h2>
+    <div class="con">
+      <table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <thead>
+          <tr>
+            <th>编号</th>
+            <th>玩家账号</th>
+            <th>充值游戏</th>
+            <th>充值金额</th>
+            <th>实际金额</th>
+            <th>充值时间</th>
+          </tr>
+        </thead>
+        <tbody>
+          <volist name="list_data" id="vo">
+          <tr>
+            <td>{$vo.id}</td>
+            <td>{$vo.user_account}</td>
+            <td>{:get_game_name($vo['game_id'])}</td>
+            <td>{$vo.amount}</td>
+            <td>{$vo.real_amount}</td>
+            <td>{$vo.create_time|date='Y:m:d H:i:s',###}</td>
+          </tr>
+        </volist>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div id="pagehtml" class="pagenavi clearfix">{$_page}</div>
+</div>
+<link rel="stylesheet" type="text/css" href="__CSS__/p_jquery.datetimepicker.css">
+<script type="text/javascript" src="__JS__/jquery.datetimepicker.js"></script>
+<script type="text/javascript">
+$().ready(function(){
+ $('#sdate').datetimepicker({
+    lang:'ch',
+    format:'Y-m-d',
+    formatDate:'Y-m-d',
+    timepicker:false
+  });
+  
+  $('#edate').datetimepicker({
+    lang:'ch',
+    format:'Y-m-d',
+    formatDate:'Y-m-d',
+    timepicker:false
+  });
+});
+</script>
+</block>

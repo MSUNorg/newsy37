@@ -1,0 +1,11 @@
+/* login */
+.formTb th{text-align:right}
+.formTb .form-control{float:left;margin-right:10px}
+button,input,optgroup,select,textarea{color:inherit;font:inherit;margin:0}
+.form-control{background:#fff;border:1px solid #ccc;border-radius:4px;font-size:14px;padding:6px 12px;height:34px;line-height:1.4;box-sizing:border-box}
+.formTb td,.formTb th{vertical-align:top}
+.btn{display:inline-block;font-weight:400;text-align:center;vertical-align:middle;cursor:pointer;border:1px solid transparent;filter:chroma(color=#000000);white-space:nowrap;padding:6px 12px;font-size:14px;line-height:1.42857143;border-radius:4px}
+.formTb .btn-b{padding:12px 24px;font-size:22px;}
+.btn-b{background:#e02222;color:#fff}
+.change {text-align:right;}
+.change .ca{color:red;}

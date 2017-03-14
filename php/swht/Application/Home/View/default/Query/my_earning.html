@@ -1,0 +1,44 @@
+﻿<extend name="Public/promote_base"/>
+
+<block name="body">
+<div id="query">
+        <div id="jiesuan" class="mod">
+          <h2>我的收益</h2>
+          <div class="con">
+            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+              <thead>
+                <tr>
+                  <th>结算编号</th>
+                  <th>结算周期</th>
+                  <th>收益金额</th>
+                  <th>结算状态</th>
+                </tr>
+              </thead>
+              <tbody>
+                <volist name="list_data" id="vo">
+                <tr>
+                  <td>{$vo.id}</td>
+                  <td>{$vo.spend_time|date="Y-m-d",###}</td>
+                  <td>{$vo.money}</td>
+                  <td>{:get_pay_sett($vo['status'])}</td>
+                </tr>
+              </volist>
+              </tbody>
+            </table>
+            <div class="import">
+              <!-- <span>收益总金额：￥ 0.00</span>  <span>未结算金额：￥0.00元</span>--> 
+              <span>数据量：{$count}条数据</span>
+              <span><a href="{:U('Export/expUser',array('id'=>2))}">导出数据(excel格式)</a></span>
+            </div>
+                                    <div id="pagehtml" class="pagenavi clearfix">{$_page}</div>
+
+          </div>
+          </div>
+        <!-- <div class="js warn"> 注：下载结算单后，请打印并盖上公司公章或财务专用章，开具相应数额的增值税专用发票(需下载对应的开票资质)，邮寄到以下地址，收到您的纸质结算单以及发票才能继续结算流程。<br>
+          地址：武汉市洪山区书城路文秀街10号中石创意大厦2号门9楼<br>
+          收件人：潘玉庭<br>
+          电话： 027-87548895 
+        </div> -->
+</div>
+</block>
+  

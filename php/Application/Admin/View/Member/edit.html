@@ -1,0 +1,190 @@
+<extend name="Public/base" />
+
+<block name="body">
+<script src="__STATIC__/layer/layer.js" type="text/javascript"></script>
+
+<link rel="stylesheet" type="text/css" href="__CSS__/admin_table.css" media="all">
+<script type="text/javascript" src="__STATIC__/uploadify/jquery.uploadify.min.js"></script>
+    <div class="main-title cf">
+        <h2>编辑 [用户信息]</h2>
+    </div>
+    <!-- 标签页导航 -->
+<div class="tab-wrap">
+    <ul class="tab-nav nav">
+			<volist name=":parse_config_attr($model['field_group'])" id="group">
+			<li data-tab="tab{$key}" <eq name="key" value="1">class="current"</eq>><a href="javascript:void(0);">{$group}</a></li>
+			</volist>
+    </ul>
+    <div class="tab-content zc_for">
+    <!-- 表单 -->
+    <form id="form" action="{:U('edit?model='.$model['id'])}" method="post" class="form-horizontal">
+        <!-- 基础文档模型 -->
+		<div id="tab1" class="tab-pane in tab1 tab-look">
+            <table  border="0" cellspacing="0" cellpadding="0">
+                <tbody>
+                  <tr>
+                    <td class="l">用户账号：</td>
+                    <td class="r">
+                        <input type="text" class="txt" name="account" value="{$data['account']}" disabled="disabled">
+                    </td>
+                    <td class="l">登陆密码：</td>
+                    <td class="r">
+                        <input type="text" class="txt" name="password" value="">
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="l">用户昵称：</td>
+                    <td class="r">
+                        <input type="text" class="txt" name="nickname" value="{$data['nickname']}" disabled>
+                    </td>
+                    <td class="l">电子邮件：</td>
+                    <td class="r">
+                        <input type="text" class="txt" name="email" value="{$data['email']}" disabled>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="l">真实姓名：</td>
+                    <td class="r">
+                        <input type="text" class="txt" name="real_name" value="{$data['real_name']}" disabled>
+                    </td>
+                    <td class="l">身份证号：</td>
+                    <td class="r">
+                        <input type="text" class="txt" name="idcard" value="{$data['idcard']}" disabled>
+                    </td>
+                  </tr>
+                    
+                  <tr>
+                    <td class="l">防沉迷：</td>
+                    <td class="r">
+                        <label class="inp_radio">
+                            <input type="radio" class="inp_radio" value="0" name="anti_addiction" <eq name="data['anti_addiction']" value="0">checked="checked"</eq>>关闭
+                            <input type="radio" class="inp_radio" value="1" name="anti_addiction" <eq name="data['anti_addiction']" value="1">checked="checked"</eq>>开启
+                        </label>
+                    </td>
+                    <td class="l">账号状态：</td>
+                    <td class="r">
+                        <label class="inp_radio">
+                            <input type="radio" class="inp_radio" value="0" name="lock_status" <eq name="data['lock_status']" value="0">checked="checked"</eq>>锁&nbsp;&nbsp;&nbsp;定
+                            <input type="radio" class="inp_radio" value="1" name="lock_status" <eq name="data['lock_status']" value="1">checked="checked"</eq>>开启
+                        </label>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="l">电话：</td>
+                    <td class="r" >
+                        <input type="text" class="txt" name="phone" value="{$data['phone']}" disabled>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="l">平台币余额：</td>
+                    <td class="r">
+                        <input type="text" class="txt" name="balance" value="{$data['balance']}" disabled>
+                    </td>
+                    <td class="l">绑定平台余额：</td>
+                    <td class="r">
+                    <span id="bind_balance">点击查看</span>
+                    </td>
+                  </tr>
+                      <tr>
+                    <td class="l">注册时间：</td>
+                    <td class="r">
+                        <input type="text" class="txt" name="register_time" value="{$data['register_time']|date="Y-m-d H:i:s",###}" disabled>
+                    </td>
+                    <td class="l">注册ip：</td>
+                    <td class="r">
+                    <input type="text" class="txt" name="register_ip" value="{$data['register_ip']}" disabled>
+
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="l">充值记录：</td>
+                    <td class="r">
+                    <span id="chongzhi">点击查看</span>
+                    </td>
+                      <td class="l">游戏登陆记录：</td>
+                    <td class="r">
+                    <span id="denglu">点击查看</span>
+                    </td>
+                  </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="form-item cf">
+            <input type="hidden" id="selfid" name="id" value="{$data.id}">
+            <input type="hidden" id="url" name="urll" value="{$url}">
+            <button class="btn submit-btn ajax-post hidden" id="submit" type="submit" target-form="form-horizontal">确 定</button>
+            <a class="btn btn-return" onclick="javascript:history.back(-1);return false;">返 回</a>
+        </div>
+    </form>
+    </div>
+</div>
+</block>
+
+<block name="script">
+<link href="__STATIC__/datetimepicker/css/datetimepicker.css" rel="stylesheet" type="text/css">
+<php>if(C('COLOR_STYLE')=='blue_color') echo '<link href="__STATIC__/datetimepicker/css/datetimepicker_blue.css" rel="stylesheet" type="text/css">';</php>
+<link href="__STATIC__/datetimepicker/css/dropdown.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="__STATIC__/datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
+<script type="text/javascript" src="__STATIC__/datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js" charset="UTF-8"></script>
+<script type="text/javascript">
+//导航高亮
+highlight_subnav('{:U('Member/user_info')}');
+Think.setValue("prmoote_id_to", {$data.promote_id|default = 0});
+$('#submit').click(function(){
+    $('#form').submit();
+});
+
+$(function(){
+	$('.time').datetimepicker({
+        format: 'yyyy-mm-dd hh:ii',
+        language:"zh-CN",
+        minView:2,
+        autoclose:true
+    });
+    $('.date').datetimepicker({
+        format: 'yyyy-mm-dd',
+        language:"zh-CN",
+        minView:2,
+        autoclose:true
+    });
+    showTab();
+var id=$("#selfid").val();
+var url=$("#url").val();
+$("#chongzhi").click(function() {
+ layer.open({
+  type: 2,
+  title: '充值记录',
+  shadeClose: true,
+  shade: 0.8,
+  area: ['70%', '80%'],
+  content: url+'admin.php?s=/Member/chax/id/'+id+''//iframe的url
+}); 
+});
+
+$("#denglu").click(function() {
+ layer.open({
+  type: 2,
+  title: '游戏登陆记录',
+  shadeClose: true,
+  shade: 0.8,
+  area: ['70%', '80%'],
+  content: url+'admin.php?s=/Member/denglu/id/'+id+''//iframe的url
+}); 
+});
+$("#bind_balance").click(function() {
+ layer.open({
+  type: 2,
+  title: '绑定平台币余额',
+  shadeClose: true,
+  shade: 0.8,
+  area: ['70%', '80%'],
+  content: url+'admin.php?s=/Member/bind_balance/id/'+id+''//iframe的url
+}); 
+});
+
+
+
+});
+</script>
+</block>

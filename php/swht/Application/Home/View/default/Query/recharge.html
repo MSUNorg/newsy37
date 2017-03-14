@@ -1,0 +1,119 @@
+﻿<extend name="Public/promote_base"/>
+
+<block name="body">
+      <div id="query">
+        <div id="search" class="mod">
+          <h2>查询</h2>
+          <form id="data_form" action="{:U('Query/recharge')}" method="post" enctype="multipart/form-data">
+            <ol>
+              <li class="user">
+                <input type="text" name="user_account" id="uid" placeholder="请输入用户名" value="{:I('user_account')}">
+              </li>
+              <li class="other clearfix">
+                <div class="l">
+                  <select name="game_appid" id="game_id" style="width:80px;">
+                    <option value="0">全部游戏</option>
+                    <volist name=":get_game_list()" id ="s">
+                    <option value="{$s.game_appid}">{$s.game_name}</option>
+                  </volist>
+                  </select>
+                </div>
+                <div class="l2">
+                  <select name="promote_id" id="subid" style="width:90px;">
+                    <option value="0">全部子账号</option>
+                    <option value="{:PROMOTE_ID}">自己</option>
+                    <volist name=":get_prmoote_chlid_account(PROMOTE_ID)" id ="s">
+                      <option value="{$s.id}">{$s.account}</option>
+                    </volist>
+                  </select>
+                </div>
+                <div class="m"><em>开始时间：</em><span class="required">*</span>
+                  <input type="text" id="sdate" name="time-start" value="">
+                </div>
+                <div class="r"><em>结束时间：</em><span class="required">*</span>
+                  <input type="text" id="edate" name="time-end" value="">
+                </div>
+                <div class="search_btn">
+                  <input type="submit" value="查询">
+                </div>
+              </li>
+            </ol>
+          </form>
+        </div>
+        <div id="total_reg" class="mod">
+          <h2>充值记录</h2>
+          <div class="con">
+            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+              <thead>
+                <tr>
+                  <th>用户账号</th>
+                  <th>订单号</th>
+                  <th>游戏名称</th>
+                  <th>充值金额</th>
+                  <th>支付方式</th>
+                  <th>充值时间</th>
+                  <th>充值状态</th>
+                  <th>渠道</th>
+                </tr>
+              </thead>
+              <tbody>
+                <volist name="list_data" id="s">
+                <tr>
+                  <td>{$s.user_account}</td>
+                  <td>{$s.pay_order_number}</td>
+                  <td>{$s.game_name}</td>
+                  <td>{$s.pay_amount}</td>
+                  <td>
+                    <switch name='s.pay_way'>
+                      <case value="0">支付宝</case>
+                      <case value="1">微信</case>
+                      <case value="2">平台币</case>
+                    </switch>
+                  </td>
+                  <td>{$s.pay_time}</td><!-- {$s.pay_time|date='Y-m-d',###} -->
+                  <td>
+                    <switch name='s.pay_status'>
+                      <case value="0">支付未下单</case>
+                      <case value="1">支付成功</case>
+                    </switch>
+                  </td>
+                  <td>{$s.promote_account}{:get_parent_promote($s['promote_id'])}</td>
+                </tr>
+              </volist>
+              </tbody>
+            </table>
+            <div class="import"><span>充值总计：￥{$total_amount}</span>
+            <span>数据量：{$count}条数据 
+             <!-- <a href="{:U('Admin/Recharge/expUser',array('id'=>15))}" >导出数据(excel格式)</a> -->
+            </span>
+          </span></div>
+          </div>
+        </div>
+      </div>
+                        <div id="pagehtml" class="pagenavi clearfix">{$_page}</div>
+
+    </div>
+  </div>
+</div>
+<link rel="stylesheet" type="text/css" href="__CSS__/p_jquery.datetimepicker.css">
+<script type="text/javascript" src="__JS__/jquery.datetimepicker.js"></script>
+<script type="text/javascript">
+$().ready(function(){
+   $('#sdate').datetimepicker({
+    lang:'ch',
+    format:'Y-m-d',
+    formatDate:'Y-m-d',
+    timepicker:false
+  });
+  
+  $('#edate').datetimepicker({
+    lang:'ch',
+    format:'Y-m-d',
+    formatDate:'Y-m-d',
+    timepicker:false
+  });
+});
+</script>
+    
+</block>
+  

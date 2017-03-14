@@ -1,0 +1,120 @@
+<extend name="Public/bases" />
+<block name="body" >
+	<link href="__CSS__/gift-common.css" rel="stylesheet" />
+	<link href="__CSS__/gift-list.css" rel="stylesheet" />
+    <section>
+        <div class="pack">
+		<foreach name="gift" item="g" key="k">
+			<?php $count = count($g)-1;?>
+			<foreach name="g" item="vo" key="k2">
+            <div class="pack-con" style="<if condition='$k2 neq 0 ' >margin-top:1.5%;</if>">
+			<if condition="$k2 eq 0 " >
+                <div class="pack-con-Yesterday">
+                    <a>{$k}</a>
+                </div>
+			</if>
+                <div class="pack-con-in">
+                    <a class="pack-con-in-imge" href="{:U('Gift/detail?id='.$vo['id'].'')}">
+						<img src="__ROOT__{$vo.icon|get_cover='path'}">
+					</a>
+                    <a class="pack-con-in-txt" href="{:U('Gift/detail?id='.$vo['id'].'')}">
+                        <p class="pack-con-in-titl">{$vo.giftbag_name}</p>
+                        <p class="pack-con-in-time">剩余: <em>{$vo.novice_num}</em></p>
+                    </a>
+                    <a class="pack-con-in-btn cor2" href="{:U('Gift/detail?id='.$vo['id'].'')}">领号</a>
+                </div>
+                <p class="pack-con-txt">{$vo.desribe}</p>
+            </div>
+			<if condition="$k2 eq $count">
+			<div class="pack-black"></div>
+			</if>
+			</foreach>
+		</foreach>
+           
+        </div>
+    </section>
+	<div id="more_Infor"><span id="more_Infor_btn">点击加载更多数据</span></div>
+	<script>
+		loadd();
+        function loadd(){
+            var loading ='<img src="__IMG__/loading.gif">正在加载中';
+            var nodata = '已加载完成全部数据';
+			var total='{$total}';
+			var page = '{$page}',key='{$key}';
+            $(window).bind("scroll", function(){
+                var more=$("#more_Infor_btn");
+				var $this =$(this),
+					viewH =$(document.body).height(),//可见高度
+					contentH =$(window).height(),//内容高度
+					scrollTop =$(this).scrollTop(),//滚动高度
+					newht = viewH - contentH - scrollTop;
+				if (page > total){
+					more.unbind().html(nodata);
+					return;
+				}
+				if(newht <= 0){
+					$("#more_Infor").show();
+					
+					$.ajax({
+						type: 'POST',
+					  async: true,
+				  dataType : 'json',
+						url: '__CONTROLLER__/gift',
+					   data: 'p='+page,
+				 beforeSend: function(){
+								more.html(loading);
+							},
+					success: function (data) {
+							switch (parseInt(data.status)) {
+								case 1:
+								page = data.page;
+								var d = data.data;
+								var val = '',k = data.key;
+								for(var i in d) {
+									if (i === key)
+										$('.pack').find('div.pack-black:last').remove();
+									for(var j in d[i]) {	
+										if (parseInt(j) === 0 && i !== key) {
+											val += '<div class="pack-con">';
+											val += '<div class="pack-con-Yesterday"><a>'+i+'</a></div>';
+										} else {
+											val += '<div class="pack-con" style="margin-top:1.5%;">';
+										}										
+																				
+										val += '<div class="pack-con-in">';
+										val += '<a class="pack-con-in-imge" href="__MODULE__/Game/detail/id/'+d[i][j].id+'">';
+										val += '<img src="'+d[i][j].picurl+'">';
+										val += '</a>';
+										val += '<a class="pack-con-in-txt" href="__MODULE__/Game/detail/id/'+d[i][j].id+'">';
+										val += '<p class="pack-con-in-titl">'+d[i][j].giftbag_name+'</p>';
+										val += '</a>';
+										val += '<a class="pack-con-in-btn cor2" href="__MODULE__/Game/detail/id/'+d[i][j].id+'">领号</a>';
+										val += '</div>';
+										val += '<p class="pack-con-txt">'+d[i][j].describe+'</p>';
+										val += '</div>';
+										if (parseInt(j) === (d[i].length-1)) {
+											val += '<div class="pack-black"></div>';
+										}
+									}															
+								}
+								key = k;
+								$('.pack').append(val);
+								more.unbind().html('点击加载更多数据');
+								break;
+							default:
+								more.unbind().html('点击加载更多数据');
+								break;	
+							}
+							return false;
+						},
+					error: function () {
+							more.unbind().html('点击加载更多数据');
+						},
+					cache: false
+						
+					});
+				}
+            });
+        }// CC函数结束
+	</script>
+</block>

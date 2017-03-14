@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta charset="UTF-8">
+    <title>游戏登陆列表|溪谷软件管理平台</title>
+    <link href="http://admin.vlcms.com/Public/icon.ico" type="image/x-icon" rel="shortcut icon">
+    <link rel="stylesheet" type="text/css" href="__CSS__/base.css" media="all">
+    <link rel="stylesheet" type="text/css" href="__CSS__/common.css" media="all">
+    <link rel="stylesheet" type="text/css" href="__CSS__/module.css">
+    <link rel="stylesheet" type="text/css" href="__CSS__/style.css" media="all">
+	<link rel="stylesheet" type="text/css" href="__CSS__/blue_color.css" media="all">
+</head>
+	<style>
+body{ padding: 0px; }
+	</style>
+<body>  
+    <div id="main" class="main" style="min-height: 342px;">       
+    <!-- 标题栏 -->
+    <div class="main-title">
+        <h2>[游戏登陆] 列表</h2>
+    </div>
+	<div class="cf">
+	
+	</div>
+
+    <!-- 数据列表 -->
+    <div class="data-table">
+        <div class="data-table table-striped">
+            <table>
+                <!-- 表头 -->
+                <thead>
+                    <tr>
+                                                
+                        <th style="text-align:center">用户名</th>
+                        <th style="text-align:center">登陆游戏</th>
+                        <th style="text-align:center">登陆时间</th>
+                    </tr>
+                </thead>
+
+                <!-- 列表 -->
+                <tbody>
+                	<volist name="list_data" id="data">
+                        <tr>
+                            <td style="border-right:1px solid #DDDDDD;text-align:center">{:get_user_account($data['user_id'])}</td>
+                            <td style="border-right:1px solid #DDDDDD;text-align:center">{:get_game_name($data['game_id'])}</td>
+                            <td style="border-right:1px solid #DDDDDD;text-align:center">{$data.login_time|date="Y-m-d H:i:s",###}</td>                           
+                        </tr>
+                    </volist>
+                          </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="page">
+    {$_page}
+            </div>
+    ﻿         
+        </div>
+  
+    <!-- /内容区 -->
+    <script type="text/javascript">
+    (function(){
+        var ThinkPHP = window.Think = {
+            "ROOT"   : "", //当前网站地址
+            "APP"    : "/admin.php?s=", //当前项目地址
+            "PUBLIC" : "/Public", //项目公共目录地址
+            "DEEP"   : "/", //PATHINFO分割符
+            "MODEL"  : ["3", "", "html"],
+            "VAR"    : ["m", "c", "a"]
+        }
+    })();
+    </script>
+<link href="__CSS__/datetimepicker.css" rel="stylesheet" type="text/css">
+<link href="__CSS__/datetimepicker_blue.css" rel="stylesheet" type="text/css"><link href="__CSS__/dropdown.css" rel="stylesheet" type="text/css">
+<script type="text/javascript">
+</script>

@@ -1,0 +1,78 @@
+<extend name="Public/base" />
+
+<block name="body">
+<link rel="stylesheet" type="text/css" href="__CSS__/admin_table.css" media="all">
+<script type="text/javascript" src="__STATIC__/uploadify/jquery.uploadify.min.js"></script>
+    <div class="main-title cf">
+        <h2>新增 [开放类型]</h2>
+    </div>
+    <!-- 标签页导航 -->
+<div class="tab-wrap">
+    <ul class="tab-nav nav">
+        <li data-tab="tab1" class="current"><a href="javascript:void(0);">基础</a></li>
+
+    </ul>
+    <div class="tab-content zc_for">
+    <!-- 表单 -->
+    <form id="form" action="{:U('addopen')}" method="post" class="form-horizontal">
+        <!-- 基础文档模型 -->
+        <div id="tab1" class="tab-pane in tab1">
+    		<table  border="0" cellspacing="0" cellpadding="0">
+                <tbody>
+                  <tr>
+                    <td class="l">类型名称：</td>
+                    <td class="r" colspan='3'>
+                        <input type="text" class="txt " name="open_name" value="">
+                        
+                    </td>
+                  </tr>
+                 
+                  <tr>
+					<td class="l">分类状态：</td>
+                    <td class="r">
+                        <label class="inp_radio">
+                            <input type="radio" class="inp_radio" value="0" name="status">隐藏
+                            <input type="radio" class="inp_radio" value="1" name="status" checked="checked">显示
+                        </label>
+                    </td>
+                  </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="form-item cf">
+            <button class="btn submit-btn ajax-post hidden" id="submit" type="submit" target-form="form-horizontal">确 定</button>
+            <a class="btn btn-return" href="javascript:history.back(-1);">返 回</a>
+        </div>
+    </form>
+    </div>
+</div>
+</block>
+
+<block name="script">
+<script type="text/javascript" src="__STATIC__/datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
+<script type="text/javascript">
+//导航高亮
+highlight_subnav('{:U('Game/openlist')}');
+$('#submit').click(function(){
+    $('#form').submit();
+});
+
+$(function(){
+    $('.date').datetimepicker({
+        format: 'yyyy-mm-dd',
+        language:"zh-CN",
+        minView:2,
+        autoclose:true
+    });
+    $('.time').datetimepicker({
+        format: 'yyyy-mm-dd hh:ii',
+        language:"zh-CN",
+        minView:2,
+        autoclose:true
+    });
+    showTab();
+
+});
+
+</script>
+</block>

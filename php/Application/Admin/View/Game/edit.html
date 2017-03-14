@@ -1,0 +1,380 @@
+<extend name="Public/base" />
+
+<block name="body">
+<link rel="stylesheet" type="text/css" href="__CSS__/admin_table.css" media="all">
+<script type="text/javascript" src="__STATIC__/uploadify/jquery.uploadify.min.js"></script>
+    <div class="main-title cf">
+        <h2>编辑 [游戏]</h2>
+    </div>
+    <!-- 标签页导航 -->
+<div class="tab-wrap">
+    <ul class="tab-nav nav">
+        <li data-tab="tab1" class="current"><a href="javascript:void(0);">基础</a></li>
+        <li data-tab="tab2" ><a href="javascript:void(0);">扩展</a></li>
+        <li data-tab="tab3" ><a href="javascript:void(0);">设置</a></li>
+    </ul>
+    <div class="tab-content zc_for">
+    <!-- 表单 -->
+    <form id="form" action="{:U('edit')}" method="post" class="form-horizontal">
+        <!-- 基础 -->
+        <div id="tab1" class="tab-pane in tab1 tab-look ">
+            <table  border="0" cellspacing="0" cellpadding="0">
+                <tbody>
+                  <tr>
+                    <td class="l">游戏名称：</td>
+                    <td class="r" >
+                        <input type="text" class="txt " name="game_name" value="{$data['game_name']}" placeholder="请输入游戏名称">
+                        <input type="hidden"  name="game_appid" value="{$data['game_appid']}">
+                    </td>
+                    <td class="l">游戏地址：</td>
+                    <td class="r" >
+                        <input type="text" class="txt " name="game_address" value="{$data['game_address']}">
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="l">游戏类型：</td>
+                    <td class="r">
+                        <select id="game_type_id" name="game_type_id">
+                            <volist name=":get_game_type_all()" id="vo">
+                            <if condition="$vo[id] eq $data[game_type_id]">
+                            <option value="{$vo.id}" selected>{$vo.type_name}</option>
+                            <else />
+                            <option value="{$vo.id}">{$vo.type_name}</option>
+                            </if>
+                            </volist>                           
+                        </select>
+                        <input type="hidden" id="game_type_name" name="game_type_name" value="{$data['game_type_name']}"></input>
+                    </td>
+                    <td class="l">开放类型：</td>
+                    <td class="r">
+                        <label class="inp_radio">
+                            <input type="radio" class="inp_radio" value="0" name="category" <eq name="data.category"
+                            value="0"> checked="ture" </eq> >不限                        
+                            <volist name=":get_opentype_all()" id="vo">
+                            <input type="radio" class="inp_radio" value="{$vo.id}" name="category" <eq name="data.category"
+                            value="$vo['id']"> checked </eq> >{$vo.open_name}
+                            </volist>
+                        </label>
+                    </td>
+                </tr>
+                 <tr>
+                    <td class="l">游戏折扣：</td>
+                    <td class="r">
+                        <input type="text" class="txt" name="discount" value="{$data['discount']}" placeholder="游戏折扣为1-10">
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="l">分成比例：</td>
+                    <td class="r">
+                        <input type="text" class="txt" name="ratio" value="{:$data['ratio']}" placeholder="分成比例为1~100%(不要输入%)">
+                    </td>
+                    <td class="l">注册单价</td>
+                    <td class="r">
+                        <input type="text" class="txt" name="money" value="{$data['money']}" placeholder="注册单价(元) 大于0的整数">
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="l">游戏排序：</td>
+                    <td class="r">
+                        <input type="text" class="txt" name="sort" value="{$data['sort']}">
+                    </td>
+
+                    <td class="l">游戏版本：</td>
+                    <td class="r">
+                        <input type="text" class="txt" name="version" value="{$data['version']}">
+                    </td>
+                    <!-- <td class="l">游戏简写：</td>
+                    <td class="r">
+                        <input type="text" class="txt" name="short" value="">
+                    </td> -->
+                  </tr>
+                  <tr>
+                    <td class="l">游戏图标：<span class="infonotice2">(尺寸：115*115px)</span>  </td>
+                    <td class="r">
+                        <input type="file" id="upload_picture_icon">
+                        <input type="hidden" name="icon" id="cover_id_icon" value="{$data.icon}" />
+                        <div class="upload-img-box">
+                        <notempty name="data['icon']">
+                            <div class="upload-pre-item"><img src="{$data['icon']|get_cover='path'}"/></div>
+                        </notempty>
+                        </div>
+                        
+                    </td>
+                    <td class="l">游戏封面：<span class="infonotice2">(尺寸：275*160px)</span> </td>
+                    <td class="r">
+                        <input type="file" id="upload_picture_cover">
+                        <input type="hidden" name="cover" id="cover_id_cover" value="{$data.cover}" />
+                        <div class="upload-img-box">
+                        <notempty name="data['cover']">
+                            <div class="upload-pre-item"><img src="{$data['cover']|get_cover='path'}"/></div>
+                        </notempty>
+                        </div>
+                        
+                    </td>
+                  </tr>
+                  <tr>
+                      <td class="l">游戏截图：<span class="infonotice2">(尺寸：210*350px)</span> </td>
+                      <td class="r" >
+                          {:hook('UploadImages', array('name'=>'screenshot','value'=>$data['screenshot']))}
+                          
+                      </td>
+
+                    <td class="l">游戏简介：</td>
+                    <td class="r" >
+                        <input type="text" class="txt " name="features" value="{$data['features']}">
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="l">游戏评分：</td>
+                    <td class="r">
+                        <input type="text" class="txt" name="game_score" value="{$data['game_score']}" placeholder="请输入小于10的一位小数">
+                    </td>
+                    <td class="l">推荐指数：</td>
+                    <td class="r">
+                        <input type="text" class="txt" name="recommend_level" value="{$data['recommend_level']}" placeholder="请输入小于10的一位小数">
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class='l'>游戏大小</td>
+                    <td class='r'><input type="text" class='txt' name='game_size' value="{$data['game_size']}"></td>
+                    <td  class='l'></td>
+                    <td  class='r'></td>
+                  </tr>
+                </tbody>
+            </table>
+        </div>
+        <!-- 扩展 -->
+        <div id="tab2" class="tab-pane  tab2 tab-look">
+            <table  border="0" cellspacing="0" cellpadding="0">
+                <tbody>
+                  <tr>
+                    <td class="l">游戏状态：</td>
+                    <td class="r">
+                        <label class="inp_radio">
+                            <input type="radio" class="inp_radio" value="0" name="game_status" <eq name="data['game_status']" value="0">checked="checked"</eq>>关闭
+                            <input type="radio" class="inp_radio" value="1" name="game_status" <eq name="data['game_status']" value="1">checked="checked"</eq>>开启
+                        </label>
+                    </td>
+                    <td class="l">推荐状态：</td>
+                    <td class="r">
+                        <label class="inp_radio">
+                            <input type="radio" class="inp_radio" value="0" name="recommend_status" <eq name="data['recommend_status']" value="0">checked="checked"</eq>>不推荐
+                            <input type="radio" class="inp_radio" value="1" name="recommend_status" <eq name="data['recommend_status']" value="1">checked="checked"</eq>>推荐
+                            <input type="radio" class="inp_radio" value="2" name="recommend_status" <eq name="data['recommend_status']" value="2">checked="checked"</eq>>热门
+                            <input type="radio" class="inp_radio" value="3" name="recommend_status" <eq name="data['recommend_status']" value="3">checked="checked"</eq>>最新
+                        </label>
+                    </td>
+                  </tr>
+                  <tr>
+                    <!-- <td class="l">充值状态：</td>
+                    <td class="r">
+                        <label class="inp_radio">
+                            <input type="radio" class="inp_radio" value="0" name="pay_status" <eq name="data['pay_status']" value="0">checked="checked"</eq>>关闭
+                            <input type="radio" class="inp_radio" value="1" name="pay_status" <eq name="data['pay_status']" value="1">checked="checked"</eq>>开启
+                        </label>
+                    </td> -->
+                    <td class="l">下载状态：</td>
+                    <td class="r">
+                        <label class="inp_radio">
+                            <input type="radio" class="inp_radio" value="0" name="dow_status" <eq name="data['dow_status']" value="0">checked="checked"</eq>>关&nbsp;&nbsp;&nbsp;闭
+                            <input type="radio" class="inp_radio" value="1" name="dow_status" checked="checked" <eq name="data['dow_status']" value="1">checked="checked"</eq>>开启
+                        </label>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="l">语言：</td>
+                    <td class="r">
+                        <input type="text" class="txt" name="language" value="{$data['language']}">
+                    </td>
+                    <td class="l">开发商：</td>
+                    <td class="r">
+                        <input type="text" class="txt" name="developers" value="{$data['developers']}">
+                    </td>
+
+                  </tr>
+                  <tr>
+                    <td class="l">游戏币名称：</td>
+                    <td class="r">
+                        <input type="text" class="txt" name="game_coin_name" value="{$data['game_coin_name']}">
+                    </td>
+                    <td class="l">游戏币比例：</td>
+                    <td class="r">
+                        <input type="text" class="txt" name="game_coin_ration" value="{$data['game_coin_ration']}">
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="l">详细介绍：</td>
+                    <td class="r" colspan='3'>
+                        <textarea name="introduction" class="txt_area">{$data['introduction']}</textarea>
+                    </td>
+                  </tr>
+                </tbody>
+            </table>
+        </div>
+        <!-- 设置 -->
+        <div id="tab3" class="tab-pane  tab3 tab-look">
+            <table  border="0" cellspacing="0" cellpadding="0">
+                <tbody>
+                  <tr>
+                    <td class="l">游戏登陆通知地址：</td>
+                    <td class="r" colspan='3'>
+                        <input type="text" class="txt txt_title" name="login_notify_url" value="{$data['login_notify_url']}">
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="l">游戏支付通知地址：</td>
+                    <td class="r" colspan='3'>
+                        <input type="text" class="txt txt_title" name="pay_notify_url" value="{$data['pay_notify_url']}">
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="l">游戏角色获取地址：</td>
+                    <td class="r" colspan='3'>
+                        <input type="text" class="txt txt_title" name="game_role_url" value="{$data['game_role_url']}">
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="l">游戏礼包领取地址：</td>
+                    <td class="r" colspan='3'>
+                        <input type="text" class="txt txt_title" name="game_gift_url" value="{$data['game_gift_url']}">
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="l">游戏key：</td>
+                    <td class="r">
+                        <input type="text" class="txt" name="game_key" value="{$data['game_key']}">
+                    </td>
+                    <td class="l">游戏支付appid：</td>
+                    <td class="r">
+                        <input type="text" class="txt" name="game_pay_appid" value="{$data['game_pay_appid']}">
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="l">访问秘钥：</td>
+                    <td class="r">
+                        <input type="text" class="txt" name="access_key" value="{$data['access_key']}">
+                    </td>
+                    <td class="l">游戏合作id：</td>
+                    <td class="r" colspan='3'>
+                        <input type="text" class="txt" name="agent_id" value="{$data['agent_id']}">
+                    </td>
+                  </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="form-item cf">
+            <input type="hidden" name='id' value="{$data['id']}"></input>
+            <button class="btn submit-btn ajax-post hidden" id="submit" type="submit" target-form="form-horizontal">确 定</button>
+            <a class="btn btn-return" href="javascript:history.back(-1);">返 回</a>
+        </div>
+    </form>
+    </div>
+</div>
+</block>
+
+<block name="script">
+<script type="text/javascript" src="__STATIC__/datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
+<script type="text/javascript">
+//导航高亮
+highlight_subnav('{:U('Game/lists')}');
+Think.setValue("game_type_id", {$data.game_type_id|default = 0});
+Think.setValue("category", {$data.category|default = 0});
+$('#submit').click(function(){
+    $('#form').submit();
+});
+
+$(function(){
+    $("#game_type_name").val($("#game_type_id option:selected").text());
+	$('.time').datetimepicker({
+        format: 'yyyy-mm-dd hh:ii',
+        language:"zh-CN",
+        minView:2,
+        autoclose:true
+    });
+    $('.date').datetimepicker({
+        format: 'yyyy-mm-dd',
+        language:"zh-CN",
+        minView:2,
+        autoclose:true
+    });
+    showTab();
+});
+
+/*获取游戏类型名称*/
+$("#game_type_id").change(function() {
+    $("#game_type_name").val($("#game_type_id option:selected").text());
+});
+
+//上传游戏图标
+/* 初始化上传插件 */
+$("#upload_picture_icon").uploadify({
+    "height"          : 30,
+    "swf"             : "__STATIC__/uploadify/uploadify.swf",
+    "fileObjName"     : "download",
+    "buttonText"      : "上传图标",
+    "uploader"        : "{:U('File/uploadPicture',array('session_id'=>session_id()))}",
+    "width"           : 120,
+    'removeTimeout'   : 1,
+    'fileTypeExts'    : '*.jpg; *.png; *.gif;',
+    "onUploadSuccess" : upload_picture_icon{$field.name},
+    'onFallback' : function() {
+        alert('未检测到兼容版本的Flash.');
+    }
+});
+function upload_picture_icon{$field.name}(file, data){
+    var data = $.parseJSON(data);
+    var src = '';
+    if(data.status){
+        $("#cover_id_icon").val(data.id);
+        src = data.url || '__ROOT__' + data.path;
+        $("#cover_id_icon").parent().find('.upload-img-box').html(
+            '<div class="upload-pre-item"><img src="' + src + '"/></div>'
+        );
+    } else {
+        updateAlert(data.info);
+        setTimeout(function(){
+            $('#top-alert').find('button').click();
+            $(that).removeClass('disabled').prop('disabled',false);
+        },1500);
+    }
+}
+
+
+//上传游戏封面
+/* 初始化上传插件 */
+$("#upload_picture_cover").uploadify({
+    "height"          : 30,
+    "swf"             : "__STATIC__/uploadify/uploadify.swf",
+    "fileObjName"     : "download",
+    "buttonText"      : "上传封面",
+    "uploader"        : "{:U('File/uploadPicture',array('session_id'=>session_id()))}",
+    "width"           : 120,
+    'removeTimeout'   : 1,
+    'fileTypeExts'    : '*.jpg; *.png; *.gif;',
+    "onUploadSuccess" : upload_picture_cover{$field.name},
+    'onFallback' : function() {
+        alert('未检测到兼容版本的Flash.');
+    }
+});
+function upload_picture_cover{$field.name}(file, data){
+    var data = $.parseJSON(data);
+    var src = '';
+    if(data.status){
+        $("#cover_id_cover").val(data.id);
+        src = data.url || '__ROOT__' + data.path;
+        $("#cover_id_cover").parent().find('.upload-img-box').html(
+            '<div class="upload-pre-item"><img src="' + src + '"/></div>'
+        );
+    } else {
+        updateAlert(data.info);
+        setTimeout(function(){
+            $('#top-alert').find('button').click();
+            $(that).removeClass('disabled').prop('disabled',false);
+        },1500);
+    }
+}
+
+
+</script>
+</block>

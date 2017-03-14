@@ -1,0 +1,110 @@
+/* banner */
+.banner{width:100%;height:400px;overflow:hidden;position:relative}
+.banner .carousel-nums{width:100%;overflow:hidden;position:absolute;bottom:20px;left:0;z-index:5;text-align:center}
+.banner .carousel-nums li{display:inline-block;width:13px;height:13px;overflow:hidden;border:1px solid #fff;border-radius:50%;margin:0 2px;cursor:pointer}
+.banner .carousel-nums li.active{background:#fff}
+.carousel-main ul{width:100%;height:400px;position:relative;overflow:hidden}
+.carousel-main .car-item{position:absolute;top:0;left:50%;margin-left:-500px;background-repeat:no-repeat;opacity:0;filter:alpha(opacity=0);-webkit-transition:all .5s ease-out;-moz-transition:all .5s ease-out;-ms-transition:all .5s ease-out;-o-transition:all .5s ease-out;transition:all .5s ease-out}
+.carousel-main .active .car-item{opacity:1;filter:alpha(opacity=100)}
+.carousel-main .car-bounce{-webkit-transform:scale(.6);-moz-transform:scale(.6);-ms-transform:scale(.6);-o-transform:scale(.6);transform:scale(.6)}
+.carousel-main li.active .car-bounce{-webkit-transform:scale(1);-moz-transform:scale(1);-ms-transform:scale(1);-o-transform:scale(1);transform:scale(1)}
+.carousel-main .banner-btn{width:190px;padding:6px 12px;display:block;background:#fff;border-radius:5px;font-size:26px;color:#398439;letter-spacing:3px;line-height:1.5;cursor:pointer;position:absolute;top:218px;left:50%;margin-left:-375px}
+.carousel-main a.banner-btn:hover{text-decoration:none}
+.carousel-main li{width:100%;height:400px;opacity:0;filter:alpha(opacity=0);position:absolute;left:0;top:0;z-index:1;-webkit-transition:opacity .5s;-moz-transition:opacity .5s;-ms-transition:opacity .5s;-o-transition:opacity .5s;transition:opacity .5s}
+.carousel-main li.active{opacity:1;filter:alpha(opacity=100);z-index:2}
+.carousel-main .banner-0{background:url(../images/banner.jpg) center 0 no-repeat #3fbeff}
+.carousel-main .banner-0 .car-bounce{width:860px;height:400px;margin-left:-575px}
+.carousel-main .banner-0 .banner-btn{width:156px;color:#3fbeff;top:170px;margin-left:-460px}
+.carousel-main .banner-1{background:url(../images/banner3.jpg) center 0 no-repeat #0099cb}
+.carousel-main .banner-1 .car-bounce{width:671px;height:278px;background-image:url(../images/3.png);top:30px;-webkit-transform:scale(.8);-moz-transform:scale(.8);-ms-transform:scale(.8);-o-transform:scale(.8);transform:scale(.8)}
+.carousel-main .banner-2{background-image:url(../images/banner2.jpg)}
+.carousel-main .banner-2 .car-left{background-image:url(../images/2.png);width:432px;height:176px;margin-left:-732px;top:47px}
+.carousel-main .banner-2.active .car-left{margin-left:-523px}
+.carousel-main .banner-2 .car-right{background-image:url(../images/banner2-am.png);width:222px;height:201px;margin-left:178px;top:75px}
+.carousel-main .banner-2.active .car-right{margin-left:-85px}
+.carousel-main .banner-3{background-image:url(../images/banner.jpg)}
+.carousel-main .banner-3 .car-top{background-image:url(../images/banner.png);width:472px;height:114px;top:-114px}
+.carousel-main .banner-3.active .car-top{top:77px}
+.carousel-main .banner-3 .car-bottom{background-image:url(../images/banner1-am.png);width:384px;height:310px;top:auto;bottom:-310px;margin-left:-150px}
+.carousel-main .banner-3.active .car-bottom{bottom:0}
+/* login */
+.loginBox{position:absolute;top:44px;right:50%;height:280px;z-index:10;margin-right:-500px;width:300px;padding-top:10px;background:#fff;text-align:left}
+.loginBox .welcomeTit{font-size:18px;padding:15px 30px;margin-bottom:20px;font-weight:400;border-bottom:1px solid #eee}
+.loginBox .failmsg{font-size:18px;padding:0 30px 5px}
+.loginBox .circle .poptip{width:120px}
+.loginBox .circle .poptip i{top:18px}
+.loginBox .uname{padding:10px 30px 15px}
+.loginBox .btnArea{padding:0 30px}
+.loginBox .btn{display:block}
+.loginBox a.btn .poptip.bottom{top:45px;left:50%;width:212px;margin-left:-120px;color:#333}
+.loginBox .change{height:40px;oveflow:hidden;line-height:40px;padding:0 30px;margin-top:28px;background-color:#f2f7fa;border-top:1px solid #e6ecf0}
+.loginBox .logErr{height:25px;line-height:25px;padding:0 30px;margin-top:-5px}
+.loginTb{width:100%}
+.loginTb tr{margin-top:15px;height:40px;line-height:40px}
+.loginTb td,.loginTb th{padding:4px 5px}
+.loginTb th{width:22%;font-weight:400}
+.loginTb .form-control{width:90%}
+.loginTb .code{width:35%;margin-right:10px}
+.loginTb .btn{width:85%;float:none;display:block;margin:0 auto;padding:4px 0}
+.loginTb .adaptive td,.loginTb .adaptive th{padding-top:0;padding-bottom:0}
+
+/* main */
+.sideBar{width:100%;float:right;overflow:hidden}
+.sideBar li{color:#969696}
+.kaifu,.newsPanel{width:46%}
+.titA{padding:20px 0}
+.titA .tname{font-size:24px;line-height:30px;font-weight:400;float:left;border-left:3px solid #FFC200}
+.titA .tname span{cursor:pointer;padding:7px 20px;margin-right:15px}
+.titA a.more{float:right;margin-top:18px}
+.moduleA{padding-bottom:30px}
+.moduleA h3.titB font{color:#ddd;font-size:22px}
+.ind_titb{margin:15px;color:#656565;text-align:center;font-weight:400;font-size:22px}
+.ind_titb font{color:#ddd;font-size:18px}
+.txtlist li a{color:#353232;line-height:28px;}
+/* contact us */
+.cont_us li{  height:200px; width:25.3%; display:block; color:#969696; float:left; background:#fafafa; margin:0px 40px; padding:15px; text-align:center;}
+.cont_us li a:hover{ text-decoration:none;}
+.cont_us li b{ color:#FF8631; text-decoration:underline;}
+.cont_us li span{ font-size:12px; margin-top:20px; display:block;}
+.cont_us li:hover{border-bottom: 2px solid #FF8631; border-top:1px solid #ddd; border-left:1px solid #ddd; border-right:1px solid #ddd;} 
+.cont_adress, .cont_phone, .cont_email{ display:block; width:55px; height:60px; background:url(../images/cont_icon.png) no-repeat; margin:0 auto; margin-top:25px; margin-bottom:15px;}
+.cont_phone{ background-position:-5px 0px;}
+.cont_email{background-position:-70px 0px;}
+.cont_adress{background-position:-145px 0px;}
+/* game */
+.gameList li{float:left;width:200px;padding:22px 5px 17px;}
+.gameList li:hover{}
+.gameList li .sp1{margin-right:5px;}
+.gameList li h3{font-size: 16px;font-weight:normal;}
+.gameList li h3 a{color:#353232;}
+.gameList li .gamestyle{padding: 1px 0 2px 0;color: #999;}
+.gameList li .gamedown{    border: 1px solid #f90;
+    width: 60px;
+    text-align: center;
+    border-radius: 4px;
+    display: inline-block;}
+.gameList li .gamedown a{color:#f90;}
+.gameList li .gamedown:hover{background:#f90;}
+.gameList li .gamedown:hover a {color:#fff;}
+.gameList li img{width:70px;}
+/* join us */
+.join_us {color:#7F6259; }
+.join_us .last{padding-right:0;width:17%}
+.join_01,.join_02,.join_03,.join_04{background:url(../images/process-box.png) no-repeat;width:140px;height:140px;display:block;margin:0 auto}
+.join_01{background-position:0 0}
+.join_01:hover{background-position:0 -140px}
+.join_02{background-position:-160px 0}
+.join_02:hover{background-position:-160px -140px}
+.join_03{background-position:-310px 0}
+.join_03:hover{background-position:-310px -140px}
+.join_04{background-position:-480px 0}
+.join_04:hover{background-position:-480px -140px}
+.addSteps ul li{padding-right:10%;float:left;font-size:20px;width:27.5%;text-align:center}
+.addSteps ul a{overflow:hidden;color:#A9A9A9;margin:0 auto}
+.addSteps ul a:hover{background-position:0 -60px;text-decoration:none}
+.addSteps ul li.last{background:0 0;padding-right:0}
+/* frendly links */
+.frdlink{text-align:center;position:relative}
+
+.frdlink a{padding:0px 10px;color:#969696;font-size:1.3em;line-height:50px;height:50px}
+.frdlink a:hover{color:#666;}

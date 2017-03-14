@@ -1,0 +1,333 @@
+<extend name="Public/base"/>
+
+<block name="body">
+    <link href="__CSS__/stat/group_figure.css" rel="stylesheet" media="all">
+    <link href="__CSS__/stat/echartsHome.css" rel="stylesheet">
+    <link href="__CSS__/stat/default.css" rel="stylesheet">
+    <script src="__JS__/stat/echarts.js"></script>
+    <div class="main-title cf">
+    </div>
+    <!-- 标签页导航 -->
+    <div class="tab-wrap">
+      <!-- <ul class="tab-nav nav">
+        <li data-tab="tab1" class="current"><a href="javascript:void(0);">基础画像</a></li>
+      </ul> -->
+      <div class="tab-content"> 
+        <!--基础画像-->
+        <div id="tab1" class="tab-pane tab1 in">
+          <div class="tabFigureContent baseFigure" style="display: block;">
+            <!--充值统计 -->
+            <div class="dashBoard dashBoardSex">
+                <div class="dashBoardContent"> 
+                    <script type="text/javascript">    
+                        // 路径配置
+                        require.config({
+                          paths: {
+                            echarts: 'http://echarts.baidu.com/build/dist'
+                          }
+                        });
+
+                        // 使用
+                        require(
+                          [
+                            'echarts',
+                            'echarts/chart/bar', // 使用柱状图就加载bar模块，按需加载
+                            'echarts/chart/line'
+                          ],
+                          function (ec) {
+                            // 基于准备好的dom，初始化echarts图表
+                            var myChart = ec.init(document.getElementById('recharge')); 
+                            //设置数据
+                            var option = {
+                                title : {text: '充值统计',subtext: ''},
+                                tooltip : {trigger: 'axis'},
+                                legend: {data:['上月', '本月']},
+                                calculable : true,
+                                xAxis : [{type : 'value',boundaryGap : [0, 0.01]}],
+                                yAxis : [{type : 'category',data : ['微信','支付宝','充值总值(元)']}],
+                                series: [
+                                    {
+                                        name:'上月',type:'bar',
+                                        data:[
+                                         "{$recharge_last_data[0]}",
+                                         "{$recharge_last_data[1]}", 
+                                         "{$recharge_last_data[2]}"
+                                        ]
+                                    },
+                                    {
+                                        name:'本月',type:'bar',
+                                        data:[
+                                            "{$recharge_this_data[0]}", 
+                                            "{$recharge_this_data[1]}", 
+                                            "{$recharge_this_data[2]}"
+                                        ]
+                                    }
+                                ]
+                            };
+                            // 为echarts对象加载数据 
+                            myChart.setOption(option); 
+                          }
+                        );        
+                    </script>
+                    <div id="recharge" class="sj"></div>
+                </div>
+            </div>
+            <!--充值统计END--> 
+            <!--注册统计 -->
+            <div class="dashBoard dashBoardSex">
+                <div class="dashBoardContent"> 
+                    <script type="text/javascript"> 
+                        // 路径配置
+                        require.config({
+                          paths: {
+                            echarts: 'http://echarts.baidu.com/build/dist'
+                          }
+                        });
+
+                        // 使用
+                        require(
+                          [
+                            'echarts',
+                            'echarts/chart/bar', // 使用柱状图就加载bar模块，按需加载
+                            'echarts/chart/line'
+                          ],
+                          function (ec) {
+                            // 基于准备好的dom，初始化echarts图表
+                            var myChart = ec.init(document.getElementById('register')); 
+                            //设置数据
+                            var option = {
+                                title : {text: '注册统计',subtext: ''},
+                                tooltip : {trigger: 'axis'},
+                                legend: {data:['上月', '本月']},
+                          
+                                calculable : true,
+                                xAxis : [{type : 'value',boundaryGap : [0, 0.01]}],
+                                yAxis : [{type : 'category',data : ['手机端','电脑端','注册总数(人)']}],
+                                series: [
+                                    {
+                                        name:'上月',type:'bar',
+                                        data:[
+                                         "{$reg_last_data[0]}",
+                                         "{$reg_last_data[1]}", 
+                                         "{$reg_last_data[2]}"
+                                        ]
+                                    },
+                                    {
+                                        name:'本月',type:'bar',
+                                        data:[
+                                         "{$reg_this_data[0]}", 
+                                         "{$reg_this_data[1]}", 
+                                         "{$reg_this_data[2]}"
+                                        ]
+                                    }
+                                ]
+                            };
+                            // 为echarts对象加载数据 
+                            myChart.setOption(option); 
+                          }
+                        );        
+                    </script>
+                    <div id="register" class="sj"></div>
+                </div>
+            </div>
+            <!--注册统计END--> 
+                    
+            <!--充值统计年-->
+            <div class="dashBoard dashBoardAge">
+                <div class="dashBoardContent"> 
+                    <script type="text/javascript">
+                        // 路径配置
+                        require.config({paths: {echarts: 'http://echarts.baidu.com/build/dist'}});
+                        // 使用
+                        require(
+                          [
+                            'echarts',
+                            'echarts/chart/bar', // 使用柱状图就加载bar模块，按需加载
+                            'echarts/chart/line'
+                          ],
+                          function (ec) {
+                            // 基于准备好的dom，初始化echarts图表
+                            var myChart = ec.init(document.getElementById('recharge1')); 
+                            //设置数据
+                            var option = {
+                            title : { text: '充值统计',subtext: ''},
+                            tooltip : {trigger: 'axis'},
+                            legend: {data:['推广充值','总充值']},
+                           
+                            calculable : true,
+                            xAxis : [
+                                {
+                                    type : 'category',
+                                    data : ['1月','2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月']
+                                }
+                            ],
+                            yAxis : [
+                                {type : 'value'}
+                            ],
+                            series : [
+                                {
+                                    name:'推广充值',
+                                    type:'bar',
+                                    data:[
+                                    "{$year_promote[0]['amount']}", 
+                                    "{$year_promote[1]['amount']}", 
+                                    "{$year_promote[2]['amount']}", 
+                                    "{$year_promote[3]['amount']}", 
+                                    "{$year_promote[4]['amount']}", 
+                                    "{$year_promote[5]['amount']}", 
+                                    "{$year_promote[6]['amount']}", 
+                                    "{$year_promote[7]['amount']}", 
+                                    "{$year_promote[8]['amount']}", 
+                                    "{$year_promote[9]['amount']}", 
+                                    "{$year_promote[10]['amount']}", 
+                                    "{$year_promote[11]['amount']}"
+                                    ],
+                                    markPoint : {
+                                        data : [
+                                            {type : 'max', name: '最大值'},
+                                            {type : 'min', name: '最小值'}
+                                        ]
+                                    }
+                                },
+                                {
+                                    name:'总充值',
+                                    type:'bar',
+                                    data:[
+                                    "{$year_total[0]['amount']}", 
+                                    "{$year_total[1]['amount']}", 
+                                    "{$year_total[2]['amount']}", 
+                                    "{$year_total[3]['amount']}", 
+                                    "{$year_total[4]['amount']}", 
+                                    "{$year_total[5]['amount']}", 
+                                    "{$year_total[6]['amount']}", 
+                                    "{$year_total[7]['amount']}", 
+                                    "{$year_total[8]['amount']}", 
+                                    "{$year_total[9]['amount']}", 
+                                    "{$year_total[10]['amount']}", 
+                                    "{$year_total[11]['amount']}"
+                                    ],
+                                    markPoint : {
+                                        data : [
+                                            {type : 'max', name: '最大值'},
+                                            {type : 'min', name: '最小值'}
+                                        ]
+                                    }
+                                    
+                                }
+                            ]
+                        };
+                        // 为echarts对象加载数据 
+                        myChart.setOption(option); 
+                    }
+                    );        
+                </script>
+                <div id="recharge1" class="sj1"></div>
+              </div>
+            </div>
+            <!--充值统计年END--> 
+
+            <!--注册统计年-->
+            <div class="dashBoard dashBoardAge">
+                <div class="dashBoardContent"> 
+                    <script type="text/javascript">
+                        // 路径配置
+                        require.config({paths: {echarts: 'http://echarts.baidu.com/build/dist'}});
+                        // 使用
+                        require(
+                          [
+                            'echarts',
+                            'echarts/chart/bar', // 使用柱状图就加载bar模块，按需加载
+                            'echarts/chart/line'
+                          ],
+                          function (ec) {
+                            // 基于准备好的dom，初始化echarts图表
+                            var myChart = ec.init(document.getElementById('recharge2')); 
+                            //设置数据
+                            var option = {
+                            title : { text: '注册充值统计',subtext: ''},
+                            tooltip : {trigger: 'axis'},
+                            legend: {data:['推广量','总注册量']},
+                           
+                            calculable : true,
+                            xAxis : [
+                                {
+                                    type : 'category',
+                                    data : ['1月','2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月']
+                                }
+                            ],
+                            yAxis : [
+                                {type : 'value'}
+                            ],
+                            series : [
+                                {
+                                    name:'推广量',
+                                    type:'bar',
+                                    data:[
+                                    "{$prom_data_year[0]['counts']}", 
+                                    "{$prom_data_year[1]['counts']}", 
+                                    "{$prom_data_year[2]['counts']}", 
+                                    "{$prom_data_year[3]['counts']}", 
+                                    "{$prom_data_year[4]['counts']}", 
+                                    "{$prom_data_year[5]['counts']}", 
+                                    "{$prom_data_year[6]['counts']}", 
+                                    "{$prom_data_year[7]['counts']}", 
+                                    "{$prom_data_year[8]['counts']}", 
+                                    "{$prom_data_year[9]['counts']}", 
+                                    "{$prom_data_year[10]['counts']}", 
+                                    "{$prom_data_year[11]['counts']}"
+                                    ],
+                                    markPoint : {
+                                        data : [
+                                            {type : 'max', name: '最大值'},
+                                            {type : 'min', name: '最小值'}
+                                        ]
+                                    }
+                                },
+                                {
+                                    name:'总注册量',
+                                    type:'bar',
+                                    data:[
+                                    "{$reg_data_year[0]['counts']}", 
+                                    "{$reg_data_year[1]['counts']}", 
+                                    "{$reg_data_year[2]['counts']}", 
+                                    "{$reg_data_year[3]['counts']}", 
+                                    "{$reg_data_year[4]['counts']}", 
+                                    "{$reg_data_year[5]['counts']}", 
+                                    "{$reg_data_year[6]['counts']}", 
+                                    "{$reg_data_year[7]['counts']}", 
+                                    "{$reg_data_year[8]['counts']}", 
+                                    "{$reg_data_year[9]['counts']}", 
+                                    "{$reg_data_year[10]['counts']}", 
+                                    "{$reg_data_year[11]['counts']}"
+                                    ],
+                                    markPoint : {
+                                        data : [
+                                            {type : 'max', name: '最大值'},
+                                            {type : 'min', name: '最小值'}
+                                        ]
+                                    }
+                                    
+                                }
+                            ]
+                        };
+                        // 为echarts对象加载数据 
+                        myChart.setOption(option); 
+                    }
+                    );        
+                </script>
+                <div id="recharge2" class="sj1"></div>
+              </div>
+            </div>
+            <!--注册统计年END-->
+          </div>
+        </div>
+        <!--基础画像结束--> 
+      </div>
+    </div>
+</block>
+<block name="script">
+<script type="text/javascript">
+//导航高亮
+highlight_subnav('{:U('Statistics/index')}');
+</script>
+</block>

@@ -1,0 +1,100 @@
+﻿<extend name="Public/promote_base"/>
+
+<block name="body">
+       <div id="query">
+        <div id="search" class="mod">
+          <h2>查询</h2>
+          <form id="data_form" action="{:U('Query/bill')}" method="post" enctype="multipart/form-data">
+            <ol>
+              <li class="other clearfix">
+              <div>
+                  <input type="text" id="" name="bill_number" value="{:I('bill_number')}" placeholder="请输入对账单号">
+                </div>
+                <div class="">
+                  <select name="game_id" id="game_id" style="width:80px;">
+                    <option value="">全部游戏</option>
+                    <volist name=":get_game_list()" id ="s">
+                    <option value="{$s.id}">{$s.game_name}</option>
+                  </volist>
+                  </select>
+                </div>
+                <div class="m"><em>开始时间：</em><span class="required">*</span>
+                  <input type="text" id="sdate" value="{:I(timestart)}" name="timestart" value="">
+                </div>
+                <div class="r"><em>结束时间：</em><span class="required">*</span>
+                  <input type="text" id="edate" value="{:I(timeend)}" name="timeend" value="">
+                </div>
+                <div class="search_btn">
+                  <input type="submit" value="查询">
+                </div>
+              </li>
+            </ol>
+          </form>
+        </div>
+        <div id="jiesuan" class="mod">
+          <h2>我的对账单</h2>
+          <div class="con">
+            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+              <thead>
+                <tr>
+                  <th>对账单号</th>
+                  <th>对账单时间</th>
+                  <th>所属渠道</th>
+                  <th>游戏名称</th>
+                  <th>充值总额</th>
+                  <th>注册人数</th>
+                  <th>状态</th>
+                </tr>
+              </thead>
+              <tbody>
+                <volist name="list_data" id="vo">
+                <tr>
+                  <td>{$vo.bill_number}</td>
+                  <td>{$vo.bill_time}</td>
+                  <td>{:get_promote_name($vo['promote_id'])} </td>
+                  <td>{:get_game_name($vo['game_id'])}</td>
+                  <td>{$vo.total_money}</td>
+                  <td>{$vo.total_number}</td>
+                  <td>已对账</td>
+                </tr>
+              </volist>
+              </tbody>
+            </table>
+            <div class="import">
+                <!-- <span>数据量：{$count}条数据</span><span> -->
+                <span><a href="{:U('Export/expUser',array(
+            'id'=>7,
+            'bill_number'=>I('bill_number'),
+            'game_id'=>I('game_id'),
+            'timestart'=>I('timestart'),
+            'timeend'=>I('timeend'),
+            'start'=>I('start'),
+            'end'=>I('end'),
+            ))}" >导出数据(excel格式)</a>
+            </span>
+              </div>
+          </div>
+          <div id="pagehtml" class="pagenavi clearfix">{$_page}</div>
+        </div>
+      </div>
+<link rel="stylesheet" type="text/css" href="__CSS__/p_jquery.datetimepicker.css">
+<script type="text/javascript" src="__JS__/jquery.datetimepicker.js"></script>
+<script type="text/javascript">
+$().ready(function(){
+  $('#sdate').datetimepicker({
+    lang:'ch',
+    format:'Y-m-d',
+    formatDate:'Y-m-d',
+    timepicker:false
+  });
+  
+  $('#edate').datetimepicker({
+    lang:'ch',
+    format:'Y-m-d',
+    formatDate:'Y-m-d',
+    timepicker:false
+  });
+});
+</script>
+</block>
+  

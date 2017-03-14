@@ -1,0 +1,179 @@
+.m-allineone-validatePass .validate-pass-wrap {
+    padding: 147px 0 381px 300px;
+    font-size: 14px;
+}
+
+.m-allineone-validatePass .validate-pass-wrap .tips {
+    color: #333;
+    margin-bottom: 15px;
+}
+.m-allineone-validatePass .validate-pass-wrap .input-optimize {
+    position: relative;
+}
+.m-allineone-validatePass .validate-pass-wrap .pass-input {
+    display: block;
+    width: 263px;
+    height: 34px;
+    line-height: 34px;
+    border: 1px solid #cecece;
+    text-indent: 10px;
+    margin: 0 0 30px;
+}
+.m-allineone-validatePass .validate-pass-wrap .input-optimize .error-msg {
+    position: absolute;
+    left: 270px;
+    top: 0;
+    height: 34px;
+    line-height: 34px;
+    color: #ff4f00;
+    font-size: 12px;
+}
+.m-allineone-validatePass .validate-pass-wrap .confirm {
+    display: inline-block;
+    width: 109px;
+    height: 34px;
+    text-align: center;
+    line-height: 34px;
+    font-size: 14px;
+    color: #fff;
+    background:#F82800;
+    border-radius:3px;
+    border-bottom:1px solid #aaa;
+
+}
+.m-allineone-validatePass .validate-pass-wrap .cancel {
+    display: inline-block;
+    width: 109px;
+    height: 34px;
+    color: #09f;
+    text-align: center;
+    line-height: 34px;
+}
+
+
+/**/
+.binded-wrap {
+    padding: 31px 0 0 142px;
+}
+.binded-wrap .form-item {
+    margin: 0 0 16px;
+    position: relative;
+    z-index: auto;
+}
+.binded-wrap label {
+    display: inline-block;
+    width: 85px;
+    text-align: right;
+    margin: 0 22px 0 0;
+}
+.binded-wrap .input-optimize {
+    position: relative;
+    display: inline-block;
+    vertical-align: middle;
+}
+.binded-wrap .input-optimize input {
+    padding: 0 0 0 10px;
+    width: 253px;
+    height: 34px;
+    line-height: 34px;
+    border: 1px solid #cecece;
+    vertical-align: middle;
+}
+.binded-wrap .input-optimize.error input {
+    border: 1px solid red;
+}
+.binded-wrap .input-optimize .error-msg,
+.binded-wrap .input-optimize .right-msg,
+.binded-wrap .error-msg,
+.binded-wrap .right-msg {
+    margin-left: 12px;
+    font-size: 12px;
+    color: #df0000;
+    position: absolute;
+    left: 260px;
+    top: 0;
+    height: 34px;
+    line-height: 34px;
+    white-space: nowrap;
+    word-break: break-all;
+}
+.binded-wrap .input-optimize .right-msg,
+.binded-wrap .right-msg {
+    color:green;
+}
+.binded-wrap .check-code-wrap input {
+    width: 168px;
+}
+.binded-wrap .check-code-wrap img {
+    width: 67px;
+    height: 30px;
+    margin-left: 18px;
+    vertical-align: middle;
+}
+.binded-wrap .send-code {
+    display: block;
+    background: url(../images/btn-send-msg.png) no-repeat;
+    width: 137px;
+    height: 34px;
+    text-align: center;
+    line-height: 34px;
+    margin: 0 0 0 112px;
+}
+a,a:hover {
+    color: #333;
+}
+.binded-wrap .operation-bar .confirm {
+    display: inline-block;
+    width: 109px;
+    height: 34px;
+    text-align: center;
+    line-height: 34px;
+    font-size: 14px;
+    color: #fff;
+    /* background: url(../images/btn-blue.png?t=1459502458067) no-repeat; */
+    background:#F82800;
+    border-radius:3px;
+    border-bottom:1px solid #aaa;
+    margin: 0 0 0 112px;
+}
+.binded-wrap .operation-bar .cancel {
+    display: inline-block;
+    width: 109px;
+    height: 34px;
+    color: #F82800;
+    text-align: center;
+    line-height: 34px;
+}
+
+.notice{line-height:40px;position:relative;margin-left:0;font-size:18px;}
+
+.m-binded-id p {
+    font-size: 12px;
+    line-height: 18px;
+}
+.m-binded-id label {
+    color: #333;
+    margin-right: 22px;
+    vertical-align: middle;
+    line-height: 34px;
+}
+.m-binded-id .input-optimize input {
+    width: 250px;
+    height: 34px;
+    padding: 0 0 0 10px;
+    outline: 0;
+    border: 1px solid #cecece;
+    line-height: 34px;
+    margin-bottom: 16px;
+    vertical-align: baseline;
+}
+.m-binded-id .star {
+    vertical-align: middle;
+}
+.m-binded-id .red {
+    margin: 20px 0 27px;
+    color: #df0000;
+}
+.m-binded-id  .input-optimize .error-msg {
+    left: 380px;
+}

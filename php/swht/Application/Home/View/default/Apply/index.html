@@ -1,0 +1,115 @@
+<extend name="Public/promote_base"/>
+
+<block name="body">
+  <style type="text/css">
+  .pos{position: relative;}
+  </style>
+  <script src='__STATIC__/zeroclipboard/jquery.zclip.min.js'></script>
+  <div id="query">
+    <div id="other_se" class="mod">
+      <h2>查询</h2>
+      <form action="{:U('Apply/index')}" method="post" enctype="multipart/form-data">
+        <div>
+          <input type="text" placeholder="请输入游戏名称" class="txts" name="game_name" value="{:I('game_name')}">
+          <input type="submit" value="查询" class="btns">
+        </div>
+      </form>
+    </div>
+    <div id="lg" class="mod">
+      <h2>游戏列表</h2>
+      <table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tbody>
+	       <tr>
+          <th>&nbsp;</th>
+          <th>应用名称</th>
+          <th>版本号</th>
+          <th>类型</th>
+          <th>应用大小</th>
+          <th>申请状态</th>
+        </tr>
+      </tbody>
+      <tbody>
+	      <volist name="list_data" id="vo">
+        <tr>
+            <td>
+              <if condition='$vo["recommend_status"] eq 1'>
+                <img src="__IMG__/promote/006.gif" width="50">
+              </if>
+            </td>
+            <td>
+              <a href="javacript:;"><img src="__ROOT__{$vo.icon|get_cover='path'}" width="50" height="50" align="middle">
+                <span class="name_a">{$vo.game_name}</span>
+              </a>
+            </td>
+            <td>{$vo.version}</td>
+            <td>{$vo['game_type_name']}</td>
+            <td>{$vo.game_size}</td>
+		        <td class="pos">
+                <switch name="vo['status']">
+                  <case value="0"><a href="javascript:;" class="bts proc">审核中</a></case>
+                  <case value="1">
+                    <a href="<if condition='$vo.dow_status eq 0'>#<else/>{:U('Down/down_file?game_id='.$vo['id'].'&promote_id='.$vo['promote_id'])}</if>" class="bts" >下载</a>
+                    <a href="javascript:;" class="bts copy" data-url="{:get_apply_dow_url($vo['id'],$vo['promote_id'])}" >
+                      复制下载地址
+                    </a>
+                  </case>
+                  <case value="2"><a href="javascript:;" class="bts proc">审核失败</a></case>
+                  <default /><a href="javascript:;" class="bts" onclick="apply({$vo.id},this)">马上申请</a>
+                </switch>
+            </td>
+        </tr>
+	      </volist>
+        </tbody>
+      </table>
+    </div>
+    <div id="pagehtml" class="pagenavi clearfix">{$_page}</div>
+  </div>
+</block>
+<block name="script">
+  <script type="text/javascript">
+  $(document).ready(function() {
+    $('a.copy').zclip({
+          path: "/Public/static/zeroclipboard/ZeroClipboard.swf",
+          copy: function(){
+              return $(this).attr('data-url');
+          },
+          beforeCopy:function(){
+            $(this).addClass("proc");
+          },
+          afterCopy:function(){
+            $(this).removeClass("copy");
+            if($(this).attr('data-url')=="" || $(this).attr('data-url')==null){
+              layer.msg("游戏原包暂未上传",{icon:2});
+            }
+            else{
+              layer.msg("复制成功",{icon:1});
+            }
+            
+          }
+    });
+  })
+
+  function apply($gameid,obj){
+    $.ajax({
+      type:"post",
+      url:"__URL__/apply",
+      dataType:"json",
+      data:{game_id:$gameid},
+      success:function(res){
+        if(res.status){
+          $(obj).attr("onclick","").html("审核中").addClass("proc");
+          layer.msg(res.msg,{icon: 1});
+        }
+        else{
+          layer.msg(res.msg,{icon: 2});
+        }
+      },
+      error:function(){
+        layer.msg('服务器故障',{icon:5});
+      }
+    })
+  }
+  //导航高亮
+  highlight_subnav('{:U('Apply/index')}');
+  </script>
+</block>

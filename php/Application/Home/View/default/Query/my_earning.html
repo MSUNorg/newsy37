@@ -1,0 +1,142 @@
+﻿<extend name="Public/promote_base"/>
+
+<block name="body">
+<div id="query">
+        <div id="search" class="mod">
+          <h2>查询</h2>
+          <form id="data_form" action="{:U('Query/my_earning')}" method="post" enctype="multipart/form-data">
+            <ol>
+              <li class="other clearfix">
+                <div>
+                  <input type="text" id="" value="{:I('settlement_number')}" name="settlement_number" placeholder="请输入结算账单号">
+                </div>
+                <div class="">
+                  <select name="game_id" id="game_id" style="width:80px;">
+                    <option value="">全部游戏</option>
+                    <volist name=":get_game_list()" id ="s">
+                    <option value="{$s.id}">{$s.game_name}</option>
+                  </volist>
+                  </select>
+                </div>
+                <div>
+                  <select name="pattern" class="txts">
+                  <option <if condition="empty(I('pattern'))">selected="selected"</if> value="">请选择合作模式</option>
+                  <option <if condition="I('pattern') == '0'">selected="selected"</if> value="0" >CPS</option>
+                  <option <if condition="I('pattern') == '1'">selected="selected"</if> value="1">CPA</option>
+                </select>
+                </div>
+                <div>                                                       
+                  <select name="ti_status" class="txts">
+                  <option <if condition="empty(I('ti_status'))">selected="selected"</if> value="">请选择提现状态</option>
+                  <option <if condition="I('ti_status') == '-1'">selected="selected"</if> value="-1" >未申请</option>
+                  <option <if condition="I('ti_status') == '0'">selected="selected"</if> value="0">申请中</option>
+                  <option <if condition="I('ti_status') == '1'">selected="selected"</if> value="1">已通过</option>
+                  <option <if condition="I('ti_status') == '2'">selected="selected"</if> value="2">已驳回</option>
+                </select>
+                </div>
+                <div class="search_btn">
+                  <input type="submit" value="查询">
+                </div>
+              </li>
+            </ol>
+          </form>
+        </div>
+        <div id="jiesuan" class="mod">
+          <h2>我的结算单</h2>
+          <div class="con">
+            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+              <thead>
+                <tr>
+                  <th class="row-selected row-selected">
+                    <input class="check-all" type="checkbox">
+                  </th>
+                  <th>结算账单</th>
+                  <th>游戏名</th>
+                  <th>合作模式</th>
+                  <th>充值总额</th>
+                  <th>注册人数</th>
+                  <th>分成比例</th>
+                  <th>注册单价</th>
+                  <th>结算金额</th>
+                  <th>提现状态</th>
+                  <th>操作</th>
+                </tr>
+              </thead>
+              <tbody>
+                <volist name="list_data" id="vo">
+                <tr>
+                <td style="border-right:1px solid #DDDDDD;text-align:center"><input class="ids" type="checkbox" value="{$data['id']}" name="ids[]" <if condition="$data.is_check eq 1">disabled="disabled"</if>></td>
+                  <td>{$vo.settlement_number}</td>
+                  <td>{$vo.game_name}</td>
+                  <td>{:get_pattern($vo['pattern'])}</td>
+                  <td>{$vo.total_money}</td>
+                  <td>{$vo.total_number}</td>
+                  <td><if condition="$vo.pattern eq 0">{$vo.ratio}%<else/>--</if></td>
+                  <td><if condition="$vo.pattern eq 1">{$vo.money}<else/>--</if></td>
+                  <td>{$vo.sum_money}</td>
+                  <td>
+                    <switch name="vo.ti_status" >
+                      <case value="-1"><lable style="color:#D0D0D0">未申请</lable></case>
+                      <case value="0"><lable style="color:#46A3FF">申请中</lable></case>
+                      <case value="1"><lable style="color:#00DB00">已通过</lable></case>
+                      <case value="2"><lable style="color:#FF0000">已驳回</lable></case>
+                      <default /><lable style="color:#D0D0D0">未申请</lable>
+                    </switch>
+                  </td>
+                  <td><a href="javascript:;" onclick="tixian({$vo.id})">申请提现</a></td>
+                </tr>
+              </volist>
+              </tbody>
+              <tr>
+                <td colspan="6" style="text-align: center;">结算汇总(元)</td>
+                <td  colspan="3" style="text-align: center;">{$sum_money}</td>
+              </tr>
+              <if condition="$parent_id eq 0">
+              <tr>          
+                <td colspan="6" style="text-align: center;">未提现汇总(元)</td>                
+                <td  colspan="3" style="text-align: center;">{$w_money}</td>
+              </tr>
+              <tr>
+                <td colspan="6" style="text-align: center;">成功提现汇总(元)</td>                
+                <td  colspan="3" style="text-align: center;">{$y_money}</td>
+              </tr>
+              </if>
+            </table>
+
+            <div id="pagehtml" class="pagenavi clearfix">{$_page}</div>
+
+          </div>
+          </div>
+        <!-- <div class="js warn"> 注：下载结算单后，请打印并盖上公司公章或财务专用章，开具相应数额的增值税专用发票(需下载对应的开票资质)，邮寄到以下地址，收到您的纸质结算单以及发票才能继续结算流程。<br>
+          地址：武汉市洪山区书城路文秀街10号中石创意大厦2号门9楼<br>
+          收件人：潘玉庭<br>
+          电话： 027-87548895 
+        </div> -->
+</div>
+  <script>
+  var ss="{:U('my_earning')}";
+    function tixian(id) {
+      $.ajax({
+        url: '{:U("apply_withdraw")}',
+        type: 'POST',
+        dataType: 'json',
+        data: {'id': id},
+        success:function(data){
+          if(data.status==0){
+               layer.msg('请勿重复操作', {icon: 5});
+
+          }else{
+              layer.msg('申请成功', {icon: 6});
+              setTimeout(function(){location.href=ss;},2000);
+          }
+        },
+        error:function(){
+          layer.msg('服务器故障', {icon: 4});
+        }
+      });
+
+      
+    }
+  </script>
+</block>
+  

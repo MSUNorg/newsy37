@@ -1,0 +1,52 @@
+﻿<extend name="Public/promote_base"/>
+
+<block name="body">
+      <div id="query">
+        <div id="other_se" class="mod">
+          <h2>查询</h2>
+          <form action="{:U('Promote/mychlid')}" method="post" enctype="multipart/form-data">
+            <div>
+              <input type="text" placeholder="子帐号" class="txts" name="account" value="{:I('account')}">
+              <input type="submit" value="查询" class="btns">
+              <a href="{:U('Promote/add_chlid')}" id="add_btn">添加子帐号</a>
+            </div>
+          </form>
+        </div>
+        <div id="lg" class="mod">
+          <h2>子帐号列表</h2>
+          <div class="tabs">
+            <ul class="tab_nav tabNavigation clearfix">
+              <li><a  class="on">全部</a></li>
+                          </ul>
+            <div id="tabcon01" class="tabcon" style="display: block;">
+              <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                <thead>
+                <tr>
+                  <th>账号ID</th>
+                  <th>子帐号</th>
+                  <th>状态</th>
+                  <th>创建时间</th>
+                  <th>操作</th>
+                </tr></thead>
+                
+                 <tbody>
+                  <volist name="list_data" id="vo">
+                  <tr>
+                    <td>{$vo.id}</td>
+                    <td>{$vo.account}</td>  
+                    <td><if condition="$vo['status'] eq 0">关闭<else/>启用</if></td>
+                    <td>{$vo.create_time|date='Y-m-d H:i:s',###}</td>
+                    <td><a href="{:U('Promote/edit_chlid','id='.$vo['id'])}">修改</a></td>
+                  </tr>
+                  </volist>
+                </tbody>
+                </table>
+            </div>
+          </div>
+          <div class="pagenavi clearfix"> 
+			     {$page}
+          </div>
+        </div>
+      </div>
+</block>
+  

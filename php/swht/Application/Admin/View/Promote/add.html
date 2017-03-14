@@ -1,0 +1,96 @@
+<extend name="Public/base" />
+
+<block name="body">
+<link rel="stylesheet" type="text/css" href="__CSS__/admin_table.css" media="all">
+<script type="text/javascript" src="__STATIC__/uploadify/jquery.uploadify.min.js"></script>
+    <div class="main-title cf">
+        <h2>新增 [推广员]</h2>
+    </div>
+    <!-- 标签页导航 -->
+<div class="tab-wrap">
+    <ul class="tab-nav nav">
+        <li data-tab="tab1" class="current"><a href="javascript:void(0);">基础</a></li></li>
+    </ul>
+    <div class="tab-content zc_for">
+    <!-- 表单 -->
+    <form id="form" action="{:U('add?model='.$model['id'])}" method="post" class="form-horizontal">
+        <!-- 基础文档模型 -->
+        <div id="tab1" class="tab-pane in tab1 tab-look">
+    		<table  border="0" cellspacing="0" cellpadding="0">
+                <tbody>
+                    <tr>
+                        <td class="l">登陆账号：</td>
+                        <td class="r">
+                           <input type="text" class="txt" name="account" value="">
+                        </td>
+                        <td class="l">登陆密码：</td>
+                        <td class="r">
+                           <input type="text" class="txt time" name="password" value="">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="l">真实姓名：</td>
+                        <td class="r">
+                           <input type="text" class="txt" name="real_name" value="">
+                        </td>
+                        <!-- <td class="l">二级密码:</td>
+                        <td class="r">
+                           <input type="text" class="txt" name="second_pwd" value="">
+                        </td> -->
+                    </tr>
+                    <tr>
+                        <td class="l">银行名称：</td>
+                        <td class="r">
+                           <input type="text" class="txt" name="bank_name" value="" >
+                        </td>
+                        <td class="l">银行卡号：</td>
+                        <td class="r">
+                           <input type="text" class="txt" name="bank_card" value="">
+                        </td>
+                    </tr>
+                    <tr>
+                       <!-- <td class="l">平台余额：</td>
+                        <td class="r">
+                          <input type="text" class="txt" name="balance_coin" value="" >
+                        </td> -->
+                        <td class="l">推广员状态：</td>
+                        <td class="r">
+                            <label class="inp_radio">
+                                <input type="radio" class="inp_radio" value="0" name="status">拉黑
+                                <input type="radio" class="inp_radio" value="1" name="status" checked="checked">正常
+                            </label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="l">电子邮件：</td>
+                        <td class="r">
+                           <input type="text" class="txt" name="email" value="">
+                        </td>
+                        <td class="l">手机号码：</td>
+                        <td class="r">
+                           <input type="text" class="txt" name="mobile_phone" value="">
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <input type='hidden' name="admin_id" value="{:UID}" />
+        <div class="form-item cf">
+            <button class="btn submit-btn ajax-post hidden" id="submit" type="submit" target-form="form-horizontal">确 定</button>
+            <a class="btn btn-return" href="javascript:history.back(-1);">返 回</a>
+        </div>
+    </form>
+    </div>
+</div>
+</block>
+
+<block name="script">
+<script type="text/javascript">
+Think.setValue("admin", {$UID|default = 0});
+//导航高亮
+highlight_subnav('{:U('Promote/lists')}');
+$('#submit').click(function(){
+    $('#form').submit();
+});
+</script>
+</block>

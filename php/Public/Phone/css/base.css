@@ -1,0 +1,36 @@
+@charset "UTF-8";
+*{margin:0; padding:0;}
+
+table{border-collapse:collapse; border-spacing:0;}
+fieldset,img{border:0;}
+address,caption,cite,code,dfn,em,var,i{font-style:normal; font-weight:normal;}
+ul,ol,li{list-style:none;}
+h1,h2,h3,h4,h5,h6{font-size:100%; font-weight:normal;}
+input,textarea {outline:none;resize:none;}
+pre,p{ white-space: -webkit-pre-wrap;white-space: -moz-pre-wrap; }
+
+a{text-decoration:none;}
+a:hover{}
+
+.cl:after { content: "."; display: block; height: 0; clear: both; visibility: hidden; } 
+.cl { zoom: 1; }
+.clear {clear:both;display:inline;}
+
+.show{display:block;}
+.hide{display:none;}
+
+.fl,.z{float:left;}
+.fr,.y{float:right;}
+.thin {-webkit-font-smoothing: antialiased;-moz-osx-font-smoothing: grayscale;}
+.ell {overflow:hidden; white-space:nowrap; text-overflow:ellipsis }
+
+body {font-size:12px;font-family:"Microsoft Yahei";color:#666;}
+
+
+
+/*公共底部*/
+.footer {border-top: #f18700 solid 3px;margin-top: 25px;background-color: #fff;font-size: 12px}
+.foot {padding:18px 0 30px;text-align:center;width:1024px;margin:0 auto;position:relative;}
+.foot-logo {margin-left:50px;margin-top:20px;display:inline-block;}
+.foot-copy {color:#666;line-height: 24px;display:inline-block;text-align:left;margin-right:50px;}
+.foot-copy a {color:#666;}

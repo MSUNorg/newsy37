@@ -1,0 +1,171 @@
+<extend name="Public/bases" />
+<block name="body" >
+	<div class="content J-wrapper">
+		<section class="wrapper-inner">
+			<ul class="t_nav">
+				<li><span class="wy" onclick="clicktopage(this)"></span><a href="{:U('Game/index')}">网游</a></li>
+				<li><span class="pk" onclick="clicktopage(this)"></span><a href="{:U('Game/index')}">跑酷</a></li>
+				<li><span class="xc" onclick="clicktopage(this)"></span><a href="{:U('Game/index')}">射击</a></li>
+				<li><span class="pj" onclick="clicktopage(this)"></span><a href="{:U('Gift/index')}">礼包</a></li>
+				<div class="clear"></div>
+			</ul>
+			<script>
+				function clicktopage(that) {
+					document.location.href = $(that).next('a').attr('href');
+				}
+			</script>
+			<div class="list_tit">
+				<h2>推荐游戏</h2>
+				<a href="{:U('Sort/index')}">更多&gt;&gt;</a>
+				<div class="clear"></div>
+			</div>
+			<ul class="g_list" id="J-recommend-game">
+				<foreach name="recommend" item="vo">
+				<li>
+					<a href="{$vo.and_dow_address}" title="{$vo.game_name}">
+						<span class="g_icon">
+							<img src="__ROOT__{$vo.icon|get_cover='path'}" width="66" alt="">
+						</span>
+					</a>
+					<a href="{:U('Game/detail?id='.$vo['id'].'')}" title="{$vo.game_name}">
+						<span class="g_name">{$vo.game_name}</span>
+					</a>
+					<span class="g_info">{:get_game_type($vo['game_type_id'])}{$vo.game_size}</span>
+					<a class="install" href="{:U('Down/down_file?game_id='.$vo['id'].'&type=1')}">安装</a>
+				</li>
+				</foreach>
+				<div class="clear"></div>
+			</ul>
+			<div class="list_tit">
+				<h2>新游推荐</h2>
+				<a href="{:U('Sort/index')}">更多&gt;&gt;</a>
+				<div class="clear"></div>
+			</div>
+			<ul class="g_list" id="J-new-game">
+				<foreach name="newsgame" item="vo">
+				<li>
+					<a href="{:U('Down/down_file?game_id='.$vo['id'].'&type=1')}">
+						<span class="g_icon">
+							<img src="__ROOT__{$vo.icon|get_cover='path'}" width="66" alt="{$vo.game_name}">
+						</span>
+						<span class="g_name">{$vo.game_name}</span>
+					</a>
+				</li>
+				</foreach>
+				<div class="clear"></div>
+			</ul>
+			<div class="list_tit">
+				<h2>休闲游戏</h2>
+				<a href="{:U('Sort/index')}">更多&gt;&gt;</a>
+				<div class="clear"></div>
+			</div>
+			<ul class="g_list">
+				<foreach name="casual" item="vo">
+				<li>
+					<a href="{:U('Game/detail?id='.$vo['id'].'')}">
+						<span class="g_icon">
+						<img src="__ROOT__{$vo.icon|get_cover='path'}" width="66" alt="{$vo.game_name}">
+						</span>
+						<span class="g_name">{$vo.game_name}</span>
+					</a>
+				</li>
+				</foreach>
+				<div class="clear"></div>
+			</ul>
+			<div class="list_tit">
+				<h2>精品游戏</h2>
+				<a href="{:U('Necessary/index')}">更多&gt;&gt;</a>
+				<div class="clear"></div>
+			</div>
+			<ul class="g_list" id="J-games">
+				<foreach name="good" item="vo">
+				<li>
+					<a href="{:U('Down/down_file?game_id='.$vo['id'].'&type=1')}" title="">
+						<span class="g_icon">
+							<img src="__ROOT__{$vo.icon|get_cover='path'}" width="66" alt="{$vo.game_name}">
+						</span>
+					</a>
+					<a href="{:U('Game/detail?id='.$vo['id'].'')}" title="{$vo['game_name']}">
+						<span class="g_name">{$vo.game_name}</span>
+					</a>
+					<span class="g_info">{:get_game_type($vo['game_type_id'])}{$vo.game_size}</span>
+					<a class="install" href="{:U('Down/down_file?game_id='.$vo['id'].'&type=1')}">安装</a>
+				</li>
+				</foreach>
+				<div class="clear"></div>
+			</ul>
+		</section>
+	</div><!-- end content -->
+    <div id="more_Infor"><span id="more_Infor_btn">点击加载更多数据</span></div>
+	<script>
+		loadd();
+        function loadd(){
+            var loading ='<img src="__IMG__/loading.gif">正在加载中';
+            var nodata = '已加载完成全部数据';
+			var total='{$total}';
+			var page = '{$page}';
+            $(window).bind("scroll", function(){
+                var more=$("#more_Infor_btn");
+				var $this =$(this),
+					viewH =$(document.body).height(),//可见高度
+					contentH =$(window).height(),//内容高度
+					scrollTop =$(this).scrollTop(),//滚动高度
+					newht = viewH - contentH - scrollTop;
+				if (page > total){
+					more.unbind().html(nodata);
+					return;
+				}
+				if(newht <= 0){
+					$("#more_Infor").show();
+					
+					$.ajax({
+						type: 'POST',
+					  async: true,
+				  dataType : 'json',
+						url: '__CONTROLLER__/necessary',
+					   data: 'p='+page,
+				 beforeSend: function(){
+								more.html(loading);
+							},
+					success: function (data) {
+							switch (parseInt(data.status)) {
+								case 1:
+								page = data.page;
+								var d = data.data;
+								var val = '';
+								for(var i=0;i<d.length;i++) {
+									
+									val += '<li>';
+									val += '	<a href="'+d[i].game_down+'" title="">'
+									val += '		<span class="g_icon">'
+									val += '			<img src="'+d[i].picurl+'" width="66" alt="">'
+									val += '		</span>'
+									val += '	</a>'
+									val += '	<a href="__MODULE__/Game/detail/id/'+d[i].id+'" title="'+d[i].game_name+'">'
+									val += '		<span class="g_name">'+d[i].game_name+'</span>'
+									val += '	</a>'
+									val += '	<span class="g_info" >'+d[i].game_type_id+d[i].game_size+'</span>'
+									val += '	<a class="install" href="'+d[i].game_down+'">安装</a>'
+									val += '</li>'								
+									
+								}
+								$('#J-games').find('li:last').after(val);
+								more.unbind().html('点击加载更多数据');
+								break;
+							default:
+								more.unbind().html('点击加载更多数据');
+								break;	
+							}
+							return false;
+						},
+					error: function () {
+							more.unbind().html('点击加载更多数据');
+						},
+					cache: false
+						
+					});
+				}
+            });
+        }// CC函数结束
+	</script>
+</block>

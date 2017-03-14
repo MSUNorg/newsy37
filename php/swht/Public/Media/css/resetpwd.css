@@ -1,0 +1,276 @@
+
+.modify_box {
+    background: #fff;
+    padding:0px 15px;
+    min-height: 489px;
+}
+.modify_box .bread-wrap {
+    height: 60px;
+    border-bottom: 1px solid #e6e6e6;
+}
+.modify_box .forget-protection {
+    float: right;
+    height: 60px;
+    line-height: 60px;
+    color: #939393;
+    margin-right: 16px;
+}
+.modify_box .bread-list {
+    height: 60px;
+    font-size: 16px;
+    color: #676767;
+    font-weight: 700;
+    padding-left: 26px;
+}
+.modify_box .bread-list li {
+    float: left;
+    height: 60px;
+    line-height: 60px;
+}
+.modify_box .bread-list .gutter {
+    margin: 0 10px;
+}
+.modify_box .bread-list li.active {
+    color: #ff8400;
+}
+
+.modify_box .m-confirm-username-wrap {
+    padding: 40px 0 0 45px;
+    position:relative;
+}
+.modify_box .m-select-wrap {
+    margin-bottom: 20px;
+    position: relative;
+    z-index: 10;
+}
+.modify_box label {
+    display: inline-block;
+    width: 66px;
+    text-align: right;
+    vertical-align: middle;
+    margin: 0 20px 0 0;
+}
+.modify_box .select-con {
+    display: inline-block;
+    position: relative;
+    vertical-align: middle;
+    height: 34px;
+}
+.select-optimize {
+    width: 260px;
+    height: 32px;
+    position: relative;
+    outline: 0;
+    border: 1px solid #e6e6e6;
+}
+.select-optimize .select-icon-trigger {
+    position: absolute;
+    display: block;
+    height: 100%;
+    width: 30px;
+    background: url(../images/icon-trigger.png?t=1460429829235) no-repeat center;
+    top: 0;
+    right: 0;
+    cursor: pointer;
+}
+.select-optimize .show-window {
+    width: 100%;
+    height: 100%;
+    text-indent: 10px;
+    word-break: break-all;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.select-optimize .select-list {
+    display: none;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    margin-top: 1px;
+    overflow: auto;
+    border: 1px solid #e6e6e6;
+    background: #fff;
+}
+.select-optimize .select-list li {
+    display: block;
+    height: 100%;
+    text-indent: 10px;
+    list-style: none;
+    white-space: nowrap;
+    border-top: 1px solid #e6e6e6;
+}
+.modify_box .select-con .select-optimize li {
+    background: #fff;
+}
+.modify_box .pure-text {
+    display: inline-block;
+    height: 32px;
+    line-height: 32px;
+    margin-bottom: 20px;
+    padding-left: 10px;
+}
+.modify_box .input-optimize {
+    display: inline-block;
+    position: relative;
+    margin-bottom: 20px;
+    margin-left: 0;
+    width:548px;
+}
+.modify_box .input-optimize input {
+    width: 248px;
+    height: 32px;
+    line-height: 32px;
+    font-size: 14px;
+    padding-left: 10px;
+    border: 1px solid #cecece;
+    vertical-align: middle;
+    color: #333;
+}
+.modify_box .checkcodeInput input {
+    width: 133px;
+}
+.modify_box .checkcode {
+    width: 97px;
+    height: 34px;
+    vertical-align: middle;
+    margin-left: 19px;
+}
+.modify_box .input-optimize .msg {
+    font-size:12px;
+    margin-left:5px;
+}
+.modify_box .input-optimize .error-msg {
+    font-size: 12px;
+    color: red;
+    /* display: block;
+    position: absolute;
+    top: 34px;
+    left: 0; */
+}
+.modify_box .m-forgetPass-box .pure-text {
+    display: inline-block;
+    height: 32px;
+    line-height: 32px;
+    margin-bottom: 20px;
+    padding-left: 10px;
+}
+.modify_box .pure-text.phone {
+    width: 133px;
+}
+.modify_box .m-confirm-username-wrap .send-safe-code {
+    display: inline-block;
+    margin: 0 0 0 31px;
+    height: 25px;
+    text-align: center;
+    line-height: 25px;
+    background: #f1f1f1;
+    border: 1px solid #d4d4d4;
+    border-radius: 2px;
+    padding: 0 10px;
+}
+.modify_box .input-optimize .clear-text {
+    display: inline-block;
+    width: 21px;
+    height: 21px;
+    background: url(../images/icon.jpg?t=1459502458067) no-repeat;
+    background-position: -5px -2px;
+    cursor: pointer;
+    position: absolute;
+    left: 232px;
+    top: 6px;
+}
+.modify_box .m-confirm-username-wrap .operation-bar {
+    padding-left: 90px;
+}
+.modify_box .m-confirm-username-wrap .operation-bar a {
+    display: inline-block;
+    width: 119px;
+    height: 34px;
+    text-align: center;
+    line-height: 34px;
+    color: #676767;
+    font-size: 16px;
+    background: url(../images/btn-shorter.png?t=1459502458067) no-repeat;
+    margin-right: 20px;
+}
+.modify_box .m-confirm-username-wrap .operation-bar .next-step {
+    background-position: 0 -35px;
+    color: #fff;
+}
+
+
+.modify_box .m-resetPass-box {
+    padding: 36px 0 0 45px;
+}
+
+.modify_box .m-resetPass-box .up-bar {
+    position: absolute;
+    left: 260px;
+    top: 0;
+    height: 34px;
+    line-height: 34px;
+    font-size: 14px;
+    color: #333;
+    width: 100px;
+    margin-left: 16px;
+    display: none;
+}
+
+.modify_box .submit-btn {
+    display: inline-block;
+    width: 261px;
+    height: 34px;
+    line-height: 32px;
+    background: url(../images/btn-longer.png?t=1459502458067) no-repeat center;
+    background-position: 0 0;
+    font-size: 16px;
+    color: #fff;
+    text-align: center;
+    margin: 6px 0 0 90px;
+    border: 0;
+    cursor: pointer;
+    letter-spacing: 5px;
+    font-weight: 700;
+}
+
+
+.modify_box .m-reset-finish-wrap {
+    font-size: 14px;
+    color: #676767;
+    text-align: center;
+    line-height: 22px;
+}
+.modify_box .m-reset-finish-wrap .title {
+    font-size: 26px;
+    color: #676767;
+    margin: 56px 0 39px;
+}
+.modify_box .m-reset-finish-wrap a {
+    text-decoration: underline;
+    color: #ff8400;
+}
+
+.modify_box .input-optimize .placeholder {
+    position: absolute;
+    top: 2px;
+    left: 1px;
+    height: 30px;
+    line-height: 30px;
+    text-indent: 10px;
+    background: #fff;
+    width: 258px;
+}
+
+.nonephone{font-size:18px;}
+.nonephone a{color:red;padding:0 3px;}
+
+.right-msg{color:green;}
+.msg-success{color:green;margin-left:5px;}
+.msg-fail{color:red;}
+#notice{margin-left:30px;}
+.success{color:green;}
+.fail{color:red;}

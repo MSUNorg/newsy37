@@ -1,0 +1,48 @@
+﻿<extend name="Public/base" />
+<block name="body" >
+<!--main-->
+<div class="wrap_w">
+	<div class="crumbs"><em>当前位置：</em><a href="{:U('Index/index')}" target="_blank">溪谷游戏</a><span> &gt; </span>
+  <a href="{:U('Service/index')}">客服中心</a>&gt; 其他问题</div>
+  <div id="service">
+    <div id="ser_sub" class="clearfix">
+      <div id="l">
+        <ul>
+
+			<li><a href="{:U('Service/spwd')}">密码问题</a></li>
+			<li><a href="{:U('Service/spay')}">充值问题</a></li>
+			<li><a href="{:U('Service/saccont')}">账户问题</a></li>
+			<li><a href="{:U('Service/sgift')}">礼包问题</a></li>
+			<li><a href="{:U('Service/sother')}" style="color:#186DC3;">其他问题</a></li>
+        </ul>
+      </div>
+      <div id="r">
+        <h4>其他问题</h4>
+		<ul>
+        	<!-- <foreach name="plist_data" item="ld">
+        	<li>
+				<div class="q"><em>?</em>{$ld.sName}<a name="{$ld.id}"></a></div>
+				<div class="a">{$ld.sContent}</div>
+			</li>
+		  </foreach> -->
+		   <li>
+            <div class="q"><em>•</em>为什么我登录游戏的时候，登不上去，没有任何提示？<a name="47"></a></div>
+            <div class="a"><p style="line-height:15px"><span style="font-family:&#39;微软雅黑&#39;,&#39;sans-serif&#39;"></span></p><p><span style="font-family: 微软雅黑, sans-serif; line-height: 15px;">亲爱的玩家：您好！建议您检查网络设置，确保网络畅通无延迟情况，然后清理下内存和应用数据。感谢您对游戏平台的支持，祝您游戏愉快！</span></p><p><br></p></div>
+          </li>
+			          <li>
+            <div class="q"><em>•</em>闪退\掉线\卡机如何处理?<a name="32"></a></div>
+            <div class="a"><p style="margin: 10px auto; padding: 0px; word-wrap: break-word; text-indent: 2em; line-height: 1.8; color: rgb(85, 85, 85); font-family: Tahoma, Helvetica, Arial, &#39;microsoft yahei&#39;, &#39;Microsoft Yahei&#39;, sans-serif; font-size: 14px; white-space: normal; background-color: rgb(255, 255, 255);">亲爱的玩家您好，请您先加客服QQ“{:C('MT_SITE_QQ')}<span style="line-height: 1.8; text-indent: 2em;">”，进行客服咨询，查看是否为游戏更新版本或例行维护导致，如为个别现象，请您尝试以下方法：</span></p><p style="margin: 10px auto; padding: 0px; word-wrap: break-word; text-indent: 2em; line-height: 1.8; color: rgb(85, 85, 85); font-family: Tahoma, Helvetica, Arial, &#39;microsoft yahei&#39;, &#39;Microsoft Yahei&#39;, sans-serif; font-size: 14px; white-space: normal; background-color: rgb(255, 255, 255);">1、清理缓存，关闭空闲软件，再次登录游戏;</p><p style="margin: 10px auto; padding: 0px; word-wrap: break-word; text-indent: 2em; line-height: 1.8; color: rgb(85, 85, 85); font-family: Tahoma, Helvetica, Arial, &#39;microsoft yahei&#39;, &#39;Microsoft Yahei&#39;, sans-serif; font-size: 14px; white-space: normal; background-color: rgb(255, 255, 255);">2、使用手机卫士清理加速，并检查运行内存;</p><p style="margin: 10px auto; padding: 0px; word-wrap: break-word; text-indent: 2em; line-height: 1.8; color: rgb(85, 85, 85); font-family: Tahoma, Helvetica, Arial, &#39;microsoft yahei&#39;, &#39;Microsoft Yahei&#39;, sans-serif; font-size: 14px; white-space: normal; background-color: rgb(255, 255, 255);">3、关闭手机重新启动;</p><p style="margin: 10px auto; padding: 0px; word-wrap: break-word; text-indent: 2em; line-height: 1.8; color: rgb(85, 85, 85); font-family: Tahoma, Helvetica, Arial, &#39;microsoft yahei&#39;, &#39;Microsoft Yahei&#39;, sans-serif; font-size: 14px; white-space: normal; background-color: rgb(255, 255, 255);">4、确认网络是否正常，请查看手机其它应用或其它设备联网是否正常;</p><p style="margin: 10px auto; padding: 0px; word-wrap: break-word; text-indent: 2em; line-height: 1.8; color: rgb(85, 85, 85); font-family: Tahoma, Helvetica, Arial, &#39;microsoft yahei&#39;, &#39;Microsoft Yahei&#39;, sans-serif; font-size: 14px; white-space: normal; background-color: rgb(255, 255, 255);">5、卸载游戏，通过官网重新下载安装;</p><p style="margin: 10px auto; padding: 0px; word-wrap: break-word; text-indent: 2em; line-height: 1.8; color: rgb(85, 85, 85); font-family: Tahoma, Helvetica, Arial, &#39;microsoft yahei&#39;, &#39;Microsoft Yahei&#39;, sans-serif; font-size: 14px; white-space: normal; background-color: rgb(255, 255, 255);">如不能解决问题，请您准备以下材料提交客服人员：账号、游戏名称、所在区服、游戏角色、使用的网络、手机品牌、手机型号、手机系统版本。<br>&nbsp;</p><p><br></p></div>
+          </li>
+			          <li>
+            <div class="q"><em>•</em>忘记游戏所在区服怎么办?<a name="31"></a></div>
+            <div class="a"><p><span style="color: rgb(85, 85, 85); font-family: Tahoma, Helvetica, Arial, &#39;microsoft yahei&#39;, &#39;Microsoft Yahei&#39;, sans-serif; font-size: 14px; line-height: 25.2000007629395px; text-indent: 28px; background-color: rgb(255, 255, 255);">亲爱的玩家您好，请您提供账号名称(包括绑定的手机和邮箱)、角色名称、等级、职业，以便我们尽快帮助您。</span></p></div>
+          </li>
+		 </ul>
+		 <div class="page">
+			{$_page|default=''}
+		</div>
+      </div>
+    </div>
+  </div>
+</div>
+</block>

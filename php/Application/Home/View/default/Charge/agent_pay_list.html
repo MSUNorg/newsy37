@@ -1,0 +1,113 @@
+<extend name="Public/promote_base"/>
+
+<block name="body">
+      <div id="query">
+        <div id="search" class="mod">
+          <h2>查询</h2>
+          <form id="data_form" action="{:U('Charge/agent_pay_list')}" method="post" enctype="multipart/form-data">
+            <ol>
+              <li class="user">
+                <input type="text" name="user_account" id="uid" placeholder="请输入玩家账号" value="{:I('user_account')}">
+              </li>
+              <li class="other clearfix">
+                <div class="l">
+                  <select name="game_id" id="game_id" style="width:80px;">
+                    <option value="0">全部游戏</option>
+                    <volist name=":get_game_list()" id ="s">
+                    <option value="{$s.id}">{$s.game_name}</option>
+                  </volist>
+                  </select>
+                </div>
+                <div class="m"><em>开始时间：</em><span class="required">*</span>
+                  <input type="text" id="sdate" name="time-start" value="{:I('time-start')}">
+                </div>
+                <div class="r"><em>结束时间：</em><span class="required">*</span>
+                  <input type="text" id="edate" name="time-end" value="{:I('time-end')}">
+                </div>
+                <div class="search_btn">
+                  <input type="submit" value="查询">
+                </div>
+              </li>
+            </ol>
+          </form>
+        </div>
+        <div id="total_reg" class="mod">
+          <h2>代充汇总</h2>
+          <div class="con">
+            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+              <thead>
+                <tr>
+                  <th>游戏名称</th>
+                  <th>流水号</th>
+                  <th>代充金额</th>
+                  <th>实扣金额</th>
+                  <th>支付方式</th>
+                  <th>支付状态</th>
+                  <th>玩家账号</th>                  
+                  <th>充值时间</th>                  
+                </tr>
+              </thead>
+              <tbody>
+                <volist name="list_data" id="s">
+                <tr>
+                  <td>{$s['game_name']}</td>
+                  <td>{$s.pay_order_number}</td>
+                  <td>{$s.amount}</td>
+                  <td>{$s.real_amount}</td>
+                  <td>
+                    <switch name='s.pay_way'>
+                      <case value="1">支付宝</case>
+                      <case value="2">微信</case>
+                    </switch>
+                  </td>
+                  <td>{:get_status_text(0,$s['pay_status'])}</td>
+                  <td>{$s.user_account}</td>
+                  <td>{$s.create_time|date="Y-m-d H:i:s",###}</td>
+                </tr>
+              </volist>
+              </tbody>
+            </table>
+            <div class="import"><span>充值总计：￥{$total_amount}</span>
+            <span>数据量：{$count}条数据 
+              <span><a href="{:U('Export/expUser',array(
+            'id'=>1,
+            'user_account'=>I('user_account'),
+            'game_id'=>I('game_id'),
+            'time-start'=>I('time-start'),
+            'time-end'=>I('time-end'),
+            'start'=>I('start'),
+            'end'=>I('end'),
+            ))}" >导出数据(excel格式)</a>
+            </span>
+            </span>
+          </span></div>
+          </div>
+        </div>
+      </div>
+         <div id="pagehtml" class="pagenavi clearfix">{$_page}</div>
+
+    </div>
+  </div>
+</div>
+<link rel="stylesheet" type="text/css" href="__CSS__/p_jquery.datetimepicker.css">
+<script type="text/javascript" src="__JS__/jquery.datetimepicker.js"></script>
+<script type="text/javascript">
+$().ready(function(){
+   $('#sdate').datetimepicker({
+    lang:'ch',
+    format:'Y-m-d',
+    formatDate:'Y-m-d',
+    timepicker:false
+  });
+  
+  $('#edate').datetimepicker({
+    lang:'ch',
+    format:'Y-m-d',
+    formatDate:'Y-m-d',
+    timepicker:false
+  });
+});
+</script>
+    
+</block>
+  

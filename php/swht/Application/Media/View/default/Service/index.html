@@ -1,0 +1,84 @@
+﻿<extend name="Public/base" />
+<block name="body" >
+<style>
+#q_05{ position:relative;}
+#q_05 em{ background:#F00; border-radius:15px; text-align:center; position:absolute; width:45px; height:25px; line-height:25px; color:#fff; right:-10px;top:0;}
+
+</style>
+<!--main-->
+<div class="wrap_w">
+  <div class="crumbs"><em>当前位置：</em><a href="{:U('Service/index')}">客服中心</a></div>
+  <div id="service_box">
+    <div id="service_main">
+      <ul class="clearfix">
+        <li id="q_01"><a href="{:U('Service/spwd')}"><span>密码问题</span></a></li>
+        <li id="q_02"><a href="{:U('Service/spay')}"><span>充值问题</span></a></li>
+        <li id="q_03"><a href="{:U('Service/saccont')}"><span>账户问题</span></a></li>
+        <li id="q_04"><a href="{:U('Service/sgift')}"><span>礼包问题</span></a></li>
+<!--         <li id="q_05"><a href=""><span>申诉中心</span></a><em>即时</em></li>
+        <li id="q_01"><a href=""><span>密码问题</span></a></li>
+        <li id="q_02"><a href=""><span>充值问题</span></a></li>
+        <li id="q_03"><a href=""><span>账户问题</span></a></li>
+        <li id="q_04"><a href=""><span>礼包问题</span></a></li> -->
+      </ul>
+    </div>
+    <div id="service_bot" class="clearfix">
+      <div id="left">
+        <div id="left_t" class="clearfix">
+          <div class="l">常见问题</div>
+          <div class="r">
+<!--             <form class="clearfix">
+              <input type="text" class="txt">
+              <input type="submit" class="sub">
+            </form> -->
+          </div>
+        </div>
+        <div id="left_ms">
+          <ul>
+			<!-- <foreach name="sindex" item="si">
+			<li> <a href="{:U('Service/'.$si['sMark'].'?#'.$si['id'].'')}">{$si.sName}</a></li>
+			</foreach> -->
+				<li> <a href="{:U('Service/saccont#23')}">游戏闪退和无法登录解决方法？</a></li>
+				<li> <a href="{:U('Service/spay#14')}">充值中心提供了哪些充值方式?</a></li>
+				<li> <a href="{:U('Service/spay#15')}">如何选择合适的充值方式?</a></li>
+				<li> <a href="{:U('Service/spwd#12')}">游戏账号的密码忘记了，怎么办?</a></li>
+				<li> <a href="{:U('Service/saccont#30')}">游戏账号忘记了,怎么办?</a></li>
+				<li> <a href="{:U('Service/saccont#58')}">一个手机号码可以绑定几个账号？</a></li>
+				<li> <a href="{:U('Service/sgift#62')}">什么时候发放最新的礼包？</a></li>
+				<li> <a href="{:U('Service/sgift#19')}">平台游戏的新手卡激活码如何领取?</a></li>
+				<li> <a href="{:U('Service/saccont#22')}">梦幻游戏账号问题?</a></li>
+				<li> <a href="{:U('Service/spay#24')}">先玩后付用不了?</a></li>
+          </ul>
+        </div>
+        
+      </div>
+      <div id="right">
+        <div class="right_each" id="right_01">
+          <h2>在线客服</h2>
+          <div class="con">
+            <!-- WPA Button Begin -->
+            <!-- <script charset="utf-8" type="text/javascript" src="images/wpa.php"></script> -->
+            <!-- WPA Button End -->
+            <p>通过在线客服咨询产品问题<br>
+              工作时间：{:C('PC_WORK_TIME');}</p>
+          </div>
+        </div>
+        <div class="right_each" id="right_02">
+          <h2>服务热线</h2>
+          <div class="con">
+           <span>{:C('MT_SITE_TEL')}</span>
+            <p>服务热线仅收市话费<br>
+              工作时间：{:C('PC_WORK_TIME');}</p>
+          </div>
+        </div>
+        <div class="right_each" id="right_03">
+          <h2>官方微信</h2>
+          <div class="con" style="background:url({:get_cover(C('MT_SITE_DIMENSION'),'path')}) no-repeat 0 0; background-size: 80px 80px">
+            <p>扫描关注官方微信</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</block>

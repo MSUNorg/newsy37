@@ -1,0 +1,64 @@
+﻿<extend name="Public/base" />
+<block name="body" >
+<!--main-->
+<div class="wrap_w">
+	<div class="crumbs"><em>当前位置：</em><a href="{:U('Index/index')}" target="_blank">溪谷游戏</a><span> &gt; </span>
+  <a href="{:U('Service/index')}">客服中心</a>&gt; 礼包问题</div>
+  <div id="service">
+    <div id="ser_sub" class="clearfix">
+      <div id="l">
+        <ul>
+			
+			<li><a href="{:U('Service/spwd')}">密码问题</a></li>
+			<li><a href="{:U('Service/spay')}">充值问题</a></li>
+			<li><a href="{:U('Service/saccont')}">账户问题</a></li>
+			<li><a href="{:U('Service/sgift')}" style="color:#186DC3;">礼包问题</a></li>
+			<li><a href="{:U('Service/sother')}">其他问题</a></li>
+        </ul>
+      </div>
+      <div id="r">
+        <h4>礼包问题</h4>
+		<ul>
+			<!-- <foreach name="plist_data" item="ld">
+        	<li>
+				<div class="q"><em>?</em>{$ld.sName}<a name="{$ld.id}"></a></div>
+				<div class="a">{$ld.sContent}</div>
+			</li>
+		  </foreach> -->
+		  <li>
+            <div class="q"><em>•</em>什么时候发放最新的礼包？<a name="62"></a></div>
+            <div class="a"><p><span style="font-family: 微软雅黑, &#39;Microsoft YaHei&#39;; font-size: 14px;">&nbsp; &nbsp; &nbsp; &nbsp;亲爱的玩家：您好！请您保持对溪谷游戏平台的持续关注，您登录游戏后在界面左边有一个隐藏的悬浮图标，点击账户中的礼包页面，就可以领取对应的礼包，礼包数量有限，请在领取后及时兑换。  </span></p></div>
+          </li>
+			          <li>
+            <div class="q"><em>•</em>如何查看是否已领取过同类型礼包？<a name="61"></a></div>
+            <div class="a"><p><span style="font-family: 微软雅黑, &#39;Microsoft YaHei&#39;; font-size: 14px;">&nbsp; &nbsp; &nbsp; &nbsp;亲爱的玩家：您好！获得兑换码后尝试在游戏内兑换，如已领取过同类型礼包，则游戏内系统会有相关提示。</span></p></div>
+          </li>
+			          <li>
+            <div class="q"><em>•</em>不同渠道获得的礼包，都可以使用吗？<a name="60"></a></div>
+            <div class="a"><p><span style="font-family: 微软雅黑, &#39;Microsoft YaHei&#39;; font-size: 14px;">&nbsp; &nbsp; &nbsp; &nbsp;亲爱的玩家：您好！如果您是在不用的渠道获得的礼包，那么是无法在在溪谷平台使用的，建议您在溪谷平台领取对应礼包并使用。</span></p></div>
+          </li>
+			          <li>
+            <div class="q"><em>•</em>礼包兑换、领取方式<a name="59"></a></div>
+            <div class="a"><p><span style="font-family: 微软雅黑, &#39;Microsoft YaHei&#39;; font-size: 14px;">&nbsp; &nbsp; &nbsp; &nbsp;亲爱的玩家：您好！请您在游戏中寻找礼包功能输入兑换码即可完成领取。</span></p></div>
+          </li>
+			          <li>
+            <div class="q"><em>•</em>领取礼包兑换失效/过期等问题，怎么办?<a name="21"></a></div>
+            <div class="a"><p><span style="font-family: 微软雅黑, &#39;Microsoft YaHei&#39;; font-size: 14px;">&nbsp; &nbsp; &nbsp; &nbsp;亲爱的玩家：您好！一种礼包，一个角色只能兑换一次，礼包失效可能是玩家通过其他方式已经获得了该礼包。过期礼包是无法使用的，请您重新领取礼包并及时兑换。 </span></p></div>
+          </li>
+			          <li>
+            <div class="q"><em>•</em>进入溪谷助手发现礼包领取完怎么办?<a name="20"></a></div>
+            <div class="a"><p><span style="font-family: 微软雅黑, &#39;Microsoft YaHei&#39;; font-size: 14px;">&nbsp; &nbsp; &nbsp;亲爱的玩家：您好！以下两种方式可以帮您解决：</span></p><p><span style="font-family: 微软雅黑, &#39;Microsoft YaHei&#39;; font-size: 14px;">1、助手和微信都是有淘号功能，当别的玩家领取的礼包没有及时使用，您是可以通过淘号获取到没有兑换的礼包。也能够淘的到其它玩家使用的礼包，建议多试几次。</span></p><p><span style="font-family: 微软雅黑, &#39;Microsoft YaHei&#39;; font-size: 14px;">2、平台发现礼包没有会及时添加，你持续关注溪谷助手或者微信动态即可获得礼包。</span></p><p><span style="font-family: 微软雅黑, &#39;Microsoft YaHei&#39;; font-size: 14px;"></span></p><p><br></p></div>
+          </li>
+			          <li>
+            <div class="q"><em>•</em>平台游戏的新手卡激活码如何领取?<a name="19"></a></div>
+            <div class="a"><p>1、下载溪谷助手，输入游戏名称即可领取礼包。</p><p>2、关注（溪谷游戏）微信，回复游戏名称：“###”即可获取礼包回复码。</p><p><br></p></div>
+          </li>
+		 </ul>
+		 <div class="page">
+			{$_page|default=''}
+		</div>
+      </div>
+    </div>
+  </div>
+</div>
+</block>

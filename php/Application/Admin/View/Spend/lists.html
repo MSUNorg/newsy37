@@ -1,0 +1,260 @@
+<extend name="Public/base"/>
+
+<block name="body">
+    <!-- 标题栏 -->
+    <div class="main-title">
+        <h2>[{$model['title']}] 列表</h2>
+    </div>
+	<div class="cf top_nav_list">
+		<!-- <div class="fl">
+		<empty name="model.extend">
+			<div class="tools">
+				<a class="btn" href="{:U('add?model='.$model['id'])}">新 增</a>
+				<button class="btn ajax-post confirm" target-form="ids" url="{:U('del?model='.$model['id'])}">删 除</button>
+			</div>
+		</empty>
+		</div> -->
+		<!-- 高级搜索 -->
+		<div class="search-form fr cf">
+            <div class="input-list">
+                <label>充值时间：</label>
+                <input type="text" id="time-start" name="time-start" class="text input-2x" value="{:I('time-start')}" placeholder="起始时间" /> 
+                -
+                <div class="input-append date" id="datetimepicker"  style="display:inline-block">
+                <input type="text" id="time-end" name="time-end" class="text input-2x" value="{:I('time-end')}" placeholder="结束时间" />
+                <span class="add-on"><i class="icon-th"></i></span>
+                </div>
+            </div>
+            <div class="i_list" >
+                 <div class="drop-down drop-down2">
+                    <if condition="I('game_name') eq ''">
+                    <input type="text" id="i_list_id" class="sort-txt" value="" placeholder="请选择游戏" />
+                    <else />
+                    <input type="text" id="i_list_id" class="sort-txt" value="{:I('game_name')}" placeholder="请选择游戏" />
+                    </if>
+                    <input type="hidden" id="i_list_idh" name="game_name" value="{:I('game_name')}" />
+                    <i class="arrow arrow-down"></i>
+                    <ul id="i_list_li" class="nav-list hidden i_list_li">
+                        <li><a href="javascript:;" value="" >全部</a></li>
+                        <volist name=":get_game_list()" id="vo">                        
+                        <li><a href="javascript:;" value="{$vo.id}" >{$vo.game_name}</a></li>
+                        </volist>
+                    </ul>
+                </div>                
+            </div>
+            <div class="d_list">
+                <div class="drop-down drop-down12" style="width:100px">
+                    <span  class="sort-txt" data="{I('pay_status')}" style="width:65px">
+                        <if condition="I('pay_status') eq ''">充值状态
+                        <elseif  condition="I('pay_status') eq 0" />未支付
+                        <elseif  condition="I('pay_status') eq 1" />成功
+                        </if>
+                    </span>
+                    <i class="arrow arrow-down"></i>
+                    <ul  class="nav-list hidden">
+                        <li><a href="javascript:;" value="0" style="width:80px">未支付</a></li>
+                        <li><a href="javascript:;" value="1" style="width:80px">成功</a></li>
+                    </ul>
+                </div>
+                <input type='hidden' class="hiddenvalue" id='pay_status' name="pay_status" value="{:I('pay_status')}"></input>
+            </div>
+            <div class="d_list" >
+                <div class="drop-down drop-down11" style="width:100px">
+                    <span  class="sort-txt" data="{I('pay_way')}" style="width:65px">
+                        <if condition="I('pay_way') eq ''">充值方式
+                        <elseif  condition="I('pay_way') eq 0" />平台币
+                        <elseif  condition="I('pay_way') eq 1" />支付宝
+						<elseif  condition="I('pay_way') eq 3" />聚宝云
+                        <else/>微信
+                        </if>
+                    </span>
+                    <i class="arrow arrow-down"></i>
+                    <ul class="nav-list hidden">
+                        <li><a href="javascript:;" value="0" style="width:80px">平台币</a></li>
+                        <li><a href="javascript:;" value="1" style="width:80px">支付宝</a></li>
+                        <li><a href="javascript:;" value="2" style="width:80px">微信</a></li>
+						<li><a href="javascript:;" value="3" style="width:80px">聚宝云</a></li>
+                    </ul>
+                </div>
+                <input type='hidden' class="hiddenvalue" id='pay_way' name="pay_way" value="{:I('pay_way')}"></input>
+            </div>
+            <div class="sleft">
+				<input type="text" name="pay_order_number" class="search-input" value="{:I('pay_order_number')}" placeholder="请输入订单号">
+            </div>
+			<div class="sleft">
+				<input type="text" name="{$model['search_key']|default='user_account'}" class="search-input" value="{:I('user_account')}" placeholder="请输入用户账号">
+				<!-- <a class="sch-btn" href="javascript:;" id="search" url="{:U('Spend/lists','model='.$model['name'],false)}"><i class="btn-search"></i></a> -->
+			</div>
+            <div class="input-list">
+                <a class="sch-btn" href="javascript:;" id="search" url="{:U('Spend/lists','model='.$model['name'],false)}">搜索</a>
+            </div>
+            <div class="input-list"> 
+                <a class="sch-btn" href="{:U('Export/expUser',array(
+                'id'=>7,
+                'user_account'=>I('user_account'),
+                'pay_way'=>I('pay_way'),
+                'pay_status'=>I('pay_status'),
+                'game_name'=>I('game_name'),
+                'time-start'=>I('time-start'),
+                'time-end'=>I('time-end'),
+                'start'=>I('start'),
+                'end'=>I('end'),
+                ))}">导出</a>
+                <span class="totalvalue">(共计消费<i>{$total}</i>元)</span>
+            </div>
+		</div>
+        
+        
+	</div>
+
+
+    <!-- 数据列表 -->
+    <div class="data-table">
+        <div class="data-table table-striped">
+            <table>
+                <!-- 表头 -->
+                <thead>
+                    <tr>
+                        <!-- <th class="row-selected row-selected">
+                            <input class="check-all" type="checkbox">
+                        </th> -->
+                        <volist name="list_grids" id="field">
+                            <th>{$field.title}</th>
+                        </volist>
+                    </tr>
+                </thead>
+
+                <!-- 列表 -->
+                <tbody>
+                    <volist name="list_data" id="data">
+                        <tr>
+                            <!-- <td><input class="ids" type="checkbox" value="{$data['id']}" name="ids[]"></td> -->
+                            <volist name="list_grids" id="grid">
+                                <td>{:get_list_field($data,$grid)}</td>
+                            </volist>
+                        </tr>
+                    </volist>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="page">
+        {$_page|default=''}
+    </div>
+    <!-- <span><a href="{:U('Export/expUser',array(
+    'id'=>7,
+    'user_account'=>I('user_account'),
+    ))}">导出数据(excel格式)</a></span> -->
+</block>
+
+<block name="script">
+<link href="__STATIC__/datetimepicker/css/datetimepicker.css" rel="stylesheet" type="text/css">
+<php>if(C('COLOR_STYLE')=='blue_color') echo '<link href="__STATIC__/datetimepicker/css/datetimepicker_blue.css" rel="stylesheet" type="text/css">';</php>
+<link href="__STATIC__/datetimepicker/css/dropdown.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="__STATIC__/datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
+<script type="text/javascript" src="__STATIC__/datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js" charset="UTF-8"></script>
+
+<script type="text/javascript">
+//导航高亮
+highlight_subnav('{:U('Spend/lists')}');
+$(function(){
+	//搜索功能
+	$("#search").click(function(){
+		var url = $(this).attr('url');
+        var query  = $('.search-form').find('input').serialize();
+        query = query.replace(/(&|^)(\w*?\d*?\-*?_*?)*?=?((?=&)|(?=$))/g,'');
+        query = query.replace(/^&/g,'');
+        if( url.indexOf('?')>0 ){
+            url += '&' + query;
+        }else{
+            url += '?' + query;
+        }
+		window.location.href = url;
+	});
+
+    //回车自动提交
+    $('.search-form').find('input').keyup(function(event){
+        if(event.keyCode===13){
+            $("#search").click();
+        }
+    });
+    
+    $('#time-start').datetimepicker({
+        format: 'yyyy-mm-dd',
+        language:"zh-CN",
+        minView:2,
+        autoclose:true
+    });
+
+    $('#datetimepicker').datetimepicker({
+       format: 'yyyy-mm-dd',
+        language:"zh-CN",
+        minView:2,
+        autoclose:true,
+        pickerPosition:'bottom-left'
+    })
+    
+    
+    $(".d_list").find(".drop-down11").hover(function(){
+        $(this).find(".nav-list").removeClass("hidden");
+    },function(){
+        $(this).find(".nav-list").addClass("hidden");
+    });
+
+    $(".drop-down11 .nav-list li").find("a").each(function(){
+        var that = $(".drop-down11");
+        $(this).click(function(){
+            var text = $(this).text(),val = $(this).attr("value");
+            that.find(".sort-txt").text(text).attr("data",val);
+            that.find(".nav-list").addClass("hidden");
+            that.siblings('.hiddenvalue').val(val);
+        })
+    });
+    
+    $(".d_list").find(".drop-down12").hover(function(){
+        $(this).find(".nav-list").removeClass("hidden");
+    },function(){
+        $(this).find(".nav-list").addClass("hidden");
+    });
+
+     $(".drop-down12 .nav-list li").find("a").each(function(){
+        var that = $(".drop-down12");
+        $(this).click(function(){
+            var text = $(this).text(),val = $(this).attr("value");
+            that.find(".sort-txt").text(text).attr("data",val);
+            that.find(".nav-list").addClass("hidden");
+            that.siblings('.hiddenvalue').val(val);
+        })
+    });
+    
+    
+    $(".drop-down2").on('click',function(event) {
+        var navlist = $(this).find('.i_list_li');
+        if (navlist.hasClass('hidden')) {
+            navlist.removeClass('hidden');
+            $('#i_list_id').focus().val('');            
+        } else {
+            navlist.addClass('hidden');
+        }
+        $(document).one("click", function(){
+            navlist.addClass('hidden');
+        });
+        event.stopPropagation();
+    });
+
+    $('#i_list_id').on('keyup',function(event) {
+        var val  = $.trim($(this).val()).toLowerCase();
+        $('#i_list_idh').val(val);
+    });
+    
+    $("#i_list_li").find("a").each(function(){
+        $(this).click(function(){
+            var text = $.trim($(this).text()).toLowerCase();
+            $("#i_list_id").val(text);
+            $('#i_list_idh').val(text);
+        })
+    });
+
+})
+</script>
+</block>

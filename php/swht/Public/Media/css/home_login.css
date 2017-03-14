@@ -1,0 +1,288 @@
+body ,input, textarea, keygen, select, button {
+    font-size: 12px;
+    font-family: Microsoft Yahei;
+    color: #666;
+}
+.ajustHeight {
+    height: 10%;
+}
+.g-register-header, .g-login-header {
+    position: relative;
+    height: 62px;
+    background: #fff;
+}
+.m-register-header, .m-login-header {
+    position: absolute;
+    left: 50%;
+    margin-left: -630px;
+    font-size: 32px;
+    color: #676767;
+    padding: 3px 0 13px;
+}
+.m-login-header .login-logo {
+    font-size: 0;
+    float: left;
+}
+.m-login-header img {
+    width: 177px;
+}
+.m-login-header .line {
+    display: inline-block;
+    height: 29px;
+    width: 1px;
+    background: #dcdcdc;
+    margin: 0 24px;
+    vertical-align: middle;
+}
+
+
+
+html,body {
+    height: 100%
+}
+
+.ajustHeight {
+    height: 10%
+}
+
+.g-login-wrap {
+    height: 532px;
+    background: url(../images/bg1.jpg) no-repeat center;
+    background-size: cover;
+    margin-bottom: 16px;
+    min-width: 1260px
+}
+
+.g-login-wrap .error-msg,.g-login-wrap .right-msg {
+    font-size: 12px;
+    color: red;
+    position: absolute;
+    top: 50px;
+    left: 46px;
+    width: 265px
+}
+.g-login-wrap .right-msg {
+    color: green;
+}
+
+.g-login-wrap .hidden {
+    display: none
+}
+
+.g-login-wrap .m-login-box {
+    position: relative;
+    left: 50%;
+    top: 53px;
+    margin-left: 155px;
+    width: 354px;
+    background: #fff
+}
+
+.g-login-wrap .m-login-box .titlebar {
+    color: #676767;
+    font-size: 16px;
+    padding: 16px 0 45px 16px
+}
+
+.g-login-wrap .m-login-box .login-form {
+    margin-left: 46px
+}
+
+.g-login-wrap .m-login-box .input-optimize {
+    position: relative;
+    margin-bottom: 13px;
+    font-size: 12px
+}
+
+.g-login-wrap .m-login-box .input-optimize.error input {
+    border: 1px solid #ff4f00
+}
+
+.g-login-wrap .m-login-box input {
+    width: 260px;
+    height: 34px;
+    line-height: 34px;
+    font-size: 14px;
+    padding-left: 40px;
+    border: 1px solid #cecece;
+    vertical-align: middle;
+    color: #333
+}
+
+.g-login-wrap .m-login-box .icon-deco {
+    display: inline-block;
+    *display: inline;
+    *zoom:1;width: 40px;
+    height: 32px;
+    background: #fff url(../images/icon2.png?t=1459909347467) no-repeat;
+    position: absolute;
+    left: 1px;
+    top: 1px;
+    z-index: 10;
+    *top: 3px
+}
+
+.g-login-wrap .m-login-box .icon-deco.icon-acco {
+    background-position: center 6px
+}
+
+.g-login-wrap .m-login-box .icon-deco.icon-pass {
+    background-position: center -22px
+}
+
+.g-login-wrap .m-login-box .placeholder {
+    position: absolute;
+    top: 1px;
+    left: 1px;
+    text-indent: 40px;
+    height: 32px;
+    line-height: 32px;
+    background: #fff;
+    width: 258px;
+    *top: 3px
+}
+
+.g-login-wrap .m-login-box .checkbox-optimize {
+    display: inline-block;
+    *display: inline;
+    *zoom:1;width: 15px;
+    height: 15px;
+    border: 1px solid #ff8400;
+    margin: 0 5px 0 0;
+    cursor: pointer;
+    line-height: 15px;
+    vertical-align: middle
+}
+
+.g-login-wrap .m-login-box .checkbox-optimize .icon-autologin {
+    display: none;
+    width: 13px;
+    height: 12px;
+    background: url(../images/icon2.png?t=1459909347467) no-repeat;
+    background-position: -4px -96px;
+    margin-left: 1px;
+    *vertical-align: middle
+}
+
+.g-login-wrap .m-login-box .checkbox-optimize.active .icon-autologin {
+    display: inline-block;
+    *display: inline;
+    *zoom:1}
+
+.g-login-wrap .m-login-box .agreement {
+    margin: 5px 0 19px
+}
+
+.g-login-wrap .m-login-box .agreement span {
+    cursor: pointer
+}
+
+.g-login-wrap .m-login-box .checkcode {
+    width: 97px;
+    height: 34px;
+    vertical-align: middle
+}
+
+.g-login-wrap .m-login-box .checkcode-input input {
+    width: 132px;
+    padding-left: 14px;
+    margin-right: 15px
+}
+
+.g-login-wrap .m-login-box .checkcode-input .placeholder {
+    width: 143px;
+    text-indent: 14px
+}
+
+.g-login-wrap .m-login-box .checkcode-input img {
+    cursor: pointer
+}
+
+.g-login-wrap .m-login-box .login-btn {
+    display: inline-block;
+    *display: inline;
+    *zoom:1;width: 261px;
+    height: 34px;
+    line-height: 32px;
+    background: url(../images/btn-longer.png?t=1459909347467) no-repeat center;
+    background-position: 0 0;
+    font-size: 16px;
+    color: #fff;
+    text-align: center;
+    border: 0;
+    cursor: pointer;
+    padding-left: 0
+}
+
+.g-login-wrap .m-login-box .clear-text {
+    display: inline-block;
+    *display: inline;
+    *zoom:1;width: 21px;
+    height: 21px;
+    background: url(../images/icon2.png?t=1459909347467) no-repeat;
+    background-position: center -58px;
+    cursor: pointer;
+    position: absolute;
+    left: 232px;
+    top: 6px
+}
+
+.g-login-wrap .m-login-box .bottom-bar {
+    padding: 105px 20px 16px 0;
+    text-align: right
+}
+
+.g-login-wrap .m-login-box .bottom-bar a {
+    font-size: 12px;
+    color: #939393
+}
+
+.g-login-wrap .m-login-box .bottom-bar a:hover {
+    color: #ff8400;
+    text-decoration: underline
+}
+
+.g-login-wrap .m-login-box .bottom-bar .line {
+    display: inline-block;
+    *display: inline;
+    *zoom:1;height: 11px;
+    width: 1px;
+    margin: 0 12px 0 16px;
+    background: #939393;
+    vertical-align: middle
+}
+
+
+.g-register-login-footer {
+    position: relative;
+    min-height: 90px;
+    background: #fff;
+    font-size: 12px;
+    font-family: simsong;
+}
+.g-inner {
+    width: 1260px;
+    margin: 0 auto;
+}
+.g-register-login-footer .helper-list {
+    float: right;
+    font-size: 0;
+}
+.g-register-login-footer .helper-list a {
+    font-size: 12px;
+    color: #676767;
+    padding: 0 8px;
+    border-left: 1px solid #676767;
+}
+.g-register-login-footer .helper-list .fir {
+    border-left: 0;
+}
+.g-register-login-footer .helper-text {
+    margin-left: 50px;
+    white-space: normal;
+}
+
+
+
+.success{color:green;}
+.fail{color:red;}

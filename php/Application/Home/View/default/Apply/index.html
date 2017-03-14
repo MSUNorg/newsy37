@@ -1,0 +1,216 @@
+<extend name="Public/promote_base"/>
+
+<block name="body">
+  <style type="text/css">
+  .pos{position: relative;}
+  </style>
+  <script src='__STATIC__/zeroclipboard/jquery.zclip.min.js'></script>
+  <div id="query">
+    <div id="other_se" class="mod">
+      <h2>查询</h2>
+      <form action="{:U('Apply/index')}" method="post" enctype="multipart/form-data">
+        <div>
+          <input type="text" placeholder="请输入游戏名称" class="txts" name="game_name" value="{:I('game_name')}">
+          <input type="submit" value="查询" class="btns">
+        </div>
+      </form>
+    </div>
+    <div id="lg" class="mod">
+      <h2>游戏列表</h2>
+      <table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tbody>
+        <tr>
+          <th></th>
+          <if condition="$parent_id eq 0"><th>全选</th>
+          <th><span style="color: red"><a href="#" id="gapply"><input type="button" id="chong" value="批量申请"id="chong" ></a></span></th><else/><th></th>
+          <th></th></if>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+        </tr>
+         <tr>
+          <th></th>
+          <th><input type="checkbox"  name="ids" id="all" value=""></th>
+          <th>游戏名称</th>
+          <th>版本号</th>
+          <th>游戏类型</th>
+          <th>游戏大小</th>
+          <!-- <th>合作模式<if condition="$parent_id eq 0"><select name="allpa" class="allpaa"><option value="0">CPS</option><option value="1">CPA</option></select></if></th> -->
+          <th>申请状态</th>
+        </tr>
+      </tbody>
+      <tbody>
+        <volist name="list_data" id="vo">
+        <tr class="vallist">
+            <td>
+              <if condition='$vo["recommend_status"] eq 1'>
+                <img src="__IMG__/promote/006.gif" width="50">
+              </if>
+            </td>
+            <td><input type="checkbox" name="zi" value="{$vo.id}"  <neq name="vo['status']" value=""> disabled="disabled" </neq>></td>
+            <td>
+              <a href=""><img src="__ROOT__{$vo.icon|get_cover='path'}" width="50" height="50" align="middle">
+                <span class="name_a">{$vo.game_name}</span>
+              </a>
+            </td>
+            <td>{$vo.version}</td>
+            <td>{$vo['game_type_name']}</td>
+            <td>{$vo.game_size}</td>
+            <if condition="$parent_id neq ''">
+            <!-- <td class="cooperation">
+                <select class="pattern" id='pa{$vo.id}' name="pattern[]" <if condition="$parent_id eq 0"><else/> disabled="disabled" </if> onchange="select_change(this)" <if condition="$vo.pattern neq ''"> stat="f"<else/>stat="t" </if>>
+                  <option <if condition="$vo.pattern eq 0">selected="selected"</if> value="0">CPS</option>
+                  <option <if condition="$vo.pattern eq 1">selected="selected"</if> value="1">CPA</option>
+                </select>
+            </td> -->
+            <else/>
+            <!-- <td>
+              <if condition="$vo.pattern eq 1"><span>CPA</span><input type="hidden" class="papa" value="1"><else/><span>CPS</span><input type="hidden" class="papa" value="0"></if>         
+                
+            </td> -->
+            </if>
+            <td class="pos">
+                <switch name="vo['status']">
+                  <case value="0"><a href="javascript:;" class="bts proc">审核中</a></case>
+                  <case value="1">
+                    <a href="<if condition='$vo.dow_status eq 0'>#<else/>{:U('Down/down_file?game_id='.$vo['id'].'&promote_id='.$vo['promote_id'])}</if>" class="bts" >下载</a>
+                    <a href="javascript:;" class="bts copy" data-url="{:get_apply_dow_url($vo['id'],$vo['promote_id'])}" >
+                      复制下载地址
+                    </a>
+                  </case>
+                  <case value="2"><a href="javascript:;" class="bts proc">审核失败</a></case>
+                  <default /><a href="javascript:;" class="bts" onclick="yiapply({$vo.id},this)">马上申请</a><!-- <if condition="$parent_id eq 0"><a href="javascript:;" class="bts" onclick="yiapply({$vo.id},this)">马上申请</a><else/><if condition="$vo.pattern eq ''"><a href="javascript:;" class="bts" onclick="errapply({$vo.id},0,this)">马上申请</a><else/><a href="javascript:;" class="bts" onclick="erapply({$vo.id},{$vo.pattern},this)">马上申请</a></if></if> -->
+                </switch>
+            </td>
+        </tr>
+        </volist>
+        </tbody>
+      </table>
+    </div>
+    <div id="pagehtml" class="pagenavi clearfix">{$_page}</div>
+  </div>
+</block>
+<block name="script">
+  <script type="text/javascript">
+  $(document).ready(function() {
+    $('a.copy').zclip({
+          path: "/Public/static/zeroclipboard/ZeroClipboard.swf",
+          copy: function(){
+              return $(this).attr('data-url');
+          },
+          beforeCopy:function(){
+            $(this).addClass("proc");
+          },
+          afterCopy:function(){
+            $(this).removeClass("copy");
+            if($(this).attr('data-url')=="" || $(this).attr('data-url')==null){
+              layer.msg("游戏原包暂未上传",{icon:2});
+            }
+            else{
+              layer.msg("复制成功",{icon:1});
+            }
+            
+          }
+    });
+  })
+  $("#all").click(
+  function(){
+    if(this.checked){
+        $("input[name='zi']").prop('checked', true)
+    }else{
+        $("input[name='zi']").prop('checked', false)
+    }
+  }
+);
+  //批量申请
+  $("#gapply").click(function() {
+    // var query = $('.vallist').find('select').serialize(); 
+   var chk_value =""; 
+   var pattern_value="";  
+    $(':checkbox').each(function(){  
+    if($(this).val()!=""&&$(this).prop('checked'))  {
+      // $("#pa{$vo.id}").attr('stat','tt');
+     chk_value+= (","+$(this).val());
+     // alert($(this).prop('disabled'));
+     // if(!$(this).prop('disabled')){
+     //     pattern_value+=(","+$(this).parent().siblings('.cooperation').find('option:selected').val());
+     // }
+    }  
+    });     
+   chk_value =chk_value.substr(1, chk_value.length-1); 
+    chk_value=chk_value.slice(0);
+    pattern_value =pattern_value.substr(1, pattern_value.length-1); 
+    pattern_value=pattern_value.slice(0);
+    if(chk_value==0){
+      alert('你还没有选择任何内容！');
+    }else{
+     $("#gapply").attr('href', '__MODULE__/Apply/gapply/game_id/'+chk_value);//+'/pattern/'+pattern_value
+
+    }
+  });
+  // var pattern=0;
+  // function select_change(obj){
+  //   pattern=obj.value;
+  // }
+  // $(".allpaa").change(function(){
+  //   all= $(".allpaa").val();
+  //   $(".pattern").each(function(){
+  //     if($(this).prop('disabled')){
+  //     }else{
+  //       $(this).val(all);
+  //     }
+  //   });
+  // });
+  function errapply($gameid,pattern,obj){ 
+        layer.msg("上级渠道未申请或未通过该游戏,不能申请",{icon: 2});
+  }
+  function erapply($gameid,pattern,obj){ 
+      $.ajax({
+        type:"post",
+        url:"__URL__/apply",
+        dataType:"json",
+        data:{game_id:$gameid,pattern:pattern},
+        success:function(res){
+          if(res.status){
+            $(obj).attr("onclick","").html("审核中").addClass("proc");
+            // layer.msg(res.msg,{icon: 1});
+            location.href="{:U('index')}";
+          }
+          else{
+            layer.msg(res.msg,{icon: 2});
+          }
+        },
+        error:function(){
+          layer.msg('服务器故障',{icon:5});
+          // setTimeout('location.href="{:U('index')}";',1000);
+        }
+      }) 
+  }
+  function yiapply($gameid,obj){ 
+      $.ajax({
+        type:"post",
+        url:"__URL__/apply",
+        dataType:"json",
+        data:{game_id:$gameid},//,pattern:pattern
+        success:function(res){
+          if(res.status){
+            $(obj).attr("onclick","").html("审核中").addClass("proc");
+            layer.msg(res.msg,{icon: 1});
+            // location.href="{:U('index')}";
+          }
+          else{
+            layer.msg(res.msg,{icon: 2});
+          }
+        },
+        error:function(){
+          layer.msg('服务器故障',{icon:5});
+          // setTimeout('location.href="{:U('index')}";',1000);
+        }
+      }) 
+  }
+  //导航高亮
+  highlight_subnav('{:U('Apply/index')}');
+  </script>
+</block>

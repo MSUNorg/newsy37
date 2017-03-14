@@ -1,0 +1,121 @@
+<extend name="Public/loginreg" />
+<block name="body" >
+<link href="__CSS__/home_register.css" rel="stylesheet" />
+<div class="g-register-wrap g-register-popp">
+    <div class="m-register-box">
+        <div class="form-box">
+            <div class="box-bar">
+                <span class="has-account">已有帐号？<a href="{:U('plogin')}" class="ime-login">立即登录</a></span>
+                <h3>欢迎注册溪谷手游平台帐号<span id="notice"></span></h3>
+            </div>
+            <div class="tab-trigger-bar">
+                <a href="#" class="phone-trigger active" data-target="mPhoneRegister">注册手机帐号<span class="arrow"></span></a>
+                <a href="#" class="user-trigger" data-target="mUsernameRegister">注册用户名帐号<span class="arrow"></span></a>
+            </div>
+            <div class="m-phone-register register-tab-box active" id="mPhoneRegister">
+                <form action="" id="mPhoneRegisterForm">
+                    <input type="hidden" name="pid" value="{$pid}" />
+                    <div>
+                        <label for="">手机号码</label>
+                        <div class="input-optimize">
+                            <input data-validate="require phone" name="account" type="text" id="registerPhone" class="js-phone">
+                            <i class="clear-text"></i>
+                            <div class="placeholder">请输入你的手机号码</div>
+                            <span class="error-msg"></span>
+                            <i class="icon-error"></i>
+                            <i class="icon-correct"></i>
+                        </div>
+                    </div>
+                    <div>
+                        <a href="#" class="get-checkcode disabled js-get-safe-code" id="getSafeCode">免费获取安全码</a>
+                        <span class=""></span>
+                    </div>
+                    <div>
+                        <label for="">安全码</label>
+                        <div class="input-optimize">
+                            <input type="text" name="vcode" value="" id="registerSafeCode" class="js-safe-code-input">
+                            <div class="placeholder">请输入安全码</div>
+                            <span class="error-msg"></span>
+                        </div>
+                    </div>
+                    <div>
+                        <label for="">密码</label>
+                        <div class="input-optimize">
+                            <input type="password" class="hidden">
+                            <input type="password" data-validate="passrequire pass" name="password" id="registerPhonePass" class="js-pass">
+                            <div class="placeholder">6~30位数字、字母或特殊字符组成</div>
+                            <span class="error-msg"></span>
+                        </div>
+                    </div>
+                    <div>
+                        <a class="checkbox-optimize active js-agreement-wrap">
+                            <i class="icon-agree js-agreement-trigger" id="registerByPhoneAgree"></i>
+                            <input type="hidden" name="" value="1">
+                        </a>
+                        <span href="#" id="registerByPhoneAgreeTxt" class="agree-txt active js-agreement-txt-trigger">我已阅读并同意《<a href="{:U('Article/agreement')}" target="_blank">溪谷游戏用户注册协议</a>》</span>
+                    </div>
+                    <input type="submit" class="register-btn js-submit" value="注册" id="registerByPhoneSubmit">
+                </form>
+            </div>
+            <div class="m-username-register register-tab-box" id="mUsernameRegister">
+                <form action="" id="mNameRegisterForm">
+                    <input type="hidden" name="pid" value="{$pid}" />
+                    <div>
+                        <label for="">帐号</label>
+                        <div class="input-optimize">
+                            <input data-validate="usernamerequire username" name="account" type="text" id="userNameByName" class="js-name">
+                            <i class="icon-error"></i>
+                            <i class="icon-correct"></i>
+                            <div class="placeholder">6~30数字、字母或下划线</div>
+                            <span class="error-msg"></span>
+                        </div>
+                    </div>
+                    <div>
+                        <label for="">设置密码</label>
+                        <div class="input-optimize">
+                            <input type="password" class="hidden">
+                            <input type="password" name="password" id="userPass" data-validatepassid="pass" data-validate="passrequire pass" class="js-pass">
+                            <div class="placeholder">6~30位数字、字母或特殊字符组成</div>
+                            <span class="error-msg"></span>
+                        </div>
+                    </div>
+                    <div>
+                        <label for="">确认密码</label>
+                        <div class="input-optimize">
+                            <input type="password" class="hidden">
+                            <input type="password" name="repassword" id="userConfirmPasss" data-validate="confirmpass" class="js-repass">
+                            <span class="error-msg"></span>
+                        </div>
+                    </div>
+                    <div class="checkcodeInput js-vcode-wrap" id="registerNameCheck">
+                        <label for="">验证码</label>
+                        <div class="input-optimize">
+                            <input type="text" name="verify" id="registerNameVcode" class="js-vcode-input">
+                            <img src="__MODULE__/Member/verify" alt="" class="checkcode js-vcode">
+                            <span class="error-msg"></span>
+                        </div>
+                    </div>
+                    <div>
+                        <span class="checkbox-optimize active js-agreement-wrap">
+                            <i class="icon-agree js-agreement-trigger" id="registerByNameAgree"></i>
+                            <input type="hidden" name="" value="" class="">
+                        </span>
+                        <span id="registerByNameAgreeTxt" class="agree-txt active js-agreement-txt-trigger">我已阅读并同意《<a href="{:U('Article/agreement')}" target="_blank">溪谷游戏用户注册协议</a>》</span>
+                        <span class="agreeError"></span>
+                    </div>
+                    <input type="submit" class="register-btn js-submit" value="注册" id="registerByNameSubmit">
+                </form>
+            </div>
+        </div>
+<!--         <div class="m-37box">
+            <p class="spec-item spec-item-fir">注册溪谷手游帐号海量游戏随心玩</p>
+            <p>[获得最多的福利]</p><p>[最新游戏优先体验]</p>
+            <p>[每月周边送不停]</p>
+            <img class="beauty" src="__IMG__/img-xgbox.png" alt="">
+            <a href="" target="_blank" class="register-down">立即下载</a>
+        </div> -->
+    </div>
+</div>
+<script>var UURL = '__CONTROLLER__/';</script>
+<script src="__JS__/register.js"></script>
+</block>

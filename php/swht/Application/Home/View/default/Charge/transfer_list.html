@@ -1,0 +1,56 @@
+<extend name="Public/promote_base"/>
+
+<block name="body">
+<div id="query">
+  <div class="mod">
+    <h2>代充记录</h2>
+    <div id="zc_top">
+      <ul class="clearfix">
+        <li style="border:none;">
+          <h3 class="ftype">转移平台币</h3>
+          <p><span>0.00</span>个 <i>1平台币=1元</i></p>
+          <div>
+            <a href="{:U('transfer')}" class="btn01" style="float:left; margin-left:10px">转移平台币</a>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div id="other_se" class="mod">
+    <h2>查询</h2>
+    <form id="form"  action="{:U('index')}" method="post">
+      <div>
+        <!-- <input type="text" placeholder="请输入游戏名称" class="txts" name="game_id" value="{:I('game_id')}"> -->
+        <input type="text" class="txts" name="account" value="{:I('account',NULL)}" placeholder="请输入玩家账号">
+        <input type="submit" value="查询" class="btns">
+      </div>
+    </form>
+  </div>        
+  <div id="jiesuan" class="mod">
+    <h2>代充记录</h2>
+    <div class="con">
+      <table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <thead>
+          <tr>
+            <th>编号</th>
+            <th>玩家账号</th>
+            <th>充值金额</th>
+            <th>充值时间</th>
+          </tr>
+        </thead>
+        <tbody>
+          <volist name="list_data" id="vo">
+          <tr>
+            <td>{$vo.id}</td>
+            <td>{$vo.account}</td>
+            <td>{$vo.amount}</td>
+            <td>{$vo.create_time}</td>
+          </tr>
+        </volist>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div id="pagehtml" class="pagenavi clearfix">{$_page}</div>
+</div>
+</block>

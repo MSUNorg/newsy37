@@ -1,0 +1,115 @@
+<extend name="Public/base"/>
+
+<block name="body">
+	<div class="main-title">
+		<h2>文件设置</h2>
+	</div>
+	<div class="tab-wrap">
+		<ul class="tab-nav nav">
+			<li data-tab="tab1" class="current"><a href="javascript:void(0);" >OSS设置</a></li>
+			<li data-tab="tab2"><a href="javascript:void(0);" >七牛设置</a></li>
+		</ul>
+		<div class="tab-content">
+		<div id="tab1" class="tab-pane in tab1">
+		<form action="{:U('saveTool')}" method="post" class="form-horizontal OSS">
+			<div class="form-item">
+				<label class="item-label">oss的bucket名称<span class="check-tips">（oss的bucket名称）</span> </label>
+				<div class="controls">
+					<input type="text" class="text input-large" name="config[bucket]" value="{$oss_storage['bucket']}">
+				</div>
+			</div>
+			<div class="form-item">
+				<label class="item-label">OSS的AccessKeyId<span class="check-tips">（从OSS获得的AccessKeyId）</span> </label>
+				<div class="controls">
+					<input type="text" class="text input-large" name="config[accesskeyid]" value="{$oss_storage['accesskeyid']}">
+				</div>
+			</div>
+			<div class="form-item">
+				<label class="item-label">从OSS获得的AccessKeySecr<span class="check-tips">（从OSS获得的AccessKeySecr）</span> </label>
+				<div class="controls">
+					<input type="text" class="text input-large" name="config[accesskeysecr]" value="{$oss_storage['accesskeysecr']}">
+				</div>
+			</div>
+			<div class="form-item">
+				<label class="item-label">您选定的OSS数据中心访问域名<span class="check-tips">（例如oss-cn-hangzhou.al）</span> </label>
+				<div class="controls">
+					<input type="text" class="text input-large" name="config[domain]" value="{$oss_storage['domain']}">
+				</div>
+			</div>
+			<div class="form-item">
+				<label class="item-label">启用状态<span class="check-tips">（OSS和七牛同时开启的话默认OSS）</span> </label>
+				<div class="controls">
+					<input type="radio" class="inp_radio" value="0" name="status" <eq name="oss_storage_data['statue']" value="0">checked="checked"</eq>>禁用
+                    <input type="radio" class="inp_radio" value="1" name="status" <eq name="oss_storage_data['status']" value="1">checked="checked"</eq>>启用
+				</div>
+			</div>
+			<div class="form-item">
+				<div class="controls">
+					<input type="hidden" name="name" value="oss_storage"></input>
+					<!-- <button type="submit" class="btn submit-btn" target-form="form-horizontal-oss">确 定</button> -->
+					<button type="submit" class="btn submit-btn ajax-post" target-form="OSS">确 定</button>
+					<button class="btn btn-return" onclick="javascript:history.back(-1);return false;">返 回</button>
+				</div>
+			</div>
+		</form>
+		</div>
+		</div>
+
+		<div class="tab-content">
+		<div id="tab2" class="tab-pane tab2">
+		<form action="{:U('saveTool')}" method="post" class="form-horizontal qiniu">
+			<div class="form-item">
+				<label class="item-label">七牛的bucket名称<span class="check-tips">（七牛的bucket名称）</span> </label>
+				<div class="controls">
+					<input type="text" class="text input-large" name="config[bucket]" value="{$qiniu_storage['bucket']}">
+				</div>
+			</div>
+			<div class="form-item">
+				<label class="item-label">七牛的AccessKeyId<span class="check-tips">（从七牛获得的AccessKeyId）</span> </label>
+				<div class="controls">
+					<input type="text" class="text input-large" name="config[accesskeyid]" value="{$qiniu_storage['accesskeyid']}">
+				</div>
+			</div>
+			<div class="form-item">
+				<label class="item-label">从七牛获得的AccessKeySecr<span class="check-tips">（从七牛获得的AccessKeySecr）</span> </label>
+				<div class="controls">
+					<input type="text" class="text input-large" name="config[accesskeysecr]" value="{$qiniu_storage['accesskeysecr']}">
+				</div>
+			</div>
+			<div class="form-item">
+				<label class="item-label">您选定的七牛数据中心访问域名<span class="check-tips">（例如oss-cn-hangzhou.al）</span> </label>
+				<div class="controls">
+					<input type="text" class="text input-large" name="config[domain]" value="{$qiniu_storage['domain']}">
+				</div>
+			</div>
+			<div class="form-item">
+				<label class="item-label">启用状态<span class="check-tips">（OSS和七牛同时开启的话默认OSS）</span> </label>
+				<div class="controls">
+					<input type="radio" class="inp_radio" value="0" name="status" <eq name="qiniu_storage_data['statue']" value="0">checked="checked"</eq>>禁用
+                    <input type="radio" class="inp_radio" value="1" name="status" <eq name="qiniu_storage_data['status']" value="1">checked="checked"</eq>>启用
+				</div>
+			</div>
+			<div class="form-item">
+				<div class="controls">
+					<input type="hidden" name="name" value="qiniu_storage"></input>
+					<!-- <button type="submit" disabled class="btn submit-btn disabled" target-form="form-horizontal">确 定</button> -->
+					<button type="submit" class="btn submit-btn ajax-post" target-form="qiniu">确 定</button>
+					<button class="btn btn-return" onclick="javascript:history.back(-1);return false;">返 回</button>
+				</div>
+			</div>
+		</form>
+		</div>
+		</div>
+	</div>
+</block>
+
+<block name="script">
+<script type="text/javascript">
+	//导航高亮
+	highlight_subnav('{:U('Tool/storage')}');
+	$(function(){
+		//支持tab
+		showTab();
+	})
+</script>
+</block>

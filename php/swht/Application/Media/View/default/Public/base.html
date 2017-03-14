@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<!-- saved from url=(0026)game/ -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <title>{:C('PC_SET_TITLE')}</title>    
+	<meta name="keywords" content="{:C('WEB_SITE_KEYWORD')}">    
+	<meta name="description" content="{:C('WEB_SITE_DESCRIPTION')}">            
+	<meta http-equiv="Cache-Control" content="no-transform">
+    <meta http-equiv="Cache-Control" content="no-siteapp">
+    <meta name="mobile-agent" content="format=html5;url=">
+    <meta http-equiv="mobile-agent" content="format=xhtml; url=">
+    <link rel="shortcut icon" href="favicon.ico">
+    <link rel="stylesheet" type="text/css" media="all" href="__CSS__/base.css">
+    <link rel="stylesheet" type="text/css" media="all" href="__CSS__/index.css">
+    <script type="text/javascript" src="__STATIC__/jquery-2.0.3.min.js"></script>
+	<script type="text/javascript" src="__JS__/function.js"></script>
+    <script type="text/javascript" src="__JS__/vivo-common.js"></script>
+</head>
+<body>
+<div class="topbar">
+    <div class="wrap_w">
+        <div class="topleft"><a href="{:U('Game/game_list')}">游戏中心</a> <span>|</span> <a href="{:U('Game/gift_list')}">礼包中心</a> </div>
+        <div class="top">
+            <!-- <div class="fl">
+                <div id="xguc_login_script"></div>
+            </div> -->
+            <div class="login-register widthoutLogin">
+              <div class="login-register-link logon-link hidden">
+                <a href="#" class="trigger" tabindex="0" id="topShowName"></a>
+                <a href="javascript:;" id="topLoginOut">退出登录</a>
+              </div>
+              <div class="login-register-link withoutLogon-link">
+                <a href="javascript:;" class="top-login-link">亲，请登录</a>
+                <a href="javascript:;" class="top-register-link">免费注册</a>
+              </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="header">
+    <div class="wrap_w clearfix">
+        <div class="logo" style="background:url({:get_cover(C('PC_SET_LOGO'),'path')}) no-repeat 0 0;"><a href="{:U('Index/index')}">溪谷游戏</a></div>
+        <div class="header-search">
+            <div class="searchbar">
+                <form action="{:U(CONTROLLER_NAME.'/'.ACTION_NAME)}" method="post">
+					<input type="hidden" name="search_page" value="{:CONTROLLER_NAME.'/'.ACTION_NAME}"/>				
+                    <input type="text"   class="searchstyle" name="search_key" value="" x-webkit-speech="" speech="">
+                    <input type="submit" class="searchebtn" value="搜索">
+                </form>
+            </div>
+            <!--  <div class="searchhot"><span>热门搜索词：</span>
+				<volist name="aaa" id="s">
+				<a href="/index.php/Search/index?keywords={$s.game_name}">{$s.game_name}</a>
+				</volist>
+			</div> -->
+        </div>
+        <div class="header-flash">
+			<a  href="{$single_img['url']}"><img src="{$single_img['data']}"></a>
+		</div>
+    </div>
+</div>
+
+<div class="menu clearfix">
+    <ul class="wrap_w">
+        <li class="<if condition='$Think.const.CONTROLLER_NAME eq Index'>cur</if>"><a href="{:U('Index/index')}">首  页</a></li>
+        <li class="<if condition='(ACTION_NAME eq game_list) or (ACTION_NAME eq game_detail) or ($search_page eq game_list)'>cur</if>">
+            <a href="{:U('Game/game_list')}">游戏中心</a>
+        </li>
+		<li class="<if condition='$Think.const.CONTROLLER_NAME eq Recharge'>cur</if>"><a href="{:U('Recharge/index')}">充值中心</a></li>
+        <li class="<if condition='(ACTION_NAME eq gift_list) or ($search_page eq gift_list)'>cur</if>">
+            <a href="{:U('Game/gift_list')}">独家礼包</a>
+        </li>
+        <li class="<if condition='$Think.const.CONTROLLER_NAME eq Article'>cur</if>"><a href="{:U('Article/index?category=media')}">新闻中心</a></li>
+        <li class="<if condition='$Think.const.CONTROLLER_NAME eq Service'>cur</if>"><a href="{:U('Service/index')}">客服中心</a></li>
+    </ul>
+</div> 
+
+<if condition='!($Think.const.CONTROLLER_NAME eq Index)'>
+	<link rel="stylesheet" type="text/css" media="all" href="__CSS__/sub.css">
+</if>
+<!-- 主体内容 -->
+<block name="body"></block>
+
+<div class="footer">
+    <div class="area wrap_w">
+        <div class="f-links"> <span>友情链接：</span>
+	        <div class="roll">
+	            <ul>
+					<volist name=":get_links()" id='data'>
+					<li><a target="_blank" href="{$data.link_url}" title="{$data.title}" >{$data.title}</a></li>
+					</volist>
+				</ul>
+	        </div>
+        </div>
+        <div class="infoot">
+	        <!-- <div class="logo" ><a href="{:U('Index/index')}">溪谷游戏</a></div> -->
+	        <div class="ifl" style="background:url({:get_cover(C('PC_SET_LOGO'),'path')}) no-repeat 0 0;"> </div>
+	        <div class="ifc">
+	            <p>
+					<a href="{:U('Article/detail/id/10')}" target="_blank" class="leftno">关于我们</a><span>|</span>
+					<a href="{:U('Article/detail/id/11')}" target="_blank">商务合作</a><span>|</span>
+					<a href="{:U('Article/detail/id/13')}" target="_blank">合作伙伴</a><span>|</span>
+					<a href="{:U('Article/detail/id/12')}" target="_blank">家长监督</a><span>|</span>
+					<a href="{:U('Service/index')}" target="_blank"> 客服帮助</a><span>|</span>
+					<!-- <a href="{:U('About/index?type=74')}" target="_blank"> 移动版</a> -->
+				</p>
+				<p>客服电话：{:C('PC_SET_SERVER_TEL')}</p>
+				<p>网站备案：{:C('PC_SET_FOR_THE_RECORD')}&nbsp;&nbsp;<if condition="C('PC_SET_FOR_THE_RECORD') eq ''">网络文化经营许可证编号：{:C('PC_SET_LICENSE')}</if></p>
+				<p>{:C('PC_SET_COPYRIGHT')}</p>
+	        </div>
+	        <div class="ifr"  style="background:url({:get_cover(C('PC_SET_QRCODE'),'path')}) no-repeat 0 0;background-size: 80px 80px">
+	            <p>扫描二维码</p>
+	            <p>关注官方微信</p>
+	           
+	        </div>
+        </div>
+    </div>
+</div>
+<!-- 登陆弹窗 -->
+<div class="g-login-pop g-pop " id="xglogin">			
+	<div class="m-mask"></div>			
+	<div class="m-box ">				
+		<a href="#" class="link-close"></a>							
+		<div class="form-box">	
+			<form method="post" name="login" id="loginform" onsubmit="return false">
+			<div class="title-bar">帐号登录</div>					
+			<div id="errMsg" class="error-msg"></div>					
+			<div class="input-optimize correct">						
+				<input type="text" id="loginInputUname" name="account">						
+				<i class="clear-text"></i>						
+				<i class="icon-deco icon-acco"></i>						
+				<div class="placeholder" style="display: none;">用户名/手机号</div>					
+			</div>					
+			<div class="input-optimize correct">						
+				<input type="password" class="hidden">						
+				<input type="password" id="loginPassword" name="password">						
+				<i class="icon-deco icon-pass"></i>						
+				<div class="placeholder" style="display: none;">密码</div>					
+			</div>									
+			<input type="submit" class="login-btn" value="登录" id="loginSubmit">
+			<div class="bottom-bar">
+                <a href="{:U('Member/forget')}">忘记密码</a>&nbsp;&nbsp;<a>|</a>&nbsp;&nbsp;
+				<a href="#" id="goRegisterPop">注册新帐号</a>				
+			</div>	
+			</form>
+		</div>		
+	</div>		
+</div>
+<!-- 登陆弹窗END -->
+
+<!-- 注册弹窗 -->
+<div class="g-register-pop g-pop" id="xgregister" >			
+	<div class="m-mask"></div>			
+	<div class="m-box m-register-box">				
+		<a href="#" class="link-close"></a>		
+		<h2 class="title-bar">欢迎注册溪谷游戏平台帐号<span id="notice"></span></h2>		
+		<div class="tab-trigger-bar">			
+			<a href="#" class="phone-trigger active" data-target="mPhoneRegisterPop">
+				注册手机帐号				
+				<span class="arrow"></span>			
+			</a>			
+			<a href="#" class="user-trigger" data-target="mUsernameRegisterPop">
+				注册用户名帐号				
+				<span class="arrow"></span>			
+			</a>		
+		</div>		
+		<div class="form-box">
+			<!-- 手机注册 -->			
+			<div class="m-phone-register register-tab-box active" id="mPhoneRegisterPop">
+				<form action="" id="mPhoneRegisterFormPop">
+				<div>						
+					<label for="">手机号码</label>						
+					<div class="input-optimize">							
+						<input name="account" type="text" id="registerPhonePop">							
+						<i class="clear-text"></i>							
+						<div class="placeholder">请输入您的手机号码</div>							
+						<span class="error-msg"></span>							
+						<i class="icon-error"></i>							
+						<i class="icon-correct"></i>						
+					</div>					
+				</div>									
+				<div>						
+					<a href="#" class="get-checkcode disabled" id="getSafeCodePop">免费获取安全码</a>
+                    <span class=""></span>                    
+				</div>					
+				<div>						
+					<label for="">安全码</label>						
+					<div class="input-optimize">							
+						<input type="text" name="vcode" id="registerSafeCodePop">
+                        <div class="placeholder">请输入安全码</div>                        
+						<span class="error-msg"></span>						
+					</div>					
+				</div>					
+				<div>					
+					<label for="">密码</label>						
+					<div class="input-optimize">							
+					<input type="password" name="password" id="registerPhonePassPop">							
+					<div class="placeholder">6~30位数字、字母或特殊字符组成</div>				
+					<span class="error-msg"></span>						
+					</div>					
+				</div>				
+					<div>					
+					<a class="checkbox-optimize active">		
+					<i class="icon-agree" id="registerByPhoneAgreePop"></i>	
+					<input type="hidden" name="" value="">						
+					</a>						
+					<span href="#" id="registerByPhoneAgreeTxtPop" class="agree-txt active">我已阅读并同意《<a href="{:U('Article/agreement')}" target="_blank">溪谷手游用户注册协议</a>》
+					</span> 				
+					</div>					
+					<input type="submit" class="register-btn" value="注册" id="registerByPhoneSubmitPop">				
+				</form>			
+			</div>	
+			<!-- 手机注册END -->
+			
+			<!-- 账注册 -->		
+			<div class="m-username-register register-tab-box" id="mUsernameRegisterPop">			
+				<form action="" id="mNameRegisterFormPop">					
+					<div>						
+						<label for="">帐号</label>
+						<div class="input-optimize">						
+							<input type="text" name="account" id="userNameByNamePop">							
+							<i class="icon-error"></i>							
+							<i class="icon-correct"></i>							
+							<div class="placeholder">6~30位数字、字母或下划线</div>							
+							<span class="error-msg"></span>						
+						</div>				
+					</div>				
+					<div>					
+						<label for="">设置密码</label>						
+						<div class="input-optimize">							
+							<input type="password" name="password" id="userPassPop" >							
+							<div class="placeholder">6~30位数字、字母或特殊字符组成</div>							
+							<span class="error-msg"></span>						
+						</div>					
+					</div>					
+					<div>						
+						<label for="">确认密码</label>						
+						<div class="input-optimize">							
+							<input type="password" name="repassword" id="userConfirmPasssPop">	
+							<span class="error-msg"></span>						
+						</div>					
+					</div>					
+					<div class="checkcodeInput">						
+						<label for="">验证码</label>						
+						<div class="input-optimize">							
+							<input type="text" name="verify" id="registerNameVcodePop">							
+							<img src="__MODULE__/Member/verify" alt="" class="checkcode">	
+							<span class="error-msg"></span>						
+						</div>					
+					</div>					
+					<div>						
+						<span class="checkbox-optimize active">							
+							<i class="icon-agree" id="registerByNameAgreePop"></i>		
+							<input type="hidden" name="" value="">						
+						</span>						
+						<span id="registerByNameAgreeTxtPop" class="agree-txt active">我已阅读并同意《<a href="{:U('Article/agreement')}" target="_blank">溪谷手游用户注册协议</a>》</span>				
+						<span class="agreeError"></span>					
+					</div>					
+					<input type="submit" class="register-btn" value="注册" id="registerByNameSubmitPop">				
+				</form>			
+			</div>		
+		</div>		
+		<div id="registerPopErr" class="registerpop-error"></div>
+		<div class="box-bar">				
+			<span class="has-account">					
+				已有帐号？<a href="#" id="imeLogin" class="ime-login">立即登录</a>
+			</span>		
+		</div>		
+	</div>		
+</div>
+<!-- 注册弹窗END -->
+<script src="__JS__/global.js"></script>
+<script type="text/javascript" src="__JS__/jquery.zclip.min.js"></script>
+</body>
+</html>
+<block name='script'></block>

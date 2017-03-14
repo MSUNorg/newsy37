@@ -1,0 +1,139 @@
+<extend name="Public/bases" />
+<block name="body">
+<link href="__CSS__/index.css" rel="stylesheet">
+<div class="banner"> 
+	<div class="carousel-main">
+    <ul id="carouselMain">
+      <li class="carousel-panel banner-0 active"> <span class="car-item car-bounce"></span></li>
+      <li class="carousel-panel banner-1"> <span class="car-item car-bounce"></span> <a href="#" class="banner-btn">马上加入</a> </li>
+      <li class="carousel-panel banner-2"> <span class="car-item car-left"></span> <span class="car-item car-right"></span> <a href="#" class="banner-btn">马上加入</a> </li>
+      <li class="carousel-panel banner-3"> <span class="car-item car-top"></span> <span class="car-item car-bottom"></span> <a href="#" class="banner-btn">马上加入</a> </li>
+    </ul>
+  </div>
+  <form action="{:U('login')}" method="post" class="login-form">
+  <div class="loginBox">
+    <div class="red logErr" id="qt_global_text"></div>
+    <table class="formTb loginTb">
+      <tbody>
+        <tr>
+          <th><label for="qt_account" class="form-label">帐号</label></th>
+          <td><input class="form-control" type="text" name="account" placeholder="手机号/用户名/邮箱" autocomplete="off" id="qt_account"></td>
+        </tr>
+        <tr>
+          <th><label for="qt_password" class="form-label">密码</label></th>
+          <td><input class="form-control" type="password" name="password" maxlength="20" placeholder="输入您的密码" id="qt_password"></td>
+        </tr>
+        <tr>
+          <th></th>
+          <td>
+            <!-- <label>
+              <input type="checkbox" id="qtis_autologin" checked="checked" value="1">
+                下次自动登录
+              </label> -->
+          </td>
+        </tr>
+        <tr>
+          <td colspan="2"><input type="submit" value="登录" class="btn btn-b ajax-post" id="qt_btn" target-form='login-form'></td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="change"> <a class="ca" href="{:U('Index/register')}">还没加入，马上注册</a> </div>
+  </div>
+  </form>
+</div>
+
+<div class="bgWhite moduleA">
+  <div class="section clear">
+    <div class="main mainGame">
+      <div class="titA clear">
+        <h3 class="tname" id="mainGameTab"><span class="setTab-tab on">热门手游推荐</span></h3>
+        <a href="{:U('Article/game_list')}" class="more">更多+</a> </div>
+      <div class="gameList" id="mainGameList">
+        
+        <ul class="setTab-panel clear">
+          <volist name="game_list" id="vo">
+          <li>
+      			<div class="sp1 fl">
+      				<a href="<if condition='$vo.dow_status eq 0'>#<else/>{:U('Down/down_file?game_id='.$vo['id'].'&type=1')}</if>" target="_blank"><img src="{$vo.icon|get_cover='path'}"></a>
+      			</div>
+      			<div class="sp2 fl">
+      				<h3><a href="<if condition='$vo.dow_status eq 0'>#<else/>{:U('Down/down_file?game_id='.$vo['id'].'&type=1')}</if>" target="_blank">{$vo.game_name}</a></h3>
+      				<p class="gamestyle"><span>{$vo['game_type_name']}</span></p>
+      				<div class="gamedown"><a href="<if condition='$vo.dow_status eq 0'>#<else/>{:U('Down/media_down_file?game_id='.$vo['id'].'&type=1')}</if>" class="down">下载</a></div>
+      			</div>
+          </li>
+          </volist>
+        </ul>
+      </div>
+    </div>
+    <div class="sideBar">
+      <div class="newsPanel fl">
+        <div class="titA clear">
+          <h3 class="tname"><span class="on">公告</span></h3>
+          <a href="{:U('Article/lists?category=tui_gg')}" target="_blank" class="more">更多+</a> </div>
+        <div class="newslist">
+          <ul class="txtlist">
+      		   <article:limits name="list" category="2" limit="5" child="true">
+              <li>
+                <span class="fr">{$list.create_time|date='Y-m-d',###}</span>
+                <a href="{:U('Article/detail?id='.$list['id'])}" target="_blank">【公告】{$list.title}</a>
+              </li>
+      			</article:limits>
+          </ul>
+        </div>
+      </div>
+      <div class="kaifu fr">
+        <div class="titA clear">
+          <h3 class="tname"><span class="on">资讯</span></h3>
+          <a href="{:U('Article/lists?category=tui_zx')}" target="_blank" class="more">更多+</a> 
+        </div>
+        <ul class="txtlist">
+          <article:limits name="list" category="39" limit="5" child="true">
+            <li>
+              <span class="fr">{$list.create_time|date='Y-m-d',###}</span>
+              <a href="{:U('Article/detail?id='.$list['id'])}" target="_blank">【公告】{$list.title}</a>
+            </li>
+          </article:limits>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="section addSteps moduleA">
+  <h3 class="ind_titb">如何加入我们<br><font>How to join us</font></h3>
+  <ul class="clear join_us">
+    <li><i class="join_01"></i><font>STEP1</font><br><font>注册账号</font></li>
+    <li><i class="join_02"></i><font>STEP2</font><br><font>创建渠道</font></li>
+    <li><i class="join_03"></i><font>STEP3</font><br><font>获取资源</font></li>
+    <li class="last"><i class="join_04"></i><font>STEP4</font><br><font>推广分成</font></li>
+  </ul>
+</div>
+	<div class="bgWhite moduleA" style="padding-top:15px;">
+		<div class="section">
+			<h3 class="ind_titb">联系我们<br><font>Contact us</font></h3>
+			<ul class="clear cont_us">
+				<li>
+					<i class="cont_adress"></i>
+					<b>公司地址</b><br>
+					<span>{:C('MT_SITE_P2')}</span>					
+				</li>
+				<li>					
+					<i class="cont_phone"></i>
+					<b>联系方式</b><br>
+					<span>{:C('MT_SITE_T2')}</span>					
+				</li>
+				<li>					
+					<i class="cont_email"></i>
+					<b>公司邮箱</b><br>
+					<span>{:C('MT_SITE_E2')}</span>					
+				</li>
+			</ul>
+		</div>
+	</div>
+	<div class="section moduleA">
+		<h3 class="ind_titb">友情链接<br><font>Friendly link</font></h3>
+		<div class="frdlink clear" >    
+    
+		</div>
+	</div>
+</block>

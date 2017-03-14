@@ -1,0 +1,14 @@
+
+  <dl>
+    <dt>个人中心</dt>
+    <dd><a href="{:U('Member/index')}"  class="<if condition='ACTION_NAME eq index'>on</if>">个人中心</a></dd>
+    <dd><a href="{:U('Member/platform')}" class="<if condition='ACTION_NAME eq platform'>on</if>">平台币</a></dd>
+    <dd><a href="{:U('Member/record')}" class="<if condition='ACTION_NAME eq record'>on</if>">消费记录</a></dd>
+  </dl>
+  <dl>
+    <dt>账户管理</dt>
+    <dd><a href="{:U('Member/profile')}" class="<if condition='ACTION_NAME eq profile '>on</if>">我的资料</a></dd>
+    <dd><a href="{:U('Member/phone')}" class="<if condition='ACTION_NAME eq phone'>on</if>">绑定手机</a></dd>
+    <dd><a href="{:U('Member/card')}" class="<if condition='ACTION_NAME eq card'>on</if>">实名认证</a></dd>
+    <dd><a href="{:U('Member/resetpwd?t=m&name='.$name)}" class="<if condition='ACTION_NAME eq resetpwd'>on</if>">修改密码</a></dd>
+  </dl>

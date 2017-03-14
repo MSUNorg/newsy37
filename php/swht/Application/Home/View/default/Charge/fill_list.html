@@ -1,0 +1,91 @@
+<extend name="Public/promote_base"/>
+
+<block name="body">
+<div id="query">
+  <div class="mod">
+    <h2>代充记录</h2>
+    <div id="zc_top">
+      <ul class="clearfix">
+        <!-- <li>
+          <h3 class="ftype">总余额</h3>
+          <p><span>0.00</span>元 <i>可用余额是指未对账金额</i></p>
+          <div>
+            <a href="my-pay-bi.html" class="btn01" style="float:left;">充值平台币</a> 
+            <a href="my-pay-ti.html" class="btn01" style="float:left; margin-left:10px">我要提现</a>
+          </div>
+        </li> -->
+        <li style="border:none;">
+          <h3 class="ftype">推广收入充值到平台币</h3>
+          <p><span>{:number_format(AMOUNT,2)}</span>元 <i>1平台币=1元</i></p>
+          <div>
+            <a href="{:U('fill')}" class="btn01" style="float:left;">平台币充值</a>
+            <!-- <a href="my-pay-buy.html" class="btn01" style="float:left; margin-left:10px">购买优惠卷</a>
+            <a href="my-pay-buy-red.html" class="btn01" style="float:left; margin-left:10px">购买记录</a> -->
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+   <div id="search" class="mod">
+          <h2>查询</h2>
+          <form id="data_form" action="{:U('Recharge/index')}" method="post" enctype="multipart/form-data">
+            <ol>
+              <li class="other clearfix">
+                <div class="m"><em>开始时间：</em><span class="required">*</span>
+                  <input type="text" id="sdate" name="sdate" value="{:I('sdate')}">
+                </div>
+                <div class="r"><em>结束时间：</em><span class="required">*</span>
+                  <input type="text" id="edate" name="edate" value="{:I('edate')}">
+                </div>
+                <div class="search_btn">
+                  <input type="submit" value="查询">
+                </div>
+              </li>
+            </ol>
+          </form>
+        </div>    
+  <div id="jiesuan" class="mod">
+    <h2>代充记录</h2>
+    <div class="con">
+      <table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <thead>
+          <tr>
+            <th>编号</th>
+            <th>花费金额</th>
+            <th>充值时间</th>
+          </tr>
+        </thead>
+        <tbody>
+          <volist name="list_data" id="vo">
+          <tr>
+            <td>{$vo.id}</td>
+            <td>{$vo.amount}</td>
+            <td>{$vo.create_time|date='Y-m-d',###}</td>
+          </tr>
+        </volist>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div id="pagehtml" class="pagenavi clearfix">{$_page}</div>
+</div>
+<link rel="stylesheet" type="text/css" href="__CSS__/jquery.datetimepicker.css">
+<script type="text/javascript" src="__JS__/jquery.datetimepicker.js"></script>
+<script type="text/javascript">
+$().ready(function(){
+  $('#sdate').datetimepicker({
+    lang:'ch',
+    format:'Y-m-d',
+    formatDate:'Y-m-d',
+    timepicker:false
+  });
+  
+  $('#edate').datetimepicker({
+    lang:'ch',
+    format:'Y-m-d',
+    formatDate:'Y-m-d',
+    timepicker:false
+  });
+});
+</script>
+</block>

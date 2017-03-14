@@ -1,0 +1,122 @@
+<extend name="Public/loginreg" />
+<block name="body" >
+<link rel="stylesheet" href="__CSS__/home_login.css">
+<div class="g-login-wrap g-login-pop">
+    <div class="m-login-box">
+        <div class="titlebar">帐号登录</div>
+        <form action="" class="login-form" id="loginForm" onsubmit="return false;">
+            <div id="errMsg" class="error-msg"></div>
+            <div class="input-optimize">
+                <input type="text" id="loginInputUname" name="username" class="js-name" data-alert="用户名不能为空！">
+                <i class="clear-text"></i>
+                <i class="icon-deco icon-acco"></i>
+                <div class="placeholder">用户名/手机号</div>
+            </div>
+            <div class="input-optimize">
+                <input type="password" id="loginPassword" name="password" class="js-password" data-alert="密码不能为空！">
+                <i class="icon-deco icon-pass"></i>
+                <div class="placeholder">密码</div>
+            </div>
+            <div class="agreement">
+               <!--  <a class="checkbox-optimize active">
+                    <i class="icon-autologin"></i>
+                    <input type="hidden" name="" value="0" id="saveState" class="js-save-state">
+                </a>
+                <span id="autoLoginTrigger js-auto-login">下次自动登录</span> -->
+            </div>
+            <input type="submit" class="login-btn js-login-btn" value="登录" id="loginSubmit">
+        </form>
+        <div class="bottom-bar">
+            <a href="{:U('forget')}">忘记密码</a>
+            <span class="line"></span>
+            <a href="{:U('register')}">注册新帐号</a>
+        </div>
+    </div>
+</div>
+<script>
+function login() {
+    var form_id = 'loginForm';					
+    (function i() {
+        $('.g-login-pop').find('input[type=text]').val('');
+        $('.g-login-pop').find('input[type=password]').val('');
+        $('.g-login-pop').find('.input-optimize').removeClass('error').removeClass('correct').find('.placeholder').show();
+        $('#errMsg').text('');
+    })();
+    var n = $('.input-optimize');
+    n.on('click','.clear-text',function() {
+        $('#loginInputUname').val('');
+        $(this).show().siblings('.placeholder').show();
+    });
+    n.on('click', '.placeholder',function() {
+        $(this).hide(),
+        $(this).siblings('input').focus(),
+        $(this).siblings('input').val().match(/^\s*|\s*$/g) && $(this).siblings('input').val('')
+    });
+    n.on('blur', 'input',function() {
+        var i = $(this).siblings('.placeholder');
+        var flag = 0 != i.length && ('' == $(this).val() || $(this).val() == i.text()) 
+        if (flag) {
+            $(this).val('');i.show();
+            $('#errMsg').text($(this).data('alert'));return;
+        }       
+        $('#errMsg').text('');
+    });
+    n.on('focus', 'input',function() {
+        var i = $(this).siblings('.placeholder');
+        0 != i.length && i.hide()
+    });
+    $('#' + form_id + ' #loginSubmit').val('登录').attr('disabled', false);
+    $('#' + form_id).unbind('submit').bind('submit',
+    function(event) {
+        event.preventDefault();
+        var username = $.trim($('#' + form_id + ' #loginInputUname').val());
+        if (username == '') {
+            $('#errMsg').text('用户名不能为空！');
+            $('#' + form_id + ' #loginInputUname').focus();
+            return false;
+        }
+        var password = $.trim($('#' + form_id + ' #loginPassword').val());
+        if (password == '') {
+            $('#errMsg').text('密码不能为空123！');
+            $('#' + form_id + ' #loginPassword').focus();
+            return false;
+        }
+        $('#errMsg').text('');	
+        $.ajax({
+            type: 'POST',
+            async: true,
+            dataType: 'json',
+            url: '__CONTROLLER__/login',
+            data: $('#' + form_id + '').serialize(),
+            beforeSend: function() {
+                $('#' + form_id + ' #loginSubmit').val('登录中').attr('disabled', true);
+            },
+            success: function(data) {
+                switch (parseInt(data['status'])) {
+                case 1:
+                    var reurl = $('#' + form_id).data('reurl');
+                    if (reurl) {
+                        location.href = reurl;
+                    } else {
+                        location.reload();
+                    }
+                    break;
+                default:
+                    $('#errMsg').text(data['info']);
+                    $('#' + form_id + ' #loginSubmit').val('登录').attr('disabled', false);
+                    break;
+                }
+                return false;
+            },
+            error: function() {
+                $('#errMsg').text('服务器故障，稍后再试')
+                $('#' + form_id + ' #loginSubmit').val('登录').attr('disabled', false);
+            },
+            cache: false
+        });
+        return false;
+    });
+}
+login();
+</script>
+</block>

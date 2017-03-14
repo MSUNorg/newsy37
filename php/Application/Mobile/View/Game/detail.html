@@ -1,0 +1,149 @@
+<extend name="Public/bases" />
+<block name="body" >
+<link rel="stylesheet" href="__CSS__/info.css">
+<link rel="stylesheet" href="__CSS__/swiper-3.3.1.min.css">
+<script src="__JS__/swiper-3.3.1.jquery.min.js"></script>
+<div class="content J-wrapper">
+  <section class="wrapper-inner">
+    <div class="basics">
+      <div class="pic"> <img src="__ROOT__{$data.icon|get_cover='path'}"> <span class="mask"></span> </div>
+      <div class="aside">
+        <div class="info">
+          <div class="name">{$data.game_name}</div>
+          <div class="star">
+            <div class="star-num" style="width: {$data.recommend_level}%;"></div>
+          </div>
+          <div class="kind"><b>分类：</b>{:get_game_type($data['game_type_id'])}</div>
+          <div class="attr"> <span class="bytes"><b>大小：</b>{$data.game_size}</span>
+		  <span class="version"><b>版本：</b>{$data.version}</span> </div>
+          <div class="down-btn"> <a href="{:U('Down/down_file?game_id='.$data['id'].'&type=1')}">免费下载</a> </div>
+        </div>
+      </div>
+    </div>
+    <!--添加枇杷下载推广位-->
+    <!-- <div class="T_crumbs_ad"> 
+		<a href="#">
+			<div class="ms"><img src="__IMG__/114901_6744.png">大型游戏/破解游戏，海量游戏免费下载</div>
+			<span class="now_down">立即下载</span> 
+		</a> 
+	</div>   -->
+    <!--添加枇杷下载推广位结束-->
+    <div class="preview">
+		<h4>游戏截图</h4>
+		<if condition="$gamepic eq '' ">
+		<div style="text-align:center;line-height:50px;">暂无图片</div>
+		<else />
+		<div class="swiper-container">
+			<div class="swiper-wrapper">
+				<foreach name="gamepic" item='pid'>
+				<div class="swiper-slide"><img src="__ROOT__{$pid|get_cover='path'}" width="100%" height="158"/></div>				
+				</foreach>				
+			</div>
+			<!-- 如果需要分页器 -->
+			<div class="swiper-pagination"></div>
+		</div>
+		<script>
+		var mySwiper = new Swiper('.swiper-container', {
+			autoplay: 5000,
+			pagination : '.swiper-pagination',
+			loop : true,
+		})
+		</script>
+		</if>
+		<div class="abstract J-abstract">
+			<div class="inner"><b>简介：</b>
+			  {$data.gamedetail}
+			</div>
+		</div>
+		<div class="more">
+			<div class="inner" id="J-btn-more"><span class="unfold"><i></i></span></div>
+		</div>
+		<script>
+			$(function(){
+				$(".unfold").click(function(){
+					$(".abstract").css({"height":"auto"});
+					$(".more").hide();
+				});
+			});
+		</script>
+    </div>
+    
+    <!-- 礼包模块--微信模块 -->
+    <div class="qik-gift" style="margin-top:2%;border-top: 1px solid #e4e4e4;">
+      <!-- <p class="qik-gift-tit">独家攻略秘籍及礼包，关注"7k7k手游"微信号即可获得！</p>
+      <p class="qik-gift-txt"> 第一步、登录微信点击右上角“<span class="qik-gift-icon1"></span>”<br>
+        第二步、选择“<span class="qik-gift-icon2"></span> ”添加朋友<br>
+        第三步、查找“7k7k”并关注“7k7k手游”<br>
+        第四步、进入“7k7k手游”公众号点击“领取礼包”<br>
+        <em>7K7K手游官方Q群</em>(384158693一群/190337909二群)<br>
+      </p> -->
+		&nbsp;{$data.Strategy}
+    </div>
+    
+    <!-- 添加中部广告位 -->
+    <!-- <div style="margin: 2%; background-color: #FFF; border: 1px solid #e4e4e4; overflow: hidden"> 
+      
+    </div> -->
+    <!--添加热门游戏推广位-->
+    <div class="T_hot_position">
+      <div class="h_title">
+        <h3>热门游戏推荐</h3>
+        <a href="{:U('Game/index?cate=h')}" class="h_more">更多</a> </div>
+      <div class="h_content">
+        <div class="swipe">
+          <div class="swipe-wrap">
+            <ul class="h_con">
+				<foreach name="hot" item='vo'>
+				<li>
+					<a href="{:U('Game/detail?id='.$vo['id'].'')}" >
+						<img src="__ROOT__{$vo.icon|get_cover='path'}" alt="{$vo.game_name}">
+						<span>{$vo.game_name}</span>
+					</a>
+					<a href="{:U('Down/down_file?game_id='.$vo['id'].'&type=1')}"  class="h_down">立即下载</a>
+				</li>					
+				</foreach>
+		   </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="box" style="margin-top:2%;">
+      <div class="box-hd"> <span>相关推荐</span> </div>
+      <div class="box-bd">
+        <div class="games clearfix">
+			<foreach name="xg" item='vo'>
+			<div class="item">
+				<div class="pic"> 
+					<a href="{:U('Game/detail?id='.$vo['id'].'')}">
+					<img src="__ROOT__{$vo.icon|get_cover='path'}"></a> 
+				</div>
+				<a href="{:U('Game/detail?id='.$vo['id'].'')}" class="info">
+				<div class="name">{$vo.game_name}</div>
+				<div class="attr">
+				  <div class="kind">{:get_game_type($vo['game_type_id'])}</div>
+				  <div class="byte">{$vo.game_size}</div>
+				</div>
+				<div class="star">
+				  <div class="star-num" style="width: {$vo.recommend_level}%;"></div>
+				</div>
+				</a>
+				<div class="down"> <a href="{:U('Down/down_file?game_id='.$vo['id'].'&type=1')}"  class="pkg">免费下载</a> </div>
+			</div>
+			</foreach> 
+        </div>
+      </div>
+    </div>
+    
+
+    <!-- 底部下载按钮	-->
+    <div class="botDown">
+      <div class="inbotDown"> <a href="{:U('Down/down_file?game_id='.$data['id'].'&type=1')}" > <img src="__ROOT__{$data.icon|get_cover='path'}">
+        <div>
+          <p class="inbotDown-title">{$data.game_name}</p>
+        </div>
+        </a> <a class="inbotDown-btn" href="{:U('Down/down_file?game_id='.$data['id'].'&type=1')}" >马上安装</a> </div>
+    </div>
+  </section>
+</div>
+
+</block>

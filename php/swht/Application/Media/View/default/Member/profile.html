@@ -1,0 +1,101 @@
+<extend name="Public/base" />
+<block name="body" >
+<div class="wrap_w">
+  <div class="crumbs"><em>当前位置：</em><a href="{:U('Index/index')}" target="_blank">溪谷游戏</a>
+	 <span> &gt; </span><a href="{:U('Subscriber/record')}">用户中心</a>
+  </div>
+  <div id="member" class="clearfix">
+    <div id="member_l">
+      <include file='Base' />
+    </div>
+    
+    <div id="member_r">
+      <div class="other_s">
+          <h3 class="clearfix"><span>个人资料</span></h3>
+<link href="__CSS__/profile.css" rel="stylesheet" />
+<div class="m-personInfo-wrap m-user-center-content">
+    <span id="notice" style="line-height:40px;position:relative;margin-left:97px;"></span>
+	<ul class="info-box">
+		<li class="item">
+			<div class="li-label">账号：</div>
+			<div class="li-content js-name-box filled">
+				<span class="js-show-spec-it filled-txt ">{$up.account}</span>
+			</div>
+		</li>
+		<li class="item">
+			<div class="li-label">昵称：</div>
+			<div class="li-content js-name-box filled">
+				<input type="text" name="nickname" class="nickname" id="nickname" data-value="{$up.nickname}" value="{$up.nickname}" />
+			</div>
+		</li>
+		<li class="item">
+			<div class="li-label">平台币余额：</div>
+			<div class="li-content js-name-box filled">
+				<span class="js-show-spec-it filled-txt ">{$up.balance}</span>
+			</div>
+		</li>
+		<li class="item">
+			<div class="li-label">手机：</div>
+			<div class="li-content js-name-box filled">
+				<empty name="up.phone">
+				<span class="js-show-spec-it filled-txt ">未绑定</span><a href="{:U('phone')}" class="bindbtn">去绑定</a>
+				<else />
+				<span class="js-show-spec-it filled-txt ">{$up.phone}</span>
+				</empty>
+			</div>
+		</li>
+		<li class="item">
+			<div class="li-label">姓名：</div>
+			<div class="li-content js-name-box filled">
+				<empty name="up.real_name">
+				<span class="js-show-spec-it filled-txt ">未绑定</span><a href="{:U('card')}" class="bindbtn">去绑定</a>
+				<else />
+				<span class="js-show-spec-it filled-txt ">{$up.real_name}</span>
+				</empty>
+			</div>
+		</li>
+		<li class="item">
+			<div class="li-label">身份证：</div>
+			<div class="li-content js-name-box filled">
+				<empty name="up.idcard">
+				<span class="js-show-spec-it filled-txt ">未绑定</span><a href="{:U('card')}" class="bindbtn">去绑定</a>
+				<else />
+				<span class="js-show-spec-it filled-txt ">{$up.idcard}</span>
+				</empty>
+			</div>
+		</li>
+	</ul>
+	<p class="tips"> </p>
+	<a href="javascript:;" class="btn editor-btn">提交</a>
+</div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+$(function() {
+	$('.editor-btn').on('click',function() {
+		var nickname = $.trim($('#nickname').val()),data = $.trim($('#nickname').data('value'));
+		if (nickname == '') {
+            $('#notice').removeClass('right-msg').addClass('error-msg').text('昵称不能为空');
+			return false;
+		}
+		if (nickname == data) {
+            $('#notice').removeClass('right-msg').addClass('error-msg').text('昵称修改后才能提交');
+			return false;
+		}
+		$('#notice').text('');
+		$.post('__SELF__',{nickname:nickname},function(req) {
+			if (Number(req.status) == 1) {
+                $('#notice').removeClass('error-msg').addClass('right-msg').text(req.msg);
+                setTimeout(function() {
+                    window.location.reload();
+                },2000);
+			} else {
+                $('#notice').removeClass('right-msg').addClass('error-msg').text(req.msg);
+			}
+		},'json');
+	});
+});
+</script>
+</block>

@@ -1,0 +1,414 @@
+.groupFigure .topHeaderFigure {
+	height:50px;
+	background-color:#f6f8fb;
+	padding-left:20px;
+	color:#4e515e;
+	position:relative;
+	border-bottom:1px solid #d2dae2;
+	display:none
+}
+.groupFigure .topHeaderFigure .leftHeader {
+	float:left;
+	height:50px
+}
+.groupFigure .topHeaderFigure .leftHeader .headerTxt {
+	float:left;
+	line-height:50px;
+	font-size:14px;
+	margin-right:20px
+}
+.groupFigure .topHeaderFigure .leftHeader .selectUserGroup {
+	float:left;
+	width:110px;
+	height:36px;
+	margin:6px 0;
+	color:#545454;
+	position:relative
+}
+.groupFigure .topHeaderFigure .leftHeader .selectUserGroup .headerSelect {
+	width:110px;
+	font-size:14px;
+	position:relative;
+	cursor:pointer
+}
+.groupFigure .topHeaderFigure .leftHeader .selectUserGroup .headerSelect .icon {
+	line-height:24px;
+	text-align:center;
+	color:#FFF;
+	display:inline-block;
+	width:24px;
+	float:left;
+	margin-top:6px;
+	font-size:12px;
+	-moz-border-radius:50% 50%;
+	-webkit-border-radius:50%;
+	border-radius:50% 50%;
+	background-color:#545454;
+	display:inline-block
+}
+.groupFigure .topHeaderFigure .leftHeader .selectUserGroup .headerSelect .txt {
+	margin-left:30px;
+	line-height:36px
+}
+.groupFigure .topHeaderFigure .leftHeader .selectUserGroup .headerSelect .arrow {
+	position:absolute;
+	right:-5px;
+	bottom:12px;
+	font-family:"iconfont" !important;
+	font-size:12px;
+	font-style:normal;
+	-webkit-font-smoothing:antialiased;
+	-webkit-text-stroke-width:0.2px;
+	-moz-osx-font-smoothing:grayscale
+}
+.groupFigure .topHeaderFigure .leftHeader .selectUserGroup .headerSelect .arrow:before {
+	content:"\e621";
+	font-size:8px
+}
+.groupFigure .topHeaderFigure .leftHeader .selectUserGroup .listSelect {
+	position:absolute;
+	top:0;
+	left:0;
+	width:130px;
+	background-color:#fff;
+	border:1px solid #9ba3af;
+	z-index:2;
+	box-shadow:0 4px 8px 2px rgba(0, 0, 0, 0.4);
+	padding:0 10px;
+	white-space:nowrap;
+	max-height:180px;
+	overflow-y:scroll;
+	display:none
+}
+.groupFigure .topHeaderFigure .leftHeader .selectUserGroup .listSelect .item {
+	font-size:14px;
+	position:relative;
+	cursor:pointer
+}
+.groupFigure .topHeaderFigure .leftHeader .selectUserGroup .listSelect .item .icon {
+	line-height:24px;
+	text-align:center;
+	color:#FFF;
+	display:inline-block;
+	width:24px;
+	height:24px;
+	float:left;
+	margin-top:6px;
+	font-size:12px;
+	-moz-border-radius:50% 50%;
+	-webkit-border-radius:50%;
+	border-radius:50% 50%;
+	background-color:#545454
+}
+.groupFigure .topHeaderFigure .leftHeader .selectUserGroup .listSelect .item .txt {
+	margin-left:30px;
+	line-height:36px
+}
+.groupFigure .topHeaderFigure .leftHeader .fuckUITip {
+	float:left;
+	cursor:pointer;
+	margin-left:20px
+}
+.groupFigure .topHeaderFigure .leftHeader .fuckUITip .icon {
+	line-height:50px;
+	font-family:"iconfont" !important;
+	font-size:12px;
+	font-style:normal;
+	-webkit-font-smoothing:antialiased;
+	-webkit-text-stroke-width:0.2px;
+	-moz-osx-font-smoothing:grayscale
+}
+.groupFigure .topHeaderFigure .leftHeader .fuckUITip .icon:before {
+	content:"\e675";
+	font-size:20px
+}
+.groupFigure .topHeaderFigure .leftHeader .fuckUITip .icon:hover:before {
+	color:#000
+}
+.groupFigure .topHeaderFigure .rightHeader {
+	float:right;
+	width:500px;
+	height:50px
+}
+.groupFigure .topHeaderFigure .rightHeader .timeTxt {
+	float:right;
+	line-height:50px;
+	font-size:14px
+}
+.groupFigure .topHeaderFigure .rightHeader .timeTip {
+	float:right;
+	margin-left:5px;
+	cursor:pointer;
+	height:18px;
+	width:18px;
+	position:relative
+}
+.groupFigure .topHeaderFigure .rightHeader .timeTip .icon {
+	line-height:50px;
+	display:inline-block;
+	height:16px;
+	width:16px;
+	float:left;
+	font-family:"iconfont" !important;
+	font-size:12px;
+	font-style:normal;
+	-webkit-font-smoothing:antialiased;
+	-webkit-text-stroke-width:0.2px;
+	-moz-osx-font-smoothing:grayscale
+}
+.groupFigure .topHeaderFigure .rightHeader .timeTip .icon:before {
+	content:"\e609";
+	font-size:16px
+}
+.groupFigure .topHeaderFigure .rightHeader .timeTip .icon:hover:before {
+	color:#000
+}
+.groupFigure .topHeaderFigure .rightHeader .timeTip .dateTimeTip {
+	color:#4e515e;
+	position:absolute;
+	top:46px;
+	right:-12px;
+	z-index:2;
+	display:none;
+	cursor:default
+}
+.groupFigure .topHeaderFigure .rightHeader .timeTip .dateTimeTip .tipPop {
+	padding:8px;
+	width:200px;
+	min-height:20px;
+	background-color:#fff;
+	border:1px solid #d2dae2;
+	-moz-box-shadow:2px 2px 2px 2px #d2dae2;
+	-webkit-box-shadow:2px 2px 2px 2px #d2dae2;
+	box-shadow:2px 2px 2px 2px #d2dae2
+}
+.groupFigure .topHeaderFigure .rightHeader .timeTip .dateTimeTip .tipPop .tipTxt {
+	line-height:20px;
+	padding-left:10px;
+	font-size:12px
+}
+.groupFigure .topHeaderFigure .rightHeader .timeTip .dateTimeTip .tipPop .tipTxt .load {
+	line-height:20px;
+	text-align:center;
+	margin-left:-10px
+}
+.groupFigure .topHeaderFigure .rightHeader .timeTip .dateTimeTip .popTopArrow {
+	left:0
+}
+.groupFigure .topHeaderFigure .rightHeader .timeTip .dateTimeTip .popTopArrow .border {
+	left:auto;
+	right:10px
+}
+.groupFigure .topHeaderFigure .rightHeader .timeTip .dateTimeTip .popTopArrow .tb-border {
+	border-color:transparent transparent #d2dae2
+}
+.groupFigure .topHeaderFigure .rightHeader .timeTip:hover .dateTimeTip {
+	display:inline-block
+}
+.groupFigure .topHeaderFigure .rightHeader .timeInput {
+	float:right;
+	margin:6px 10px
+}
+.groupFigure .topHeaderFigure .rightHeader .timeInput .calendarInput {
+	width:70px
+}
+.groupFigure .topHeaderFigure .rightHeader .backListBtn {
+	float:right;
+	background-color:#ee4f6a;
+	color:#FFF;
+	width:140px;
+	text-align:center;
+	cursor:pointer;
+	height:50px
+}
+.groupFigure .topHeaderFigure .rightHeader .backListBtn .icon {
+	line-height:50px;
+	font-family:"iconfont" !important;
+	font-size:12px;
+	font-style:normal;
+	-webkit-font-smoothing:antialiased;
+	-webkit-text-stroke-width:0.2px;
+	-moz-osx-font-smoothing:grayscale
+}
+.groupFigure .topHeaderFigure .rightHeader .backListBtn .icon:before {
+	content:"\e567";
+	font-size:20px
+}
+.groupFigure .topHeaderFigure .rightHeader .backListBtn .txt {
+	line-height:50px;
+	font-size:14px;
+	color:#FFF
+}
+.groupFigure .figureCondition {
+	background-color:#dee2e9;
+	border-bottom:1px solid #d2dae2;
+	height:0;
+	display:none;
+	color:#4e515e
+}
+.groupFigure .figureCondition .popTopArrow {
+	left:0px;
+	background-color:#dee2e9;
+	-moz-border-radius:0;
+	-webkit-border-radius:0;
+	border-radius:0;
+	border:none;
+	height:60px;
+	padding-left:92px
+}
+.groupFigure .figureCondition .popTopArrow .textName, .groupFigure .figureCondition .popTopArrow .textDesc {
+	height:30px;
+	line-height:30px;
+	overflow:hidden
+}
+.groupFigure .figureCondition .popTopArrow .textName .txt, .groupFigure .figureCondition .popTopArrow .textDesc .txt {
+	max-width:700px;
+	display:inline-block;
+	float:left
+}
+.groupFigure .figureCondition .popTopArrow .textName .icon, .groupFigure .figureCondition .popTopArrow .textDesc .icon {
+	color:#4e515e;
+	display:inline-block;
+	float:left;
+	font-family:"iconfont" !important;
+	font-size:12px;
+	font-style:normal;
+	-webkit-font-smoothing:antialiased;
+	-webkit-text-stroke-width:0.2px;
+	-moz-osx-font-smoothing:grayscale;
+	margin-left:10px
+}
+.groupFigure .figureCondition .popTopArrow .textName .icon:before, .groupFigure .figureCondition .popTopArrow .textDesc .icon:before {
+	content:"\e657";
+	font-size:14px
+}
+.groupFigure .figureCondition .popTopArrow .border {
+	left:226px
+}
+.groupFigure .figureCondition .popTopArrow .tb-border {
+	border-color:transparent transparent #dee2e9
+}
+.groupFigure .figureCondition .popTopArrow .tb-background {
+	border-color:transparent transparent #dee2e9
+}
+.groupFigure .tabHeader {
+	height:50px;
+	background-color:#f6f8fb;
+	padding-left:20px;
+	position:relative;
+	border-bottom:1px solid #d2dae2;
+	overflow:hidden;
+	display:none
+}
+.groupFigure .tabHeader .tabH {
+	width:100px;
+	text-align:center;
+	font-size:14px;
+	color:#a9b8cd;
+	float:left;
+	height:50px;
+	line-height:50px;
+	cursor:pointer
+}
+.groupFigure .tabHeader .active {
+	color:#4e515e
+}
+.groupFigure .tabHeader .bar {
+	position:absolute;
+	height:4px;
+	width:100px;
+	background-color:#ee4f6a;
+	top:47px;
+	left:20px;
+	display:none
+}
+{
+	background-color:#eef0f8;
+	display:none
+}
+.tabFigureContent {
+	display:none;
+	padding-left:20px;
+	padding-bottom:40px;
+	overflow:hidden
+}
+.tabFigureContent .dashBoard {
+	width:50%;
+	float:left;
+	margin-top:20px
+}
+.tabFigureContent .dashBoard:hover .dashBoardContent {
+	-moz-box-shadow:0px 0px 3px 4px #cbcdd0;
+	-webkit-box-shadow:0px 0px 3px 4px #cbcdd0;
+	box-shadow:0px 0px 3px 4px #cbcdd0;
+	-moz-border-radius:2px;
+	-webkit-border-radius:2px;
+	border-radius:2px
+}
+.tabFigureContent .dashBoard .dashBoardContent {
+	height:310px;
+	background-color:#FFF;
+	padding:20px;
+	margin-right:18px;
+	border:1px solid #e0e3ea
+}
+.tabFigureContent .dashBoard .dashBoardContent .chartTitle {
+	height:30px;
+	font-size:14px
+}
+.tabFigureContent .dashBoard .dashBoardContent .chartTitle .rightTopBtn {
+	float:right;
+	height:10px;
+	font-size:12px
+}
+.tabFigureContent .dashBoard .dashBoardContent .chartTitle .rightTopBtn span {
+	display:inline-block
+}
+.tabFigureContent .dashBoard .dashBoardContent .chartTitle .rightTopBtn .bt {
+	cursor:pointer;
+	padding:0 10px
+}
+.tabFigureContent .dashBoard .dashBoardContent .chartTitle .rightTopBtn .bt:hover {
+	text-decoration:underline
+}
+.tabFigureContent .dashBoard .dashBoardContent .chartTitle .rightTopBtn .bt2, .tabFigureContent .dashBoard .dashBoardContent .chartTitle .rightTopBtn .bt3 {
+	border-left:1px solid #323b3d
+}
+.tabFigureContent .dashBoard .dashBoardContent .chartTitle .rightTopBtn .active {
+	color:#359ce7;
+	text-decoration:none
+}
+.tabFigureContent .dashBoard .dashBoardContent .chartContent {
+	height:260px
+}
+.tabFigureContent .dashBoard .dashBoardContent .chartContent .load {
+	line-height:150px;
+	text-align:center
+}
+.tabFigureContent .dashBoard .dashBoardContent .chartContent .load .tryAgain {
+	cursor:pointer
+}
+.tabFigureContent .dashBoard .dashBoardContent .chartContent .load .link {
+	font-size:12px;
+	line-height:30px;
+	color:#2297f4
+}
+.tabFigureContent .dashBoard .dashBoardContent .chartContent .load .link:hover {
+	color:#007be3;
+	text-decoration:underline
+}
+.tabFigureContent .dashBoardOne {
+	width:100%
+}
+.groupFigure .groupFigureTip .noListTip {
+	display:none;
+	line-height:50px;
+	text-align:center;
+	font-size:14px
+}
+.groupFigure .groupFigureTip .noComplete {
+	display:none;
+	line-height:50px;
+	text-align:center;
+	font-size:14px
+}

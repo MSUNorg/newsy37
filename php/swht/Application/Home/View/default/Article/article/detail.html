@@ -1,0 +1,19 @@
+<extend name="Public/bases" />
+<block name="body">
+<div class="ctitle"></div>
+<div  class="news_detail">
+	<div class="detail container">
+		<h2>{$info.title}</h2>
+		<p class="detail_time">{$info.update_time|date="Y-m-d H:i",###}</p>
+		{$info.content}
+		<div class="cons">
+			<article:prev name="prev" info="info">
+                <a href="{:U('?id='.$prev['id'])}">上一篇</a>
+            </article:prev>
+            <article:next name="next" info="info">
+                <a href="{:U('?id='.$next['id'])}">下一篇</a>
+            </article:next>
+		</div>
+	</div>
+</div>
+</block>

@@ -1,0 +1,36 @@
+﻿<extend name="Public/base" />
+<block name="body" >
+<div class="main_sub wrap_w">
+    <div class="crumbs"><em>当前位置：</em><a href="{:U('Index/index')}" target="_blank">溪谷游戏</a>
+	<span> &gt; </span><a href="{:U('Article/index?type='.$type)}">新闻中心</a></div>
+    <div id="newlist" class="clearfix">
+        <div class="l">
+            <div class="">
+				<ul class="tabNavigation clearfix">
+                    {:W('Category/new_lists', array($category['id'], ACTION_NAME == 'index'));}
+					<!-- <li><a class="<if condition='$type eq 50'>on</if>" href="{:U('Article/index?type=50')}">游戏公告</a></li>
+					<li><a class="<if condition='$type eq 49'>on</if>" href="{:U('Article/index?type=49')}">游戏新闻</a></li>
+					<li><a class="<if condition='$type eq 53'>on</if>" href="{:U('Article/index?type=53')}">游戏活动</a></li> -->					
+				</ul>
+                <div class="ntab" id="ntab01" style="display: block;">
+                    <ul>
+					<article:list name="article" category="$category['id']" child="true">
+                        <li class="clearfix">
+                            <span><a href="{:U('Article/detail?id='.$article['id'])}"></a></span>
+                            <h4><a href="{:U('Article/detail?id='.$article['id'])}">{$article.title}</a>
+                            </h4>
+                            <p class="pone"></p>
+                            <p class="ptwo">{$article.update_time|date="Y-m-d H:i:s",###}</p>
+                        </li> 
+                    </article:list>
+                    </ul>
+                    <div class="page"></div>
+                </div>
+            </div>
+        </div>
+        <div class="r">
+            {:W('Base/ranking');}
+        </div>
+    </div>
+</div>
+</block>

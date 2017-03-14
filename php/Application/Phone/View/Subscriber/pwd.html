@@ -1,0 +1,70 @@
+﻿<extend name="Public/subbases"/>
+<block name="body">
+<link href="__CSS__/pwd.css" rel="stylesheet" />
+<div class="m-pwd-wrap m-user-center-content">
+	<div class="user-center-title"><h2>修改密码</h2></div>
+    <div class="tabs">
+        <form id="form_users_password" action="{:U('pwd')}" method="post" >
+            <ul class="info-box">
+                <li class="item">
+                  <div class="li-label">用户名：</div>
+                  <div class="li-content js-name-box filled">{$data.username}</div>
+                </li>
+                <li class="item">
+                  <div class="li-label"><span class="req">*</span>旧密码：</div>
+                  <div class="li-content js-name-box filled">
+                    <input type="password" class="input" name="old_password" id="old_password" placeholder="输入您的旧密码">
+                    <span id="old_password_tip" class="msg_tip"></span>
+                   </div>
+                </li>
+                <li class="item">
+                  <div class="li-label"><span class="req">*</span>新密码：</div>
+                  <div class="li-content js-name-box filled"><input type="password" class="input" name="password" id="password" placeholder="输入您的新密码">
+                    <span id="password_tip" class="msg_tip"></span></div>
+                </li>
+                <li class="item">
+                  <div class="li-label"><span class="req">*</span>确认密码：</div>
+                  <div class="li-content js-name-box filled"><input type="password" class="input" id="confirm_password">
+                    <span id="confirm_password_tip" class="msg_tip"></span></div>
+               </li>
+            </ul>    
+            <p class="tips"> </p>
+            <input type="hidden" name="id" value="{$data.uid}"></div>        
+            <a href="javascript:;" class="tj btn editor-btn">确认修改</a>
+        </form>
+    </div>
+</div>
+<style>.msg_tip{color:red;}</style>
+<script src="__JS__/pop.js"></script>
+<script>
+    $(function() {
+        $('.tj').on('click',function() {
+            var old_password = ($('#old_password').val()),
+                password = ($('#password').val()), 
+                confirm_password = $.trim($('#confirm_password').val()),
+                re = /^[a-zA-z0-9_]{6,30}$/;
+            if (old_password == '' ) {$('#old_password_tip').text('必填项');return false;}
+            if (!re.test(old_password)) {$('#old_password_tip').text('密码由6-30位字母数字下划线组成');return false;}
+            if (password == '' ) {$('#password_tip').text('必填项');return false;}    
+            if (!re.test(password)) {$('#password_tip').text('密码由6-30位字母数字下划线组成');return false;}
+            if (confirm_password == '' ) {$('#confirm_password_tip').text('必填项');return false;}    
+            if (!re.test(confirm_password)) {$('#confirm_password_tip').text('密码由6-30位字母数字下划线组成');return false;}
+            if (confirm_password !== password) {$('#confirm_password_tip').text('两次密码不一致');return false;}
+            
+            $('.msg_tip').text('');
+            $('.pop').remove();
+            
+            pop('提示','正在验证，稍等……','');
+            ajaxpost('{:U("pwd")}',{old_password:old_password,password:password},function(data) {
+                $('.pop').remove();
+                if (parseInt(data.status) == 1) {
+                    pop('',data.msg,{ok:'确定'},true,3000,{url:'__CONTROLLER__/pwd',time:500});                    
+                } else {
+                    pop('','<span style="color:red;margin:0 10px;">!!</span>'+data.msg,{ok:'确定'},true);
+                }
+            });                   
+        });
+    });
+</script>
+</block>
+  

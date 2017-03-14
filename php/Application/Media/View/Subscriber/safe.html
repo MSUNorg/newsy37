@@ -1,0 +1,360 @@
+<extend name="Public/subbases" />
+<block name="body" >
+<link href="__CSS__/safe.css" rel="stylesheet" />
+<link href="__CSS__/set.css" rel="stylesheet" />
+<div class="m-user-safe m-user-center-content">
+	<div class="user-center-title"><h2>帐号安全</h2></div>
+	<div class="user-secure-index" id="user-secure-index">
+		<div class="m-score clear-fix">
+			<span class="desc">安全评分</span>
+			<div class="sc">
+				<span class="sc_i" style="width:{$safescore}%"></span>		
+			</div>
+			<script></script>
+			<span class="score-val">{$safescore}分!</span>
+		</div>
+		<div class="safe-tips with-no-one-setting">
+		<if condition="$safenum gt 0">
+			<p class="fir"><i class="warning"></i>有<span class="org">{$safenum}项</span>密保安全设置未完成，马上进行</p>
+			<p><i class="warning"></i>您的帐号未设置任何保密措施，不能进行密码修改，请您先进行帐号安全措施设置。</p>
+		<else />
+			<p class="tips">你已完成密保设置</p>
+		</if>
+		</div>
+		<div class="safe-item safe-item-p doing">
+			<div class="content">
+				<i class="item-deco phone"></i>
+				<span class="sub-title">绑定手机：</span>
+				<div class="with-no-bind">
+					<empty name="up.phone">
+					<a href="javascript:;" class="btn-bind btnbind" data-change="2" data-redirect="p">设置手机</a>
+					<i class="error"></i>
+					<div class="bind-desc">
+						<p>未绑定</p>
+						<p>用于密码修改时短信提示和密码遗失时重置密码</p>
+					</div>
+					<else />
+					<a href="javascript:;" class="btn-bind btnbind" data-redirect="p">重置手机</a>
+					<i class="correct"></i>
+					<div class="bind-desc">
+						<p>状态：已绑定&nbsp;手机：{$up.phone}</p>
+						<p>用于密码修改时短信提示和密码遗失时重置密码</p>
+					</div>
+					</empty>
+				</div>
+			</div>
+		</div>
+		<div class="safe-item safe-item-i doing">
+			<div class="content">
+				<i class="item-deco id"></i>
+				<span class="sub-title">绑定证件：</span>
+				<div class="with-no-bind">
+					<if condition="($up.real_name neq '' ) and ($up.idcard neq '')">
+					<a href="javascript:;" class="btn-bind btnbind" data-alert="已经设置证件信息" >已设置</a>
+					<i class="correct"></i>
+					<div class="bind-desc">
+						<p>状态：已设置&nbsp;姓名：{$up.real_name}&nbsp;身份证：{$up.idcard}</p>
+						<p>用于帐号归属确认以及防沉迷验证，一旦设置，则无法更改</p>
+					</div>
+					<else />
+					<a href="javascript:;" class="btn-bind btnbind" data-change="3" data-redirect="i">设置证件</a>
+					<i class="error"></i>
+					<div class="bind-desc">
+						<p>未设置</p>
+						<p>用于帐号归属确认以及防沉迷验证，一旦设置，则无法更改</p>
+					</div>
+					</if>
+				</div>
+			</div>
+		</div>
+		<div class="all-in-one-tip">*如出现其他帐号安全异常问题，请<a href="{:U('Service/index')}" target="_blank">联系客服</a>.</div>
+	</div>
+	
+	<div class="user-secure hide" id="user-secure">
+		<div class="user-secure-title">
+			<i class="user-secure-ico "></i>
+			<span class="user-secure-tag"></span>
+		</div>
+		<ul class="user-step ">
+			<li class="focus"><span>1</span>密码验证</li>
+			<li><span>2</span>设置密保</li>
+		</ul>
+		<div class="user-secure-setting user-form user-secure-protect" id="user-password-verify">
+			
+			<div class="user-secure-panel" id="user-secure-checkpassword">
+				<div id="check-set" class="js-unset">
+					<p class="txt">为了您的帐号安全，请在设置前验证您的登录密码！</p>
+					<p><label for="checkpassword"><span class="red">*</span>　登录密码</label>
+					<input data-rule="required,password" data-message="请输入登录密码,密码输入有误" data-view="noright" id="checkpassword" name="checkpassword" type="password" class="text">
+					</p>
+					<p class="wrap-btn">
+						<a id="tj-checkpassword" class="btn-yellow-140" href="javascript:;" title="验证密码">验证密码</a>
+					</p>
+				</div>
+			</div>			
+
+		</div>
+		<div class="user-secure-setting user-form user-secure-protect hide" id="user-secure-setting" >
+			
+			
+			<div class="user-secure-panel hide" id="user-secure-phone" data-action="verify_phone_code" data-set="2">
+				<div id="phone-set" class="js-unset">
+					<p class="txt">注意：绑定手机后可用于找回密码、接收帐号异常信息提醒等！</p>
+					<p>
+						<label for="phone-input"><span class="red">*</span>　手机号码</label>
+						<input data-rule="required,phone" data-message="请输入手机号码" id="phone-input" name="phone" type="text" class="text setting">
+					</p>
+					<p>
+						<label for="">　</label>
+						<a data-role="phone" id="tj-phone-code" href="javascript:;" class="btn-code-send btn-eee" title="发送验证码">点击发送</a>　　一天只能获取三次验证码
+					</p>
+													<p>
+						<label for="code2"><span class="red">*</span>　短信验证码</label>
+						<input data-rule="required,num" data-message="输入的验证码无效" data-view="noright" id="code2" name="code" type="text" class="text setting"></p>
+					<p class="wrap-btn"><a id="tj-phone" class="btn-yellow-140 btn-s-setting" href="javascript:;">确&nbsp;&nbsp;定</a></p>
+					<p class="txt">如果没有收到短信，您可以检查手机号是否正确并尝试重新发送验证码。</p>
+				</div>
+				<div id="phone-result" class="user-s-setted hide">
+					<p> </p>
+					<p class="txt">您的帐号已设置密保手机</p>
+					<p class="txt"><a class="btn-back " href="{:U('safe')}" title="返回">返回</a>
+					
+				</div>
+
+			</div>
+			
+			<div class="user-secure-panel hide" id="user-secure-idcard" data-action="updateinfo">
+				<div class="js-unset">
+					<div class="ac user-secure-text">
+						<p class="txt txt-info">注意：您未填写防沉迷信息，按国家相关规定被纳入防沉迷系统。</p>
+						<p class="txt txt-info">建议您马上填写防沉迷信息，以更好地获得网络服务。</p>
+						<p class="txt txt-info red">此帐号的身份证信息只能填写一次，是判断帐号归属的重要依据。</p>
+					</div>
+					<p>
+						<label for="name"><span class="red">*</span>　姓名</label>
+						<input data-rule="required,hanzi" data-message="请输入真实姓名,请输入真实姓名" id="real_name" name="real_name" type="text" class="text setting">
+					</p>
+					<p>
+						<label for="idcard"><span class="red">*</span>　身份证号</label>
+						<input data-rule="required,card" data-message="请输入身份证号,输入的身份证号无效" id="idcard" name="idcard" type="text" class="text setting">
+					</p>
+					<p class="wrap-btn"><a id="tj-name" class="btn-yellow-140 btn-s-setting" href="javascript:;">确&nbsp;&nbsp;定</a></p>
+				</div>
+				<div class="user-s-setted hide">
+					<p> </p>
+					<p class="txt f16">您已通过防沉迷认证</p>
+					<p class="txt">
+						<a class="btn-back " href="{:U('safe')}" title="返回">返回</a>
+						<a class="blue " target="_blank" href="{:U('profile')}">添加更多信息</a>
+					</p>
+				</div>
+				<div class="user-s-setted hide">
+					<p> </p>
+					<p class="txt f16">您已通过防沉迷认证</p>
+					<p class="txt f16">姓名：{$up.real_name}</p>
+					<p class="txt f16">身份证号：{$up.idcard}</p>
+					<p class="txt">
+						<a class="btn-back " href="{:U('safe')}" title="返回">返回</a>
+					</p>
+				</div>
+			</div>
+		</div>
+	</div>	
+</div>
+<script src="__JS__/pop.js"></script>
+<script>
+$(function() {
+	$('.btnbind').on('click',function() {
+		var jthat = $(this),change = jthat.data('change'),
+			redirect = jthat.data('redirect'),
+			aler = jthat.data('alert');
+		if (change) {
+			jthat.attr('href','#'+change).addClass('setted');
+			$('#user-secure-index').addClass('hide');
+			$('#user-secure').show();
+			switch(change) {
+				case 2: {
+					$('.user-secure-ico').addClass('ico-u-phone-big');
+					$('.user-secure-tag').text('密保手机：');
+				};break;
+				case 3: {
+					$('.user-secure-ico').addClass('ico-u-mail-big');
+					$('.user-secure-tag').text('证件信息：');
+					$('.user-step').addClass('hide');
+					$('#user-password-verify').hide();
+					$('#user-secure-setting').show();
+					$('#user-secure-idcard').show();
+				};break;
+				default:
+					window.location.reload();
+			}
+		}
+		if (aler) {
+			pop('温馨提示',aler,{ok:'确定'},true);
+		}
+	});
+	
+	// 实名
+	$('#real_name').on('blur keypress',function() {
+		var jthat = $(this),val = $.trim(jthat.val());
+		jthat.siblings('.field-error-message').remove();
+		if (val == ''){jthat.after('<span class="field-error-message">请输入真实姓名</span>');return;}
+		if (!(/[\u4E00-\u9FA5]{2,7}/g.test(val))) {jthat.after('<span class="field-error-message">输入的真实姓名无效</span>');return;}
+	});
+	$('#idcard').on('blur keypress',function() {
+		var jthat = $(this),val = $.trim(jthat.val());
+		jthat.siblings('.field-error-message').remove();
+		if (val == ''){jthat.after('<span class="field-error-message">请输入身份证号</span>');return;}
+		if (!checkidcard(val)) {jthat.after('<span class="field-error-message">输入的身份证号无效</span>');return;}
+		
+	});
+	$('#tj-name').on('click',function() {
+		var jreal = $('#real_name'),jidcard = $('#idcard'),
+		real = $.trim(jreal.val()),idcard=$.trim(jidcard.val());
+		jreal.siblings('.field-error-message').remove();
+		jidcard.siblings('.field-error-message').remove();
+		if (real == ''){jreal.after('<span class="field-error-message">请输入真实姓名</span>');return false;}
+		if (!(/[\u4E00-\u9FA5]{2,7}/g.test(real))) {jreal.after('<span class="field-error-message">输入的真实姓名无效</span>');return false;}
+		if (idcard == ''){jidcard.after('<span class="field-error-message">请输入身份证号</span>');return false;}
+		if (!checkidcard(idcard)) {jidcard.after('<span class="field-error-message">输入的身份证号无效</span>');return false;}
+		pop('提示','正在验证，稍等……');
+		setTimeout(function() {
+			var action = $.trim($('#user-secure-idcard').data('action'));
+			ajaxpost('__CONTROLLER__/'+action,{realname:real,idcard:idcard},function(data) {
+				$('.pop').remove();
+				if (parseInt(data.status) == 1) {
+					pop('',data.info,{ok:'确定'},true);
+					$('#user-secure-idcard .js-unset').hide();
+					$('#user-secure-idcard .user-s-setted:first').show();
+				} else {
+					pop('',data.info,{ok:'确定'},true);
+				}
+			});
+		},1000);		
+	});
+	
+	// pwd
+    var time='';
+	$('#checkpassword').on('blur keypress',function() {
+		$(this).siblings('.field-error-message').remove();
+		var val = $.trim($(this).val());
+		if (val == ''){$(this).after('<span class="field-error-message">请输入登录密码</span>');return;}
+		if (val.length<6 || val.length>30 ) {$(this).after('<span class="field-error-message">密码输入有误</span>');return;}
+	});
+	$('#tj-checkpassword').on('click',function() {
+		jcheck = $('#checkpassword');
+		var val = $.trim(jcheck.val());
+		if (val == '') { jcheck.after('<span class="field-error-message">请输入登录密码</span>');return false;}
+		if (val.length<6 || val.length>30 ) { jcheck.after('<span class="field-error-message">密码输入有误</span>');return false;}
+		pop('提示','正在验证，稍等……','');
+		setTimeout(function() {
+			var index = $('.btnbind.setted[href^="#"]').data('change');
+			ajaxpost('__CONTROLLER__/checkpassword',{password:val,type:index},function(data) {
+				$('.pop').remove();
+				if (parseInt(data.status) == 1) {
+					if (parseInt(data.type) != index) {
+						window.location.reload();
+					} 
+					$('#user-password-verify').hide();
+					$('#user-secure-setting').show();
+					$('.user-step li:last').addClass('focus').siblings().removeClass('focus');												
+					if (index == 1) {
+						$('#user-secure-email').show();
+					} else if (index == 2) {
+						$('#user-secure-phone').show();time=new Date().getTime();
+					} else window.location.reload();
+				} else {
+					pop('',data.info,{ok:'确定'},true);
+				}
+			});
+		},1000);
+	});	
+	
+
+	//phone
+	$('#phone-input').on('blur keypress',function() {
+		var jphone = $(this),val = $.trim(jphone.val());
+		jphone.siblings('.field-error-message').remove();
+		if (val == ''){jphone.after('<span class="field-error-message">请输入手机号码</span>');return;}
+		if (!(/^[1][358][0-9]{9}/.test(val))) {jphone.after('<span class="field-error-message">输入无效的手机号码</span>');return;}
+	});
+	var phonecodenum=3;
+	$('#tj-phone-code').on('click',function() {
+		var jphone = $('#phone-input'),val = $.trim(jphone.val());
+		jphone.siblings('.field-error-message').remove();
+		if (val == ''){jphone.after('<span class="field-error-message">请输入手机号码</span>');return false;}
+		if (!(/^[1][358][0-9]{9}/.test(val))) {jphone.after('<span class="field-error-message">输入无效的手机号码</span>');return false;}
+		pop('温馨提示','<div class="savecode-dialog-content comm-form">'
+        +'<p class="savecode-title"><label for="save_code">请输入验证码：</label></p>'
+        +'<p><input type="text" maxlength="4" data-default="请输入图片中的4位验证码" name="save_code" id="save_code" class="inp-txt v-code error save_code" data-message="请填写正确验证码">'
+		+'<img title="点击刷新验证" class="code-img fl" id="phone-img" src="__MODULE__/Subscriber/verify/vid/2" width="65" height="36"></p>'
+        +'<p id="savecode-msg" class="savecode-msg"></p>'
+    +'</div>',function(){
+			bottom = '<a class="sq-dialog-btn btn btn-s-1 btn-s-140" id="send" href="javascript:;" data-name="发送短信">发送短信</a>';
+			return bottom;
+		},true);
+		$('#phone-img').on('click',function() {
+			var imgsrc ='__MODULE__/Subscriber/verify/vid/2/t/'+(new Date().getTime());
+            $(this).attr('src',imgsrc);
+		});
+		$('#save_code').on('blur keypress',function() {
+            var jthat = $(this),val = $.trim(jthat.val()),jcodemsg=$('#savecode-msg');
+            jcodemsg.text('');
+            if (val == ''){jcodemsg.text('请输入验证码');return;}
+            if (val.length != 4){jcodemsg.text('请填写正确的验证码');return;}
+        });
+		$('#send').on('click',function() {
+            var jsavecode=$('#save_code'),savecode=$.trim(jsavecode.val()),jcodemsg=$('#savecode-msg');
+            jcodemsg.text('');
+            if (savecode == ''){jcodemsg.text('请输入验证码');return false;}
+            if (savecode.length != 4){jcodemsg.text('请填写正确的验证码');return false;}           
+            var time2 = new Date().getTime()-time;
+            if (parseInt(time2/60000)<30) {
+                ajaxpost('{:U("sendsafecode")}',{phone:val,verify:savecode,vid:2,flag:true},function(data) {
+                    $('.pop').remove();
+                    if (parseInt(data.status)==1) {
+                        pop('提示信息',data.msg,{ok:'确定'},true);
+                    } else {
+                        pop('提示信息',data.msg,{ok:'确定'},true);
+                    }
+                });
+            } else {
+               $('.pop').remove();
+               pop('提示信息','请重新输入登陆密码',{ok:'确定'},true);
+            }
+        });	
+	});
+    $('#code2').on('blur keypress',function() {
+        var jthat = $(this),val = $.trim(jthat.val());
+        jthat.siblings('.field-error-message').remove();
+        if (val == ''){jthat.after('<span class="pc field-error-message">请输入短信验证码</span>');return;}
+		if (!(/^\d+$/.test(val))) {jthat.after('<span class="pc field-error-message">输入的短信验证码无效</span>');return;}
+    });
+    
+    $('#tj-phone').on('click',function() {
+         var jcode2 = $('#code2'),code2 = $.trim(jcode2.val());
+        jcode2.siblings('.field-error-message').remove();
+        if (code2 == ''){jcode2.after('<span class="pc field-error-message">请输入短信验证码</span>');return;}
+		if (!(/^\d+$/.test(code2))) {jcode2.after('<span class="pc field-error-message">输入的短信验证码无效</span>');return;}
+        
+        $('.pop').remove();
+        pop('提示','正在验证，稍等……',''); 
+        var phone = $.trim($('#phone-input').val());
+        setTimeout(function(){
+            ajaxpost('{:U("csafecode")}',{phone:phone,vcode:code2},function(data) {
+                $('.pop').remove();
+                if (parseInt(data.status) == 1) {
+                    $('#phone-set').hide();
+                    $('#phone-result').show();
+                } else {
+                    pop('','短信验证失败，请重新尝试',{ok:'确定'},true);
+                }
+            });           
+        },1000);
+    });
+    
+    
+	
+});
+</script>
+</block>

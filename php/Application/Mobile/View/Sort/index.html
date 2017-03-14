@@ -1,0 +1,156 @@
+<extend name="Public/bases" />
+<block name="body" >
+<link href="__CSS__/game.css" rel="stylesheet" />
+<div class="T_hot_position" id="J-top-new-game">
+  <div class="h_title">
+    <h3>新游排行</h3>
+    <a href="{:U('Game/index?cate=n')}" class="h_more">更多</a> </div>
+  <div class="h_content">
+    <div class="swipe">
+      <div class="swipe-wrap">
+        <ul class="h_con">
+		<foreach name="newsgame" item="vo">
+			<li> 
+				<a href="{:U('Down/down_file?game_id='.$vo['id'].'&type=1')}" > 
+					<img src="__ROOT__{$vo.icon|get_cover='path'}" alt="{$vo.game_name}"> 
+				</a> 
+				<a href="{:U('Game/detail?id='.$vo['id'].'')}"> 
+					<span>{$vo.game_name}</span>
+					<p>{:get_game_type($vo['game_type_id'])}</p>
+					<p>{$vo.game_size}</p>
+				</a> 
+				<a href="{:U('Down/down_file?game_id='.$vo['id'].'&type=1')}"  class="h_down">下载</a> 
+			</li>		
+		</foreach>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="T_hot_position">
+  <div class="h_title">
+    <h3>休闲游戏排行榜</h3>
+    <a href="{:U('Game/index?type=13')}" class="h_more">更多</a> </div>
+  <div class="h_content">
+    <div class="swipe">
+      <div class="swipe-wrap">
+        <ul class="h_con">
+        <foreach name="casual" item="vo">
+			<li> 
+				<a href="{:U('Game/detail?id='.$vo['id'].'')}" > 
+					<img src="__ROOT__{$vo.icon|get_cover='path'}" alt="{$vo.game_name}"> 
+				</a>
+				<a href="{:U('Game/detail?id='.$vo['id'].'')}"> <span>{$vo.game_name}</span> </a> 
+			</li>
+		</foreach>
+		</ul>
+      </div>
+    </div>
+  </div>
+</div>
+<section class="boxs game">
+  <div class="box-content">
+    <div id="J-games" class="games">
+      <div class="box-hd"> <span>热门游戏排行</span> </div>
+		<div class="J-games games clearfix">
+		<foreach name="hot" item="vo">
+			<div class="item item-box">
+				<div class="item-top"> 
+					<a href="{:U('Down/down_file?game_id='.$vo['id'].'&type=1')}">
+						<div class="pic"><img src="__ROOT__{$vo.icon|get_cover='path'}"></div>
+					</a>
+					<div class="info"> 
+						<a href="{:U('Game/detail?id='.$vo['id'].'')}"><div class="name">{$vo.game_name}</div></a> 
+						<a href="{:U('Down/down_file?game_id='.$vo['id'].'&type=1')}">
+							<div class="dl-btn"><span>免费下载</span></div>
+						</a> 
+					</div>
+				</div>
+				<div class="message">
+					<div class="byte"><span class="line">{:get_game_type($vo['game_type_id'])}</span><span>{$vo.game_size}</span></div>
+				</div>
+			</div>
+		</foreach>
+      </div>
+    </div>
+  </div>
+</section>
+	<div id="more_Infor"><span id="more_Infor_btn">点击加载更多数据</span></div>
+	<script>
+		loadd();
+        function loadd(){
+            var loading ='<img src="__IMG__/loading.gif">正在加载中';
+            var nodata = '已加载完成全部数据';
+			var total='{$total}';
+			var page = '{$page}';
+            $(window).bind("scroll", function(){
+                var more=$("#more_Infor_btn");
+				var $this =$(this),
+					viewH =$(document.body).height(),//可见高度
+					contentH =$(window).height(),//内容高度
+					scrollTop =$(this).scrollTop(),//滚动高度
+					newht = viewH - contentH - scrollTop;
+				if (page > total){
+					more.unbind().html(nodata);
+					return;
+				}
+				if(newht <= 0){
+					$("#more_Infor").show();
+					
+					$.ajax({
+						type: 'POST',
+					  async: true,
+				  dataType : 'json',
+						url: '__CONTROLLER__/hot',
+					   data: 'p='+page,
+				 beforeSend: function(){
+								more.html(loading);
+							},
+					success: function (data) {
+							switch (parseInt(data.status)) {
+								case 1:
+								page = data.page;
+								var d = data.data;
+								var val = '';
+								for(var i=0;i<d.length;i++) {
+									
+									val += '<div class="item item-box">';
+									val += '	<div class="item-top">';
+									val += '		<a href="'+d[i].game_down+'" title="">';
+									val += '		<div class="pic">';
+									val += '			<img src="'+d[i].picurl+'" >';
+									val += '		</div>';
+									val += '		</a>';
+									val += '		<div class="info">';
+									val += '			<a href="__MODULE__/Game/detail/id/'+d[i].id+'" >';
+									val += '			<div class="name">'+d[i].game_name+'</div>';
+									val += '			</a>';
+									val += '			';
+									val += '			<a href="'+d[i].game_down+'" data-source="'+d[i].and_dow_address+'" ><div class="dl-btn"><span>免费下载</span></div></a>';
+									val += '		</div>';
+									val += '	</div>';
+									val += '	<div class="message">';
+									val += '		<div class="byte"><span class="line">'+d[i].game_type_id+'</span><span>'+d[i].game_size+'</span></div>';
+									val += '	</div>';
+									val += '</div>';								
+								}
+								$('#J-games').find('div.item.item-box:last').after(val);
+								more.unbind().html('点击加载更多数据');
+								break;
+							default:
+								more.unbind().html('点击加载更多数据');
+								break;	
+							}
+							return false;
+						},
+					error: function () {
+							more.unbind().html('点击加载更多数据');
+						},
+					cache: false
+						
+					});
+				}
+            });
+        }// CC函数结束
+	</script>
+</block>

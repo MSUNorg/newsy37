@@ -1,0 +1,143 @@
+<extend name="Public/promote_base"/>
+
+<block name="body">
+<script src="__STATIC__/layer/layer.js" type="text/javascript"></script>
+<div id="query">
+  <div class="mod">
+    <h2>为玩家充值平台币</h2>
+    <div class="zc_for">
+      <form id="form" action="{:U('agent')}" method="post">
+        <table width="100%" border="0" cellspacing="0" cellpadding="0">
+          <tbody>
+            <tr>
+              <td class="l"></td>
+              <td class="r">
+                <span class="pay_type_info" id="pay_type_0">
+                  可用平台币币为：<font color="#FF0000" id="balance" data="{$balance}">{$balance}个</font>
+                </span>
+              </td>
+            </tr>
+            <tr>
+              <td class="l">充值游戏：</td>
+              <td class="r">
+                <select id="game_id" name='game_id'>
+                  <option value="0" ratio='0'>请选择游戏</option>
+                  <volist name="game_list" id="vo">
+                    <option value="{$vo.game_id}" ratio="{$vo.ratio}" game_appid="{$vo.game_appid}">{$vo.game_name}</option>
+                  </volist>
+                </select>
+              </td>
+            </tr>
+            
+            <tr>
+              <td class="l">充值用户名：</td>
+              <td class="r">
+                <select id="account" name='account'>
+                  <option value="" >请选择用户</option>
+                </select>
+              </td>
+            </tr>
+            
+            <tr>
+              <td class="l">充值金额：</td>
+              <td class="r"><input type="text" class="name txt" id="pay_fmoney" name="amount">
+                (请输入整数)
+              </td>
+            </tr>
+            <tr>
+              <td class="l">折扣：</td>
+              <td class="r" id="content" >会长代充充值折扣{$ratios}折</td>
+            </tr>
+            <tr>
+              <td class="l"></td>
+              <td class="r">
+                <input type="hidden"  id="ratio" name="ratio" value="{$ratios}"> 
+                <input type="hidden" name="create_time" value="{:date('Y-m-d H:i:s')}"> 
+                <button type="button" class="tjbnt" onclick="check()" >确认</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </form>
+    </div>
+  </div>
+</div>
+</block>
+<block name="script">
+  <script type="text/javascript">
+    function check() {
+      data = validation();
+      if(data.status !=1){layer.msg(data.msg,{icon:2}); return false;};
+      var real_money = ((10 - $('#game_id option:selected').attr("ratio")) * $("#pay_fmoney").val()  )/10;
+      if(real_money > $("#balance").attr("data")){
+        layer.msg('余额不足',{icon:2}); return false;
+      }
+
+      $('#form').submit();
+    }
+
+    $("#game_id").change(function(){
+      var ratio = $('#game_id option:selected').attr("ratio");
+      var zk = 10 - ratio;
+      $("#ratio").val(zk);
+      $("#content").text("会长代充充值折扣"+zk+"折");
+      is_exist($('#game_id option:selected').attr("game_appid"));
+    })
+
+    function validation(){
+       var json_data = "";
+      if($("#game_id").find("option:selected").val()=='0'){
+        return json_data = {'status':0,'msg':'请选择充值游戏'}
+      }
+      if($.trim($('#account').val()).length == 0){
+        return json_data = {'status':0,'msg':'账号不能为空'}
+      }
+      if($.trim($('#pay_fmoney').val()).length == 0){
+        return json_data = {'status':0,'msg':'充值金额不能为空'}
+      }
+      if(!intege($('#pay_fmoney').val())){
+        return json_data = {'status':0,'msg':'金额必须是整数'};
+      }
+      return json_data = {'status':1,'msg':'成功'};
+      
+    }
+
+    function is_exist(game_appid){
+      var result = false;
+      $.ajax({
+        type:"post",
+        url:"{:U('is_exist')}",
+        async:false,
+        dataType:'json',
+        data:{game_appid:game_appid},
+        success:function(data){
+
+          if(data.status){
+            var html ="";
+            for(var i=0; i<data.data.length; i++){
+              html +=  "<option value='"+data.data[i].account+"'>"+data.data[i].account+"</option>";
+            }
+            $("#account").html(html);
+          }
+          else{
+            var html = "<option value=\"\" >此游戏暂无用户</option>";
+            $("#account").html(html);
+          }
+        }
+
+      })
+    }
+
+    function intege(data){
+      var re = /^[1-9]+[0-9]*]*$/;
+      if (!re.test(data))  
+      {  
+        return false;  
+      } 
+      else{
+        return true;
+      } 
+    }
+
+  </script>
+</block>

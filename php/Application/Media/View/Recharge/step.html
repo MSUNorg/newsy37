@@ -1,0 +1,38 @@
+<!-- <extend name="Public/pay" /> -->
+<block name="body" >
+    <div class="main">
+				<div class="rech_rightnav"><img src="__IMG__/rech_dingdanbt.jpg"></div>
+							  	<!--充值提醒-->
+		<div class="right_cnt">
+		<form action="http://37.com.cn/pay/deal_order.php" method="POST" id="create_user_pay_order" target="_self">
+			<input name="money" value="10" type="hidden" readonly="">
+			<input name="bank" value="ICBCB2C" type="hidden" readonly="">
+			<input name="order_id" value="CZ201604121525572809" type="hidden" readonly="">
+			<input name="pay_id" value="12" type="hidden" readonly="">
+		</form>
+		<div class="charge_confirm_content">
+		  <h3>请确认您的充值信息：</h3>
+		  <dl class="charge_confirm_dl">
+			<dt>充值方式：</dt>
+			<dd>网银支付</dd>
+			<dt>订单编号：</dt>
+			<dd class="w_notice">CZ201604121525572809</dd>
+						<dt>充值帐号：</dt>
+			<dd class="w_notice">fdsafdaf</dd>
+			<dt>充值金额：</dt>
+			<dd class="w_notice">10元</dd>
+		  </dl>
+		  <br>
+		  <p style="color:#c00;font-size:14px;">注：请记录订单编号，如充值遇到问题请向
+		  <a href="http://b.qq.com/webc.htm?new=0&amp;sid=800089273&amp;eid=2188z8p8p8p8z808K8y8P&amp;o=&amp;q=7" title="客服咨询" target="_self" style="color:#06F">客服咨询</a></p>
+          
+		  <div class="charge_confirm_link"> 
+			<a class="" id="confirm_submit" target="_self">确认提交</a> 
+			<a href="{:U('index')}" class="charge_confirm_back_a">返回修改</a> </div>
+
+		</div>
+	  </div>
+	 	<!---充值提醒结束-->
+		<div class="clear"></div>
+    </div>
+</block>

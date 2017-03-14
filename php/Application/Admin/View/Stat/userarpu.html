@@ -1,0 +1,211 @@
+<extend name="Public/base"/>
+
+<block name="body">
+    <!-- 标题栏 -->
+    <div class="main-title">
+        <h2>[用户ARRPU] 列表</h2>
+    </div>
+	<div class="cf top_nav_list">
+		<div class="fl button_list">
+		</div>
+		<!-- 高级搜索 -->
+		<div class="search-form fr cf">
+            <div class="input-list">
+                <label>选择日期：</label>
+                <input type="text" id="time-start" name="time-start" class="text input-2x" value="{:I('time-start')}" placeholder="请选择时间" /> 
+            </div>
+            <div class="i_list" id="" >
+                 <div class="drop-down" id="game">
+                    <if condition="I('game_name') eq ''">
+                    <input type="text" id="i_list_id" class="sort-txt" value="" placeholder="请选择游戏" />
+                    <else />
+                    <input type="text" id="i_list_id" class="sort-txt" value="{:I('game_name')}" placeholder="请选择游戏" />
+                    </if>
+                    <input type="hidden" id="i_list_idh" name="game_name" value="{:I('game_name')}" />
+                    <i class="arrow arrow-down"></i>
+                    <ul id="i_list_li" class="nav-list hidden i_list_li">
+                        <li><a href="javascript:;" value="" >全部</a></li>
+                        <volist name=":get_game_list()" id="vo">                        
+                        <li><a href="javascript:;" value="{$vo.id}" >{$vo.game_name}</a></li>
+                        </volist>
+                    </ul>
+                </div>                
+            </div>
+            <div class="i_list">
+                 <div class="drop-down" id="promote">
+                    <if condition="I('promote_name') eq ''">
+                    <input type="text" id="i_list_id" class="sort-txt" name="promote_name" value="" placeholder="请选择所属渠道" />
+                    <else />
+                    <input type="text" id="i_list_id" class="sort-txt" name="promote_name" value="{:I('promote_name')}" placeholder="请选择所属渠道" />
+                    </if>
+                    <input type="hidden" id="i_list_idh" name="promote_id" value="{:I('promote_id')}" />
+                    <i class="arrow arrow-down"></i>
+                    <ul id="i_list_li" class="nav-list hidden i_list_li">
+                        <li><a href="javascript:;" value="" >全部</a></li>
+                        <li><a href="javascript:;" value="0" >自然注册</a></li>
+                        <volist name=":get_promote_all()" id="vo">                        
+                        <li><a href="javascript:;" value="{$vo.id}" >{$vo.account}</a></li>
+                        </volist>
+                    </ul>
+                </div>                
+            </div>
+            <!-- <div class="sleft">
+				<a class="sch-btn" href="javascript:;" id="search" url="{:U('stat/userarpu','model='.$model['name'],false)}"><i class="btn-search"></i></a>
+			</div>  -->  
+            <div class="input-list">
+                <a class="sch-btn" href="javascript:;" id="search" url="{:U('stat/userarpu','model='.$model['name'],false)}">搜索</a>
+            </div>
+		</div>
+	</div>
+
+    <!-- 数据列表 -->
+    <div class="data-table">
+        <div class="data-table table-striped">
+            <table>
+                <!-- 表头 -->
+                <thead>
+                    <tr>
+                        <!-- <th style="text-align:center">日期</th>            -->
+                        <th style="text-align:center">游戏名称</th>
+                        <th style="text-align:center">新增用户数</th>
+                        <th style="text-align:center">次日留存数</th>
+                        <th style="text-align:center">次日留存率</th>
+                        <th style="text-align:center">总用户数</th>
+                        <th style="text-align:center">付费用户数</th>
+                        <th style="text-align:center">新用户付费金额</th>
+                        <th style="text-align:center">总付费金额</th>
+                        <th style="text-align:center">总付费率</th>
+                         <th style="text-align:center">新用户ARPU</th>
+                          <th style="text-align:center">付费ARPU</th>
+
+                    </tr>
+                </thead>
+
+                <!-- 列表 -->
+                <tbody>
+                        <tr>
+                          <!-- <td style="text-align:center">11</td> -->
+                        <td style="text-align:center">{$game_name}</td>
+                        <td style="text-align:center">{$newcount}</td>
+                        <td style="text-align:center">{$cicount}</td>
+                        <td style="text-align:center">{$cilogin}</td>
+                        <td style="text-align:center">{$allcount}</td>
+                        <td style="text-align:center">{$paycount}</td>
+                        <td style="text-align:center">{$newpaycount}</td>
+                        <td style="text-align:center">{$allpay}</td>
+                        <td style="text-align:center">{$allrate}</td>
+                        <td style="text-align:center">{$userarpu}</td>
+                        <td style="text-align:center">{$payarpu}</td>
+
+                        </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="page">
+        {$_page|default=''}
+    </div>
+</block>
+
+<block name="script">
+<link href="__STATIC__/datetimepicker/css/datetimepicker.css" rel="stylesheet" type="text/css">
+<php>if(C('COLOR_STYLE')=='blue_color') echo '<link href="__STATIC__/datetimepicker/css/datetimepicker_blue.css" rel="stylesheet" type="text/css">';</php>
+<link href="__STATIC__/datetimepicker/css/dropdown.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="__STATIC__/datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
+<script type="text/javascript" src="__STATIC__/datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js" charset="UTF-8"></script>
+<script type="text/javascript">
+//导航高亮
+highlight_subnav('{:U('stat/userarpu')}');
+$(function(){
+	//搜索功能
+	$("#search").click(function(){
+		var url = $(this).attr('url');
+        var query  = $('.search-form').find('input').serialize();
+        query = query.replace(/(&|^)(\w*?\d*?\-*?_*?)*?=?((?=&)|(?=$))/g,'');
+        query = query.replace(/^&/g,'');
+        if( url.indexOf('?')>0 ){
+            url += '&' + query;
+        }else{
+            url += '?' + query;
+        }
+		window.location.href = url;
+	});
+
+    //回车自动提交
+    $('.search-form').find('input').keyup(function(event){
+        if(event.keyCode===13){
+            $("#search").click();
+        }
+    });
+    $('#time-start').datetimepicker({
+         format: 'yyyy-mm-dd',
+         language:"zh-CN",
+         minView:2,
+         autoclose:true
+    });
+
+    $('#datetimepicker').datetimepicker({
+       format: 'yyyy-mm-dd',
+        language:"zh-CN",
+        minView:2,
+        autoclose:true,
+        pickerPosition:'bottom-left'
+    })
+    
+    
+    $("#game").on('click',function(event) {
+        var navlist = $(this).find('.i_list_li');
+        if (navlist.hasClass('hidden')) {
+            navlist.removeClass('hidden');
+            $(this).find('#i_list_id').focus().val('');            
+        } else {
+            navlist.addClass('hidden');
+        }
+        $(document).one("click", function(){
+            navlist.addClass('hidden');
+        });
+        event.stopPropagation();
+    });
+
+    $('#game #i_list_id').on('keyup',function(event) {
+        var val  = $.trim($(this).val()).toLowerCase();
+        $(this).closest('.drop-down').find('#i_list_idh').val(val);
+    });
+    
+    $("#game #i_list_li").find("a").each(function(){
+        $(this).click(function(){
+            var text = $.trim($(this).text()).toLowerCase();
+            $(this).closest('.drop-down').find("#i_list_id").val(text);
+            $(this).closest('.drop-down').find('#i_list_idh').val(text);
+        })
+    });
+    
+    
+    $("#promote").on('click',function(event) {
+        var navlist = $(this).find('.i_list_li');
+        if (navlist.hasClass('hidden')) {
+            navlist.removeClass('hidden');
+            $(this).find('#i_list_id').focus().val('');            
+        } else {
+            navlist.addClass('hidden');
+        }
+        $(document).one("click", function(){
+            navlist.addClass('hidden');
+        });
+        event.stopPropagation();
+    });
+
+    $('#promote #i_list_id').on('keyup',function(event) {
+        $(this).closest('.drop-down').find('#i_list_idh').val(-1);
+    });
+    
+    $("#promote #i_list_li").find("a").each(function(){
+        $(this).click(function(){
+            var text = $.trim($(this).text()).toLowerCase();
+            $(this).closest('.drop-down').find("#i_list_id").val(text);
+            $(this).closest('.drop-down').find('#i_list_idh').val($(this).attr('value'));
+        })
+    });
+})
+</script>
+</block>

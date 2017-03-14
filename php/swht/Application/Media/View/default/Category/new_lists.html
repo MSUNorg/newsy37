@@ -1,0 +1,17 @@
+<volist name="category" id="cate">
+<if condition='in_array($cate["name"],array("media_gg","media_new","media_activity"))'>
+	<eq name="current" value="$cate['id']">
+		<li class="active">
+			<a class="on" href="{:U('Article/lists?category='.$cate['name'])}">
+				<i class="icon-chevron-right"></i>{$cate.title}
+			</a>
+		</li>
+	<else/>
+		<li>
+			<a  href="{:U('Article/lists?category='.$cate['name'])}">
+				<i class="icon-chevron-right"></i>{$cate.title}
+			</a>
+		</li>
+	</eq>
+</if>
+</volist>

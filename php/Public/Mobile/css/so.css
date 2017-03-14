@@ -1,0 +1,102 @@
+.games {
+  padding-top: 2%;
+}
+.no-result {
+  /* display: none; */
+  padding: 4% 2% 2%;
+  color: #666666;
+}
+.no-result span {
+  color: #0080ff;
+}
+.no-result em {
+  color: #e764a0;
+  font-style: normal;
+}
+.hot-keyword {
+  /* display: none; */
+  margin-top: 0;
+  padding: 2%;
+}
+.clearfix:before,
+.clearfix:after {
+    display: table;
+    line-height: 0;
+    content: "";
+}
+.clearfix:after {
+    clear: both;
+}
+.hot-keyword dt {
+  margin-bottom: 5px;
+  color: #666;
+  font-weight: normal;
+}
+.hot-keyword dd {
+  margin-left: 0;
+}
+.hot-keyword dd.hot-key div {
+  display: none;
+}
+.hot-keyword dd.hot-key div.on {
+  display: block;
+}
+.hot-keyword dd a {
+  float: left;
+  height: 28px;
+  margin-right: 2%;
+  margin-bottom: 2%;
+  padding-left: 15px;
+  padding-right: 15px;
+  border: 1px solid #dbdbdb;
+  background-color: #fff;
+  font-size: 14px;
+  line-height: 28px;
+  color: #999;
+  -webkit-tap-highlight-color: rgba(242, 242, 242, 0.8);
+}
+.hot-keyword dd .change {
+  height: 30px;
+  text-align: center;
+  border: 1px solid #dbdbdb;
+  background-color: #fff;
+}
+.hot-keyword dd .change .inner {
+  display: inline-block;
+  position: relative;
+  padding-left: 20px;
+}
+.hot-keyword dd .change .inner i {
+  position: absolute;
+  left: 0;
+  top: 7px;
+  width: 14.5px;
+  height: 14.5px;
+  background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABMAAAATCAYAAAByUDbMAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAYxJREFUeNqUlMFHRFEUxl+vJ1pF22EojzKR/oCIVpNoVaQ2rUppkVkkatNiRExEimhZYiKlFJGGiLRIi+GJFhGtYlYRQ9/hu5ye87ze4efNfW/ud+855363pVqtekZ0gHlQBAMc18k+uLEmBbFxK1gFJQroKJBxis6Be/0HX/1uB7LNdSX0CW7BAQW08B2YVe9ygdrRBRjm+BksgVpsd5LyBtOXObt8hmDRiVWU0AmYBE2jLLLICFihqBP8k+Y7+GYNphOEdJxzjtmALXBJwZ8UoSlwaH3QDYis1Yw4BWugYYmFXraQ3ZdBN9jTJRGxV3DGdmeJL7AA+sG1TnMMvLAznRlF6+xwrx87/WKhNzqgLaNo5Cf4skLbpEVO19wSk472gaMUIcnkmOUpJYnlweg/hQbp6bwTk0O6zc64Nm+CK3oxHkPgSZVBLoJl5wA5Lx/80FTmLRLp1gPoAj2skwtxzYRzTaCEPF58EQULsXtMR4MWLOtDGxhp1NgAqdsMUw25+iMP6I5lp18BBgANp1WaKAMViAAAAABJRU5ErkJggg==) 0 0 no-repeat;
+  background-size: 14.5px 14.5px;
+}
+.hot-keyword dd .change .inner.loading i {
+  -webkit-animation: rotating 0.25s ease infinite;
+  -webkit-transform-origin: 50% 50%;
+}
+.hot-keyword dd .change .inner span {
+  line-height: 28px;
+  color: #999;
+}
+@-webkit-keyframes rotating {
+  0% {
+    -webkit-transform: rotate(0deg);
+  }
+  25% {
+    -webkit-transform: rotate(45deg);
+  }
+  50% {
+    -webkit-transform: rotate(90deg);
+  }
+  75% {
+    -webkit-transform: rotate(135deg);
+  }
+  100% {
+    -webkit-transform: rotate(180deg);
+  }
+}

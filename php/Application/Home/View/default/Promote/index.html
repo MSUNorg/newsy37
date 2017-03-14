@@ -1,0 +1,128 @@
+<extend name="Public/promote_base"/>
+
+<block name="body">
+    <script src="__STATIC__/layer/layer.js" type="text/javascript"></script>
+    <script src='__STATIC__/zeroclipboard/jquery.zclip.min.js'></script>
+      <!-- <div id="total"> -->
+        <div class="yulan">
+          <div class="user">
+            <p><img src="__IMG__/promote/ico_user.jpg"> <i>{:session('promote_auth.account')}</i></p>
+          </div>
+          <ul class="clearfix">
+            <li>
+              <div class="box">昨日收入<span>￥{$yesterday}</span></div>
+            </li>
+            <li>
+              <div class="box">今日收入<span>￥{$today}</span></div>
+            </li>
+            <li>
+              <div class="box">本月收入<span>￥{$month}</span></div>
+            </li>
+            <li>
+              <div class="box">总计收入<span>￥{$total}</span></div>
+            </li>
+          </ul>
+        </div>
+        <style>
+            .sharelink {
+                margin: 20px auto;
+                border:1px solid #eee;
+            }
+            .sharelinktitle {
+                background:#eee;
+                line-height:40px;
+                font-size:16px;
+                font-weight:bold;
+                border-bottom:1px solid #eee;
+                padding-left:10px;
+            }
+            .sharelinkcontent {
+                clear:both;
+                padding: 20px;
+                position:relative;
+                line-height:38px;
+            }
+            .sharelinkcontent:after{
+                content:' ';
+                overflow:hidden;
+                display:inline-table;
+                clear:both;
+            }
+            .sharelinkcontent span{                
+                display:block;
+                line-height:30px;                
+                float:left;                
+            }
+            .slc1 input {
+                border:1px solid #eee;
+                border-right:none;
+                padding:2px 6px;
+                line-height:30px;
+                outline:none;
+                width:360px;
+            }
+            .slc2 {
+                background:#e02222;
+                color:#fff;
+                border:1px solid #e02222;
+                cursor:pointer;
+                padding:2px 6px;
+            }
+            #copytip{
+                position:absolute;                
+                z-index:8888;
+                border:1px solid #eee;
+                padding:2px 8px;
+                background:#fff;
+                top:-14px;
+                left:490px;
+                font-size:14px;
+                line-height:24px;
+                border-radius:5px;
+            }
+        </style>
+        <!-- <div class="sharelink">
+            <div class="sharelinktitle">全站推广链接</div>
+            <div class="sharelinkcontent">
+                <span class="slc1"><input type="text" id="links" value="{$url}" /></span>
+                <span class="slc2" id="copybtn">复制推广链接</span>
+            </div>
+        </div> -->
+        <script src="__JS__/jquery.zclip.js"></script>
+        <script>
+            $(function() {
+                $('#copybtn').zclip({
+                    path:'__JS__/ZeroClipboard.swf',
+                    copy: $('#links').val(),
+                    afterCopy: function() {
+                        $('#copytip').remove();
+                        layer.msg("复制成功",{icon:1});
+                        setTimeout(function() {
+                            $('#copytip').remove();
+                        },3000);
+                    }
+                });
+            });
+        </script>
+        <div id="news">
+         <h2>新闻公告</h2>
+         <ul>
+            <!-- <volist name="list" id="vo">
+              <li><span>{$vo.create_time}</span><p>·<a target="_blank" href="#">{$vo.title}</a></p></li>
+            </volist> -->
+            <article:limits name="article" category="39" limit="20" child="true">
+              <li>
+                <span class="fr">
+                   {$article.create_time|date='Y-m-d',###}
+                </span>
+                <p>
+                  <a href="{:U('Home/Article/detail?id='.$article['id'])}" target="_blank">
+                    【公告】{$article.title}
+                  </a>
+                </p>
+              </li>
+            </article:limits>
+          </ul>
+        </div>
+</block>
+  

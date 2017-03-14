@@ -1,0 +1,77 @@
+<extend name="Public/bases" />
+<block name="body" >
+<link href="__CSS__/platform.css" rel="stylesheet" />
+<div class="title_bg">
+  <div class="title_t"><span>新闻资讯</span></div>
+</div>
+<div class="wrap clear-fix">
+  <div class="left fl">
+	<foreach name="news['list']" item="vo">
+    <div class="list">
+      <div class="list_t news_title">
+		<a target="_self" href="{:U('detail?id='.$vo['id'])}" title="{$vo.title}">
+		{$vo.title}</a>
+		</div>
+      <div class="list_d">{$vo.description}</div>
+      <div class="list_date">{$vo.update_time|date='y-m-d',###}</div>
+    </div>
+	</foreach>
+    <div class="pagination">
+<!--     	 <article:page name="vo" page=""> -->
+		{$news['show']|default=''}
+<!-- 		</article:page> -->
+	</div>
+  </div>
+  <div class="hot_box fr">
+    <div class="hot_new_wrap">
+			<div class="hot_new_box_t">热门资讯</div>
+			<div class="hot_new_box">
+				<ul>
+					<foreach name="news['list']" item="vo">
+					<li>
+						<span></span>
+						<a target="_self" href="{:U('News/detail?id='.$vo['id'])}">《{$vo.title}》</a>
+					</li>
+					</foreach>
+				</ul>
+			</div>
+		</div>
+		<div class="hot_game_wrap">
+			<div class="hot_game_box_t">热门游戏榜</div>
+			<div class="hot_game_box">
+			 <game:recommend name="vo" recommend_status="2" limit="10" child="true">
+					<dl class="d1 <if condition='$key eq 0'>active</if>">
+						<dt class="num_box no{$key+1}">{$key+1}</dt>
+						<dd class="game_img">
+							<a target="_self" href="{:U('Game/detail?id='.$vo['id'])}" title="{$vo.game_name}">
+								<img src="{$vo.icon|get_cover='path'}" alt="{$vo.game_name}">
+							</a>
+						</dd>
+						<dd class="game_info">
+							<div class="game_info_t">
+								<a target="_self" href="{:U('Game/detail?id='.$vo['id'])}">{$vo.game_name}</a>
+							</div>
+							<div class="game_info_i">
+								<span>{:get_game_type($vo['game_type_id'])}</span>
+								<span>|</span>
+								<span>{$vo.game_size}</span>
+							</div>
+						</dd>
+						<dd class="game_btn">
+							<a target="_self" href="{:U('Gift/lists?id='.$vo['id'])}" class="game_gift_btn"></a>
+							<a href="<if condition='$vo.dow_status eq 0'>#<else/>{:U('Down/down_file?game_id='.$vo['id'].'&type=1')}</if>" class="game_down_btn"></a>
+						</dd>
+					</dl>
+					</game:recommend>
+			</div>
+		</div>
+  </div>
+</div>
+<script>
+	$('.hot_game_box dl').hover(function(){
+		$(this).addClass('active');
+		$(this).siblings().removeClass('active');
+	});
+</script>
+<div class="clear"></div>
+</block>

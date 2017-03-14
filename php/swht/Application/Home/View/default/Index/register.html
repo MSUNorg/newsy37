@@ -1,0 +1,57 @@
+<extend name="Public/bases" />
+<block name="body">
+<script type="text/javascript" src="__JS__/jquery.validate.js"></script>
+<script type="text/javascript" src="__JS__/register.js"></script>
+
+<div class="ctitle"><div class="section">用户注册
+	<span class="ctreg">已经有账号? <a href="{:U('Index/index')}">点此登录</a> </span>
+</div></div>
+<div class="reg_list">
+	<div class="reg_form section">
+        <form class="login_form" id="login_form" action="__SELF__" method="post" novalidate="novalidate" >
+			<div class="reg-con">
+			  <h2>注册信息</h2>
+				<ol class="clearfix">
+				  <li><em><i>*</i>用户名</em> <span>
+					<input type="text" name="account" id="account" class="input-txt" value="" placeholder="输入您的用户名">
+					</span>
+					<p id="account_tip" class=""></p>
+				  </li>
+				  <li><em><i>*</i>密码</em> <span>
+					<input type="password" name="password" id="password" class="input-txt" placeholder="输入您的登录密码">
+					</span>
+					<p id="password_tip" class=""></p>
+				  </li>
+				  <li><em><i>*</i>确认密码</em> <span>
+					<input type="password" name="repassword" id="repassword" class="input-txt" placeholder="输入您的登录密码">
+					</span>
+					<p id="repassword_tip" class=""></p>
+				  </li>
+                  <li><em><i>*</i>联系人</em> <span>
+					<input type="text" name="real_name" id="real_name" class="input-txt">
+					</span>
+					<p id="realname_tip"></p>
+				  </li>
+                  <li><em><i>*</i>联系电话</em> <span>
+					<input type="text" name="mobile_phone" id="mobile_phone" class="input-txt">
+					</span>
+					<p id="mobile_phone_tip"></p>
+				  </li>
+				</ol>
+                <div class="rulebox">
+				  <p>
+					<input name="agreement" type="checkbox" id="agreement" checked="">
+					<label for="agreement">我已阅读并接受<a href="{:U('rule')}" target="_blank">《梦创渠道合作协议》</a></label>
+					<span id="agreement_tip"></span>
+				  </p>
+				  <div class="reg-btn">
+					<input type="submit" class="btn" value="立即注册" title="">
+				  </div>
+				</div>
+				  
+			</div>
+        </form>
+	</div>
+</div>
+<div id="info" style="display:none;"></div>
+</block>

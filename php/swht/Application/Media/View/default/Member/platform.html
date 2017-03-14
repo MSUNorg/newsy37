@@ -1,0 +1,38 @@
+<extend name="Public/base" />
+<block name="body">
+<!--main-->
+<div class="wrap_w">
+  <div class="crumbs"><em>当前位置：</em><a href="{:U('Index/index')}" target="_blank">溪谷游戏</a>
+	 <span> &gt; </span><a href="{:U('Subscriber/record')}">用户中心</a>
+  </div>
+  <div id="member" class="clearfix">
+    <div id="member_l">
+      <include file='Base' />
+    </div>
+    <script type="text/javascript" src="__JS__/anfeng.ucenter.js"></script>    
+    <div id="member_r">
+      <div class="other_s">
+          <h3 class="clearfix"><span>我的平台币</span><!-- <em><a href="/users/fb#">收入记录</a><a href="/users/fb#">支出记录</a></em> --></h3>
+          <div class="other_p">
+            <h4>您的溪谷现金账户：<em>{:$mid['balance']==null?0:$mid['balance']}</em>F币</h4>
+            <p>使用溪谷现金账户会让您在溪谷SDK游戏购买各种虚拟物品。</p>
+          </div>
+          <ul class="features clearfix">
+            <li> 
+              <img src="__IMG__/cash-welcome-safe.png" alt="">
+              <p>采用顶级数据加密方案，保障现金账户、出入账记录的绝对安全，您可放心使用。</p>
+            </li>
+            <li> 
+              <img src="__IMG__/cash-welcome-fast.png" alt="">
+              <p>补偿等服务可在通过审核后立即到账您的现金账户，免去等待。</p>
+            </li>
+            <li> 
+              <img src="__IMG__/cash-welcome-easy.png" alt="">
+              <p>账户中记录您每一笔入账和支出，方便查找和管理日常交易。</p>
+            </li>
+          </ul>
+      </div>
+    </div>
+  </div>
+</div>
+</block>

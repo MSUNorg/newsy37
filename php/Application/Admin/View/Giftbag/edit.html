@@ -1,0 +1,216 @@
+<extend name="Public/base" />
+
+<block name="body">
+<link rel="stylesheet" type="text/css" href="__CSS__/admin_table.css" media="all">
+<script type="text/javascript" src="__STATIC__/layer/layer.js"></script>
+<script type="text/javascript" src="__STATIC__/uploadify/jquery.uploadify.min.js"></script>
+    <div class="main-title cf">
+        <h2>编辑 [{$model['title']}]</h2>
+    </div>
+    <!-- 标签页导航 -->
+<div class="tab-wrap">
+    <ul class="tab-nav nav">
+       <li data-tab="tab1" class="current"><a href="javascript:void(0);">基础</a></li></li>
+    </ul>
+    <div class="tab-content zc_for">
+    <!-- 表单 -->
+    <form id="form" action="{:U('edit?id='.$data['id'])}" method="post" class="form-horizontal">
+        <!-- 基础文档模型 -->
+        <div id="tab1" class="tab-pane in tab1 tab-look">
+            <table  border="0" cellspacing="0" cellpadding="0">
+                <tbody>
+                  <tr>
+                    <td class="l">游戏名称：</td>
+                    <td class="r">
+                       <select id="game_id" name="game_id">
+                        <option value="">请选择游戏</option>
+                       <volist name=":get_game_list()" id="vo">
+                        <option value="{$vo.id}">{$vo.game_name}</option>
+                       </volist>
+                       <input type="hidden" id="game_name" name="game_name" value=""></input>
+                       </select>
+                    </td>
+                    <td class="l">区服名称：</td>
+                    <td class="r">
+                       <select id="server_id" name="server_id">
+                        <option value="">请选择区服</option>
+                       </select>
+                       <input type="hidden" id="server_name" name="server_name" value=""></input>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="l">礼包名称：</td>
+                    <td class="r" >
+                        <input type="text" class="txt " name="giftbag_name" value="{$data['giftbag_name']}">
+                    </td>
+                    <td class="l">礼包类型：</td>
+                    <td class="r">
+                        <label class="inp_radio">
+                            <input type="radio" class="inp_radio" value="0" name="giftbag_type"  >不推荐
+                            <input type="radio" class="inp_radio" value="1" name="giftbag_type" >推荐
+                            <input type="radio" class="inp_radio" value="2" name="giftbag_type" >热门
+                            <input type="radio" class="inp_radio" value="3" name="giftbag_type" >最新
+                        </label>
+                    </td>
+                  </tr>
+                  <tr>
+                    <!-- <td class="l">礼包类型：</td>
+                    <td class="r">
+                       <select  id="giftbag_type" name="giftbag_type">
+                        <option value="" selected="">请选礼包类型</option>
+                        <option value="1">新手包</option>
+                        <option value="2">媒体包</option>
+                        <option value="3">其他包</option>
+                        <option value="4">公众礼包</option>
+                       </select>
+                    </td> -->
+                    <td class="l">领取等级：</td>
+                    <td class="r">
+                       <select id="level" name="levellevel">
+                        <option value="0">无需等级</option>
+                        <option value="1">VIP0</option>
+                        <option value="2">VIP1</option>
+                        <option value="3">VIP2</option>
+                        <option value="4">VIP3</option>
+                        <option value="5">VIP4</option>
+                        <option value="6">VIP5</option>
+                       </select>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="l">礼包状态：</td>
+                    <td class="r">
+                        <label class="inp_radio">
+                            <input type="radio" class="inp_radio" value="0" name="status" <eq name="data['status']" value="0">checked="checked"</eq>>关闭
+                            <input type="radio" class="inp_radio" value="1" name="status" <eq name="data['status']" value="1">checked="checked"</eq>>开启
+                        </label>
+                    </td>
+                    <!-- <td class="l">是否通服：</td>
+                    <td class="r">
+                        <label class="inp_radio">
+                            <input type="radio" class="inp_radio" value="0" name="tong_server" <eq name="data['tong_server']" value="0">checked="checked"</eq>>否
+                            <input type="radio" class="inp_radio" value="1" name="tong_server" <eq name="data['tong_server']" value="1">checked="checked"</eq>>是
+                        </label>
+                    </td> -->
+                  </tr>
+                  <tr>
+                    <td class="l">开始时间：</td>
+                    <td class="r">
+                        <input type="text" class="txt time" name="start_time" value="{:set_show_time($data['start_time'])}">
+                    </td>
+                    <td class="l">结束时间：</td>
+                    <td class="r">
+                        <input type="text" class="txt time" name="end_time" value="{:set_show_time($data['end_time'])}">
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="l">激活码：</td>
+                    <td class="r">
+                        <textarea name="novice" class="txt_area2">{:str_replace(",","\\r\\n",$data['novice'])}</textarea>
+                    </td>
+                    <td class="l">领取方式：</td>
+                    <td class="r">
+                        <textarea name="digest" class="txt_area2">{$data['digest']}</textarea>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="l">礼包内容：</td>
+                    <td class="r" colspan='3'>
+                        <textarea name="desribe" class="txt_area1">{$data['desribe']}</textarea>
+                    </td>
+                  </tr>
+                  
+                </tbody>
+            </table>
+        </div>
+        <div class="form-item cf">
+            <input type="hidden" name='id' value="{$data['id']}">
+            <button class="btn submit-btn ajax-post hidden" id="submit" type="submit" target-form="form-horizontal">确 定</button>
+            <a class="btn btn-return" href="javascript:history.back(-1);">返 回</a>
+        </div>
+    </form>
+    </div>
+</div>
+</block>
+
+<block name="script">
+<link href="__STATIC__/datetimepicker/css/datetimepicker.css" rel="stylesheet" type="text/css">
+<php>if(C('COLOR_STYLE')=='blue_color') echo '<link href="__STATIC__/datetimepicker/css/datetimepicker_blue.css" rel="stylesheet" type="text/css">';</php>
+<link href="__STATIC__/datetimepicker/css/dropdown.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="__STATIC__/datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
+<script type="text/javascript" src="__STATIC__/datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js" charset="UTF-8"></script>
+<script type="text/javascript">
+//导航高亮
+highlight_subnav('{:U('Giftbag/lists')}');
+Think.setValue("game_id", {$data.game_id|default = 0});
+Think.setValue("server_id", {$data.area_id|default = 0});
+Think.setValue("giftbag_type", {$data.giftbag_type|default = 1});
+Think.setValue("level", {$data.level|default = 0});
+$('#submit').click(function(){
+    $('#form').submit();
+});
+
+$(function(){
+    $("#game_name").val($("#game_id option:selected").text());
+
+    $('.date').datetimepicker({
+        format: 'yyyy-mm-dd',
+        language:"zh-CN",
+        minView:2,
+        autoclose:true
+    });
+    $('.time').datetimepicker({
+    language:"zh-CN",
+     hour: 13,
+       minute: 15
+    });
+    showTab();
+    Initialize();
+});
+
+/*获取区服名称*/
+$("#server_id").change(function() {
+    $("#server_name").val($("#server_id option:selected").text());
+});
+
+function Initialize(){
+    $server_name = "{:get_area_name($data['server_id'])}";
+    $("#server_id").html("<option value='{$data.server_id}'>"+$server_name+"</option>");
+    $("#server_name").val($("#server_id option:selected").text());
+}
+var url = "{:U('Giftbag/get_ajax_area_list')}";
+$("#game_id").change(function(){
+    $("#game_name").val($("#game_id option:selected").text());
+    fun_ajax($(this).val());
+})
+
+function fun_ajax(gid){
+    $.ajax({
+        type:"post",
+        url:url,
+        dataType:"json",
+        data:{game_id:gid},
+        success:function(data){
+            fun_html(data);
+            $("#server_name").val($("#server_id option:selected").text());
+        },
+        error:function(){
+            layer.msg('服务器异常',{icon:5});
+        }
+    })
+}
+
+function fun_html(data){
+    var area='';
+    if(data == null){
+        $("#server_id").html('<option value="">请选择区服</option>');
+    }else{
+        area+="<option value=''>请选择区服</option>";
+        for (var i = 0; i<data.length; i++){
+            area+='<option value="'+data[i]['id']+'">'+data[i]['server_name']+'</option>';
+        }
+        $("#server_id").html(area);
+    }
+}
+</script>
+</block>

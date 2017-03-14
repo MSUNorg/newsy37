@@ -1,0 +1,182 @@
+<extend name="Public/base"/>
+
+<block name="body">
+	<script type="text/javascript" src="__STATIC__/uploadify/jquery.uploadify.min.js"></script>
+	<div class="main-title">
+		<h2>渠道图标设置</h2>
+	</div>
+		<div class="tab-wrap">
+		<ul class="tab-nav nav">
+			<li class="current"><a href="javascript:">图标配置</a></li>
+		</ul>
+		<div class="tab-content">
+	<form action="{:U('save')}" method="post" class="form-horizontal">
+		<volist name="list" id="config">
+			<switch name="config.name">
+				<case value="CH_SET_LOGO">
+				<div class="form-item">
+					<label class="item-label">{$config.title}<span class="check-tips">（{$config.remark}）</span> </label>
+					<div class="controls">
+						<input type="file" id="upload_picture_logo">
+		                <input type="hidden" name="config[{$config.name}]" id="cover_id_logo" value="{$config.value}" />
+		                <div class="upload-img-box">
+		                <notempty name="config['value']">
+			                    <div class="upload-pre-item"><img src="{$config['value']|get_cover='path'}"/></div>
+			                </notempty>
+		                </div>
+                        <!-- <span class="infonotice" style="line-height:40px;" >(248*60px)</span> -->
+					</div>
+				</div>
+				</case>
+				<case value="CH_SET_QRCODE">
+					<div class="form-item">
+						<label class="item-label">{$config.title}<span class="check-tips">（{$config.remark}）</span> </label>
+						<div class="controls">
+							<input type="file" id="upload_picture_qrcode">
+			                <input type="hidden" name="config[{$config.name}]" id="cover_id_qrcode"/>
+			                <div class="upload-img-box">
+			                <notempty name="config['value']">
+			                    <div class="upload-pre-item"><img src="{$config['value']|get_cover='path'}"/></div>
+			                </notempty>
+			                </div>
+                            <!-- <span class="infonotice" style="line-height:40px;" >(430*430px)</span> -->
+						</div>
+					</div>
+				</case>
+				<case value="CH_SET_ICO">
+					<div class="form-item">
+						<label class="item-label">{$config.title}<span class="check-tips">（{$config.remark}）</span> </label>
+						<div class="controls">
+							<input type="file" id="upload_picture_ico">
+			                <input type="hidden" name="config[{$config.name}]" id="cover_id_ico"/>
+			                <div class="upload-img-box">
+			                <notempty name="config['value']">
+			                    <div class="upload-pre-item"><img src="{$config['value']|get_cover='path'}"/></div>
+			                </notempty>
+			                </div>
+                            <!-- <span class="infonotice" style="line-height:40px;" >(16*16px)</span> -->
+						</div>
+					</div>
+				</case>
+			</switch>
+		</volist>
+		<div class="form-item">
+			<label class="item-label"></label>
+			<div class="controls">
+				<empty name="list"><button type="submit" disabled class="btn submit-btn disabled" target-form="form-horizontal">确 定</button><else/><button type="submit" class="btn submit-btn ajax-post" target-form="form-horizontal">确 定</button></empty>
+				
+				<button class="btn btn-return" onclick="javascript:history.back(-1);return false;">返 回</button>
+			</div>
+		</div>
+	</form>
+			</div>
+	</div>
+</block>
+
+<block name="script">
+<script type="text/javascript">
+	//导航高亮
+	highlight_subnav('{:U('Lgog/channel_logo')}');
+
+	/* 初始化上传插件 */
+	$("#upload_picture_logo").uploadify({
+	    "height"          : 30,
+	    "swf"             : "__STATIC__/uploadify/uploadify.swf",
+	    "fileObjName"     : "download",
+	    "buttonText"      : "上传LOGO",
+	    "uploader"        : "{:U('File/uploadPicture',array('session_id'=>session_id()))}",
+	    "width"           : 120,
+	    'removeTimeout'   : 1,
+	    'fileTypeExts'    : '*.jpg; *.png; *.gif;',
+	    "onUploadSuccess" : upload_picture_logo{$field.name},
+	    'onFallback' : function() {
+	        alert('未检测到兼容版本的Flash.');
+	    }
+	});
+	function upload_picture_logo{$field.name}(file, data){
+	    var data = $.parseJSON(data);
+	    var src = '';
+	    if(data.status){
+	        $("#cover_id_logo").val(data.id);
+	        src = data.url || '__ROOT__' + data.path;
+	        $("#cover_id_logo").parent().find('.upload-img-box').html(
+	            '<div class="upload-pre-item"><img src="' + src + '"/></div>'
+	        );
+	    } else {
+	        updateAlert(data.info);
+	        setTimeout(function(){
+	            $('#top-alert').find('button').click();
+	            $(that).removeClass('disabled').prop('disabled',false);
+	        },1500);
+	    }
+	}
+
+
+	/* 初始化二维码上传插件 */
+	$("#upload_picture_qrcode").uploadify({
+	    "height"          : 30,
+	    "swf"             : "__STATIC__/uploadify/uploadify.swf",
+	    "fileObjName"     : "download",
+	    "buttonText"      : "上传二维码",
+	    "uploader"        : "{:U('File/uploadPicture',array('session_id'=>session_id()))}",
+	    "width"           : 120,
+	    'removeTimeout'   : 1,
+	    'fileTypeExts'    : '*.jpg; *.png; *.gif;',
+	    "onUploadSuccess" : upload_picture_qrcode{$field.name},
+	    'onFallback' : function() {
+	        alert('未检测到兼容版本的Flash.');
+	    }
+	});
+	function upload_picture_qrcode{$field.name}(file, data){
+	    var data = $.parseJSON(data);
+	    var src = '';
+	    if(data.status){
+	        $("#cover_id_qrcode").val(data.id);
+	        src = data.url || '__ROOT__' + data.path;
+	        $("#cover_id_qrcode").parent().find('.upload-img-box').html(
+	            '<div class="upload-pre-item"><img src="' + src + '"/></div>'
+	        );
+	    } else {
+	        updateAlert(data.info);
+	        setTimeout(function(){
+	            $('#top-alert').find('button').click();
+	            $(that).removeClass('disabled').prop('disabled',false);
+	        },1500);
+	    }
+	}
+
+
+	/* 初始化上传插件 */
+	$("#upload_picture_ico").uploadify({
+	    "height"          : 30,
+	    "swf"             : "__STATIC__/uploadify/uploadify.swf",
+	    "fileObjName"     : "download",
+	    "buttonText"      : "上传ICO图标",
+	    "uploader"        : "{:U('File/uploadPicture',array('session_id'=>session_id()))}",
+	    "width"           : 120,
+	    'removeTimeout'   : 1,
+	    'fileTypeExts'    : '*.jpg; *.png; *.gif;',
+	    "onUploadSuccess" : upload_picture_ico{$field.name},
+	    'onFallback' : function() {
+	        alert('未检测到兼容版本的Flash.');
+	    }
+	});
+	function upload_picture_ico{$field.name}(file, data){
+	    var data = $.parseJSON(data);
+	    var src = '';
+	    if(data.status){
+	        $("#cover_id_ico").val(data.id);
+	        src = data.url || '__ROOT__' + data.path;
+	        $("#cover_id_ico").parent().find('.upload-img-box').html(
+	            '<div class="upload-pre-item"><img src="' + src + '"/></div>'
+	        );
+	    } else {
+	        updateAlert(data.info);
+	        setTimeout(function(){
+	            $('#top-alert').find('button').click();
+	            $(that).removeClass('disabled').prop('disabled',false);
+	        },1500);
+	    }
+	}
+</script>
+</block>

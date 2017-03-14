@@ -1,0 +1,112 @@
+﻿<extend name="Public/promote_base"/>
+
+<block name="body">
+<div id="query">
+  <div id="add_son" class="mod">
+    <h2>添加子帐号</h2>
+    <form id="form_reg" action="{:U('Promote/add_chlid')}" method="post" novalidate="novalidate" class="base_info">
+      <table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tbody>
+          <tr>
+            <td class="l">登录帐号：</td>
+            <td class="r">
+              <input type="text" class="name input-txt" name="account" id="account" placeholder="输入登录帐号">
+              <p id="account_tip"></p>
+            </td>
+          </tr>
+          <tr>
+            <td class="l">登录密码：</td>
+            <td class="r">
+              <input type="password" class="name" name="password" id="password" placeholder="输入登录密码">
+              <span id="password_tip"></span>
+            </td>
+          </tr>
+          <tr>
+            <td class="l">确认密码：</td>
+            <td class="r">
+              <input type="password" class="name" name="repassword" id="repassword" placeholder="输入登录密码">
+              <span id="repassword_tip"></span>
+            </td>
+          </tr>
+          <tr>
+            <td class="l">子帐号昵称：</td>
+            <td class="r">
+              <input type="text" class="name" name="nickname" id="nickname" placeholder="输入子帐号昵称">
+              <span id="nickname_tip"></span>
+            </td>
+          </tr>
+          <tr>
+            <td class="l">真实姓名：</td>
+            <td class="r">
+              <input type="text" class="name" name="real_name" id="real_name" placeholder="输入子帐号姓名">
+              <span id="real_name_tip"></span>
+            </td>
+          </tr>
+          <tr>
+            <td class="l">手机号：</td>
+            <td class="r">
+              <input type="text" class="name" name="mobile_phone" id="mobile_phone" placeholder="输入子帐号手机号">
+              <span id="mobile_phone_tip"></span>
+            </td>
+          </tr>
+          <tr>
+            <td class="l">电子邮件：</td>
+            <td class="r">
+              <input type="text" class="name" name="email" id="email" placeholder="输入子帐号电子邮件">
+              <span id="email_tip"></span>
+            </td>
+          </tr>
+          <tr>
+            <td class="l">银行名称：</td>
+            <td class="r">
+              <input type="text" class="name" name="bank_name" id="bank_name" placeholder="输入子帐号开户银行">
+              <span id="bank_name_tip"></span>
+            </td>
+          </tr>
+          <tr>
+            <td class="l">银行卡：</td>
+            <td class="r">
+              <input type="text" class="name" name="bank_card" id="bank_card" placeholder="输入子帐号银行卡号">
+              <span id="bank_card_tip"></span>
+            </td>
+          </tr>
+          <tr>
+            <td class="l"></td>
+            <td class="r">
+              <input type="hidden" name="parent_id" value="{:session('promote_auth.pid')}"></input>
+              <input type="button" class="tj btn ajax-post" onclick="check()" value="确认添加" title="" target-form="base_info">
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </form>
+  </div>
+</div>
+
+<script type="text/javascript">
+  function check() {
+      data = validation();
+      if(data.status !=1){layer.msg(data.msg,{icon:2}); return false;};
+      $('#form_reg').submit();
+  }
+  function validation(){
+       var json_data = "";
+      if($.trim($('#account').val()).length < 6){
+        return json_data = {'status':0,'msg':'账号不能低于6位'}
+      }
+      if($.trim($('#password').val()).length < 6){
+        return json_data = {'status':0,'msg':'密码不能低于6位'}
+      }
+      if($('#repassword').val()!==$('#password').val()){
+        return json_data = {'status':0,'msg':'两次密码不一致'}
+      }
+      // if($.trim($('#nickname').val()).length == 0){
+      //   return json_data = {'status':0,'msg':'昵称不能为空'};
+      // }
+      return json_data = {'status':1,'msg':'成功'};
+      
+  }
+</script>
+
+</block>
+  

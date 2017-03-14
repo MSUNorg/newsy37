@@ -1,0 +1,161 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!-- 应用包名：微信，推送限制 -->
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.sdk_test_demo"
+    android:installLocation="auto"
+    android:versionCode="3214"
+    android:versionName="3.0.3" >
+
+    <!-- 版本号，版本名称 -->
+    <!-- 添加必要的权限支持 -->
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <!-- 添加必要的权限支持 -->
+    <!-- 悬浮窗 -->
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+    <!-- 聚宝云 -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.INTERACT_ACROSS_USERS_FULL" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.webkit.permission.PLUGIN" />
+    <uses-sdk
+        android:minSdkVersion="14"
+        android:targetSdkVersion="21" />
+
+    <application
+        android:allowBackup="true"
+        android:allowClearUserData="true"
+        android:icon="@drawable/sec"
+        android:label="@string/app_name"
+        android:theme="@android:style/Theme.NoTitleBar" >
+        <activity
+            android:name="com.mchsdk.paysdk.TestActivity"
+            android:screenOrientation="landscape" >
+        </activity>
+        <activity
+            android:name="com.mchsdk.paysdk.activity.ChoosePayActivity"
+            android:launchMode="singleTop"
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" >
+        </activity>
+        <activity
+            android:name="com.mchsdk.paysdk.activity.PTBPayResultActivity"
+            android:launchMode="singleTop" >
+        </activity>
+        <activity
+            android:name="com.example.sdk_test_demo.wxapi.WXPayEntryActivity"
+            android:exported="true"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Translucent" >
+        </activity>
+        <activity
+            android:name="com.mchsdk.paysdk.activity.MCPacksActivity"
+            android:launchMode="singleInstance" >
+        </activity>
+        <activity
+            android:name="com.mchsdk.paysdk.activity.MCPersonalInfoActivity"
+            android:launchMode="singleTask" >
+
+            <!-- android:screenOrientation="portrait" -->
+        </activity>
+        <activity
+            android:name="com.mchsdk.paysdk.activity.MCChangePasswordActivity"
+            android:launchMode="singleTop" >
+        </activity>
+        <activity
+            android:name="com.mchsdk.paysdk.activity.MCMoneyRecordActivity"
+            android:launchMode="singleTop" >
+        </activity>
+        <activity
+            android:name="com.mchsdk.paysdk.activity.MCGameRecordActivity"
+            android:launchMode="singleTop" >
+        </activity>
+        <activity
+            android:name="com.mchsdk.paysdk.activity.MCAddPtbMoneyActivity"
+            android:launchMode="singleTop" >
+        </activity>
+        <activity
+            android:name="com.mchsdk.paysdk.activity.MCBindPhoneActivity"
+            android:launchMode="singleTop" >
+        </activity>
+        <activity
+            android:name="com.alipay.sdk.app.H5PayActivity"
+            android:configChanges="orientation|keyboardHidden|navigation"
+            android:exported="false"
+            android:screenOrientation="behind"
+            android:windowSoftInputMode="adjustResize|stateHidden" >
+        </activity>
+        <activity
+            android:name="com.alipay.sdk.auth.AuthActivity"
+            android:configChanges="orientation|keyboardHidden|navigation"
+            android:exported="false"
+            android:screenOrientation="behind" >
+        </activity>
+
+        <service android:name="com.mchsdk.paysdk.server.MCHFloatService" >
+        </service>
+
+        <activity android:name="com.mchsdk.paysdk.activity.MCForgetPasswordActivity" >
+        </activity>
+        <activity android:name="com.example.sdk_test_demo.test.TestAcitvity" >
+        </activity>
+        <activity
+            android:name="com.example.sdk_test_demo.MainActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:screenOrientation="portrait"
+            android:label="@string/app_name"
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name="com.example.sdk_test_demo.test.ShowFloatActivity" >
+        </activity>
+               <activity android:name="com.fanwei.bluearty.pluginmgr.DynamicActivity" 
+             android:configChanges="keyboardHidden|orientation|screenSize"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Light.NoTitleBar"/>       <!--  -->
+        <!-- 这里填写的是sdk客户端和服务器端验签用的key，这里填的值对key进行了加密 -->
+        <!-- 如果你是游戏对接人员，只需要联运提供加密之后的key填写在这里即可 -->
+        <!-- 如果你是联运方，需要查看这个加密的key如何生成 -->
+        <!-- 设置一个验签key，然后用加密文件对这个key进行加密。加密的密码是 gnauhcgnem -->
+        <!-- 这里设置了，服务器对应也要更改。保证客户端服务器端这两个key一致 -->
+        <meta-data
+            android:name="paysdk_signkey"
+            android:value="CgsPEgsLEg8LCg==" />
+        <!-- 这里面填联运方sdk服务器接口地址的前面通用部分 -->
+        <!-- 例如：联运服务器的登录接口为http://a2.vlcms.com/sdk.php/User/user_login -->
+        <!-- 这里面就要填http://a2.vlcms.com/sdk.php -->
+        <meta-data
+            android:name="paysdk_ipaddress"
+            android:value="http://www.51syw.com/sdk.php" />
+    </application>
+    <!--
+    http://sy.bengwan.com/ 
+    http://192.168.31.207/jiumao/sdk.php
+    http://192.168.31.207/NewSY/sdk.php // 本地地址
+    http://a2.vlcms.com/sdk.php
+    http://pingtai.vlcms.com/sdk.php
+	http://www.qiangwan.com/sdk.php
+	http://u7858.com/sdk.php
+	http://sdk.3011.cn//九毛科技
+	http://120.26.114.113:3000/sdk.php// 道蒙
+	http://www.8shouyou.com/sdk.php//台湾米洛
+	http://pingtai.vlcms.com 
+	http://www.33youxi.cn/sdk.php
+    -->
+</manifest>

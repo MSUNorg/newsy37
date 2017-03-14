@@ -1,0 +1,100 @@
+<extend name="Public/base" />
+
+<block name="body">
+<link rel="stylesheet" type="text/css" href="__CSS__/admin_table.css" media="all">
+<script type="text/javascript" src="__STATIC__/uploadify/jquery.uploadify.min.js"></script>
+    <div class="main-title cf">
+        <h2>编辑[游戏返利]</h2>
+    </div>
+    <!-- 标签页导航 -->
+<div class="tab-wrap">
+    <ul class="tab-nav nav">
+        <li data-tab="tab1" class="current"><a href="javascript:void(0);">基础</a></li>
+    </ul>
+    <div class="tab-content zc_for">
+    <!-- 表单 -->
+    <form id="form" action="{:U('edit?model='.$model['id'])}" method="post" class="form-horizontal">
+        <!-- 基础 -->
+        <div id="tab1" class="tab-pane in tab1">
+            <table  border="0" cellspacing="0" cellpadding="0">
+                <tbody>
+                  <tr>
+                    <td class="l">游戏名称：</td>
+                    <td class="r" >
+                       <select id="game_id" name="game_id">
+                       <volist name=":get_game_list()" id="vo">
+                        <option value="{$vo.id}">{$vo.game_name}</option>
+                       </volist>
+                       </select>
+                    </td>
+                    </tr>
+                  <tr>
+                    <td class="l">金额限制：</td>
+                    <td class="r">
+                        <label>
+                            <input type="radio" class="inp_radio" id="inp_radio" value="0" name="status" <eq name="data['status']" value="0">checked="checked"</eq>>关闭
+                            <input type="radio" class="inp_radio" value="1" name="status" <eq name="data['status']" value="1">checked="checked"</eq>>开启
+                        </label>
+                    </td>
+                    <td class="l"></td>
+                    <td class="r">                        
+                    </td>
+                  </tr>
+                  <tr class="money">
+                    <td class="l">单笔金额：</td>
+                    <td class="r" colspan='3'>
+                        <input type="text" class="txt txt_title" id="money" name="money" value="{$data.money}" placeholder="请输入开放类型名称">
+                    </td>
+                    <input type="hidden" name="create_time" value="{:time()}">
+                  </tr>
+                    <tr>
+                    <td class="l">返利比例：</td>
+                    <td class="r" colspan='3'>
+                        <input type="text" class="txt txt_title"  name="ratio" value="{$data.ratio}" placeholder="1~100%">
+                    </td>
+                    <input type="hidden" name="create_time" value="{:time()}">
+                    <input type="hidden" name="id" value="{$data['id']}">
+                  </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="form-item cf">
+            <button class="btn submit-btn ajax-post hidden" id="submit" type="submit" target-form="form-horizontal">确 定</button>
+            <a class="btn btn-return" href="javascript:history.back(-1);">返 回</a>
+        </div>
+    </form>
+    </div>
+</div>
+</block>
+
+<block name="script">
+<script type="text/javascript" src="__STATIC__/datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
+<script type="text/javascript">
+//导航高亮
+highlight_subnav('{:U('Rebate/add')}');
+Think.setValue("game_id", {$data.game_id|default = 0});
+$('#submit').click(function(){
+    $('#form').submit();
+});
+
+$(function(){
+    var inp_radio=$(":radio:checked").val();
+  if(inp_radio==0){
+    $(".money").hide()
+    $("#money").val(0);
+  }else{
+     $(".money").show();     
+  }
+  $(".inp_radio").change(function(){
+    if($(this).val()==1){
+     $(".money").show();     
+    }else{
+    $(".money").hide()
+    $("#money").val(0);   
+    }
+  });
+    showTab();
+
+});
+</script>
+</block>

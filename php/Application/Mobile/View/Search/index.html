@@ -1,0 +1,146 @@
+<extend name="Public/bases" />
+<block name="body">
+	<link href="__CSS__/so.css" rel="stylesheet" />
+	<div class="content J-wrapper">
+		<section class="wrapper-inner">
+			<if condition="isset($search)">	
+			<div class="no-result J-empty" >
+				<span>搜索结果：</span>您搜索的「<em id="key">{$search_key}</em>」，结果为<em>0</em>
+			</div>
+			<dl class="hot-keyword J-hot" >				
+				<dt>最热搜索词</dt>
+				<dd id="hot-key" class="hot-key clearfix">
+					<foreach name="search" item="sea">
+						<div class="<if condition='$key == 0' >on</if>">
+						<foreach name="sea" item="s">
+							<a href="/mobile.php/Search/index?keyword={$s.game_name}">{$s.game_name}</a>
+						</foreach>
+						</div>
+					</foreach>			
+				</dd>
+				<dd>
+					<div id="change" class="change">
+						<span class="inner"><i></i><span>换一组看看</span></span>
+					</div>
+				</dd>
+				<script>
+					$(function(){
+						$('#change .inner').click(function(){
+							var index=0;
+							var len = $('#hot-key').find('div').size();
+							$('#hot-key').find('div').each(function() {
+								if ($(this).hasClass('on')) {
+									index = $(this).index();
+									index++;
+									if (index>=len) {
+										index = 0;
+									}
+								}
+							}).removeClass('on');
+							$('#hot-key').find('div').eq(index).addClass('on');
+						});
+					});
+				</script>
+			</dl>
+			<else />
+			<div class="J-games games clearfix" id="J-games">
+			<foreach name="search_data" item="sd">
+				<div class="item">	
+					<div class="pic">		
+						<a href="{:U('Game/detail','id='.$sd['id'].'')}">
+							<img src="__ROOT__{$sd.icon|get_cover='path'}">
+						</a>	
+					</div>	
+					<a href="{:U('Game/detail','id='.$sd['id'].'')}" class="info">		
+						<div class="name">{$sd.game_name}</div>		
+						<div class="attr">			
+							<div class="kind">{:get_game_type($sd['game_type_id'])}</div>			
+							<div class="byte">{$sd.game_size}</div>		
+						</div>		
+						<div class="star">			
+							<div class="star-num" style="width: {$sd.recommend_level}%"></div>		
+						</div>	
+					</a>	
+					<div class="down">		
+						<a href="{$sd.and_dow_address}" class="pkg">免费下载</a>	
+					</div>
+				</div>	
+			</foreach>			
+			</div>
+			<div id="more_Infor"><span id="more_Infor_btn">点击加载更多数据</span></div>
+			<script>
+				loadd();
+				function loadd(){
+					var loading ='<img src="__IMG__/loading.gif">正在加载中';
+					var nodata = '已加载完成全部数据';
+					var total='{$total}';
+					var page = '{$page}';
+					$(window).bind("scroll", function(){
+						var more=$("#more_Infor_btn");
+						var $this =$(this),
+							viewH =$(document.body).height(),//可见高度
+							contentH =$(window).height(),//内容高度
+							scrollTop =$(this).scrollTop(),//滚动高度
+							newht = viewH - contentH - scrollTop;
+						if (page > total){
+							more.unbind().html(nodata);
+							return;
+						}
+						if(newht <= 0){
+							$("#more_Infor").show();
+							
+							$.ajax({
+								type: 'POST',
+							  async: true,
+						  dataType : 'json',
+								url: '__CONTROLLER__/search',
+							   data: 'p='+page+'&keyword={$search_key}',
+						 beforeSend: function(){
+										more.html(loading);
+									},
+							success: function (data) {
+									switch (parseInt(data.status)) {
+										case 1:
+										page = data.page;
+										var d = data.data;
+										var val = '';
+										for(var i=0;i<d.length;i++) {
+											
+											val += '<div class="item">';
+											val += '<div class="pic"><a href="__MODULE__/Game/detail/id/'+d[i].id+'">';
+											val += '<img src="'+d[i].picurl+'"></a></div>';
+											val += '<a href="__MODULE__/Game/detail/id/'+d[i].id+'" class="info">';		
+											val += '<div class="name">'+d[i].game_name+'</div>';		
+											val += '<div class="attr">';			
+											val += '<div class="kind">'+d[i].game_type_id+'</div>';			
+											val += '<div class="byte">'+d[i].game_size+'</div></div>';		
+											val += '<div class="star">';			
+											val += '<div class="star-num" style="width: '+d[i].recommend_level+'%"></div>';		
+											val += '</div></a>';
+											val += '<div class="down">';		
+											val += '<a href="'+d[i].and_dow_address+'" class="pkg">免费下载</a></div>';
+											val += '</div>';												
+										}
+										$('#J-games').find('div.item:last').after(val);
+										more.unbind().html('点击加载更多数据');
+										break;
+									default:
+										more.unbind().html('点击加载更多数据');
+										break;	
+									}
+									return false;
+								},
+							error: function () {
+									more.unbind().html('点击加载更多数据');
+								},
+							cache: false
+								
+							});
+						}
+					});
+				}// CC函数结束
+			</script>
+			</if>
+		</section>
+	</div>
+</block>

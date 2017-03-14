@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta charset="UTF-8">
+    <title>绑定平台币余额|溪谷软件管理平台</title>
+    <link href="http://admin.vlcms.com/Public/icon.ico" type="image/x-icon" rel="shortcut icon">
+    <link rel="stylesheet" type="text/css" href="__CSS__/base.css" media="all">
+    <link rel="stylesheet" type="text/css" href="__CSS__/common.css" media="all">
+    <link rel="stylesheet" type="text/css" href="__CSS__/module.css">
+    <link rel="stylesheet" type="text/css" href="__CSS__/style.css" media="all">
+	<link rel="stylesheet" type="text/css" href="__CSS__/blue_color.css" media="all">
+    <script type="text/javascript" src="__CSS__/jquery-2.0.3.min.js"></script>
+    <script type="text/javascript" src="__CSS__/jquery.mousewheel.js"></script>    
+</head>
+	<style>
+body{ padding: 0px; }
+	</style>
+<body>  
+    <div id="main" class="main" style="min-height: 342px;">       
+    <!-- 标题栏 -->
+    <div class="main-title">
+        <h2>[绑定平台币余额] 列表</h2>
+    </div>
+	<div class="cf">
+	
+	</div>
+
+    <!-- 数据列表 -->
+    <div class="data-table">
+        <div class="data-table table-striped">
+            <table>
+                <!-- 表头 -->
+                <thead>
+                    <tr>
+                                                
+                        <th style="text-align:center">用户</th>
+                        <th style="text-align:center">游戏名称</th>
+                        <th style="text-align:center">绑定平台币余额</th>
+                    </tr>
+                </thead>
+
+                <!-- 列表 -->
+                <tbody>
+                	<volist name="list_data" id="data">
+                        <tr>
+                            <td style="border-right:1px solid #DDDDDD;text-align:center">{$data.user_account}</td>
+                            <td style="border-right:1px solid #DDDDDD;text-align:center">{$data.game_name}</td>
+                            <td style="border-right:1px solid #DDDDDD;text-align:center">{$data.bind_balance}元</td>
+                        </tr>
+                    </volist>
+                          </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="page">
+    {$_page}
+            </div>
+    ﻿         
+        </div>
+  
+    <!-- /内容区 -->
+    <script type="text/javascript">
+    (function(){
+        var ThinkPHP = window.Think = {
+            "ROOT"   : "", //当前网站地址
+            "APP"    : "/admin.php?s=", //当前项目地址
+            "PUBLIC" : "/Public", //项目公共目录地址
+            "DEEP"   : "/", //PATHINFO分割符
+            "MODEL"  : ["3", "", "html"],
+            "VAR"    : ["m", "c", "a"]
+        }
+    })();
+    </script>
+    <script type="text/javascript" src="__CSS__/think.js"></script>
+    <script type="text/javascript" src="__CSS__/common.js"></script>
+    <script type="text/javascript">
+        +function(){
+            var $window = $(window), $subnav = $("#subnav"), url;
+            $window.resize(function(){
+                $("#main").css("min-height", $window.height() - 130);
+            }).resize();
+
+            /* 左边菜单高亮 */
+            url = window.location.pathname + window.location.search;
+            url = url.replace(/(\/(p)\/\d+)|(&p=\d+)|(\/(id)\/\d+)|(&id=\d+)|(\/(group)\/\d+)|(&group=\d+)/, "");
+            $subnav.find("a[href='" + url + "']").parent().addClass("current");
+
+            /* 左边菜单显示收起 */
+            $("#subnav").on("click", "h3", function(){
+                var $this = $(this);
+                $this.find(".icon").toggleClass("icon-fold");
+                $this.next().slideToggle("fast").siblings(".side-sub-menu:visible").
+                      prev("h3").find("i").addClass("icon-fold").end().end().hide();
+            });
+
+            $("#subnav h3 a").click(function(e){e.stopPropagation()});
+
+            /* 头部管理员菜单 */
+            $(".user-bar").mouseenter(function(){
+                var userMenu = $(this).children(".user-menu ");
+                userMenu.removeClass("hidden");
+                clearTimeout(userMenu.data("timeout"));
+            }).mouseleave(function(){
+                var userMenu = $(this).children(".user-menu");
+                userMenu.data("timeout") && clearTimeout(userMenu.data("timeout"));
+                userMenu.data("timeout", setTimeout(function(){userMenu.addClass("hidden")}, 100));
+            });
+
+	        /* 表单获取焦点变色 */
+	        $("form").on("focus", "input", function(){
+		        $(this).addClass('focus');
+	        }).on("blur","input",function(){
+				        $(this).removeClass('focus');
+			        });
+		    $("form").on("focus", "textarea", function(){
+			    $(this).closest('label').addClass('focus');
+		    }).on("blur","textarea",function(){
+			    $(this).closest('label').removeClass('focus');
+		    });
+
+            // 导航栏超出窗口高度后的模拟滚动条
+            var sHeight = $(".sidebar").height();
+            var subHeight  = $(".subnav").height();
+            var diff = subHeight - sHeight; //250
+            var sub = $(".subnav");
+            if(diff > 0){
+                $(window).mousewheel(function(event, delta){
+                    if(delta>0){
+                        if(parseInt(sub.css('marginTop'))>-10){
+                            sub.css('marginTop','0px');
+                        }else{
+                            sub.css('marginTop','+='+10);
+                        }
+                    }else{
+                        if(parseInt(sub.css('marginTop'))<'-'+(diff-10)){
+                            sub.css('marginTop','-'+(diff-10));
+                        }else{
+                            sub.css('marginTop','-='+10);
+                        }
+                    }
+                });
+            }
+        }();
+    </script>
+    
+<link href="__CSS__/datetimepicker.css" rel="stylesheet" type="text/css">
+<link href="__CSS__/datetimepicker_blue.css" rel="stylesheet" type="text/css"><link href="__CSS__/dropdown.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="__CSS__/bootstrap-datetimepicker.min.js"></script>
+<script type="text/javascript" src="__CSS__/bootstrap-datetimepicker.zh-CN.js" charset="UTF-8"></script>
+<script type="text/javascript">
+</script>

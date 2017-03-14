@@ -1,0 +1,117 @@
+<extend name="Public/base"/>
+
+<block name="body">
+<script type="text/javascript" src="__STATIC__/uploadify/jquery.uploadify.min.js"></script>
+
+	<div class="main-title">
+		<h2>网站设置</h2>
+	</div>
+		<div class="tab-wrap">
+		<ul class="tab-nav nav">
+		<volist name="Think.config.CONFIG_GROUP_LIST" id="group">
+
+			<li <eq name="id" value="$key">class="current"</eq>>
+				<a href="{:U('group',array(cate_id=>I('cate_id'),group_id=>$key))}">{$group}配置</a>
+			</li>
+
+		</volist>
+		</ul>
+		<div class="tab-content">
+	<form action="{:U('save')}" method="post" class="form-horizontal">
+	<volist name="list" id="config">
+		<div class="form-item">
+			<label class="item-label">{$config.title}<span class="check-tips">（{$config.remark}）</span> </label>
+			<div class="controls">
+			<switch name="config.type">
+			<case value="0">
+			<input type="text" class="text input-small" name="config[{$config.name}]" value="{$config.value}">
+			</case>
+			<case value="1">
+			<input type="text" class="text input-large" name="config[{$config.name}]" value="{$config.value}">
+			</case>
+			<case value="2">
+			<label class="textarea input-large">
+				<textarea name="config[{$config.name}]">{$config.value}</textarea>
+			</label>
+			</case>
+			<case value="3">
+			<label class="textarea input-large">
+				<textarea name="config[{$config.name}]">{$config.value}</textarea>
+			</label>
+			</case>
+			<case value="4">
+			<select name="config[{$config.name}]">
+				<volist name=":parse_config_attr($config['extra'])" id="vo">
+					<option value="{$key}" <eq name="config.value" value="$key">selected</eq>>{$vo}</option>
+				</volist>
+			</select>
+			</case>
+			<case value="5">
+						<input type="file" id="upload_picture_{$config.name}">
+						<input type="hidden" name="config[{$config.name}]" id="cover_id_{$config.name}" value="{$config['value']}"/>
+						<div class="upload-img-box">
+						<notempty name="config['value']">
+							<div class="upload-pre-item"><img src="{$config['value']|get_cover='path'}"/></div>
+						</notempty>
+						</div>
+					
+					<script type="text/javascript">
+					//上传图片
+				    /* 初始化上传插件 */
+					$("#upload_picture_{$config.name}").uploadify({
+				        "height"          : 30,
+				        "swf"             : "__STATIC__/uploadify/uploadify.swf",
+				        "fileObjName"     : "download",
+				        "buttonText"      : "上传图片",
+				        "uploader"        : "{:U('File/uploadPicture',array('session_id'=>session_id()))}",
+				        "width"           : 120,
+				        'removeTimeout'	  : 1,
+				        'fileTypeExts'	  : '*.jpg; *.png; *.gif;',
+				        "onUploadSuccess" : uploadPicture{$field.name},
+                        'onFallback' : function() {
+                            alert('未检测到兼容版本的Flash.');
+                        }
+				    });
+					function uploadPicture{$field.name}(file, data){
+				    	var data = $.parseJSON(data);
+				    	var src = '';
+				        if(data.status){
+				        	$("#cover_id_{$config.name}").val(data.id);
+				        	src = data.url || '__ROOT__' + data.path;
+				        	$("#cover_id_{$config.name}").parent().find('.upload-img-box').html(
+				        		'<div class="upload-pre-item"><img src="' + src + '"/></div>'
+				        	);
+				        } else {
+				        	updateAlert(data.info);
+				        	setTimeout(function(){
+				                $('#top-alert').find('button').click();
+				                $(that).removeClass('disabled').prop('disabled',false);
+				            },1500);
+				        }
+				    }
+					</script>	
+			</case>
+			</switch>
+				
+			</div>
+		</div>
+		</volist>
+		<div class="form-item">
+			<label class="item-label"></label>
+			<div class="controls">
+				<empty name="list"><button type="submit" disabled class="btn submit-btn disabled" target-form="form-horizontal">确 定</button><else/><button type="submit" class="btn submit-btn ajax-post" target-form="form-horizontal">确 定</button></empty>
+				
+				<button class="btn btn-return" onclick="javascript:history.back(-1);return false;">返 回</button>
+			</div>
+		</div>
+	</form>
+			</div>
+	</div>
+</block>
+
+<block name="script">
+<script type="text/javascript">
+	//导航高亮
+	highlight_subnav('{:U('Config/group')}');
+</script>
+</block>

@@ -1,0 +1,86 @@
+﻿<extend name="Public/promote_base"/>
+
+<block name="body">
+<div id="query">
+  <div id="add_son" class="mod">
+    <h2>修改子帐号</h2>
+    <form action="{:U('Promote/edit_chlid')}" method="post" enctype="multipart/form-data" class="edit_info">
+			<table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tbody>
+          <tr>
+            <td class="l">登录帐号：</td>
+            <td class="r">
+              <input type="text" class="name" name="account" id="account" value="{$data['account']}" disabled="disabled">
+              <span id="account_tip"></span>
+            </td>
+          </tr>
+          <tr>
+            <td class="l">登录密码：</td>
+            <td class="r">
+              <input type="password" class="name" name="password" id="password" placeholder="输入登录密码">
+              <span id="password_tip"></span>
+            </td>
+          </tr>
+          <tr>
+            <td class="l">子帐号昵称：</td>
+            <td class="r">
+              <input type="text" class="name" name="nickname" id="nickname" value="{$data['nickname']}" placeholder="输入子帐号昵称">
+              <span id="nickname_tip"></span>
+            </td>
+          </tr>
+          <tr>
+            <td class="l">真实姓名：</td>
+            <td class="r">
+              <input type="text" class="name" name="real_name" id="real_name" value="{$data['real_name']}" placeholder="输入子帐号姓名">
+              <span id="real_name_tip"></span>
+            </td>
+          </tr>
+          <tr>
+            <td class="l">手机号：</td>
+            <td class="r">
+              <input type="text" class="name" name="mobile_phone" id="mobile_phone" value="{$data['mobile_phone']}" placeholder="输入子帐号手机号">
+              <span id="mobile_phone_tip"></span>
+            </td>
+          </tr>
+          <tr>
+            <td class="l">电子邮件：</td>
+            <td class="r">
+              <input type="text" class="name" name="email" id="email" value="{$data['email']}" placeholder="输入子帐号电子邮件">
+              <span id="email_tip"></span>
+            </td>
+          </tr>
+          <tr>
+            <td class="l">银行名称：</td>
+            <td class="r">
+              <input type="text" class="name" name="bank_name" id="bank_name" value="{$data['bank_name']}" placeholder="输入子帐号开户银行">
+              <span id="bank_name_tip"></span>
+            </td>
+          </tr>
+          <tr>
+            <td class="l">银行卡：</td>
+            <td class="r">
+              <input type="text" class="name" name="bank_card" id="bank_card" value="{$data['bank_card']}" placeholder="输入子帐号银行卡号">
+              <span id="bank_card_tip"></span>
+            </td>
+          </tr>
+          <tr>
+            <td class="l">是否启用账号：</td>
+            <td class="r">
+              <label><input type="radio" name="status" value="1" <eq name="data['status']" value="1">checked="checked"</eq>>启用</label>
+              <label><input type="radio" name="status" value="0" <eq name="data['status']" value="0">checked="checked"</eq>>关闭</label>
+            </td>
+          </tr>
+          <tr>
+            <td class="l"></td>
+            <td class="r">
+              <input type="hidden" name="id" value='{$data.id}'></input>
+              <input type="submit" class="tj btn ajax-post" value="确认添加" title="" target-form="edit_info">
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </form>
+  </div>
+</div>
+</block>
+  

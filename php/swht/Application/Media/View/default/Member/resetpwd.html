@@ -1,0 +1,209 @@
+<extend name="Public/base" />
+<block name="body">
+<div class="wrap_w">
+  <div class="crumbs"><em>当前位置：</em><a href="{:U('Index/index')}" target="_blank">溪谷游戏</a>
+	 <span> &gt; </span><a href="{:U('Subscriber/record')}">用户中心</a>
+  </div>
+  <div id="member" class="clearfix">
+    <div id="member_l">
+      <include file='Base' />
+    </div>
+    
+    <div id="member_r">
+      <div class="other_s">
+          <h3 class="clearfix"><span>修改密码</span></h3>
+            <link rel="stylesheet" href="__CSS__/resetpwd.css" />
+            <div class="modify_box">
+                <div class="bread-wrap">
+                    <ul class="bread-list">
+                        <li class="bl">确认帐号</li><li class="gutter">&gt;</li>
+                        <li class="bl active">验证安全设置</li><li class="gutter">&gt;</li>
+                        <li class="bl">重置密码</li><li class="gutter">&gt;</li><li class="bl">完成</li>
+                    </ul>
+                </div>
+                <div class="m-confirm-username-wrap" id="mcuw" data-num="2">
+                    <span id="notice" style="line-height:40px;font-size:18px;position:absolute;top:0;left:40px;"></span>
+                    <empty name="phone" >
+                    <div class="nonephone">
+                        <div>您还没有绑定手机号，无法自行进行密码的修改，请见谅！如需修改:</div>
+                        <div>1. 如果还记得您的密码，请去<a href="{:U('safe')}">绑定手机</a>后，再自行修改您的密码。</div>
+                        <div>2. 如果您已遗忘密码，请<a href="{:U('Service/index')}">联系客服</a>进行修改。</div>
+                    </div>
+                    <else />
+                    <div id="verifyByPhone" style="display: block;">
+                        <div>
+                            <label>您的帐号</label>
+                            <div class="pure-text js-name">{$name}</div>
+                        </div>
+                        <div class="checkcodeInput">
+                            <label>验证码</label>
+                            <div class="input-optimize checkcodeInput">
+                                <input type="text" class="js-check-code">
+                                <img src="{:U('verify?vid=2')}" alt="checkcode" class="checkcode" id="vcode">
+                                <span class="error-msg"></span>
+                            </div>
+                        </div>
+                        <div>
+                            <label>手机号码</label>
+                            <div class="pure-text phone js-phone">{$phone}</div>
+                            <a href="#" class="send-safe-code" id="sendcode">点击发送</a>
+                            <span class=""></span>
+                        </div>
+                        <div>
+                            <label>安全码:</label>
+                            <div class="input-optimize">
+                                <input type="text" id="phoneSafeCode">
+                                <i class="clear-text"></i>
+                                <span class="error-msg"></span>
+                            </div>
+                        </div>
+                    </div>   
+                    <div class="operation-bar">
+                        <a href="#" class="prev-step" style="display: none;">上一步</a>
+                        <a href="#" class="next-step">下一步</a>
+                    </div>
+                    </empty>
+                </div>
+                <div class=" m-resetPass-box hidden"  id="mrb" data-num="4">
+                    <div>
+                        <label>您的帐号：</label>
+                        <div class="pure-text js-name">{$name}</div>
+                    </div>
+                    <div>
+                        <label>新密码：</label>
+                        <div class="input-optimize">
+                            <input type="password" class="hidden">
+                            <input type="password" id="pass" >
+                            <i class="clear-text"></i>
+                            <span class="error-msg"></span>
+                            <div class="up-bar">
+                                <span></span><span></span><span></span>
+                                <b class="text">弱</b>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <label>密码确认：</label>
+                        <div class="input-optimize">
+                            <input type="password" id="confirmPass" >
+                            <span class="error-msg"></span>
+                        </div>
+                    </div>
+                    <input type="submit" class="submit-btn" value="确定">
+                </div>
+                <div class="m-reset-finish-wrap  hidden" id="mrfw" data-num="6">
+                    <p class="title js-reset-result"></p>
+                    <p class="clocking"></p>
+                    <p>点击<a href="{:U('Index/index')}" class="js-trigger-return">返回平台</a></p>
+                </div>
+                
+            </div>
+          
+      </div>
+    </div>
+    <script>
+        $(function() {
+            $('.checkcode').on('click',function() {
+                $(this).attr('src','__MODULE__/Member/verify/vid/2/t/'+(new Date).getTime());
+            });
+            
+            $('#sendcode').on('click',function() {
+                var jscc = $('.js-check-code'),scc = $.trim(jscc.val()),that = $(this);
+                if (scc == '') {jscc.siblings('.error-msg').text('必填项');return false;}
+                $.ajax({
+                    type:'post',
+                    dataType:'json',
+                    data:'phone={$ph}&verify='+scc+'&vid=2',
+                    url:'{:U("sendvcode")}',
+                    success:function(data) {
+                        switch (parseInt(data.status)) {
+                            case 1: {
+                                $('#vcode').siblings('.error-msg').text('');
+                                that.siblings('span').removeClass('error-msg').addClass('right-msg').text(data.msg);                            
+                            };break;   
+                            case 2: {
+                                that.siblings('span').text('');
+                                $('#vcode').siblings('.error-msg').text(data.msg); $('.checkcode').click();
+                            };break;
+                            default: 
+                                $('#vcode').siblings('.error-msg').text(''); $('.checkcode').click();
+                                that.siblings('span').removeClass('right-msg').addClass('error-msg').text(data.msg);                            
+                        }
+                    },
+                    error:function() {
+                        alert('服务器故障，请稍候再试。。。。');
+                    }
+                });
+                
+            });
+            
+            $('.next-step').on('click',function() {
+                var jpsc = $('#phoneSafeCode'),psc = $.trim(jpsc.val());
+                if (psc == '') {jpsc.siblings('.error-msg').text('必填项');return false;}
+                $('.input-optimize .error-msg').text('');$('#notice').text('');
+                $.ajax({
+                    type:'post',
+                    dataType:'json',
+                    data:'phone={$ph}&vcode='+psc,
+                    url:'{:U("checktelsvcode")}',
+                    success:function(data) {
+                        if (parseInt(data.status) == 1 ) {
+                            $('#notice').removeClass('fail').addClass('success').text('安全码正确，正在跳转。。。');  
+                            setTimeout(function() {
+                                $('#mcuw').addClass('hidden');
+                                var num = $('#mrb').removeClass('hidden').data('num');
+                                $('.bread-list li').eq(num).addClass('active').siblings('li').removeClass('active');
+                                 
+                            },2000);                           
+                        } else {
+                            $('#notice').removeClass('success').addClass('fail').text(data.msg);
+                        }
+                    },
+                    error:function() {
+                        alert('服务器故障，请稍候再试。。。。');
+                    }
+                });
+            });
+            
+            $('.submit-btn').on('click',function() {
+                var jpass = $('#pass'),pass=$.trim(jpass.val()),jcpass = $('#confirmPass'),cpass=$.trim(jcpass.val());
+                if (pass == '') {jpass.siblings('.error-msg').text('必填项');return false;}
+                if (pass.length <6 || pass.length >30 ) {jpass.siblings('.error-msg').text('密码由6-30位字母、数字或下划线组成');return false;}
+                if (!(/^[a-zA-z0-9_]{6,30}$/.test(pass))) {jpass.siblings('.error-msg').text('6-30位字母、数字或下划线组成');return false;}
+                if (cpass == ''){jcpass.siblings('.error-msg').text('必填项');return false;}
+                if (pass !== cpass){jcpass.siblings('.error-msg').text('两次密码不一致，请重新输入');return false;}
+                
+                $('.input-optimize .error-msg').text('');
+                $.ajax({
+                    type:'post',
+                    dataType:'json',
+                    data:'t=m&name={$name}&password='+cpass,
+                    url:'{:U("resetpwd")}',
+                    success:function(data) {
+                        $('#mrb').addClass('hidden');
+                        var num = $('#mrfw').removeClass('hidden').data('num');
+                        $('.bread-list li').eq(num).addClass('active').siblings('li').removeClass('active');
+                        $('#mrfw .js-reset-result').text(data.msg);
+                        clock('.clocking',10);
+                    },
+                    error:function() {
+                        alert('服务器故障，请稍候再试。。。。');
+                    }
+                });
+                
+            });
+            
+        });
+        
+        function clock(e,num) {
+            $(e).text(num+' 秒后跳转');
+            var a = setInterval(function() {
+                num--;
+                $(e).text(num+' 秒后跳转');
+                0 == num && (clearInterval(a),window.location.reload());
+            },1000);
+        }
+    </script>
+  </div>
+</div>
+</block>

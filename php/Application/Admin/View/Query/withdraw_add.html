@@ -1,0 +1,112 @@
+<extend name="Public/base" />
+
+<block name="body">
+<link rel="stylesheet" type="text/css" href="__CSS__/admin_table.css" media="all">
+<script type="text/javascript" src="__STATIC__/layer/layer.js"></script>
+<script type="text/javascript" src="__STATIC__/uploadify/jquery.uploadify.min.js"></script>
+    <div class="main-title cf">
+        <h2>新增 [{$model['title']}]</h2>
+    </div>
+    <!-- 标签页导航 -->
+<div class="tab-wrap">
+    <ul class="tab-nav nav">
+        <li data-tab="tab1" class="current"><a href="javascript:void(0);">基础</a></li></li>
+    </ul>
+    <div class="tab-content zc_for">
+    <!-- 表单 -->
+    <form id="form" action="{:U('Query/withdraw_add?model='.$model['id'])}" method="post" class="form-horizontal">
+        <!-- 基础文档模型 -->
+        <div id="tab1" class="tab-pane in tab1">
+    		<table  border="0" cellspacing="0" cellpadding="0">
+                <tbody>
+                  <tr>
+                    <td class="l">游戏名称：</td>
+                    <td class="r">
+                       <select id="promote_id" name="promote_id">
+                        <option value="">请选择推广员</option>
+                       <volist name=":get_promote_parent_list()" id="vo">
+                        <option value="{$vo.id}">{$vo.account}</option>
+                       </volist>
+                       </select>
+                    </td>
+                    <td class="l"></td>
+                    <td class="r">
+                       
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="l">礼包描述：</td>
+                    <td class="r" colspan='3'>
+                        <textarea name="remark" class="txt_area1"></textarea>
+                    </td>
+                  </tr>
+                  
+                </tbody>
+            </table>
+        </div>
+        <div class="form-item cf">
+            <button class="btn submit-btn ajax-post hidden" id="submit" type="submit" target-form="form-horizontal">确 定</button>
+            <a class="btn btn-return" href="javascript:history.back(-1);">返 回</a>
+        </div>
+    </form>
+    </div>
+</div>
+</block>
+
+<block name="script">
+<link href="__STATIC__/datetimepicker/css/datetimepicker.css" rel="stylesheet" type="text/css">
+<php>if(C('COLOR_STYLE')=='blue_color') echo '<link href="__STATIC__/datetimepicker/css/datetimepicker_blue.css" rel="stylesheet" type="text/css">';</php>
+<link href="__STATIC__/datetimepicker/css/dropdown.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="__STATIC__/datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
+<script type="text/javascript" src="__STATIC__/datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js" charset="UTF-8"></script>
+<script type="text/javascript">
+//导航高亮
+highlight_subnav('{:U('Query/withdraw')}');
+$('#submit').click(function(){
+    $('#form').submit();
+});
+
+$(function(){
+    $('.date').datetimepicker({
+        format: 'yyyy-mm-dd',
+        language:"zh-CN",
+        minView:2,
+        autoclose:true
+    });
+    $('.time').datetimepicker({
+        format: 'yyyy-mm-dd hh:ii',
+        language:"zh-CN",
+        minView:2,
+        autoclose:true
+    });
+
+    
+});
+var url = "{:U('Giftbag/get_ajax_area_list')}";
+$("#game_id").change(function(){
+    fun_ajax($(this).val());
+})
+
+function fun_ajax(gid){
+    $.ajax({
+        type:"post",
+        url:url,
+        dataType:"json",
+        data:{game_id:gid},
+        success:function(data){
+            fun_html(data);
+        },
+        error:function(){
+            layer.msg('服务器异常',{icon:5});
+        }
+    })
+}
+
+function fun_html(data){
+    if(data == null){$("#area_id").html('<option value="">请选择区服</option>');}
+    $.each(data,function(key, value){
+        $("#area_id").html('<option value="'+value['id']+'">'+value['area_name']+'</option>');
+    }) 
+}
+</script>
+</block>

@@ -1,0 +1,250 @@
+/**
+ * 首页那种窄屏两个，宽屏四个的游戏块
+ */
+.boxs {
+  border: 1px solid #e4e4e4;
+  width: 98%;
+  margin-top: 1%;
+  margin-left: 1%;
+  margin-right: 1%;
+  background-color: #fff;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  box-sizing: border-box;
+}
+.boxs .box-title {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: -moz-box;
+  display: flexbox;
+  display: box;
+  -webkit-box-pack: justify;
+  -moz-box-pack: justify;
+  -o-box-pack: justify;
+  box-pack: justify;
+  padding: 0 2%;
+  line-height: 39px;
+  border-bottom: 1px solid #e4e4e4;
+}
+.boxs .box-title h2 {
+  font-weight: 600;
+  color: #666666;
+}
+.boxs .box-title .box-title-right .more {
+  font-size: 12px;
+  color: #999;
+  padding-right: 10px;
+  background-image: url(data:image/png;bast64,iVBORw0KGgoAAAANSUhEUgAAABAAAAANCAYAAACgu+4kAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMy1jMDExIDY2LjE0NTY2MSwgMjAxMi8wMi8wNi0xNDo1NjoyNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1MEUxQ0FDNjkyMERFNDExQTVGN0I0MzdCRTFFMTRCOSIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDpBMzFEQzIyQjNFNTUxMUU0OEZCMjhGNkEyNjY2MkVCOCIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDpBMzFEQzIyQTNFNTUxMUU0OEZCMjhGNkEyNjY2MkVCOCIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M2IChXaW5kb3dzKSI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOjk2OTdENUZGQzEzOEU0MTE4QjYwRTQ4QjM1MkIxRDJFIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjUwRTFDQUM2OTIwREU0MTFBNUY3QjQzN0JFMUUxNEI5Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+Fsx6MgAAAU5JREFUeNp0krtKg0EQhfdfRUTrVLY2PoYKXiJJJBEsLBRsLCIoeYBY2AsKFgo+gAQjXkCDEdFSEEHQIilshCDBMqBG4zcwwmaiCx8T9sw5O/9uomwl8+icG4INyG0NFlouWMvVmSdKPyygXTqzPIyAhKzCJobI9Mh+DI7RxjoCSK1Rh+EBsrAdhqCfUaZB9g7Rxu0E0vSqk9zDEuzS6IOQc0oSWhoy0RagTXXKKNzBIuzR2BXoF5QEfGvIVFuANr1pyC3Mw47R5RLF2IQDQhLeda4GvOjvASsSckVZhx6Zsts8mWwWdFQ5LW0D9PvzetCcD4Re+TY1l6RyWsOY49oj95BEL3kV+lSYBHm21B9mCS7Cl9wDeln2I/6JYj7SyzuBDOKHMaco+/AJcfTr8BlP1Vz8x5xW87tMGJp/A2T0FZi1Zl1r8KzmGyv+CDAAuUyB4oQaTdMAAAAASUVORK5CYII=);
+  background-position: right center;
+  background-size: auto 6px;
+  background-repeat: no-repeat;
+}
+.game {
+  border: none;
+  margin-top: 2%;
+  background-color: transparent;
+}
+.game .games {
+  padding: 0;
+  overflow: hidden;
+}
+.game .games .item {
+  float: left;
+  width: 48%;
+  display: block;
+}
+.game .games .item .item-top {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: -moz-box;
+  display: flexbox;
+  display: box;
+  width: 100%;
+  height: 64px;
+  clear: both;
+}
+.game .games .item .item-top .pic {
+  width: 57px;
+  height: auto;
+}
+.game .games .item .item-top .pic img {
+  display: block;
+  width: 57px;
+  height: 57px;
+  border-radius: 10px;
+}
+.game .games .item .item-top .info {
+  -webkit-box-flex: 1;
+  -moz-box-flex: 1;
+  -ms-box-flex: 1;
+  box-flex: 1;
+  overflow: hidden;
+  padding-top: 2px;
+}
+.game .games .item .item-top .info .name {
+  width: 95%;
+  height: 27px;
+  color: #666666;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 14px;
+}
+.game .games .item .message {
+  margin: 0 0 0 10px;
+}
+.game .games .item .message .byte {
+  float: left;
+  font-size: 12px;
+  line-height: 12px;
+}
+.game .games .item .message .byte span {
+  font-size: 12px;
+  color: #aaa;
+  text-align: left;
+  display: inline-block;
+}
+.game .games .item .message .byte .line:after {
+  content: '|';
+  color: #bcbcbc;
+  margin: 0 1px 0 3px;
+  font-family: simsun;
+  font-weight: 500;
+  vertical-align: middle;
+  position: relative;
+  top: -2px;
+}
+@media screen and (min-width: 768px) {
+  .game .games .item {
+    width: 23%;
+  }
+}
+.T_hot_position {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: -moz-box;
+  display: flexbox;
+  display: box;
+  -webkit-box-orient: vertical;
+  -moz-box-orient: vertical;
+  box-orient: vertical;
+  margin: 2%;
+  background-color: #fff;
+  border: 1px solid #e4e4e4;
+}
+.T_hot_position .h_title {
+  border-bottom: 1px solid #e4e4e4;
+  padding: 0 9px;
+  position: relative;
+}
+.T_hot_position .h_title h3 {
+  font: normal 14px/32px microsoft yahei;
+  margin: 0;
+  padding: 0;
+}
+.T_hot_position .h_title .h_more {
+  position: absolute;
+  right: 9px;
+  top: 0;
+  font: normal 10px/32px microsoft yahei;
+  color: #999;
+  padding-right: 13px;
+  display: block;
+  background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA8AAAAOCAYAAADwikbvAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMy1jMDExIDY2LjE0NTY2MSwgMjAxMi8wMi8wNi0xNDo1NjoyNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1NDEwN0IxOUNCRTdFMzExQkNDRENGQjJBRjY1RjhCOCIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDpGMUNFRTRFODE3Q0ExMUU0OTdGN0M0ODIxRTkyMjZDNiIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDpGMUNFRTRFNzE3Q0ExMUU0OTdGN0M0ODIxRTkyMjZDNiIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M2IChXaW5kb3dzKSI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOjkwQTlDMEFEMTExN0U0MTFBOUI1OTEyQzIzMDdDNjkxIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU0MTA3QjE5Q0JFN0UzMTFCQ0NEQ0ZCMkFGNjVGOEI4Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+fQzAqQAAAQFJREFUeNqEkT1qQkEQgPettv4gOULATjBaCKb1BLEKSBAVLOIBJG0OIFgIShAJwcZe488R0qXTO6Sy1Jdv4j5YXth14GMXvpmd3dngef/woi4xGN4ujsqK3qHudBIaCvAKK5JTMe9zf8WPMId7WJKUtrzPKc11TqwN+IAqfJKUEelzUeco6QlmUIE1SdlrLgjD0B5QgmUCTfiCGsU/LqftN5guLZhCSbr4nFb/Q4aSN/tvn0vG/lWGsTJve4e2z2lLyhC2RsrVmuaqTqeNzLHsoAxvcqpV6HQaeWNOvYMxdJBnU+h00T/LO4owgi4ytMbgc0oG1pf/hk1cXnHqV4ABAAN/gek7nRa4AAAAAElFTkSuQmCC);
+  background-size: 7px auto;
+  background-position: right center;
+  background-repeat: no-repeat;
+}
+.T_hot_position .h_content {
+  width: 100%;
+  overflow: hidden;
+  padding-bottom: 10px;
+}
+.T_hot_position .h_content .swipe {
+  position: relative;
+}
+.T_hot_position .h_content .swipe .swipe-warp {
+  position: relative;
+}
+.T_hot_position .h_content .h_con {
+  margin: 0;
+  float: left;
+  width: 100%;
+  position: relative;
+}
+.T_hot_position .h_content .h_con li {
+  float: left;
+  width: 25%;
+  overflow: hidden;
+  list-style-type: none;
+  margin: 10px 0 0 0;
+  text-align: center;
+}
+.T_hot_position .h_content .h_con li img {
+  width: 57px;
+  height: 57px;
+  border-radius: 10px;
+}
+.T_hot_position .h_content .h_con li span {
+  margin: 0 auto;
+  display: block;
+  width: 90%;
+  height: 26px;
+  font: normal 14px/26px microsoft yahei;
+  color: #666;
+  text-align: center;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  -o-text-overflow: ellipsis;
+  overflow: hidden;
+}
+.T_hot_position .h_content .h_con li .h_down {
+  display: inline-block;
+  height: 30px;
+  line-height: 30px;
+  padding: 0 5px;
+  text-align: center;
+  color: #ffffff;
+  font-size: 14px;
+  background-color: #0080ff;
+  border-radius: 3px;
+  width: 70%;
+}
+.T_hot_position .h_content .h_con li p {
+  color: #AAA;
+  white-space: nowrap;
+  font: normal 12px/12px microsoft yahei sans-serif;
+  overflow: hidden;
+  margin-top:5px;
+  margin-bottom:10px;
+}
+.T_hot_position .h_content .h_con li p em {
+  display: inline-block;
+  padding-left: 1px;
+  padding-right: 1px;
+  font-style: normal;
+}
+.T_hot_position .h_content .h_state {
+  margin: 0 0 2px 0;
+  list-style: none;
+  text-align: center;
+  padding: 0;
+}
+.T_hot_position .h_content .h_state li {
+  display: inline-block;
+  width: 5px;
+  height: 5px;
+  border-radius: 5px;
+  border: 1px solid #dfdfdf;
+  background: #e8e8e8;
+  margin: 0 2px;
+  cursor: pointer;
+}
+.T_hot_position .h_content .h_state li.on {
+  border-color: #c8c8c8;
+  background-color: #d1d1d1;
+}
+.box-hd {
+  padding: 1% 0 2% 2%;
+}

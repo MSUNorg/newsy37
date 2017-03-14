@@ -1,0 +1,54 @@
+<extend name="Public/subbases" />
+<block name="body" >
+<link href="__CSS__/wallet.css" rel="stylesheet" />
+<div class="m-wallet-wrap m-user-center-content">
+	<div class="user-center-title"><h2>我的钱包</h2></div>
+	<div class="wallet-summarize">
+		<div class="operation-bar">
+			<div class="tips">
+				<a href="javascript:void(0)" class="tips-trigger">什么是平台币?
+					<p class="tips-wrap">
+						平台币是一种在溪谷手游平台游戏支付的虚拟货币。
+						<span class="arrow arrow-outter"></span>
+						<span class="arrow"></span>
+					</p>
+				</a>
+				<a href="{:U('Recharge/index')}" class="btn charge-now">立即充值</a>
+			</div>
+		</div>
+		<div class="left-money">钱包余额：
+		<span class="left-count" id="leftCount">{$balance}</span>
+		<span>平台币</span></div>
+	</div>
+	<div class="charge-record">
+		<div class="title">最近10笔溪谷游戏平台币充值明细</div>
+		<table id="chargeRecord">
+			<colgroup>
+				<col style="width:25%;">
+				<col style="width:25%;">
+				<col style="width:25%;">
+				<col style="width:25%;">
+			</colgroup>
+			<tr>
+				<th>游戏</th>
+				<th>订单号</th>
+				<th>金额</th>
+				<th>时间</th>
+			</tr>
+			<notempty name="rec">
+			<volist name="rec" id="vo">
+				<tr>
+					<td>{$vo.game_name}</td>
+					<td>{$vo.pay_order_number}</td>
+					<td>{$vo.pay_amount}</td>
+					<td>{$vo.pay_time|date='Y-m-d H:i:s',###}</td>
+				</tr>
+			</volist>
+			</notempty>
+		</table>
+		<empty name="rec">
+		<p class="no-data">暂无数据</p>
+		</empty>
+	</div>
+</div>
+</block>

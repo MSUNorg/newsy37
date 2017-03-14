@@ -1,0 +1,61 @@
+<extend name="Public/base" />
+
+<block name="body">
+<link rel="stylesheet" type="text/css" href="__CSS__/admin_table.css" media="all">
+<script type="text/javascript" src="__STATIC__/uploadify/jquery.uploadify.min.js"></script>
+    <div class="main-title cf">
+        <h2>编辑 [代充额度]</h2>
+    </div>
+    <!-- 标签页导航 -->
+<div class="tab-wrap">
+    <ul class="tab-nav nav">
+        <li data-tab="tab1" class="current"><a href="javascript:void(0);">基础</a></li></li>
+    </ul>
+    <div class="tab-content zc_for">
+    <!-- 表单 -->
+    <form id="form" action="{:U('edit_pay_limits?model='.$model['id'])}" method="post" class="form-horizontal">
+        <!-- 基础文档模型 -->
+        <div id="tab1" class="tab-pane in tab1">
+    		<table  border="0" cellspacing="0" cellpadding="0">
+                <tbody>
+                    <tr>
+                        <td class="l">推广员账号:</td>
+                        <td class="r">
+                            <select name="promote_id">
+                            <option value=' '> 请选择推广员</option>
+                         <volist name=":get_promote_list()" id="vo">
+                            <option value='{$vo.id}'>{$vo.account}</option>
+                        </volist>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="l">代充额度：</td>
+                        <td class="r">
+                           <input type="text" class="txt" name="limits" value="{$data['limits']}">
+                        </td>
+                    </tr>
+
+                </tbody>
+            </table>
+        </div>
+        <div class="form-item cf">
+        <input name="ids" type="hidden" value='{$data['id']}'>
+            <button class="btn submit-btn ajax-post hidden" id="submit" type="submit" target-form="form-horizontal">确 定</button>
+            <a class="btn btn-return" href="javascript:history.back(-1);">返 回</a>
+        </div>
+    </form>
+    </div>
+</div>
+</block>
+
+<block name="script">
+<script type="text/javascript">
+//导航高亮
+highlight_subnav('{:U('Promote/pay_limits')}');
+Think.setValue("promote_id", {$data.promote_id|default = 0});
+$('#submit').click(function(){
+    $('#form').submit();
+});
+</script>
+</block>

@@ -1,0 +1,175 @@
+.m-wallet-wrap {
+    height: auto
+}
+a, .a3c, .a6c, .a9c {
+    color: #3c3c3c;
+}
+.m-wallet-wrap .wallet-summarize {
+    width: 908px;
+    height: 88px;
+    margin: 40px auto 20px;
+    background: #fafafa;
+    font-size: 14px
+}
+
+.m-wallet-wrap .wallet-summarize .operation-bar {
+    float: right;
+    height: 88px;
+    line-height: 88px
+}
+
+.m-wallet-wrap .wallet-summarize .operation-bar .tips-wrap {
+    display: none;
+    white-space: normal;
+    color: #333;
+    position: absolute;
+    top: 35px;
+    left: 50%;
+    margin-left: -172px;
+    width: 342px;
+    height: 61px;
+    line-height: 61px;
+    border: 1px solid #d9d9d9;
+    background: #fff;
+    text-indent: 20px;
+    -webkit-box-shadow: 0 3px 13px -5px #000;
+    -moz-box-shadow: 0 3px 13px -5px #000;
+    box-shadow: 0 3px 13px -5px #000
+}
+
+.m-wallet-wrap .wallet-summarize .operation-bar .tips-wrap .arrow {
+    width: 0;
+    height: 0;
+    position: absolute;
+    left: 50%;
+    top: -23px;
+    border: 12px solid transparent;
+    border-bottom-color: #fff;
+    z-index: 10
+}
+
+.m-wallet-wrap .wallet-summarize .operation-bar .tips-wrap .arrow-outter {
+    top: -24px;
+    z-index: 0;
+    border-bottom-color: #d9d9d9
+}
+
+.m-wallet-wrap .wallet-summarize .operation-bar .charge-now {
+    display: inline-block;
+    *display: inline;
+    *zoom:1;width: 118px;
+    height: 34px;
+    text-align: center;
+    line-height: 34px;
+    color: #fff;
+    font-size: 16px;
+    margin: 0 20px 0 0;
+    background: url(../images/btn-editor.png) no-repeat
+}
+
+.m-wallet-wrap .wallet-summarize .operation-bar .tips-trigger {
+    position: relative;
+    margin-right: 23px;
+    color: #939393
+}
+
+.m-wallet-wrap .wallet-summarize .operation-bar .tips-trigger:hover .tips-wrap {
+    display: block
+}
+
+.m-wallet-wrap .wallet-summarize .left-money {
+    float: left;
+    height: 88px;
+    line-height: 88px;
+    padding: 0 0 0 30px;
+    color: #676767
+}
+
+.m-wallet-wrap .wallet-summarize .left-money .left-count {
+    position: relative;
+    top: 3px;
+    font-size: 30px
+}
+
+.m-wallet-wrap .wallet-summarize .left-money span {
+    color: #ff8400
+}
+
+.m-wallet-wrap .charge-record {
+    width: 908px;
+    margin: 0 auto
+}
+
+.m-wallet-wrap .charge-record .title {
+    font-size: 16px;
+    color: #333;
+    text-align: center;
+    height: 38px;
+    line-height: 38px;
+    border: 1px solid #e9e9e9;
+    background: #fafafa
+}
+
+.m-wallet-wrap .charge-record table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: -1px 0 144px 0
+}
+
+.m-wallet-wrap .charge-record table .td01 {
+    width: 131px
+}
+
+.m-wallet-wrap .charge-record table .td02 {
+    width: 107px
+}
+
+.m-wallet-wrap .charge-record table .td03 {
+    width: 138px
+}
+
+.m-wallet-wrap .charge-record table .td04 {
+    width: 91px
+}
+
+.m-wallet-wrap .charge-record table .td05 {
+    width: 88px
+}
+
+.m-wallet-wrap .charge-record table .td06 {
+    width: 149px
+}
+
+.m-wallet-wrap .charge-record table .td07 {
+    width: 205px
+}
+
+.m-wallet-wrap .charge-record th,.m-wallet-wrap .charge-record td {
+    text-align: left;
+    text-indent: 19px
+}
+
+.m-wallet-wrap .charge-record th,.m-wallet-wrap .charge-record tr, .m-wallet-wrap .charge-record td{
+    border: 1px solid #e9e9e9
+}
+
+.m-wallet-wrap .charge-record td {
+    font-size: 12px;
+    color: #676767;
+    height: 58px;
+    line-height: 58px;
+    text-indent: 19px
+}
+
+.m-wallet-wrap .charge-record th {
+    font-weight: 400;
+    background: #fafafa;
+    height: 38px;
+    line-height: 38px
+}
+
+.m-wallet-wrap .charge-record .no-data {
+    white-space: normal;
+    text-align: center;
+    margin: -100px 0 144px 0
+}

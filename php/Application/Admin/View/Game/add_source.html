@@ -1,0 +1,147 @@
+<extend name="Public/base" />
+
+<block name="body">
+<link rel="stylesheet" type="text/css" href="__CSS__/admin_table.css" media="all">
+<script type="text/javascript" src="__STATIC__/uploadify/jquery.uploadify.min.js"></script>
+    <div class="main-title cf">
+        <h2>新增 [游戏原包]</h2>
+    </div>
+    <!-- 标签页导航 -->
+<div class="tab-wrap">
+    <ul class="tab-nav nav">
+        <li data-tab="tab1" class="current"><a href="javascript:void(0);">基础</a></li>
+    </ul>
+    <div class="tab-content zc_for">
+    <!-- 表单 -->
+    <form id="form" action="{:U('add_source')}" method="post" class="form-horizontal">
+        <!-- 基础文档模型 -->
+        <div id="tab1" class="tab-pane in tab1">
+    		<table  border="0" cellspacing="0" cellpadding="0">
+                <tbody>
+                  <tr>
+                    <td class="l">游戏名称：</td>
+                    <td class="r">
+                        <select id="game_id" name="game_id">
+                            <option value="" selected="">请选择游戏</option>
+                        <volist name=':get_game_list()' id='vo'>
+                            <option value="{$vo.id}" >{$vo.game_name}</option>
+                        </volist>
+                        </select>
+                    </td>
+                    <td class="l">原包类型：</td>
+                    <td class="r">
+                        <select id="file_type" name="file_type">
+                            <option value="" >请选择原包类型</option>
+                            <option value="1">安卓</option>
+                            <option value="2">苹果</option>
+                        </select>
+                    </td>
+                  </tr>
+                  
+                  <tr>
+                    <td class="l">文件包：</td>
+                    <td class="r" colspan='3'>
+                        <input type="file" id="file_id">
+                        <input type="hidden" name="file_id"   value="{$data['file_id']}"/>
+                        <input type="hidden" name="file_name" value="{$data['file_name']}"/>
+                        <input type="hidden" name="file_url"  value="{$data['file_url']}"/>
+                        <input type="hidden" name="file_size"  value="{$data['file_size']}"/>
+                        <div class="upload-img-box">
+                            <present name="data['file_id']">
+                                <div class="upload-pre-file"><span class="upload_icon_all"></span>{$data['file_id']}</div>
+                            </present>
+                        </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="l">备注：</td>
+                    <td class="r" colspan='3'>
+                        <textarea name="remark" class="txt_area"></textarea>
+                    </td>
+                  </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="form-item cf">
+            <button class="btn submit-btn ajax-post hidden" id="submit" type="submit" target-form="form-horizontal">确 定</button>
+            <a class="btn btn-return" href="javascript:history.back(-1);">返 回</a>
+        </div>
+    </form>
+    </div>
+</div>
+</block>
+
+<block name="script">
+<script type="text/javascript" src="__STATIC__/datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
+<script type="text/javascript">
+//导航高亮
+highlight_subnav('{:U('Game/source')}');
+$('#submit').click(function(){
+    $('#form').submit();
+});
+
+$(function(){
+    $('.date').datetimepicker({
+        format: 'yyyy-mm-dd',
+        language:"zh-CN",
+        minView:2,
+        autoclose:true
+    });
+    $('.time').datetimepicker({
+        format: 'yyyy-mm-dd hh:ii',
+        language:"zh-CN",
+        minView:2,
+        autoclose:true
+    });
+    showTab();
+
+});
+
+
+
+//$('$file_id').click(function(){alert("1111")});
+//上传文件(安卓游戏原包)
+/* 初始化上传插件 */
+$("#file_id").uploadify({
+    "height"          : 30,
+    "swf"             : "__STATIC__/uploadify/uploadify.swf",
+    "fileObjName"     : "download",
+    "buttonText"      : "上传原包",
+    "uploader"        : "{:U('File/upload_game_source',array('session_id'=>session_id()))}",
+    "width"           : 120,
+    'removeTimeout'   : 1,
+    'sizeLimit': '99999999999',
+    "onUploadSuccess" : uploadFile,
+    'onFallback' : function() {
+        alert('未检测到兼容版本的Flash.');
+    }
+});
+function uploadFile(file, data){
+    //alert(data);
+    var data = $.parseJSON(data);
+    if(data.status){
+        var name = "file_id";
+        $("input[name="+name+"]").val(data.data.id);
+        $("input[name="+name+"]").parent().find('.upload-img-box').html(
+            "<div class=\"upload-pre-file\"><span class=\"upload_icon_all\"></span>" + data.info + "</div>"
+        );
+        $("input[name='file_name']").val(data.data.savename);
+        $("input[name='file_url']").val(data.data.path);
+        $("input[name='file_size']").val(data.data.size);
+    } else {
+        updateAlert(data.info);
+        setTimeout(function(){
+            $('#top-alert').find('button').click();
+            $(that).removeClass('disabled').prop('disabled',false);
+        },1500);
+    }
+}
+
+function checkUpload(){
+    if($("#game_id").val().length == 0){
+        //$('#file_id').uploadifyClearQueue()
+        updateAlert("游戏不能为空");
+    }
+}
+</script>
+</block>

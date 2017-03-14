@@ -1,0 +1,215 @@
+<extend name="Public/base" />
+<block name="body">
+
+<link rel="stylesheet" type="text/css" media="all" href="__CSS__/pay.css">
+<link rel="stylesheet" href="__CSS__/dialog_base.css" />
+<script type="text/javascript" src="__JS__/front/do.js"></script>  
+<script type="text/javascript" src="__JS__/front/cute.js"></script>
+<script type="text/javascript" src="__JS__/front/dialog.js"></script>
+<!-- <script type="text/javascript" src="__JS__/fast_register.js"></script> -->
+<script type="text/javascript" src="__JS__/common.js"></script>
+<script type="text/javascript" src="__JS__/yeepay.js"></script> 
+<script type="text/javascript">
+    $(function(){
+    	if($("#money2").val() != ''){
+    		$("#money2").parent().parent().siblings().children('input').removeProp("checked");
+    		$("#money2").parent().parent().siblings().removeClass('money_checked');
+    	}
+    	if($("#money3").val() != ''){
+    		$("#money3").parent().parent().siblings().children('input').removeProp("checked");
+    		$("#money3").parent().parent().siblings().removeClass('money_checked');
+    	}
+    	if($("#money4").val() != ''){
+    		$("#money4").parent().parent().siblings().children('input').removeProp("checked");
+    		$("#money4").parent().parent().siblings().removeClass('money_checked');
+    	}
+        
+    })
+</script>
+<div class="wrap_w">
+	   <div class="pay_box">
+	   		<div class="pay_l fl">
+		      <div class="pay_l_t">选择充值方式</div>
+		      <ul id="paytypes">
+<!-- 		        <li class="li_h" data-type="yeepay"><span class="p1_1 g" id="p1">易宝（网上银行）</span></li> -->
+		        <li class="li_h" data-type="alipay" class=""><span class="p2 g" id="p2">支付宝（网上银行）</span></li>
+		        <li data-type="wechat" class=""><span class="p26 g" id="p26">微信支付（余额）</span></li>
+		      </ul>
+		    </div>
+		    <div class="pay_r fl">
+				<div class="pay_r_t dn2" id="notlogin">
+					
+				</div>
+				<div class="pay_r_t" id="login">
+					
+				</div>
+				<div id="change_box">
+					<ul>
+				        <li class="bb" id="alipay" >
+				          
+				            <form id="form_alipay" action="{:U('alipay')}" method="post">
+				              <ul class="cz_ul">
+				            	<li style="position:relative;">
+				                	<span>
+					                    <span class="label_name">充值到：</span>
+					                    <input type="checkbox" checked="checked" class="ptbcheckbox" disabled="disabled"> 
+					                    <label class="ptb2">平台币</label>
+					                </span>
+			                        <div class="ptbtips pa" id="ptbtips2">平台币是溪谷手机游戏平台统一支付的虚拟货币。玩家可以使用平台币兑换溪谷手机游戏平台旗下绝大部分游戏的游戏币。
+			                        <a href="javascript:;" class="ptbtipsclose db pa"></a>
+			                        </div>
+				                </li>
+				                <li>
+				                	<span>
+					                    <span class="label_name">充值帐号：</span>
+					                    <input type="text" id="toaccount2" name="uname1" class="zh_input" value="">
+					                </span>
+				                </li>
+				                <li>
+				                	<span id="main_user_input">
+					                    <span class="label_name">确认帐号：</span>
+					                    <input type="text" id="retoaccount2" name="uname2" class="zh_input" value="">
+					                </span>
+				                </li>
+
+				                <li class="clearfix">
+				                	<span class="label_name fl">选择金额：</span>
+				                	<div class="pay_money_box">
+				                		<span>
+				                        	<input type="radio" name="money" value="10">
+				                        	<font>10元</font>
+				                        </span>
+				                        <span>
+				                        	<input type="radio" name="money" value="30">
+				                        	<font>30元</font>
+				                        </span>
+				                        <span>
+				                        	<input type="radio" name="money" value="50">
+				                        	<font>50元</font>
+				                        </span>
+				                         <span class="money_checked">
+				                        	<input type="radio" name="money" checked="" value="100">
+				                        	<font>100元</font>
+				                        </span>
+				                        <span>
+				                        	<input type="radio" name="money" value="300">
+				                        	<font>300元</font>
+				                        </span>
+				                        <span>
+				                        	<input type="radio" name="money" value="500">
+				                        	<font>500元</font>
+				                        </span>
+				                        <span>
+				                        	<input type="radio" name="money" value="1000">
+				                        	<font>1000元</font>
+				                        </span>
+				                        <span class="last_money">
+					                        <font>其他 <input type="text" maxlength="10" size="10" name="money2" id="money3" class="money2" onkeyup="this.value = this.value.replace(/[^0-9]/g, ''); get_game_coin2();" style="display: inline-block"> 元
+					                        </font>
+				                        </span> 
+				                        <input type="hidden" id="alipay_amount" name="alipay_amount" value="" />          
+				                    </div>
+				                    <div class="clear"></div> 
+				                </li>
+				                <li class="clearfix"><span class="label_name">返利券：</span>
+				                	<div class="flq_div" id="flq_div2">没有可用的返利券</div>
+				                </li>
+				                <li class="clearfix"><span class="label_name"></span>
+				                	<div class="flqtips_div">
+				                        <p class="flqtips_l">*兑换比例1元=1平台币</p>
+				                        <p class="flqtips_r">本次充值获得平台币：<span id="game_coin2">10</span><!-- <br />获得赠宝奖励：99999999 --></p>
+				                     </div>
+				                </li>
+				                <li> <a class="pay_submit" href="javascript:;" id="alipay_action">立即充值</a></li>
+				            </ul>
+				            </form>
+				        </li>
+				        <li class="bb" id="wechat" style="display: none;">
+				            <form id="form_wxpay" action="{:U('wxpay')}" method="post">
+				              <ul class="cz_ul">
+				            	<li style="position:relative;">
+				                	<span>
+					                    <span class="label_name">充值到：</span>
+					                    <input type="checkbox" checked="checked" class="ptbcheckbox" disabled="disabled"> 
+					                    <label class="ptb3">平台币</label>
+					                </span>
+			                        <div class="ptbtips pa" id="ptbtips3">平台币是溪谷手机游戏平台统一支付的虚拟货币。玩家可以使用平台币兑换溪谷手机游戏平台旗下绝大部分游戏的游戏币。
+			                        <a href="javascript:;" class="ptbtipsclose db pa"></a>
+			                        </div>
+				                </li>
+				                <li>
+				                	<span>
+					                    <span class="label_name">充值帐号：</span>
+					                    <input type="text" id="toaccount3" name="uname1" class="zh_input" value="">
+					                </span>
+				                </li>
+				                <li>
+				                	<span id="main_user_input">
+					                    <span class="label_name">确认帐号：</span>
+					                    <input type="text" id="retoaccount3" name="uname2" class="zh_input" value="">
+					                </span>
+				                </li>
+
+				                <li class="clearfix">
+				                	<span class="label_name fl">选择金额：</span>
+				                	<div class="pay_money_box">
+				                		<span>
+				                        	<input type="radio" name="money" value="10">
+				                        	<font>10元</font>
+				                        </span>
+				                        <span>
+				                        	<input type="radio" name="money" value="30">
+				                        	<font>30元</font>
+				                        </span>
+				                        <span>
+				                        	<input type="radio" name="money" value="50">
+				                        	<font>50元</font>
+				                        </span>
+				                         <span class="money_checked">
+				                        	<input type="radio" name="money" checked="" value="100">
+				                        	<font>100元</font>
+				                        </span>
+				                        <span>
+				                        	<input type="radio" name="money" value="300">
+				                        	<font>300元</font>
+				                        </span>
+				                        <span>
+				                        	<input type="radio" name="money" value="500">
+				                        	<font>500元</font>
+				                        </span>
+				                        <span>
+				                        	<input type="radio" name="money" value="1000">
+				                        	<font>1000元</font>
+				                        </span>
+				                        <span class="last_money">
+				                        	<font>其他 <input type="text" maxlength="10" size="10" name="money2" id="money4" class="money2" onkeyup="this.value = this.value.replace(/[^0-9]/g, ''); get_game_coin3();" style="display: inline-block"> 元
+				                        	</font>
+				                        </span>
+				                        <input type="hidden" id="wxpay_amount" name="wxpay_amount" value="" />  
+				                    </div>
+				                    <div class="clear"></div> 
+				                </li>
+				                <li class="clearfix"><span class="label_name">返利券：</span>
+				                	<div class="flq_div" id="flq_div3">没有可用的返利券</div>
+				                </li>
+				                <li class="clearfix"><span class="label_name"></span>
+				                	<div class="flqtips_div">
+				                        <p class="flqtips_l">*兑换比例1元=1平台币</p>
+				                        <p class="flqtips_r">本次充值获得平台币：<span id="game_coin3">1000</span><!-- <br />获得赠宝奖励：99999999 --></p>
+				                     </div>
+				                </li>
+				                <li> <a class="pay_submit" href="javascript:;" id="wechat_action">立即充值</a></li>
+				            </ul>
+				            </form>
+				        </li>
+				    </ul>
+				</div>
+	       </div>
+	   </div>
+	   </div>
+	</div>
+	<div class="mask" id="qr_code_mask"></div>
+	<div class="login" id="qr_code">
+	  <iframe id="qr_code_view" width="100%" height="100%" src="" frameborder="no" border="0" marginwidth="0" marginheight="0" scrolling="no" allowtransparency="yes"></iframe>
+	</div>
+</block>

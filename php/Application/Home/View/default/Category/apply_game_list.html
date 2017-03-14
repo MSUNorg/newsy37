@@ -1,0 +1,128 @@
+
+<link type="text/css" href="__CSS__/Category/basen.css" rel="stylesheet" media="screen">
+<link type="text/css" href="__CSS__/Category/innerCss.css" rel="stylesheet" media="screen">
+<script language="javascript">
+    $(document).ready(
+	    function(){
+			$pingtaibiyue=$("#pingtaibiyue");
+			$("#pingtaibiyue",window.parent.document).html("0.00");
+			
+			$game=$("[name='game']");
+			$gametag=$("[name='gametag']");
+			$sohchoosegamediv=$("#sohchoosegamediv");
+			$choosegamediv=$("#choosegamediv");
+			$gameid=$("#gameid");
+			$tgghdaichongfirstzhekou=$("#tgghdaichongfirstzhekou");
+			$tgghdaichongsecondzhekou=$("#tgghdaichongsecondzhekou");
+			
+			$gametag.click(
+			    function(){
+					$this=$(this);
+					var taghtml=$this.html();
+					var arr=taghtml.toLowerCase().split('');
+					
+					$gametag.each(
+					    function(){
+							$(this).removeClass("on");
+						}
+					);
+					$this.addClass("on");
+					
+					if(taghtml=="所有游戏"){
+						$game.each(
+						    function(){
+								$(this).show();
+							}
+						);
+					}
+					else{
+						$game.each(
+						    function(){
+								$t=$(this);
+								var qp=$t.attr("qp");
+								var isshow=false;
+								for(i=0;i<arr.length;i++){
+									if(qp.substring(0,1)==arr[i]){
+										isshow=true;
+									}
+								}
+								if(isshow){
+									$t.show();
+								}
+								else{
+									$t.hide();
+								}
+							}
+						);
+					}
+				}
+			);
+			
+			$game.click(
+			    function(){
+					$this=$(this);
+					var gamename=$this.attr("n");
+					$sohchoosegamediv.html('<div class="p_right"></div>'+gamename);
+					$gameid.attr("value",$this.attr("v"));
+					$("#game_ratio").attr("value",$this.attr("fc"));
+					$("#game_name").val(gamename);
+					$("#game_appid").val($this.attr("appid"));
+					//清空 价格
+					$("#pay_fmoney").val("");
+					$choosegamediv.addClass("hide");
+					if($this.attr("v")==0){
+						$tgghdaichongfirstzhekou.html("");
+						$tgghdaichongsecondzhekou.html("");
+					}
+					else{
+						
+						$tgghdaichongfirstzhekou.html("充值折扣："+$this.attr("fc")+"折");
+						$tgghdaichongsecondzhekou.html("续充值折扣："+$this.attr("sc")+"折");
+					}
+				}
+			);
+        }
+	);
+</script>
+<!-- <div class="add_coin"></div> -->
+<input type="hidden" id="gameid" name="game_id" value="0"></input>
+<input type="hidden" id="game_appid" name="game_appid"  value="">   
+<input type="hidden" id="game_name" name="game_name"   value="">
+<input type="hidden" id="game_ratio" name="game_ratio" value="0"></input>
+<div class="rp_model">
+	<div class="select_panel flt">
+		<div id="sohchoosegamediv" class="panel_box" onclick="$(&#39;#choosegamediv&#39;).toggleClass(&#39;hide&#39;);">
+			<div class="p_right"></div>请选择游戏
+		</div>
+		<div id="choosegamediv" class="list_box hide">
+			<div class="title">
+				<a name="gametag" href="javascript:;" class="flt on">所有游戏</a>
+				<a name="gametag" href="javascript:;" class="flt">ABCD</a>
+				<a name="gametag" href="javascript:;" class="flt">EFGH</a>
+				<a name="gametag" href="javascript:;" class="flt">IJKL</a>
+				<a name="gametag" href="javascript:;" class="flt">MNOP</a>
+				<a name="gametag" href="javascript:;" class="flt">QRST</a>
+				<a name="gametag" href="javascript:;" class="flt">UVW</a>
+				<a name="gametag" href="javascript:;" class="flt">XYZ</a>
+				<div class="clr"></div>
+			</div>
+			<ul>
+				<li name="game" class="flt" qp="" v="0" n="请选择游戏" fc="" sc="">
+					<img src="__CSS__/Category/allgame.jpg" alt="" class="flt">
+					<div class="flt" style="padding-top:9px;"><h2>全部游戏</h2></div>
+					<div class="clr"></div>
+				</li>
+				<!-- {:var_dump($list_data)} -->
+				<volist name="list_data" id="data">
+				<li name="game" class="flt" qp="{$data.short}" v="{$data.game_id}" appid="{$data.game_appid}" n="{$data.game_name}" fc="{$data.discount}" sc="{$data.discount}">
+					<img src="{$data.icon|get_cover='path'}" alt="" class="flt">
+					<div class="flt" style="padding-top:9px;"><h2>{$data.game_name}</h2></div>
+					<div class="clr"></div>
+				</li>
+				</volist>
+				<div class="clr"></div>
+			</ul>
+		</div>
+	</div>
+	<div class="clr"></div>
+</div>

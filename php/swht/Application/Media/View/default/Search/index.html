@@ -1,0 +1,81 @@
+<extend name="Public/base" />
+<block name="body">
+<div class="main_sub wrap_w">
+    <div class="crumbs">
+    	<em>当前位置：</em><a href="{:U('Index/index')}" target="_blank">溪谷游戏</a>
+		<span> &gt; </span>
+		<switch name='$search_page'>
+			<case value="game_list"><a href="{:U('Game/game_list')}">游戏中心</a></case>
+			<case value="gift_list"><a href="{:U('Game/gift_list')}">礼包中心</a></case>
+		</switch>
+		&nbsp;搜索“{:$_REQUEST['search_key']}”关键字
+	</div>
+	<switch name="search_page">
+		<case value="game_list">
+		<div id="game_list" class="subbg">
+			<ul class="gamelistbox clearfix"> 
+			   <volist name="list_data" id="sd">
+				<li><a href="{:U('Game/game_detail','id='.$sd['id'].'')}" target="_blank">
+					<img src="__ROOT__{$sd.icon|get_cover='path'}"></a>
+					<div class="box01 fl">
+					<span class="tt"><a href="{:U('Game/game_detail','id='.$sd['id'].'')}" target="_blank">{$sd.game_name}</a></span>
+					<span><em>版本：{$sd.version}</em>下载：{$sd.dow_num}次</span><span>游戏类型：{:get_game_type($sd['game_type'])}</span>
+					<!-- <div>
+						<span class="gw mr10">官网游戏</span>
+						<a href="{:U('Gift/index?GameID='.$sd['ID'].'')}" target="_blank" class="bt_gw">独家礼包</a>
+					</div> -->
+					</div>
+					<div class="box02 fl"><span class="star5"></span>
+					  <input name="" type="button" class="download02" onclick="window.open('{$sd.and_dow_address}')">
+					</div>
+					<div class="code"><img src=""></div>
+				</li>
+				</volist>
+			</ul>
+			<div class="page">
+				{$_page|default=''}
+			</div>
+		</div>
+
+		</case>
+		<case value='gift_list'>
+		<div id="giftlist">
+			<ul class="clearfix">
+			<volist name="list_data" id="vo">
+            <li>
+                <div class="l">
+                    <a href="{:U('Game/game_detail?id='.$vo['game_id'].'')}">
+                        <img src="__ROOT__{$vo.icon|get_cover='path'}">
+                    </a>
+                </div>
+                <div class="r">
+                    <h3>{$vo.giftbag_name}</h3>
+                    <p class="ct">
+                        {$vo.desribe}
+                    </p>
+                    <p class="cm">
+                        剩余有效期：<?php 	
+											$days=round((strtotime($vo['LastTime'])-strtotime($vo['StartTime']))/86400)+1;
+											$days = $days<0?0:$days;
+											echo $days;
+									?>
+						天
+                    </p>
+                    <div class="bn">
+                        <a onclick="XGUC.get_game_gift({$vo.id}, &#39;{$vo.giftbag_name}&#39;)" target="_blank">
+                            领取礼包
+                        </a>
+                    </div>
+                </div>
+            	</li>
+			</volist>  
+        	</ul>
+			<div class="page">
+				{$_page|default=''}
+			</div>
+		</div>
+		</case>
+		<default />数据错误
+	</switch>	
+</div>
+</block>

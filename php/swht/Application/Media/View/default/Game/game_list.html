@@ -1,0 +1,55 @@
+<extend name="Public/base" />
+<block name="body">
+<div class="main_sub wrap_w">
+    <div class="crumbs"><em>当前位置：</em><a href="{:U('Game/index')}">游戏中心</a></div>
+    <div class="gameclass">
+        <h2 class="titi">游戏<span>分类</span></h2>
+        <ul class="gameclasslist">
+            <li><span>游戏类型</span>
+                <p>
+                    <a href="{:U('Game/game_list?game_type=0')}" class="<if condition='I("game_type") == 0'>curr</if>">全部</a>
+                    <volist name=':get_game_type_list()' id='vo' key='k'>
+                        <a href="{:U('Game/game_list?game_type='.$vo["id"])}" class="<if condition='I("game_type")==$vo["id"]'>curr</if>">{$vo.type_name}</a>
+                    </volist>
+				</p>
+            </li>
+        </ul>
+    </div>
+    <ul class="gameslist clearfix">
+        <volist name="list_data" id="vo">
+        <li>
+			<span class="gampi gx"></span>
+            <a href="{:U('Game/game_detail','id='.$vo['id'].'')}" target="_blank" class="gameslistl">   
+			<img src="__ROOT__{$vo.icon|get_cover='path'}">
+            </a>
+            <div class="gameslistr">
+                <h3>
+                    <a href="{:U('Game/game_detail?id='.$vo['id'].'')}" target="_blank">
+                        {$vo.game_name}
+                    </a>
+                </h3>
+                <p>
+                    <span>类型：{$vo['game_type_name']}</span>
+					<span>更新时间：{$vo.create_time|date="Y-m-d",###}</span>
+                </p>
+                <p class="jianjie"> 
+                    <a href="{:U('Game/game_detail?id='.$vo['id'].'')}" target="_blank">
+                        简介：{:msubstr($vo['introduction'],0,25)}
+                    </a>
+                </p>
+                <p class="ganlink">
+                    <a href="{:U('Game/game_detail?id='.$vo['id'].'')}" target="_blank">游戏专区</a>
+				    <a href="<if condition='$vo.dow_status eq 0'>#<else/>{:U('Down/down_file?game_id='.$vo['id'].'&type=1')}</if>">点击下载</a>            
+				    <a href="{:U('Game/gift_list?game_id='.$vo['id'].'')}" target="_blank">
+                        领取礼包
+                    </a>
+                </p>
+            </div>
+        </li>
+        </volist>
+        </ul>
+    <div class="page">
+        {$_page|default=''}
+	</div>
+</div>
+</block>

@@ -1,0 +1,95 @@
+<extend name="Public/bases" />
+<block name="body" >
+	<link href="__CSS__/gift-common.css" rel="stylesheet" />
+	<link href="__CSS__/gift-info.css" rel="stylesheet" />
+	<section>
+        <div class="pack-rec-fin">
+            <a class="pack-rec-fin-imge"><img src="__ROOT__{$data.icon|get_cover='path'}"></a>
+            <span>
+                <p class="pack-rec-fin-t"><a>《{$data.game_name}》神秘礼包</a></p>
+                <p class="pack-rec-fin-num">剩余：
+					<em>
+						<i id="HaveNum">{$data.novice_num}</i>
+<!-- 						/<i id="TotleNum">200</i> -->
+					</em></p>
+            </span>
+            <a class="pack-rec-fin-r Style1" id="CodeBtn">立即领取</a>
+            <a class="pack-rec-fin-time" id="Timer">30分钟后可再次领取</a>
+        </div>
+        <div class="pack-rec-end" id="CodeInfo">
+            <p class="pack-rec-end-t" id="ShowCodeMessage">恭喜您，领号成功，长按复制：</p>
+            <p class="pack-rec-end-n">激活码：<em id="ShowCode">{$data.nvalue}</em></p>
+            <p class="pack-rec-end-i">领取的礼包请尽快使用哦~ </p>
+        </div>
+		<script>
+			$(function() {
+				$('#CodeBtn').click(function() {
+					$(this).removeClass('Style1').addClass('Style0').text('已领取');
+					$('#Timer').show();
+					$('#CodeInfo').show();
+					setTimeout(function(){
+						getgift();
+						$('#CodeBtn').removeClass('Style0').addClass('Style1').text('立即领取');
+						$('#Timer').hide();
+						$('#CodeInfo').hide();
+					},1800000);
+				});
+			});
+			function getgift() {
+				$.ajax({
+						type: 'POST',
+					  async: true,
+				  dataType : 'json',
+						url: '__CONTROLLER__/getgift',
+					   data: 'id={$data.ID}',
+					success: function (data) {
+							switch (parseInt(data.status)) {
+								case 1:
+									$('#ShowCode').html(data.nvalue);							
+								break;
+							default:								
+								break;	
+							}
+							return false;
+						},
+					error: function () {
+						},
+					cache: false						
+					});
+			}
+		</script>
+
+        <div class="pack-rec-txt mar-top">
+            <span></span>
+            <p id="PcakTxt">注：此礼包为溪谷平台礼包，亲测在溪谷下载的游戏可以使用，其他平台请自行测试。</p>
+        </div>
+
+        
+        <div class="pack-rec-info mar-top">
+            <span><i class="icon2"></i>礼包详情</span>
+            <p>
+                礼品内容：{$data.describe}<br>
+                有效时间：{$data.start_time|date='Y-m-d H:i',###}至{$data.end_time|date='Y-m-d H:i',###}            </p>
+        </div>
+
+        <div class="pack-rec-info mar-top">
+            <span><i class="icon3"></i>礼包使用方法</span>
+            <p>
+                {$data.digest}            </p>
+        </div>
+		
+        <!-- <div class="pack-rec-info mar-top">
+            <span><i class="icon4"></i>关注微信领取礼包方法</span>
+            <p>
+                第一步、登录微信点击右上角“<span class="pack-jia"></span>”<br>
+                第二步、选择“<span class="pack-U"></span> ”添加朋友<br>
+                第三步、查找“溪谷”并关注“溪谷手游”<br>
+                第四步、进入“溪谷手游”公众号点击“领取礼包”<br>
+                <em>7K7K手游官方Q群</em>(384158693一群/190337909二群)<br>
+            </p>
+            <div class="inpopShare" style="display: none;"><a onclick="ShowPopLayWeChatShare()">分享礼包给好友</a></div>      
+        </div> -->
+
+        		<div class="m-black"></div>
+    </section>
+</block>

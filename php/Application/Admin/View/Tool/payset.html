@@ -1,0 +1,145 @@
+<extend name="Public/base"/>
+
+<block name="body">
+	<div class="main-title">
+		<h2>支付设置</h2>
+	</div>
+	<div class="tab-wrap">
+		<ul class="tab-nav nav">
+			<li data-tab="tab1" class="current"><a href="javascript:void(0);" >支付宝</a></li>
+			<li data-tab="tab2"><a href="javascript:void(0);" >微信</a></li>
+			<li data-tab="tab3"><a href="javascript:void(0);" >聚宝云</a></li>
+		</ul>
+		<div class="tab-content">
+		<div id="tab1" class="tab-pane in tab1">
+		<form action="{:U('saveTool')}" method="post" class="form-horizontal alipay">
+			<div class="form-item">
+				<label class="item-label">合作身份者id<span class="check-tips">（合作身份者id，以2088开头的16位纯数字）</span> </label>
+				<div class="controls">
+					<input type="text" class="text input-large" name="config[partner]" value="{$alipay['partner']}">
+				</div>
+			</div>
+			
+			<div class="form-item">
+				<label class="item-label">安全检验码<span class="check-tips">（安全检验码，以数字和字母组成的32位字符）</span> </label>
+				<div class="controls">
+					<input type="text" class="text input-large" name="config[key]" value="{$alipay['key']}">
+				</div>
+			</div>
+			<div class="form-item">
+				<label class="item-label">收款帐户<span class="check-tips">（卖家支付宝帐户）</span> </label>
+				<div class="controls">
+					<input type="text" class="text input-large" name="config[email]" value="{$alipay['email']}">
+				</div>
+			</div>
+			<div class="form-item">
+				<label class="item-label">启用状态<span class="check-tips">（支付宝启用状态）</span> </label>
+				<div class="controls">
+					<input type="radio" class="inp_radio" value="0" name="status" <eq name="alipay_data['status']" value="0">checked="checked"</eq>>禁用
+                    <input type="radio" class="inp_radio" value="1" name="status" <eq name="alipay_data['status']" value="1">checked="checked"</eq>>启用
+				</div>
+			</div>
+			<div class="form-item">
+				<div class="controls">
+					<input type="hidden" name="name" value="alipay"></input>
+					<!-- <button type="submit" class="btn submit-btn" target-form="form-horizontal-oss">确 定</button> -->
+					<button type="submit" class="btn submit-btn ajax-post" target-form="alipay">确 定</button>
+					<button class="btn btn-return" onclick="javascript:history.back(-1);return false;">返 回</button>
+				</div>
+			</div>
+		</form>
+		</div>
+		</div>
+
+		<div class="tab-content">
+		<div id="tab2" class="tab-pane tab2">
+		<form action="{:U('saveTool')}" method="post" class="form-horizontal weixin">
+			<div class="form-item">
+				<label class="item-label">商户号<span class="check-tips">（微信商户号</span> </label>
+				<div class="controls">
+					<input type="text" class="text input-large" name="config[partner]" value="{$weixin['partner']}">
+				</div>
+			</div>
+			<div class="form-item">
+				<label class="item-label">预留接口<span class="check-tips">（暂时不填）</span> </label>
+				<div class="controls">
+					<input type="text" class="text input-large" name="config[email]" value="{$weixin['email']}">
+				</div>
+			</div>
+			<div class="form-item">
+				<label class="item-label">密钥key<span class="check-tips">（微信秘钥）</span> </label>
+				<div class="controls">
+					<input type="text" class="text input-large" name="config[key]" value="{$weixin['key']}">
+				</div>
+			</div>
+			<div class="form-item">
+				<label class="item-label">启用状态<span class="check-tips">（微信开启状态）</span> </label>
+				<div class="controls">
+					<input type="radio" class="inp_radio" value="0" name="status" <eq name="weixin_data['status']" value="0">checked="checked"</eq>>禁用
+                    <input type="radio" class="inp_radio" value="1" name="status" <eq name="weixin_data['status']" value="1">checked="checked"</eq>>启用
+				</div>
+			</div>
+			<div class="form-item">
+				<div class="controls">
+					<input type="hidden" name="name" value="weixin"></input>
+					<!-- <button type="submit" disabled class="btn submit-btn disabled" target-form="form-horizontal">确 定</button> -->
+					<button type="submit" class="btn submit-btn ajax-post" target-form="weixin">确 定</button>
+					<button class="btn btn-return" onclick="javascript:history.back(-1);return false;">返 回</button>
+				</div>
+			</div>
+		</form>
+		</div>
+		</div>
+
+		<div class="tab-content">
+		<div id="tab3" class="tab-pane tab3">
+		<form action="{:U('saveTool_jubaobar')}" method="post" class="form-horizontal jubaobar">
+			<div class="form-item">
+				<label class="item-label">商户号<span class="check-tips">(聚宝云商户号)</span> </label>
+				<div class="controls">
+					<input type="text" class="text input-large" name="config[partner]" value="{$jubaobar['partner']}">
+				</div>
+			</div>
+			<div class="form-item">
+				<label class="item-label">商户APPID<span class="check-tips">(聚宝云APPID)</span> </label>
+				<div class="controls">
+					<input type="text" class="text input-large" name="config[appid]" value="{$jubaobar['appid']}">
+				</div>
+			</div>
+			<div class="form-item">
+				<label class="item-label">加密口令<span class="check-tips">(微信秘钥)</span> </label>
+				<div class="controls">
+					<input type="text" class="text input-large" name="config[key]" value="{$jubaobar['key']}">
+				</div>
+			</div>
+			<div class="form-item">
+				<label class="item-label">启用状态<span class="check-tips">(聚宝云开启状态)</span> </label>
+				<div class="controls">
+					<input type="radio" class="inp_radio" value="0" name="status" <eq name="jubaobar_data['statue']" value="0">checked="checked"</eq>>禁用
+                    <input type="radio" class="inp_radio" value="1" name="status" <eq name="jubaobar_data['status']" value="1">checked="checked"</eq>>启用
+				</div>
+			</div>
+			<div class="form-item">
+				<div class="controls">
+					<input type="hidden" name="name" value="jubaobar"></input>
+					<!-- <button type="submit" disabled class="btn submit-btn disabled" target-form="form-horizontal">确 定</button> -->
+					<button type="submit" class="btn submit-btn ajax-post" target-form="jubaobar">确 定</button>
+					<button class="btn btn-return" onclick="javascript:history.back(-1);return false;">返 回</button>
+				</div>
+			</div>
+		</form>
+		</div>
+		</div>
+	</div>
+</block>
+
+<block name="script">
+<script type="text/javascript">
+	//导航高亮
+	highlight_subnav('{:U('Tool/payset')}');
+	$(function(){
+		//支持tab
+		showTab();
+	})
+</script>
+</block>

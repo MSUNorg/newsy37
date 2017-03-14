@@ -1,0 +1,149 @@
+<extend name="Public/bases" />
+<block name="body" >
+<link href="__CSS__/game.css" rel="stylesheet" />
+<link href="__CSS__/platform.css" rel="stylesheet" />
+<div class="game-center-banner m30">
+	<ul>
+		<advert:advlists2 name="vo" pos_name="slider_game_media" sort='sort desc' limit="5">
+		<li class="<if condition='$key eq 0'>active</if> <if condition='$key eq $len'>nopx</if>">
+		<div class="imgwrap" style="width: 275px;height: 160px;">
+			<a href="{$vo.url}" target="_self" title="{$vo.game_name}">
+				<img src="{$vo.data|get_cover='path'}" alt="{$vo.game_name}" title="{$vo.game_name}" class="banner-big">
+				<img src="{$vo.mini_pic|get_cover='path'}" alt="{$vo.game_name}" title="{$vo.game_name}" class="banner-icon">
+			</a>
+			</div>
+		</li>
+		</advert:advlists2>
+	</ul> 
+</div>
+<script>
+/*	function Game_Ajax(src){
+		var type = $(src).attr('type-id');
+		var url = '__CONTROLLER__/game_ajax';
+	    $.post(
+	        url,
+	        {'type':type},
+	        function(msg){
+	            $('#game').html(msg);
+	        });
+	}
+	*/
+</script>
+<div class="wrap clear-fix m20">
+	<div class="gamecenter-l">
+		<div class="game-select-box m20 clear-fix">
+			<h3>游戏类型</h3>
+			<ul class="game-type clear-fix" id="game-type">
+				<li type-id="0" class="<if condition='$typeid eq 0'>active</if>">不限</li>
+                <volist name=":get_game_type_all()" id="vo">
+                <li type-id="{$vo.id}" class="<if condition='$typeid eq $vo[id]'>active</if>">{$vo.type_name}
+                </li>
+                </volist>
+			</ul>
+			<h3>开放类型</h3>
+			<ul class="game-theme" id="game-theme">
+				<li theme-id="0" class="<if condition='$themeid eq 0'>active</if>">不限</li>
+                <volist name=":get_opentype_all()" id="vo" >
+                <li theme-id="{$vo.id}" class="<if condition='$themeid eq $vo[id]'>active</if>">{$vo.open_name}</li>
+                </volist>
+			</ul>
+		</div>
+		<script>
+			$('#game-type li').on('click',function() {
+				/*alert($(this).val());*/
+				$(this).addClass('active').siblings().removeClass('active');
+				$type = $(this).attr('type-id');
+				$theme = $('#game-theme li.active').attr('theme-id');
+				window.location='__CONTROLLER__/index/typeid/'+$type+'/themeid/'+$theme+'.html';
+			});
+			$('#game-theme li').on('click',function() {
+				$(this).addClass('active').siblings().removeClass('active');
+				$theme = $(this).attr('theme-id');
+				$type = $('#game-type li.active').attr('type-id');
+				window.location='__CONTROLLER__/index/typeid/'+$type+'/themeid/'+$theme+'.html';
+			});			
+		</script>
+
+		<div class="hot-game-box">
+			<h3 class="common-title">热门游戏榜<span class="common-title-ico"></span></h3>
+			<div class="hot-game-contont-box">
+				<div class="hot_game_box">
+
+					 <game:recommend name="vo" recommend_status="2" limit="10" child="true">
+					<dl class="d1 <if condition='$key eq 0'>active</if>">
+						<dt class="num_box no{$key+1}">{$key+1}</dt>
+						<dd class="game_img">
+							<a target="_self" href="{:U('Game/detail?id='.$vo['id'])}" title="{$vo.game_name}">
+								<img src="{$vo.icon|get_cover='path'}" alt="{$vo.game_name}">
+							</a>
+						</dd>
+						<dd class="game_info">
+							<div class="game_info_t">
+								<a target="_self" href="{:U('Game/detail?id='.$vo['id'])}">{$vo.game_name}</a>
+							</div>
+							<div class="game_info_i">
+								<span>{:get_game_type($vo['game_type_id'])}</span>
+								<span>|</span>
+								<span>{$vo.game_size}</span>
+							</div>
+						</dd>
+						<dd class="game_btn">
+							<a target="_self" href="{:U('Gift/lists?id='.$vo['id'])}" class="game_gift_btn"></a>
+							<a href="<if condition='$vo.dow_status eq 0'>#<else/>{:U('Down/down_file?game_id='.$vo['id'].'&type=1')}</if>" class="game_down_btn"></a>
+						</dd>
+					</dl>
+					</game:recommend>
+
+					
+				</div>
+			</div>
+		</div>
+
+
+
+	</div>
+	<div class="gamecenter-r">
+		<h3 class="common-title">全部游戏<span class="common-title-ico"></span></h3>
+		<div class="game-contont-box clear-fix m20">
+			<notempty name="list_data">
+			<ul id="gamecenter-list">
+			<span id='game'>
+			<foreach name="list_data['list']" item="vo">
+					<li>
+						<div class="game-center-icon">
+							<a target="_self" href="{:U('Game/detail?id='.$vo['id'])}">
+								<img src="{$vo.icon|get_cover='path'}" alt="{$vo.game_name}">
+							</a>
+						</div>
+						<div class="game-center-msg">
+							<div class="game-center-msg-m1">{$vo.game_name}</div>
+							<div class="game-center-msg-m2">{$vo['game_type_name']}&nbsp;|&nbsp;{$vo.dow_num}次下载</div>
+							<div class="game-center-msg-m3">
+								<a target="_self" href="<if condition='$vo.dow_status eq 0'>#<else/>{:U('Down/down_file?game_id='.$vo['id'].'&type=1')}</if>" class="game-center-down">下载</a>
+								<a target="_self" href="{:U('Gift/lists?id='.$vo['id'])}" class="game-center-gift">礼包</a>
+							</div>
+						</div>
+					</li>
+			</foreach>
+			</span>
+			</ul>
+			<else />
+			<div style="text-align:center;font-size:20px;">暂无符合条件的数据</div>
+		 	</notempty>
+		</div>
+		<div class="pagination" id="gamecenter-pagination">
+			 {$list_data['show']}  
+		</div>
+	</div>
+</div>
+<script>
+	$('.game-center-banner li').hover(function() {
+		$(this).addClass('active');
+		$(this).siblings().removeClass('active');
+	});
+	$('.hot_game_box dl').hover(function(){
+		$(this).addClass('active');
+		$(this).siblings().removeClass('active');
+	});
+</script>
+</block>

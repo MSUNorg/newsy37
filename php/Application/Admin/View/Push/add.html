@@ -1,0 +1,91 @@
+<extend name="Public/base" />
+
+<block name="body">
+<link rel="stylesheet" type="text/css" href="__CSS__/admin_table.css" media="all">
+<script type="text/javascript" src="__STATIC__/uploadify/jquery.uploadify.min.js"></script>
+    <div class="main-title cf">
+        <h2>新增 [推送设置]</h2>
+    </div>
+    <!-- 标签页导航 -->
+<div class="tab-wrap">
+    <ul class="tab-nav nav">
+        <li data-tab="tab1" class="current"><a href="javascript:void(0);">基础</a></li>
+    </ul>
+    <div class="tab-content zc_for">
+    <!-- 表单 -->
+    <form id="form" action="{:U('add?model='.$model['id'])}" method="post" class="form-horizontal">
+        <!-- 基础 -->
+        <div id="tab1" class="tab-pane in tab1">
+    		<table  border="0" cellspacing="0" cellpadding="0">
+                <tbody>
+                  <tr>
+                    <td class="l">应用名称：</td>
+                    <td class="r" colspan='3'>
+                        <input type="text" class="txt txt_title" name="push_name" value="" placeholder="请输入应用名称">
+                    </td>
+                  </tr>
+                      <tr>
+                    <td class="l">app_key：</td>
+                    <td class="r" colspan='3'>
+                        <input type="text" class="txt txt_title" name="app_key" value="" placeholder="请输入app_key">
+                    </td>
+                  </tr>
+                      <tr>
+                    <td class="l">master_secret</td>
+                    <td class="r" colspan='3'>
+                        <input type="text" class="txt txt_title" name="master_secret" value="" placeholder="master_secret">
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="l">启用状态：</td>
+                    <td class="r">
+                        <label class="inp_radio">
+                            <input type="radio" class="inp_radio" value="0" name="status" >禁用
+                            <input type="radio" class="inp_radio" value="1" name="status" checked="ture" >启用
+                        </label>
+                    </td>
+                    <td class="l"></td>
+                    <td class="r">
+                        
+                    </td>
+                  </tr>
+                    <input name="create_time" type="hidden"  value="{:time()}">                  
+                </tbody>
+            </table>
+        </div>
+        <div class="form-item cf">
+            <button class="btn submit-btn ajax-post hidden" id="submit" type="submit" target-form="form-horizontal">确 定</button>
+            <a class="btn btn-return" href="javascript:history.back(-1);">返 回</a>
+        </div>
+    </form>
+    </div>
+</div>
+</block>
+
+<block name="script">
+<script type="text/javascript" src="__STATIC__/datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
+<script type="text/javascript">
+//导航高亮
+highlight_subnav('{:U('Push/add')}');
+$('#submit').click(function(){
+    $('#form').submit();
+});
+
+$(function(){
+    $('.date').datetimepicker({
+        format: 'yyyy-mm-dd',
+        language:"zh-CN",
+        minView:2,
+        autoclose:true
+    });
+    $('.time').datetimepicker({
+        format: 'yyyy-mm-dd hh:ii',
+        language:"zh-CN",
+        minView:2,
+        autoclose:true
+    });
+    showTab();
+
+});
+</script>
+</block>

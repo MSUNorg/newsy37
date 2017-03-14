@@ -1,0 +1,67 @@
+<extend name="Public/base" />
+<block name="body">
+<div class="main_sub wrap_w">
+    <div class="crumbs"><em>当前位置：</em><a href="{:U('Index/index')}" target="_blank">溪谷游戏</a>
+	<span> &gt; </span><a href="{:U('Game/index')}">游戏中心</a></div>
+    <div class="gameclass">
+        <h2 class="titi">游戏<span>分类</span></h2>
+        <ul class="gameclasslist">
+            <li><span>游戏类型</span>
+                <p>
+                    <a href="{:U('Game/game_list?game_type=0')}" class="<if condition='$game_type == 0'>curr</if>">全部</a>
+                    <volist name=':get_game_type_arr()' id='vo' key='k'>
+                        <a href="{:U('Game/game_list?game_type='.$k)}" class="<if condition='$game_type == $k'>curr</if>">{$vo}</a>
+                    </volist>
+                    <!-- <a href="{:U('Game/index')}" class="<if condition='$GameType == ""'>curr</if>">全部</a>
+                    <a href="{:U('Game/index?GameType=1')}" class="<if condition='$GameType eq 1'>curr</if>" >休闲益智</a> 
+                    <a href="{:U('Game/index?GameType=2')}" class="<if condition='$GameType eq 2'>curr</if>" >网络游戏</a> 
+                    <a href="{:U('Game/index?GameType=3')}" class="<if condition='$GameType eq 3'>curr</if>" >体育竞速</a> 
+                    <a href="{:U('Game/index?GameType=4')}" class="<if condition='$GameType eq 4'>curr</if>" >角色扮演</a> 
+                    <a href="{:U('Game/index?GameType=5')}" class="<if condition='$GameType eq 5'>curr</if>" >飞行射击</a> 
+                    <a href="{:U('Game/index?GameType=6')}" class="<if condition='$GameType eq 6'>curr</if>" >策略经营</a> 
+                    <a href="{:U('Game/index?GameType=7')}" class="<if condition='$GameType eq 7'>curr</if>" >卡片棋牌</a> 
+                    <a href="{:U('Game/index?GameType=8')}" class="<if condition='$GameType eq 8'>curr</if>" >动作冒险</a> -->
+				</p>
+            </li>
+        </ul>
+    </div>
+    <ul class="gameslist clearfix">
+        <volist name="list_data" id="vo">
+        <li>
+				
+			<span class="gampi gx"></span>
+			
+            <a href="{:U('Game/game_detail','id='.$vo['id'].'')}" target="_blank" class="gameslistl">   
+			<img src="__ROOT__{$vo.icon|get_cover='path'}">
+            </a>
+            <div class="gameslistr">
+                <h3>
+                    <a href="{:U('Game/game_detail?id='.$vo['id'].'')}" target="_blank">
+                        {$vo.game_name}
+                    </a>
+                </h3>
+                <p>
+                    <span>类型：{:get_game_type($vo['game_type'])}</span>
+					<span>更新时间：{$vo.create_time|date="Y-m-d",###}</span>
+                </p>
+                <p class="jianjie"> 
+                    <a href="{:U('Game/game_detail?id='.$vo['id'].'')}" target="_blank">
+                        简介：{:get_game_introduction($vo['id'],25)}
+                    </a>
+                </p>
+                <p class="ganlink">
+                    <a href="{:U('Game/game_detail?id='.$vo['id'].'')}" target="_blank">游戏专区</a>
+				    <a href="{:U('Down/down_file?game_id='.$vo['id'].'&type=1')}">点击下载</a>            
+				    <a href="{:U('Game/gift_list?game_id='.$vo['id'].'')}" target="_blank">
+                        领取礼包
+                    </a>
+                </p>
+            </div>
+        </li>
+        </volist>
+        </ul>
+    <div class="page">
+        {$_page|default=''}
+	</div>
+</div>
+</block>

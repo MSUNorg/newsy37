@@ -1,0 +1,115 @@
+
+<div class="container-span top-columns cf">
+    <dl class="show-num-mod col_01">
+        <dt><i class="count-icon user-count-icon"></i></dt>
+        <dd>
+            <span>用户数</span>
+            <strong>{$info.user}</strong>
+        </dd>
+        <ul style="clear:both;">
+        <li>昨日注册 {$info.yesterday}</li>
+        <li>今日注册 {$info.today}</li>
+        <li>今日登陆 {$info.login}</li>
+        </ul>
+    </dl>
+    <dl class="show-num-mod col_05">
+        <dt><i class="count-icon category-count-icon"></i></dt>
+        <dd>
+            <span>游戏数</span>
+            <strong>{$info.game}</strong>
+        </dd>
+        <ul style="clear:both;">
+        <li>新增游戏 {$info.add}</li>
+        <li class="last">本月新增游戏 {$info.monthadd}</li>
+        </ul>
+    </dl>
+    <dl class="show-num-mod col_03">
+        <dt><i class="count-icon doc-modal-icon"></i></dt>
+        <dd>
+            <span>总流水</span>
+        <strong><if condition="$info.total neq null">{$info.total}<else/>0</if></strong>
+        </dd>
+        <ul style="clear:both;">
+        <li>今日流水 <if condition="$info.ttotal eq ''">0<else/>{$info.ttotal}</if></li>
+        <li>昨日流水 <if condition="$info.ytotal eq ''">0<else/>{$info.ytotal}</if></li>
+        <li>推广流水 <if condition="$info.ptotal eq ''">0<else/>{$info.ptotal}</if></li>
+        </ul>
+    </dl>
+    <dl class="show-num-mod col_02">
+        <dt><i class="count-icon user-action-icon"></i></dt>
+        <dd>
+            <span>渠道数量</span>
+            <strong>{$info.promote}</strong>
+        </dd>
+        <ul style="clear:both;">
+        <li>新增渠道 {$info.padd}</li>
+        <li class="last">本月新增渠道 {$info.monthpadd}</li>
+        </ul>
+    </dl>  
+    <dl class="show-num-mod col_04">
+        <dt><i class="count-icon wz-action-icon"></i></dt>
+        <dd>
+            <span>文章数</span>
+            <strong>{$info.document}</strong>
+        </dd>
+        <ul style="clear:both;">
+        <li>媒体站文章 {$info.media}</li>
+        <li class="last">渠道站文章 {$info.blog}</li>
+        </ul>
+        <!-- <dd style="width:auto;font-size: 12px;text-align: left;">
+        <p>徐州梦创--版权所有</p>   
+        <p>网站：www.vlcms.com</p>
+        <p>版本：手游系统商业版v2.0.6.10</p> 
+        </dd> -->
+    </dl>    
+</div>
+<div class="span2" >
+	<div class="columns-mod">
+		<div class="hd cf">
+			<h5>最近 7 天流水概况</h5>
+			<div class="title-opt">
+			</div>
+		</div>
+		<div class="" style="height:278px;width:100%;">
+            <div id="z_chart" style="height:100%;position:relative"><div id="chart" style="height:100%;"></div></div>
+        </div>
+    </div>
+    <script type="text/javascript">
+        var min = '{$info.pay.min}';
+        var data = [{$info.pay.data}];
+        var max = '{$info.pay.max}';
+        var cate = [{$info.pay.cate}];
+        jQuery(function(){jQuery("#chart").kendoChart({
+            legend:{"position":"top","labels":{"font":"12px  DejaVu Sans"}},
+            series:[{"type":"line","data":data,"name":"七天流水（单位：元）","color":"#f8a20f","axis":"temp"}],
+            valueAxes:[{"name":"temp","min":min,"max":max}],
+            categoryAxis:[{"categories":cate,"axisCrossingValue":[0,2],"justified":true,"line":{"visible":false},"majorGridLines":{"visible":false}}],
+            tooltip:{"visible":true,"format":"{0}","shared":true}
+        });});
+    </script>
+</div>
+<div class="span2" >
+	<div class="columns-mod">
+		<div class="hd cf">
+			<h5>最近 7 天注册概况</h5>
+			<div class="title-opt">
+			</div>
+		</div>
+		<div class="" style="height:278px;width:100%;">
+            <div id="z_chart1" style="height:100%;position:relative"><div id="chart1" style="height:100%;"></div></div>
+        </div>
+    </div>
+    <script type="text/javascript">
+        var min1 = '{$info.reg.min}';
+        var data1 = [{$info.reg.data}];
+        var max1 = '{$info.reg.max}';
+        var cate1 = [{$info.reg.cate}];
+        jQuery(function(){jQuery("#chart1").kendoChart({
+            legend:{"position":"top","labels":{"font":"12px  DejaVu Sans"}},
+            series:[{"type":"line","data":data1,"name":"七天注册（单位：个）","color":"#f8a20f","axis":"temp"}],
+            valueAxes:[{"name":"temp","min":min1,"max":max1}],
+            categoryAxis:[{"categories":cate1,"axisCrossingValue":[0,2],"justified":true,"line":{"visible":false},"majorGridLines":{"visible":false}}],
+            tooltip:{"visible":true,"format":"{0}","shared":true}
+        });});
+    </script>
+</div>

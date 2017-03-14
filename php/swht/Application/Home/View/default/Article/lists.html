@@ -1,0 +1,24 @@
+<extend name="Public/bases" />
+
+<block name="body">
+<div class="ctitle"><div class="section">
+    <ul class="tab_nav clear">
+        <li><a class="<if condition='I("category") eq tui_gg'>on</if>" href="{:U('Article/lists?category=tui_gg')}">游戏公告</a></li>
+        <li><a class="<if condition='I("category") eq tui_zx'>on</if>" href="{:U('Article/lists?category=tui_zx')}">游戏资讯</a></li>              
+    </ul>
+</div></div>
+<div class="news_list">
+    <ul  class="list container">
+    <article:list name="article" category="$category['id']" child="true">
+        <li>
+            <h3><a href="{:U('Article/detail?id='.$article['id'])}" target="_blank" title="{$article.title}">{$article.title}</a></h3>
+            <span>{$article.create_time|date='Y-m-d',###}</span>
+            <p>{$article.description}<a href="{:U('Article/detail?id='.$article['id'])}">&gt;&gt;阅读全文</a></p>
+        </li>
+    </article:list>
+    </ul>
+    <div class="page">
+        {$_page|default=''}
+    </div>
+</div>
+</block>

@@ -1,0 +1,68 @@
+<extend name="Public/promote_base"/>
+
+<block name="body">
+<script src="__STATIC__/layer/layer.js" type="text/javascript"></script>
+<div id="query">
+  <div class="mod">
+    <h2>为玩家充值平台币</h2>
+    <div class="zc_for">
+      <form id="form" action="{:U('fill')}" method="post">
+        <table width="100%" border="0" cellspacing="0" cellpadding="0">
+          <tbody>
+            <tr>
+              <td class="l"></td>
+              <td class="r">
+                <span class="pay_type_info" id="pay_type_0">
+                  可用现金为：<font color="#FF0000">{:number_format(AMOUNT,2)}元</font>
+                </span>
+              </td>
+            </tr>            
+            <tr>
+              <td class="l">充值账号：</td>
+              <td class="r">
+                <input type="text" class="name txt" id="pay_username" name="account" value="{:session('promote_auth.account')}" disabled="disabled">
+              </td>
+            </tr>
+            
+            <tr>
+              <td class="l">充值金额：</td>
+              <td class="r"><input type="text" class="name txt" id="pay_fmoney" name="money" value="">
+                (请输入整数)
+              </td>
+            </tr>
+            <tr>
+              <td class="l"></td>
+              <td class="r">
+                <input type="hidden"  id="ratio" name="ratio" value="{$ratios}"> 
+                <input type="hidden" name="create_time" value="{:date('Y-m-d H:i:s')}"> 
+                <button type="button" class="tjbnt" onclick="check()" >确认</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </form>
+    </div>
+  </div>
+</div>
+</block>
+<block name="script">
+  <script type="text/javascript">
+    function check() {
+      if(!intege($('#pay_fmoney').val())){
+        layer.msg('金额必须是整数',{icon:2}); return false;
+      }
+      $('#form').submit();
+    }
+
+    function intege(data){
+      var re = /^[1-9]+[0-9]*]*$/;
+      if (!re.test(data))  
+      {  
+        return false;  
+      } 
+      else{
+        return true;
+      } 
+    }
+  </script>
+</block>

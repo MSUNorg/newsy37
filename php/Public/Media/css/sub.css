@@ -1,0 +1,132 @@
+.wrap_w {
+    width: 1260px;
+    margin: 0 auto;
+    text-align: left;
+}
+.crumbs-box {
+    width: 100%;
+    height: 40px;
+    background-color: #f9b900;
+    line-height: 40px;
+}
+.crumbs-box .crumbs {
+    width: 1200px;
+    margin: 0 auto;
+    color: #fff;
+}
+.crumbs-box .crumbs a {
+    color: #fff;
+    margin-right: 5px;
+}
+.crumbs-box .crumbs span {
+    margin-left: 5px;
+}
+.game-article-wrap {
+    width: 100%;
+    background-color: #f9f9f9;
+    padding-top: 27px;
+    min-height:574px;
+}
+.clearfix:after {
+    visibility: hidden;
+    display: block;
+    font-size: 0;
+    content: "";
+    clear: both;
+    height: 0;
+}
+.gameclass{border:1px solid #e5e5e5;overflow:hidden;padding:10px 30px 20px 30px;}
+.titi{font-size:22px;color:#DC2D11
+;height:28px;margin:10px 0px; font-weight:bold;}
+.titi span{font-size:20px;font-weight:normal;color:#666;display:inline-block;margin-left:2px}
+.gameclasslist{overflow:hidden}
+.gameclasslist li{height:35px;font-size:14px;}
+.gameclasslist li span{width:80px;float:left;font-weight:bold;line-height:35px;font-size:16px;}
+.gameclasslist li p{float:left;}
+.gameclasslist li p a{display:inline-block;border:1px solid #e5e5e5;background:#fafafa;margin:0px 10px;text-align:center; padding:0 10px;line-height:35px;}
+.gameclasslist li p a:hover,.gameclasslist li p a.curr{background:#DC2D11
+;color:#FFF;position:relative;top:1px;left:1px;transition:all ease-in-out 0.3s}
+
+.gameslist{overflow:hidden;width:1230px;margin:20px 0px}
+.gameslist li{width:585px;border:1px solid #e5e5e5;position:relative;overflow:hidden;margin:0 25px 20px 0;float:left}
+.gameslist li:hover{box-shadow: 0px 0px 10px 1px #ededed;}
+.gampi{position:absolute;width:53px;height:53px;background:url(../images/homeIcon.png) no-repeat 0 -888px;top:0px;right:0px}
+.gx{background-position:-129px -109px}
+.gh{background-position:-129px -109px}
+.gt{background-position:-76px -162px}
+.gameslistl{display:inline-block;float:left;width:115px;margin:20px}
+.gameslistl img{ width:115px; height:115px;}
+
+.gameslistr{width:430px;float:left;overflow:hidden;padding:10px 0px}
+.gameslistr h3{ font-size:18px; padding-bottom:10px;}
+.gameslistr h3 a:hover{color:#DC2D11
+;position:relative;top:1px;left:1px;}
+.gameslistr p{overflow:hidden; font-size:14px;}
+.gameslistr span{ margin-right:10px;}
+.jianjie{line-height:1.7; padding:6px 0 10px 0;}
+.jianjie a{ color:#999;}
+.jianjie a:hover{color:#DC2D11
+}
+.ganlink a{display:inline-block;width:90px;border:1px solid #ededed;background:#fcfcfc;text-align:center;float:left;margin-right:10px; line-height:30px;}
+.ganlink a:hover{background:#DC2D11
+;position:relative;top:1px;left:1px;color:#FFF;transition:all ease-in-out 0.3s}
+
+
+.title span{font-size:24px;line-height:30px;}
+.title em a{font-size:12px;line-height:15px;color:#666;padding:0 17px;}
+.game-ranklist{border: 1px solid #ececec;margin-top:15px;}
+.game-ranklist dl{ border-bottom:1px solid #ececec; padding:20px 15px;}
+.game-ranklist dl:last-child{ border-bottom:0}
+.game-ranklist dl dt{width:97px;overflow:hidden; float:left}
+.game-ranklist dl dt span{ display:block; float:left;}
+.game-ranklist dl dt span.ranknum{width:20px; height:20px; text-align:center; line-height:20px; background:#b3c6d2; color:#fff}
+.game-ranklist dl dt span.num1{background:#67CD0D;}
+.game-ranklist dl dt span.num2{background:#F90;}
+.game-ranklist dl dt span.num3{background:#F30;}
+.game-ranklist dl dt span.num4{}
+.game-ranklist dl dt span.rankpic{width:68px; height:68px; overflow:hidden; border-radius:6px; margin-left:6px;}
+.game-ranklist dl dt span.rankpic a{ display:inline-block;width:100%; height:100%}
+.game-ranklist dl dt span.rankpic img{ width:100%; max-width:100%;}
+.game-ranklist dl dd{width:156px; margin-left:10px; float:left;}
+.game-ranklist dl dd h3{ font-size:14px; font-weight:bold; color:#5d5d5d}
+.game-ranklist dl dd p{ margin-top:4px;}
+.game-ranklist dl dd .rank-s{width:100%;line-height:20px;}
+.game-ranklist dl dd .rank-s span{display:inline-block;}
+.game-ranklist dl dd .rank-mark{color:#CCC;font-size:14px;background: url(../images/star.png) no-repeat 0px 3px;height:18px; width:110px;max-width:110px;}
+.game-ranklist dl dd .rank-checkin a{ border:1px solid #DC2D11
+;color:#DC2D11
+;height:22px; line-height:22px; width:44px; text-align:center; border-radius:4px; margin-right:5px; display:inline-block;}
+.game-ranklist dl dd .rank-checkin .gift{border:1px solid #F90;color:#F90;}
+.game-ranklist dl dd .rank-checkin a:hover{ background:#DC2D11
+; color:#fff;}
+.game-ranklist dl dd .rank-checkin a.gift:hover{background:#F90; color:#fff;}
+
+#gameshow{}
+#gameshow .l{width:912px; float:left;}
+.gameinti{border:1px solid #e5e5e5;padding:30px 0px 20px 0px;overflow:hidden}
+.gameintile{width:250px;float:left;position:relative;text-align:center}
+.score{display:inline-block;width:70px;height:70px;position:absolute;top:-22px;right:22px;text-indent:-10px;background:url(../images/start.png) 0px 0px;z-index:1;color:#FFF;font-family:Impact;font-size:38px;font-style:italic;line-height:70px}
+.score b{font-size:30px;font-weight:normal}
+.share{height:28px;margin-top:10px;padding-left:50px;}
+.gameintiri{float:left;overflow:hidden;width:580px;}
+.gameintiritit{width:320px;float:left;font-size:14px;}
+.gameintiritit h3{font-size:20px;font-weight:normal;height: 35px;line-height: 35px;margin: 5px 0px;}
+.gameintiritit p{ line-height:1.8;}
+.gaminwex{width:230px;float:right;text-align:center;padding:5px 0px}
+.gaminwex span{float:right;}
+.gaindow{height:42px;clear:both; font-size:14px; padding-top:10px;}
+.gaindow a{display:inline-block;width:150px;float:left;border-radius:5px;-webkit-border-radius:5px;-moz-border-radius:5px;color:#FFF;line-height:42px;margin-right:10px}
+.gaindow a i{display:inline-block;width:16px;height:19px;float: left;}
+.doandrnone,.doiosnone{background:gray;}
+.doandr{background:#DC2D11
+;}
+.doandr i,.doandrnone i{background:url(../images/homeIcon.png) -47px -229px;margin: 10px 8px 0px 31px;}
+.doandr:hover{background:#BE1A00}
+.gameincount .gamtiti{border-bottom:1px solid #e1e1e1; margin-top:20px;}
+.gameincount .gamtiti span{color:#333333;border-bottom:2px solid #28b95a;font-size:24px; padding:0 25px;line-height:48px; margin-bottom:-1px; display:inline-block;}
+.gameincount .intro{ font-size:14px; padding:20px 20px 10px 20px; line-height:1.8;}
+.gameincount .gaminimg{ padding-top:15px;}
+.gameincount .gaminimg div{ width:920px;}
+.gameincount .gaminimg img{ width:210px; float:left; margin-right:16px;}
+
+#gameshow .r{width:306px; float:right;}

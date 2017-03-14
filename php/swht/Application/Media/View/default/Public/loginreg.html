@@ -1,0 +1,62 @@
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>{:C('MT_SITE_TITLE')}</title>
+<meta name="keywords" content="">
+<meta name="description" content="">
+<meta name="author" content="">
+<link rel="shortcut icon" href="favicon.ico">
+    <script type="text/javascript" src="__STATIC__/jquery-2.0.3.min.js"></script>
+	<script type="text/javascript" src="__JS__/function.js"></script>
+
+<!-- 
+<script type="text/javascript" src="__JS__/jquery-1.9.1.min.js"></script> -->
+</head>
+<body>
+<if condition="ACTION_NAME eq plogin">
+<div class="ajustHeight"></div>
+<div class="g-login-header">
+    <div class="m-login-header">
+        <h2 class="login-logo">
+            <a href="{:U('Index/index')}"><img src="{$logo}" alt="" width="177" height="46" /></a>
+        </h2>
+        <span class="line"></span>登录
+    </div>
+</div>
+<elseif condition="ACTION_NAME eq preg" />
+<div class="g-register-header">
+    <div class="m-register-header">
+        <h2 class="register-logo">
+            <a href="{:U('Index/index')}"><img src="{$logo}" width="177" height="46" /></a>
+        </h2>
+        <span class="line"></span>注册
+    </div>
+</div>
+<elseif condition="ACTION_NAME eq agreement" />
+<div class="user-single-head">
+	<div class="user-single-h">
+        <a href="{:U('Index/index')}" target="_blank" title="" class="user-single-logo"><img src="{$logo}" width="105" height="36" /></a>
+        <h1 class="user-single-title">用户注册协议</h1>
+    </div>
+</div>
+<else />
+<div class="g-forgetPass-header">
+    <div class="m-forgetPass-header">
+        <h2 class="forgetPass-logo">37游戏<a href="/"><img src="{$logo}" alt=""></a></h2><span class="line"></span>找回密码
+    </div>
+</div>
+</if>
+
+	<block name="body"></block>
+<div class="g-register-login-footer">
+    <div class="g-inner">
+        <div class="helper-list">
+            <a href="{:U('About/about')}" target="_blank" class="fir">关于我们</a>
+            <a href="{:U('About/business')}" target="_blank">商务合作</a>
+            <a href="{:U('About/recruit')}" target="_blank">商务合作</a>
+        </div>
+        <p class="helper-text">徐州梦创网络科技有限公司</p>
+    </div>
+</div>
+</body>

@@ -1,0 +1,24 @@
+<div class="side1">
+    <div class="title"> <span>游戏排行</span>  </div>
+    <div class="game-ranklist">
+        
+        <volist name="list_rank" id="vo" >
+        <dl class="clearfix">
+            <dt> 
+    			<span class="ranknum num{$key+1}">{$key+1}</span> 
+    			<span class="rankpic"><a href="{:U('Game/game_detail?id='.$vo['id'].'')}" target="_blank">
+    				<img src="__ROOT__{$vo.icon|get_cover='path'}"></a></span> 
+    		</dt>
+            <dd>
+                <h3><a href="{:U('Game/game_detail?id='.$vo['id'].'')}">{$vo.game_name}</a></h3>
+                <p class="rank-mark{$vo.recommend_level}">推荐：</p>
+                <p class="rank-checkin">
+    				<a href="<if condition='$vo.dow_status eq 0'>#<else/>{:U('Down/down_file?game_id='.$vo['id'].'&type=1')}</if>" class="down">下载</a>
+    				<a href="{:U('Game/gift_list?game_id='.$vo['id'].'')}" class="gift">礼包</a>
+    			</p>
+            </dd>
+        </dl>
+        </volist> 
+
+    </div>
+</div>

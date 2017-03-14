@@ -1,0 +1,57 @@
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>{:C('MT_SITE_TITLE')}</title>
+<meta name="keywords" content="">
+<meta name="description" content="">
+<meta name="author" content="">
+<link rel="shortcut icon" href="{:get_cover(C('PC_SET_ICO'),'path')}" >
+<link href="__CSS__/base.css" rel="stylesheet">
+<link href="__CSS__/global.css" rel="stylesheet">
+<link rel="stylesheet" href="__CSS__/platform-common.css">
+
+
+<script type="text/javascript" src="__JS__/jquery-1.9.1.min.js"></script>
+</head>
+<body>
+<if condition="ACTION_NAME eq login">
+<div class="ajustHeight"></div>
+<div class="g-login-header">
+    <div class="m-login-header">
+        <h2 class="login-logo">
+            <a href="{:U('Index/index')}"><img src="<?php echo "http://".$_SERVER["HTTP_HOST"].get_cover(C('PC_SET_LOGO'),'path') ?>" alt="" width="177" height="46" /></a>
+        </h2>
+        <span class="line"></span>登录
+    </div>
+</div>
+<elseif condition="ACTION_NAME eq register" />
+<div class="g-register-header">
+    <div class="m-register-header">
+        <h2 class="register-logo">
+            <a href="{:U('Index/index')}"><img src=<?php echo "http://".$_SERVER["HTTP_HOST"].get_cover(C('PC_SET_LOGO'),'path') ?>" width="177" height="46" /></a>
+        </h2>
+        <span class="line"></span>注册
+    </div>
+</div>
+<else />
+<div class="user-single-head">
+	<div class="user-single-h">
+        <a href="{:U('Index/index')}" target="_blank" title="玩游戏，上三七玩" class="user-single-logo"><img src="__IMG__/s-logo.jpg" /></a>
+        <h1 class="user-single-title">用户注册协议</h1>
+    </div>
+</div>
+</if>
+
+	<block name="body"></block>
+<div class="g-register-login-footer">
+    <div class="g-inner">
+        <div class="helper-list">
+            <a href="{:U('News/detail/id/35')}" target="_blank" class="fir">关于我们</a>
+            <a href="{:U('News/detail/id/36')}" target="_blank">商务合作</a>
+            <a href="{:U('News/detail/id/37')}" target="_blank">合作伙伴</a>
+        </div>
+        <p class="helper-text">徐州梦创网络科技有限公司</p>
+    </div>
+</div>
+</body>

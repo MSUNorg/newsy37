@@ -1,0 +1,45 @@
+<extend name="Public/promote_base"/>
+
+<block name="body">
+      <!-- <div id="total"> -->
+        <div class="yulan">
+          <div class="user">
+            <p><img src="__IMG__/promote/ico_user.jpg"> <i>{:session('promote_auth.account')}</i></p>
+          </div>
+          <ul class="clearfix">
+            <li>
+              <div class="box">昨日收入<span>￥{$yesterday}</span></div>
+            </li>
+            <li>
+              <div class="box">今日收入<span>￥{$today}</span></div>
+            </li>
+            <li>
+              <div class="box">本月收入<span>￥{$month}</span></div>
+            </li>
+            <li>
+              <div class="box">总计收入<span>￥{$total}</span></div>
+            </li>
+          </ul>
+        </div>
+        <div id="news">
+         <h2>新闻公告</h2>
+         <ul>
+            <!-- <volist name="list" id="vo">
+              <li><span>{$vo.create_time}</span><p>·<a target="_blank" href="#">{$vo.title}</a></p></li>
+            </volist> -->
+            <article:limits name="article" category="39" limit="20" child="true">
+              <li>
+                <span class="fr">
+                   {$article.create_time|date='Y-m-d',###}
+                </span>
+                <p>
+                  <a href="{:U('Home/Article/detail?id='.$article['id'])}" target="_blank">
+                    【公告】{$article.title}
+                  </a>
+                </p>
+              </li>
+            </article:limits>
+          </ul>
+        </div>
+</block>
+  

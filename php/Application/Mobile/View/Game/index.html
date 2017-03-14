@@ -1,0 +1,147 @@
+<extend name="Public/bases" />
+<block name="body" >
+<link rel="stylesheet" href="__CSS__/list.css">
+<link rel="stylesheet" href="__CSS__/swiper-3.3.1.min.css">
+<script src="__JS__/swiper-3.3.1.jquery.min.js"></script>
+<div class="content J-wrapper">
+	<section class="wrapper-inner">		
+		<if condition="$slide eq '' ">
+		<!-- <div class="global_full_ad">
+			<div class="ad">
+				<div style="text-align:center;line-height:50px;">暂无图片</div>
+			</div>
+		</div> -->
+		<else />
+		<div class="global_full_ad">
+			<div class="ad">
+				<div class="swiper-container">
+					<div class="swiper-wrapper">
+						<foreach name="slide" item='vo'>
+						<div class="swiper-slide">
+							<img src="{$vo.picurl}" onclick="window.location=&#39;{$vo.slideurl}&#39;" width="100%" height="240px" />
+						</div>				
+						</foreach>				
+					</div>
+					<!-- 如果需要分页器 -->
+					<div class="swiper-pagination"></div>
+				</div>				
+				<script>
+				var mySwiper = new Swiper('.swiper-container', {
+					autoplay: 5000,
+					pagination : '.swiper-pagination',
+					loop : true,
+				})
+				</script>
+			</div>
+		</div>        
+		</if>
+		<h3 class="title"></h3>
+		<div class="J-games games clearfix" id="J-games">
+		<foreach name="game" item="vo">
+			<div class="item">	
+				<div class="pic">		
+					<a href="{:U('Game/detail?id='.$vo['id'].'')}">
+					<img src="__ROOT__{$vo.icon|get_cover='path'}"></a>	
+				</div>	
+				<a href="{:U('Game/detail?id='.$vo['id'].'')}" class="info">		
+					<div class="name">{$vo.game_name}</div>		
+					<div class="attr">			
+						<div class="kind">{:get_game_type($vo['game_type_id'])}</div>
+						<div class="byte">{$vo.game_size}</div>		
+					</div>		
+					<div class="star">			
+						<div class="star-num" style="width: {$vo.recommend_level}%;"></div>		
+					</div>	
+				</a>	
+				<div class="down">		
+					<a href="{:U('Down/down_file?game_id='.$vo['id'].'&type=1')}" class="pkg">免费下载</a>
+				</div>
+			</div>
+		</foreach>
+	</section>
+</div>
+	<div id="more_Infor"><span id="more_Infor_btn">点击加载更多数据</span></div>
+	<script>
+		$(function(){
+			$(".ad_close").click(function() {
+				$(this).closest(".global_full_ad").remove();
+			});
+		});
+		loadd();
+        function loadd(){
+            var loading ='<img src="__IMG__/loading.gif">正在加载中';
+            var nodata = '已加载完成全部数据';
+			var total='{$total}';
+			var page = '{$page}',type = '{$type}';
+            $(window).bind("scroll", function(){
+                var more=$("#more_Infor_btn");
+				var $this =$(this),
+					viewH =$(document.body).height(),//可见高度
+					contentH =$(window).height(),//内容高度
+					scrollTop =$(this).scrollTop(),//滚动高度
+					newht = viewH - contentH - scrollTop;
+				if (page > total){
+					more.unbind().html(nodata);
+					return;
+				}
+				if(newht <= 0){
+					$("#more_Infor").show();
+					
+					$.ajax({
+						type: 'POST',
+					  async: true,
+				  dataType : 'json',
+						url: '__CONTROLLER__/game',
+					   data: 'p='+page+'&type='+type,
+				 beforeSend: function(){
+								more.html(loading);
+							},
+					success: function (data) {
+							switch (parseInt(data.status)) {
+								case 1:
+								page = data.page;
+								var d = data.data;
+								var val = '';
+								for(var i=0;i<d.length;i++) {
+									
+									val += '<div class="item">';
+									val += '	<div class="pic">';
+									val += '		<a href="__MODULE__/Game/detail/id/'+d[i].id+'" title="">';
+									val += '			<img src="'+d[i].picurl+'" >';
+									val += '		</a>';
+									val += '	</div>';
+									val += '	<a href="__MODULE__/Game/detail/id/'+d[i].id+'" class="info">';
+									val += '		<div class="name">'+d[i].game_name+'</div>';
+									val += '		<div class="attr">';
+									val += '			<div class="kind">'+d[i].game_type_id+'</div>';
+									val += '			<div class="byte">'+d[i].game_size+'</div>';
+									val += '		</div>';
+									val += '		<div class="star">';
+									val += '			<div class="star-num" style="width: '+d[i].recommend_level+'%;"></div>	';
+									val += '		</div>';
+									val += '	</a>';
+									val += '	<div class="down">';
+									val += '		<a href="'+d[i].game_down+'" class="pkg">免费下载</a>';
+									val += '	</div>';
+									val += '</div>';												
+								}
+								$('#J-games').find('div.item:last').after(val);
+								more.unbind().html('点击加载更多数据');
+								break;
+							default:
+								more.unbind().html('点击加载更多数据');
+								break;	
+							}
+							return false;
+						},
+					error: function () {
+							more.unbind().html('点击加载更多数据');
+						},
+					cache: false
+						
+					});
+				}
+            });
+        }// CC函数结束
+	</script>
+</block>

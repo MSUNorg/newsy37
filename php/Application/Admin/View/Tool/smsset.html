@@ -1,0 +1,55 @@
+<extend name="Public/base"/>
+
+<block name="body">
+	<div class="main-title">
+		<h2>短信设置设置</h2>
+	</div>
+	<div class="tab-wrap">
+		<ul class="tab-nav nav">
+			<li class="current"><a href="javascript:" >短信设置</a></li>
+		</ul>
+		<div class="tab-content">
+		<form action="{:U('saveTool')}" method="post" class="form-horizontal">
+			<div class="form-item">
+				<label class="item-label">用户标识<span class="check-tips">（SMTP服务器）</span> </label>
+				<div class="controls">
+					<input type="text" class="text input-large" name="config[smtp]" value="{$sms_set['smtp']}">
+				</div>
+			</div>
+			<div class="form-item">
+				<label class="item-label">应用标识<span class="check-tips">（填写完整用户名）</span> </label>
+				<div class="controls">
+					<input type="text" class="text input-large" name="config[smtp_account]" value="{$sms_set['smtp_account']}">
+				</div>
+			</div>
+			<div class="form-item">
+				<label class="item-label">Tone<span class="check-tips">（填写您的密码）</span> </label>
+				<div class="controls">
+					<input type="text" class="text input-large" name="config[smtp_password]" value="{$sms_set['smtp_password']}">
+				</div>
+			</div>
+			<div class="form-item">
+				<label class="item-label">模板标识<span class="check-tips">（默认25）</span> </label>
+				<div class="controls">
+					<input type="text" class="text input-small" name="config[smtp_port]" value="{$sms_set['smtp_port']}">
+				</div>
+			</div>
+			<div class="form-item">
+				<div class="controls">
+					<input type="hidden" name="name" value="sms_set"></input>
+					<!-- <button type="submit" disabled class="btn submit-btn disabled" target-form="form-horizontal">确 定</button> -->
+					<button type="submit" class="btn submit-btn ajax-post" target-form="form-horizontal">确 定</button>
+					<button class="btn btn-return" onclick="javascript:history.back(-1);return false;">返 回</button>
+				</div>
+			</div>
+		</form>
+		</div>
+	</div>
+</block>
+
+<block name="script">
+<script type="text/javascript">
+	//导航高亮
+	highlight_subnav('{:U('Tool/smsset')}');
+</script>
+</block>

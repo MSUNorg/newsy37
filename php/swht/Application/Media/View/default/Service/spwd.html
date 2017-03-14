@@ -1,0 +1,54 @@
+﻿<extend name="Public/base" />
+<block name="body" >
+<!--main-->
+<div class="wrap_w">
+	<div class="crumbs"><em>当前位置：</em><a href="{:U('Index/index')}" target="_blank">溪谷游戏</a><span> &gt; </span>
+  <a href="{:U('Service/index')}">客服中心</a>&gt; 密码问题</div>
+  <div id="service">
+    <div id="ser_sub" class="clearfix">
+      <div id="l">
+        <ul>
+			
+			<li><a href="{:U('Service/spwd')}" style="color:#186DC3;">密码问题</a></li>
+			<li><a href="{:U('Service/spay')}">充值问题</a></li>
+			<li><a href="{:U('Service/saccont')}">账户问题</a></li>
+			<li><a href="{:U('Service/sgift')}">礼包问题</a></li>
+			<li><a href="{:U('Service/sother')}">其他问题</a></li>
+        </ul>
+      </div>
+      <div id="r">
+        <h4>密码问题</h4>
+		<ul>
+        	<!-- <foreach name="plist_data" item="ld">
+        	<li>
+				<div class="q"><em>•</em>{$ld.sName}<a name="{$ld.id}"></a></div>
+				<div class="a">
+					{$ld.sContent}
+				</div>
+			</li>
+			</foreach>	 -->
+			<li>
+            <div class="q"><em>•</em>我修改密码的时候，为什么接收不到短信验证码？该怎么办？<a name="37"></a></div>
+            <div class="a"><p style="line-height:15px"><br></p><p style="line-height:15px"><span style="font-family:&#39;微软雅黑&#39;,&#39;sans-serif&#39;">&nbsp;您好，如果无法正常接收验证短信，可以联系客服</span>QQ：{:C('MT_SITE_QQ')} 进行人工申述。</span></p><p><br></p></div>
+          </li>
+			          <li>
+            <div class="q"><em>•</em>我换了手机，但他那里提示要输入密码，我注册的时候是自动登陆进去的？该怎么找回密码？<a name="36"></a></div>
+            <div class="a"><p style="line-height:15px"><br></p><p style="line-height:15px"><span style="font-family:&#39;微软雅黑&#39;,&#39;sans-serif&#39;">您好，在登录框选择找回密码即可。</span></p><p><br></p></div>
+          </li>
+			          <li>
+            <div class="q"><em>•</em>账号被盗了怎么办?<a name="13"></a></div>
+            <div class="a"><p>发现账号被盗，物品丢失了，请尽快联系【在线客服】，并且提供详细的账号信息和被盗情况。但要了解一点，账号被盗可以找回，但游戏内的任何道具金币等物品丢失平台是不受理的。失建议大家不要泄露个人的账号密码，以免造成不必要的损失。</p><p><br></p></div>
+          </li>
+			          <li>
+            <div class="q"><em>•</em>游戏账号的密码忘记了，怎么办?<a name="12"></a></div>
+            <div class="a"><p><span style="font-size: 14px;">　<span style="font-family: 微软雅黑; color: rgb(128, 128, 128);">　亲爱的玩家：您好!如您的账号有设置绑定信息，您可以关注微信(溪谷游戏)点击菜单密码找回-忘记密码-输入手机号或邮箱-获取验证码，点击确定后，通过密保信息进行验证后重置密码即可;</span></span></p><p><span style="font-family: 微软雅黑; color: rgb(128, 128, 128); font-size: 14px;">　　①有设置密保手机，可通过手机验证重置密码</span></p><p><span style="font-family: 微软雅黑; color: rgb(128, 128, 128); font-size: 14px;">　　②有设置密保邮箱，可通过邮箱验证重置密码</span></p><p><span style="font-size: 14px;">　<span style="font-family: 微软雅黑; color: rgb(128, 128, 128);">　③需要人工找回联系客服QQ：{:C('MT_SITE_QQ')},客服电话：{:C('MT_SITE_TEL')}</span></span></p><p><br></p></div>
+          </li>
+		</ul>
+		<div class="page">
+			{$_page|default=''}
+		</div>
+      </div>
+    </div>
+  </div>
+</div>
+</block>

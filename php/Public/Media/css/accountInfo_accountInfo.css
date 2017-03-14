@@ -1,0 +1,184 @@
+.m-account-info .user-center-title {
+    margin-bottom: 15px
+}
+a, .a3c, .a6c, .a9c {
+    color: #3c3c3c;
+}
+.m-account-info .account-desc {
+    overflow: hidden;
+    line-height: 40px;
+    margin: 20px 0 20px 75px
+}
+
+.m-account-info .account-desc li {
+    float: left;
+    width: 240px
+}
+
+.m-account-info .account-desc .game-count,.m-account-info .account-desc .last-time {
+    color: #09f
+}
+
+.m-account-info .safe-level {
+    margin: 0 0 50px 75px
+}
+
+.m-account-info .safe-level-bar {
+    margin-left: 14px
+}
+
+.m-account-info .safe-level-bar span {
+    display: inline-block;
+    *display: inline;
+    *zoom:1}
+
+.m-account-info .safe-level-bar .progress-cube {
+    width: 23px;
+    height: 7px;
+    background: #ccc;
+    margin-left: 3px
+}
+
+.m-account-info .safe-level-bar .high,.m-account-info .safe-level-bar .middle,.m-account-info .safe-level-bar .low {
+    display: none;
+    margin-left: 15px
+}
+
+.m-account-info .safe-level-bar.high .high {
+    display: inline
+}
+
+.m-account-info .safe-level-bar.high .highH {
+    background: #ff8400
+}
+
+.m-account-info .safe-level-bar.middle .middle {
+    display: inline
+}
+
+.m-account-info .safe-level-bar.middle .middleH {
+    background: #ff8400
+}
+
+.m-account-info .safe-level-bar.low .low {
+    display: inline
+}
+
+.m-account-info .safe-level-bar.low .lowH {
+    background: #ff8400
+}
+/* 
+.m-account-info .convenience-wrap {
+    margin: 28px 0 0 75px
+}
+
+.m-account-info .convenience-wrap li {
+    width: 157px;
+    height: 153px;
+    float: left;
+    margin: 0 45px 0 0;
+    background: url(../images/img-convenience.jpg) no-repeat
+}
+
+.m-account-info .convenience-wrap .item02 {
+    background-position: -157px 0
+}
+
+.m-account-info .convenience-wrap .item03 {
+    background-position: -314px 0
+}
+
+.m-account-info .convenience-wrap .item04 {
+    background-position: -471px 0
+}
+
+.m-account-info .convenience-wrap a {
+    display: block;
+    width: 100%;
+    height: 100%
+}
+ */
+.m-account-info .mission {
+    width: 976px;
+    height: 84px;
+    border: 1px solid #f2f2f2;
+    -webkit-border-radius: 1px;
+    -moz-border-radius: 1px;
+    border-radius: 1px;
+    margin: 10px auto 0;
+    line-height: 1
+}
+
+.m-account-info .mission a {
+    float: right;
+    width: 75px;
+    height: 25px;
+    text-align: center;
+    line-height: 25px;
+    font-size: 12px;
+    color: #333;
+    background: url(../images/btn-shorter.png) no-repeat;
+    background-position: 0 -25px;
+    margin: 30px 36px 0 0
+}
+
+.m-account-info .mission a:hover,.m-account-info .mission a.active {
+    background-position: 0 0;
+    color: #fff
+}
+
+.m-account-info .mission a.done {
+    background-position: 0 0;
+    color: #fff
+}
+
+.m-account-info .mission h4 {
+    color: #333;
+    margin: 20px 0 0 36px
+}
+
+.m-account-info .mission p {
+    color: #676767;
+    margin: 10px 0 0 36px
+}
+
+.accountMissionPop .tips-deco {
+    position: absolute;
+    top: 0;
+    left: 0;
+    font-size: 12px;
+    color: #cbcbcb;
+    padding: 5px 10px
+}
+
+.accountMissionPop .pop-content {
+    text-align: center
+}
+
+.accountMissionPop .btn {
+    display: inline-block;
+    *display: inline;
+    *zoom:1;text-align: center;
+    margin: 0 0 50px 10px;
+    width: 200px;
+    height: 34px;
+    line-height: 34px;
+    background: #ff8400;
+    color: #fff;
+    font-size: 16px
+}
+
+.accountMissionPop .text-detail {
+    max-height: 300px;
+    background: #fff;
+    overflow: auto;
+    width: 400px;
+    margin: 60px auto 30px;
+    font-size: 18px
+}
+
+.accountMissionPop .m-box {
+    background: #fff;
+    margin-left: -240px;
+    width: 480px
+}

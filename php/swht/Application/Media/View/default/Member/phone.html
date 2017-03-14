@@ -1,0 +1,181 @@
+<extend name="Public/base" />
+<block name="body">
+<div class="wrap_w">
+  <div class="crumbs"><em>当前位置：</em><a href="{:U('Index/index')}" target="_blank">溪谷游戏</a>
+	 <span> &gt; </span><a href="{:U('Subscriber/record')}">用户中心</a>
+  </div>
+  <div id="member" class="clearfix">
+    <div id="member_l">
+      <include file='Base' />
+    </div>
+    
+    <div id="member_r">
+      <div class="other_s">
+          <h3 class="clearfix"><span>绑定手机</span></h3>
+          <link rel="stylesheet" href="__CSS__/safe.css" />
+          <div class="m-allineone-validatePass" id="mav">
+            <div class="validate-pass-wrap">
+                <span id="notice1" class="notice"></span>
+                <p class="tips">该操作需要验证登录密码</p>
+                <div class="input-optimize">
+                    <input type="password" style="display: none;">
+                    <input type="password" class="pass-input" id="validatePass" >
+                    <span class="error-msg"></span>
+                </div>
+                <div class="operation-bar">
+                    <a href="#" class="confirm" id="mavbtn">确定</a>
+                </div>
+            </div>
+          </div>
+          
+          <div class="binded-wrap hidden" id="bw">
+            <form action="">
+                <span id="notice" class="notice"></span>
+                <div class="form-item">
+                    <label>手机号码：</label>
+                    <div class="input-optimize correct">
+                        <input type="text" id="phone" name="phone" >
+                        <span class="error-msg"></span>
+                    </div>
+                </div>
+                <div class="form-item check-code-wrap">
+                    <label>验证码：</label>
+                    <div class="input-optimize correct">
+                        <input type="text" class="js-vcode" id="vcode" name="vcode">
+                        <img src="{:U('verify?vid=3')}" alt="" class="checkcode" >
+                        <span class="error-msg"></span>
+                    </div>
+                </div>
+                <div class="form-item">
+                    <a href="#" class="send-code" id="sendSafeCode">发送安全码</a>
+                    <span class=""></span>
+                </div>
+                <div class="form-item">
+                    <label>手机安全码：</label>
+                    <div class="input-optimize correct">
+                        <input type="text" class="js-scode" id="scode" name="scode" >
+                        <span class="error-msg"></span>
+                    </div>
+                </div>
+                <div class="operation-bar">
+                    <a href="#" class="confirm" id="bwbtn">确定</a>
+                    <a href="" class="cancel">取消</a>
+                </div>
+            </form>           
+          </div>
+      </div>
+    </div>
+    <script>
+        $(function() {
+            $('#mavbtn').on('click',function() {
+                var jvp = $('#validatePass'),vp = $.trim(jvp.val());
+                if (vp == '') {$('.error-msg').text('必填项');return false;}
+                $.ajax({
+                    type:'post',
+                    dataType:'json',
+                    data:'pwd='+vp,
+                    url:'{:U("safe")}',
+                    success:function(data) {
+                        if (parseInt(data.status) == 1 ) {
+                            //jvp.siblings('.error-msg').text('密码正确，正在跳转。。。');
+                            $('#notice1').removeClass('fail').addClass('success').text('密码正确，正在跳转。。。');
+                            setTimeout(function() {
+                                $('#mav').addClass('hidden');
+                                $('#bw').removeClass('hidden');
+                            },1000);
+                        } else {
+                            //jvp.siblings('.error-msg').text('密码错误');
+                            $('#notice1').removeClass('success').addClass('fail').text('密码错误');
+                        }
+                    },
+                    error:function() {
+                        alert('服务器故障，请稍候再试。。。。');
+                    }
+                });
+            });
+        
+        
+        
+            $('.checkcode').on('click',function() {
+                $(this).attr('src','__MODULE__/Member/verify/vid/3/t/'+(new Date).getTime());
+            });
+            $('.input-optimize input').on('blur',function() {
+                var val = $(this).val();
+                if (val == ''){$(this).siblings('.error-msg').text('必填项');return;} else {$(this).siblings('.error-msg').text('');}                
+                if ($(this).attr('id') == 'phone') {
+                    if (val.length !== 11 || !(/^[1][358][0-9]{9}/.test(val))) {
+                        $(this).siblings('.error-msg').text('手机格式不正确');return;
+                    } else {
+                        $(this).siblings('.error-msg').text('');
+                    }
+                }
+            });
+            $('#sendSafeCode').on('click',function() {
+                var jphone = $('#phone'),phone = $.trim(jphone.val()),
+                    jvcode =$('#vcode'), vcode = $.trim(jvcode.val()),that = $(this);
+                if (phone == '') {jphone.siblings('.error-msg').text('必填项');return false;}
+                if (phone.length !== 11 || !(/^[1][358][0-9]{9}$/.test(phone))) {jphone.siblings('.error-msg').text('手机格式不正确');return false;}
+                if (vcode == ''){jvcode.siblings('.error-msg').text('必填项');return false;}
+                
+                $.ajax({
+                    type:'post',
+                    dataType:'json',
+                    data:'phone='+phone+'&verify='+vcode+'&vid=3',
+                    url:'{:U("sendvcode")}',
+                    success:function(data) {
+                        switch (parseInt(data.status)) {
+                            case 1: {
+                                $('#vcode').siblings('.error-msg').text('');
+                                that.siblings('span').removeClass('error-msg').addClass('right-msg').text(data.msg);                            
+                            };break;   
+                            case 2: {
+                                that.siblings('span').text('');
+                                $('#vcode').siblings('.error-msg').text(data.msg); $('.checkcode').click();
+                            };break;
+                            default: 
+                                $('#vcode').siblings('.error-msg').text(''); $('.checkcode').click();
+                                that.siblings('span').removeClass('right-msg').addClass('error-msg').text(data.msg);                            
+                        }
+                    },
+                    error:function() {
+                        alert('服务器故障，请稍候再试。。。。');
+                    }
+                });
+                
+            });
+            $('#bwbtn').on('click',function() {
+                var jphone = $('#phone'),phone = $.trim(jphone.val()),
+                    jscode =$('#scode'), scode = $.trim(jscode.val()),                   
+                    that = $(this);
+                if (phone == '') {jphone.siblings('.error-msg').text('必填项');return false;}
+                if (phone.length !== 11 || !(/^[1][358][0-9]{9}$/.test(phone))) {jphone.siblings('.error-msg').text('手机格式不正确');return false;}
+                if (scode == ''){jscode.siblings('.error-msg').text('必填项');return false;}
+                                
+                $.ajax({
+                    type:'post',
+                    dataType:'json',
+                    data:'vcode='+scode+'&phone='+phone,
+                    url:'{:U("phone")}',
+                    success:function(data) {
+                        if (parseInt(data.status) == 1 ) {
+                            $('#notice').removeClass('fail').addClass('success').text(data.msg);
+                            setTimeout(function() {
+                                window.location.href='{:U("safe")}';
+                            },2000);
+                        } else {
+                            $('#notice').removeClass('success').addClass('fail').text(data.msg);
+                        }
+                    },
+                    error:function() {
+                        alert('服务器故障，请稍候再试。。。。');
+                    }
+                });
+            });
+            $('.cancel').on('click',function() {
+                window.location.reload();
+            });
+        });
+    </script>
+  </div>
+</div>
+</block>

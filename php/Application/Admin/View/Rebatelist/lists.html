@@ -1,0 +1,160 @@
+<extend name="Public/base"/>
+
+<block name="body">
+    <!-- 标题栏 -->
+    <div class="main-title">
+        <h2>[{$model['title']}] 列表</h2>
+    </div>
+	<div class="cf top_nav_list">
+		<div class="fl button_list">
+		<empty name="model.extend">
+			<div class="tools">
+				<button class="btn ajax-post confirm red" target-form="ids" url="{:U('del?model='.$model['id'])}">删 除</button>
+			</div>
+		</empty>
+		</div>
+		<!-- 高级搜索 -->
+		<div class="search-form fr cf" style="margin-bottom:-15px;">
+                    <div class="i_list">
+                 <div class="drop-down drop-down22">
+                    <if condition="I('game_name') eq ''">
+                    <input type="text" id="i_list_id" class="sort-txt" value="" placeholder="请选择游戏" />
+                    <else />
+                    <input type="text" id="i_list_id" class="sort-txt" value="{:I('game_name')}" placeholder="请选择游戏" />
+                    </if>
+                    <input type="hidden" id="i_list_idh" name="game_name" value="{:I('game_name')}" />
+                    <i class="arrow arrow-down"></i>
+                    <ul id="i_list_li" class="nav-list hidden i_list_li">
+                        <li><a href="javascript:;" value="" >全部</a></li>
+                        <volist name=":get_game_list()" id="vo">                        
+                        <li><a href="javascript:;" value="{$vo.id}" >{$vo.game_name}</a></li>
+                        </volist>
+                    </ul>
+                </div>                
+            </div>
+                <div class="input-list">
+                <a class="sch-btn" href="javascript:;" id="search" url="{:U('rebatelist/lists','model='.$model['name'],false)}">搜索</a>
+            </div>
+                        <div class="input-list">
+                <a class="sch-btn" href="{:U('Export/expUser',array(
+    'id'=>14,
+    'game_name'=>I('game_name'),
+    'promote_name'=>I('promote_name'),
+    'time-start'=>I('time-start'),
+    'time-end'=>I('time-end'),
+    ))}">导出</a>
+            </div>
+		</div>
+	</div>
+
+
+    <!-- 数据列表 -->
+    <div class="data-table">
+        <div class="data-table table-striped">
+            <table>
+                <!-- 表头 -->
+                <thead>
+                    <tr>
+                        <th style="text-align:center"class="row-selected row-selected">
+                            <input class="check-all" type="checkbox">
+                        </th>
+                        <volist name="list_grids" id="field">
+                            <th  style="text-align:center">{$field.title}</th>
+                        </volist>
+                    </tr>
+                </thead>
+                <!-- 列表 -->
+                <tbody>
+                    <volist name="list_data" id="data">
+                        <tr>
+                            <td style="border-right:1px solid #DDDDDD;text-align:center"><input class="ids" type="checkbox" value="{$data['id']}" name="ids[]"></td>
+                            <volist name="list_grids" id="grid">
+                                <td style="border-right:1px solid #DDDDDD;text-align:center">{:get_list_field($data,$grid)}</td>
+                            </volist>
+                        </tr>
+                    </volist>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="page">
+        {$_page|default=''}
+    </div>
+</block>
+
+<block name="script">
+<script src="__STATIC__/layer/layer.js"></script>
+<script type="text/javascript">
+//导航高亮
+highlight_subnav('{:U('Rebatelist/lists')}');
+$(function(){
+	//搜索功能
+	$("#search").click(function(){
+		var url = $(this).attr('url');
+        var query  = $('.search-form').find('input').serialize();
+        query = query.replace(/(&|^)(\w*?\d*?\-*?_*?)*?=?((?=&)|(?=$))/g,'');
+        query = query.replace(/^&/g,'');
+        if( url.indexOf('?')>0 ){
+            url += '&' + query;
+        }else{
+            url += '?' + query;
+        }
+		window.location.href = url;
+	});
+
+    //回车自动提交
+    $('.search-form').find('input').keyup(function(event){
+        if(event.keyCode===13){
+            $("#search").click();
+        }
+    });
+
+    //点击排序
+    $('.list_sort').click(function(){
+        var url = $(this).attr('url');
+        var ids = $('.ids:checked');
+        var param = '';
+        if(ids.length > 0){
+            var str = new Array();
+            ids.each(function(){
+                str.push($(this).val());
+            });
+            param = str.join(',');
+        }
+
+        if(url != undefined && url != ''){
+            
+            window.location.href = url.replace(".html","") + '/ids/' + param;
+        }
+    });
+
+    $(".drop-down22").on('click',function(event) {
+        var navlist = $(this).find('.i_list_li');
+        if (navlist.hasClass('hidden')) {
+            navlist.removeClass('hidden');
+            $('#i_list_id').focus().val('');            
+        } else {
+            navlist.addClass('hidden');
+        }
+        $(document).one("click", function(){
+            navlist.addClass('hidden');
+        });
+        event.stopPropagation();
+    });
+
+    $('#i_list_id').on('keyup',function(event) {
+        var val  = $.trim($(this).val()).toLowerCase();
+        $('#i_list_idh').val(val);
+    });
+    
+    $("#i_list_li").find("a").each(function(){
+        $(this).click(function(){
+            var text = $.trim($(this).text()).toLowerCase();
+            $("#i_list_id").val(text);
+            $('#i_list_idh').val(text);
+        })
+    });
+
+})
+</script>
+</block>

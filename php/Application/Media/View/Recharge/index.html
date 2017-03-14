@@ -1,0 +1,140 @@
+<extend name="Public/pay" />
+
+<block name="body" >
+<script type="text/javascript" src="__JS__/front/cute.js"></script>
+<script type="text/javascript" src="__JS__/front/dialog.js"></script>
+<script type="text/javascript" src="__JS__/pay.js" charset="UTF-8"></script>
+<link rel="stylesheet" href="__CSS__/dialog_base.css" />
+<img src="__IMG__/rech_rightnav.jpg">  
+<div class="main">                            
+	<div class="rech_rightnav"></div><br>
+		<div id="pay_one">
+			<form action="{:U('Recharge/jubaobar')}" method="POST" id="create_user_pay_order" target="_self">
+			<div class="main_user_input main_title"> 
+			<span>充值方式:</span>
+			<a id='cz' name="jubaopay">聚宝云</a>
+			<input type='hidden' name="pay_type" value="jubaopay">
+		</div>
+		<br>
+		<div id="main_payFor">
+			<!-- <div class="main_title">充值到哪里:</div> -->
+			<div class="main_payFor"> 
+				<a class="main_payFor_a" val="game" id="pay_for_game" style="display:none">默认充值到游戏</a>
+				<a class="main_payFor_a on" val="platform" id="pay_for_platform">充值到我的钱包</a>  
+				<span class="markmsg">（本钱包功能暂仅支持安卓版游戏）</span>
+			</div>
+		</div>
+		<div class="pay_for_cnt" id="pay_for_platform_cnt">
+	<!-- 		<div id="main_ptNotice" class="main_ptNotice">
+				什么是我的钱包？<a target="_self" href="#">[查看详情]</a>
+			</div> -->
+		</div><br>
+
+		<div class="main_user_input main_title"> 
+			<span>充值帐号:</span>
+			<input type="text" name="username" class="user_input text_input" value="">
+			<span class="input_tips"></span>
+		</div>
+		<div class="main_user_input main_title" style="margin-top:5px;"> 
+			<span>再次输入:</span>
+			<input type="text" name="username_confirm" class="user_input text_input" value=""><span class="input_tips"></span>
+		</div><br>
+		<div id="main_money">
+			<div class="main_user_input main_title"><span>选择金额:</span></div>
+			<div class="main_money" id="main_money_list"><a class="main_money_a on" val="10" id="money_0" onclick="select_money(0);">10元</a><a class="main_money_a" val="20" id="money_1" onclick="select_money(1);">20元</a><a class="main_money_a" val="50" id="money_2" onclick="select_money(2);">50元</a><a class="main_money_a" val="100" id="money_3" onclick="select_money(3);">100元</a><a class="main_money_a" val="200" id="money_4" onclick="select_money(4);">200元</a><a class="main_money_a" val="500" id="money_5" onclick="select_money(5);">500元</a><a class="main_money_a" val="1000" id="money_6" onclick="select_money(6);">1000元</a><a class="main_money_a" val="2000" id="money_7" onclick="select_money(7);">2000元</a><a class="main_money_a" val="5000" id="money_8" onclick="select_money(8);">5000元</a><a class="main_money_a" val="10000" id="money_9" onclick="select_money(9);">10000元</a><a class="main_money_a" val="20000" id="money_10" onclick="select_money(10);">20000元</a></div>
+			<div class="clear"></div>
+			<div class="main_other_money" id="main_other_money">
+								<a id="money_9999"></a><label for="other_money">其他金额：</label>
+			<input type="text" name="other_money text_input" class="other_money" id="other_money" value="" maxlength="8">
+			<input type="hidden" name="pay_money" value="">
+			<span id="money_unit">&nbsp;元</span>
+								</div>
+		</div>
+		<div class="value_redio"></div>
+		<div class="main_confirm charge_tips"><a id="pay_submit"></a></div>
+		</form>
+		<input type="hidden" id="jubaopay" name="jubaopay" value="{:U('Recharge/jubaobar')}"><!-- value="{:U('Recharge/jubaobar')}" -->
+	</div><div id="cl1"></div>		
+	<!--确定订单 -->
+	<div class="right_cnt" style="display:none" >
+			<form action="http://37.com.cn/pay/deal_order.php" method="POST" id="create_user_pay_order" target="_self">
+<!-- 				<input name="money" value="" type="text" readonly="">
+				<input name="bank" value="" type="text" readonly="">
+				<input name="order_id" value="" type="text" readonly="">
+				<input name="pay_id" value="" type="text" readonly=""> -->
+			</form>
+			<div class="charge_confirm_content">
+			  <h3>请确认您的充值信息：</h3>
+			  <dl class="charge_confirm_dl">
+				<dt>充值方式：</dt>
+				<dd>微信支付</dd>
+				<dt>订单编号：</dt>
+				<dd class="w_notice">CZ201604121525572809</dd>
+							<dt>充值帐号：</dt>
+				<dd class="w_notice">fdsafdaf</dd>
+				<dt>充值金额：</dt>
+				<dd class="w_notice">10元</dd>
+			  </dl>
+			  <br>
+			  <p style="color:#c00;font-size:14px;">注：请记录订单编号，如充值遇到问题请向客服咨询
+<!-- 			  <a href="http://b.qq.com/webc.htm?new=0&amp;sid=800089273&amp;eid=2188z8p8p8p8z808K8y8P&amp;o=&amp;q=7" title="客服咨询" target="_self" style="color:#06F">客服咨询</a></p> -->
+			  <div class="charge_confirm_link"> 
+				<a class="" id="confirm_submit1" target="_self">确认提交</a> 
+<!-- 				<input type="button" id="confirm_submit1" value="提交提交"> -->
+				<a href="{:U('index')}" class="charge_confirm_back_a">返回</a> </div>
+
+			</div>
+	 </div>
+	<!--确定订单end -->
+	<script type="text/javascript">
+		$(".charge_confirm_back_a").click(function(){
+	    	$('#pay_one').hide();
+            $('.right_cnt').show();
+	    });
+	    $('.confirm_submit1').click(function(){
+
+	    });
+	</script>
+	<div class="clear"></div>
+</div>	
+</block>
+	<!-- <div id="main_bank">
+		<div class="main_title">选择银行:</div>
+		<div class="main_bank">
+			<a id="bank_ICBCB2C" val="ICBCB2C" class="on"><img src="__IMG__/bank_icbcb2c.gif" alt=""></a>
+			<a id="bank_CMB" val="CMB" class=""><img src="__IMG__/bank_cmb.gif" alt=""></a>
+			<a id="bank_CCB" val="CCB" class=""><img src="__IMG__/bank_ccb.gif" alt=""></a>
+			<a id="bank_BOCB2C" val="BOCB2C" class=""><img src="__IMG__/bank_bocb2c.gif" alt=""></a>
+			<a id="bank_ABC" val="ABC" class=""><img src="__IMG__/bank_abc.gif" alt=""></a>
+			<a id="bank_COMM" val="COMM" class=""><img src="__IMG__/bank_comm.gif" alt=""></a>
+			<a id="bank_SPDB" val="SPDB" class=""><img src="__IMG__/bank_spdb.gif" alt=""></a>
+			<a id="bank_GDB" val="GDB" class=""><img src="__IMG__/bank_gdb.gif" alt=""></a>
+			<a id="bank_CITIC" val="CITIC" style="display:none"><img src="__IMG__/bank_citic.gif" alt=""></a>
+			<a id="bank_CEBBANK" val="CEBBANK" style="display:none"><img src="__IMG__/bank_cebbank.gif" alt=""></a>
+			<a id="bank_CIB" val="CIB" style="display:none"><img src="__IMG__/bank_cib.gif" alt=""></a>
+			<a id="bank_PSBC-DEBIT" val="PSBC-DEBIT" style="display:none"><img src="__IMG__/bank_psbc-debit.gif" alt=""></a>
+			<a id="bank_CMBC" val="CMBC" style="display:none"><img src="__IMG__/bank_cmbc.gif" alt=""></a>
+			<a id="bank_HZCBB2C" val="HZCBB2C" style="display:none"><img src="__IMG__/bank_hzcbb2c.gif" alt=""></a>
+			<a id="bank_SHBANK" val="SHBANK" style="display:none"><img src="__IMG__/bank_shbank.gif" alt=""></a>
+			<a id="bank_NBBANK" val="NBBANK" style="display:none"><img src="__IMG__/bank_nbbank.gif" alt=""></a>
+			<a id="bank_SPABANK" val="SPABANK" style="display:none"><img src="__IMG__/bank_spabank.gif" alt=""></a>
+			<a id="bank_BJBANK" val="BJBANK" style="display:none"><img src="__IMG__/bank_bjbank.gif" alt=""></a>
+			<a id="bank_BJRCB" val="BJRCB" style="display:none"><img src="__IMG__/bank_bjrcb.gif" alt=""></a>
+			<a id="bank_FDB" val="FDB" style="display:none"><img src="__IMG__/bank_fdb.gif" alt=""></a>
+		</div>
+		<div class="main_more_bank" id="main_more_bank"><a id="more_bank" onclick="more_bank();"></a></div>
+		<div class="main_close_bank" id="main_close_bank"><a id="close_bank"></a></div>
+	</div> -->
+
+	<!-- <div class="main_explain">
+		<font face="宋体"><strong>银行卡支付说明：</strong></font>
+		<p>
+			<font face="宋体">1、您必须开通了网上银行业务；</font>
+			<br><font face="宋体">2、请您关闭所有屏蔽弹出窗口之类的功能，否则在线支付将无法继续，比如：3721、上网助手、google toolbar、alexa toolbar、baidu等；</font>
+			<br><font face="宋体">3、如果您用信用卡支付，请确认该信用卡的网上交易限额大于等于您的充值金额；</font>
+			<br><font color="Red" face="宋体">4、请充值时务必确认好您的充值金额准确无误后再进行充值，避免输错金额导致的失误，如因未仔细确认金额造成的充值问题，我们将一律不予处理此类退款申诉。
+			</font>
+			<br><font color="Red" face="宋体">5.在线客服咨询QQ：800089273  客服电话：020-85166576
+			</font>
+		</p>
+	</div>          -->

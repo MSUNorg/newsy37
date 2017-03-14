@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">梦创SDK</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="btnPay">充值</string>
+    <string name="btnExit">退出</string>
+    <string name="btnCancell">注销</string>
+    <string name="btnToSDK">微信测试</string>
+    <string name="btnOpenWX">打开微信</string>
+    <string name="btnAddToWX">添加到微信</string>
+    <string name="btnShare">分享到微信</string>
+    
+    <string name="sdk_name">微信测试的sdk主页</string>
+
+</resources>

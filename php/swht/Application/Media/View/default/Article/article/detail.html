@@ -1,0 +1,32 @@
+<extend name="Public/base" />
+<block name="body" >
+<div class="main_sub wrap_w">
+    <div class="crumbs"><em>当前位置：</em><a href="{:U('Index/index')}" target="_blank">溪谷游戏</a>
+	<span> &gt; </span><a href="{:U('Article/index',array('category'=>'media'))}">新闻中心</a></div>
+    <div id="newlist" class="clearfix">
+        <div class="l">
+            <div id="newshow">
+                <h1 class="title">
+					<a href="">{$info.title}</a>
+				</h1>
+                <h2 class="meta"><em>作者：{$info.uid|get_username}</em><span>发表时间：{$info.update_time|date="Y-m-d H:i:s",###}</span></h2>
+                <div class="cons"> 
+					{$info.content}
+				</div>
+                <div class="cons">
+					<article:prev name="prev" info="info">
+                        <a href="{:U('?id='.$prev['id'])}">上一篇</a>
+                    </article:prev>
+                    <article:next name="next" info="info">
+                        <a href="{:U('?id='.$next['id'])}">下一篇</a>
+                    </article:next>
+				</div>
+                
+            </div>
+        </div>
+        <div class="r">
+            {:W('Base/ranking');}
+        </div>
+    </div>
+</div>
+</block>

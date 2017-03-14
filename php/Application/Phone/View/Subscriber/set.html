@@ -1,0 +1,135 @@
+<extend name="Public/subbases" />
+<block name="body" >
+<link href="__CSS__/set.css" rel="stylesheet" />
+<div class="m-user-safe m-user-center-content">
+	<div class="user-center-title"><h2>帐号安全</h2></div>
+	<div class="user-center-main">
+		<div class="user-secure" id="user-secure">
+			<div class="user-secure-title">
+				<i class="user-secure-ico ico-u-mail-big"></i>
+				<span class="user-secure-tag">密保邮箱：</span>
+			</div>
+			<ul class="user-step ">
+				<li class="focus"><span>1</span>密码验证</li>
+				<li><span>2</span>设置密保</li>
+			</ul>
+			<div class="user-secure-setting user-form user-secure-protect" id="user-password-verify">
+				<div class="user-secure-panel" id="user-secure-checkpassword">
+					<div id="check-set" class="js-unset">
+						<p class="txt">为了您的帐号安全，请在设置前验证您的登录密码！</p>
+						<p><label for="checkpassword"><span class="red">*</span>　登录密码</label><input data-rule="required,password" data-message="请输入登录密码,密码输入有误" data-view="noright" id="checkpassword" name="checkpassword" type="password" class="text">
+						</p>
+						<p class="wrap-btn">
+							<a id="tj-checkpassword" class="btn-yellow-140" href="javascript:;" title="验证密码">验证密码</a>
+						</p>
+					</div>
+				</div>
+			</div>
+			<div class="user-secure-setting user-form user-secure-protect hide" id="user-secure-setting" >
+				<div class="user-secure-panel hide" id="user-secure-email" data-action="verifymailcode" data-set="" >
+					<div id="email-set" class="js-unset ">
+						<p class="txt">注意：密保邮箱是用户找回帐号密码的重要手段，请认真填写并谨记！</p>
+						<p>
+							<label for="email"><span class="red">*</span>　输入邮箱</label><input data-rule="required,email" data-message="请输入邮箱" id="email-input" name="email" type="text" class="text" autocomplete="off">
+						</p>
+						<p class="wrap-btn"><a data-role="email" id="tj-mail-code" class="btn-yellow-140" href="javascript:;">验证邮箱</a></p>
+						<p> </p><p> </p><p> </p><p> </p>
+					</div>
+				</div>
+				<div id="email-result" class="user-s-setted hide">
+					<p class="txt f16">验证邮件已发送至您的邮箱： </p>
+					<p class="txt">请您尽快登录邮箱，按邮件中指示完成验证</p>
+					<p class="txt b-btn" ><a id="email-btn-url" target="_blank" class="btn-yellow-140" href="javascript:;" title="登录邮箱">登录邮箱</a></p>
+					<p class="txt">提示：系统已经向该邮箱发送了一封验证激活邮件，请查收邮件，并进行激活。</p>
+					<p class="txt">如果没有收到验证邮件，请检查邮箱的反垃圾设置<a style="color:#f00;font-weight:bold;" id="howset" title="如何设置反垃圾设置">(如何设置？)</a></p>
+					<p class="txt">并到垃圾邮箱查看是否收到，或者更换一个邮箱重新验证。</p>
+					<p class="txt"><a id="email-btn-reset" class="btn-resend btn-eee disabled" href="javascript:;" title="再次验证">106秒后重新验证</a></p>
+				</div>
+				<div id="mail-binded" class="user-s-setted hide">
+					<p> </p>
+					<p class="txt f16">您的帐号已设置密保邮箱</p>
+					<p class="txt f16">邮箱帐号：</p>
+					<p class="txt">
+						<a class="btn-back " href="/userprotect.php" title="返回">返回</a>
+						<a class="blue " target="_blank" href="forgetpwd/reset.php#mail" title="修改邮箱">修改邮箱</a>
+					</p>
+				</div>
+				
+			</div>
+		</div>		
+	</div>
+</div>
+<script src="__JS__/pop.js"></script>
+<script>
+$(function() {	
+	$('#checkpassword').on('blur keypress',function() {
+		$(this).siblings('.field-error-message').remove();
+		var val = $.trim($(this).val());
+		if (val == ''){$(this).after('<span class="field-error-message">请输入登录密码</span>');return;}
+		if (val.length<6 || val.length>30 ) {$(this).after('<span class="field-error-message">密码输入有误</span>');return;}
+	});
+	$('#tj-checkpassword').on('click',function() {
+		$check = $('#checkpassword');
+		var val = $.trim($check.val());
+		if (val == '') { $check.after('<span class="field-error-message">请输入登录密码</span>');return false;}
+		if (val.length<6 || val.length>30 ) { $check.after('<span class="field-error-message">密码输入有误</span>');return false;}
+		pop('提示','正在验证，稍等……','');
+		setTimeout(function() {
+			ajaxpost('__CONTROLLER__/checkpassword',{password:val},function(data) {
+				$('.pop').remove();
+				if (parseInt(data.status) == 1) {
+					$('#user-password-verify').hide();
+					$('#user-secure-setting').show();
+					$('#user-secure-email').show();
+					$('#email-set').show();
+					$('.user-step li:last').addClass('focus').siblings().removeClass('focus');
+				} else {
+					pop('',data.info,'ok',true);
+				}
+			});
+		},1000);
+	});
+	
+	$('#email-input').on('blur keypress',function() {
+		$(this).siblings('.field-error-message').remove();
+		var val = $.trim($(this).val());
+		if (val == ''){$(this).after('<span class="field-error-message">请输入邮箱</span>');return;}
+		if (!(/^[A-Za-z\d]+([-_.][A-Za-z\d]+)*@([A-Za-z\d]+[-.])+[A-Za-z\d]{2,5}$/.test(val))) {$(this).after('<span class="field-error-message">输入无效的邮箱</span>');return;}
+	});
+	$('#tj-mail-code').on('click',function() {
+		$check = $('#email-input');
+		var val = $.trim($check.val());
+		if (val == ''){ $check.after('<span class="field-error-message">请输入邮箱</span>');return false;}
+		if (!(/^[A-Za-z\d]+([-_.][A-Za-z\d]+)*@([A-Za-z\d]+[-.])+[A-Za-z\d]{2,5}$/.test(val))) { $check.after('<span class="field-error-message">输入无效的邮箱</span>');return false;}
+		pop('提示','处理中...','');
+		setTimeout(function() {
+			ajaxpost('__CONTROLLER__/sendemail',{email:val},function(data) {
+				$('.pop').remove();
+				if (parseInt(data.status) == 1) {
+					$('#user-password-verify').hide();
+					$('#user-secure-setting').show();
+					$('#user-secure-email').show();
+					$('#email-set').hide();
+					$('#email-result').show().find('.f16').append('<span id="email-result-account" class="red">'+data.email+'</span>');
+					$('#email-btn-url').attr('href',data.emailurl).closest('.b-btn').show();
+					var ebr = 111,si = setInterval(function() {
+						ebr--;
+						if (ebr == 0) {
+							clearInterval(si);
+							$('#email-btn-reset').text('重新验证').removeClass('disabled').on('click',function() {
+								window.location.reload();
+							});
+						} else
+							$('#email-btn-reset').text(ebr+'秒后重新验证');
+					},1000);
+					$('.user-step li:last').addClass('focus').siblings().removeClass('focus');
+				} else {
+					pop('',data.info,'ok',true);
+				}
+			});
+		},1000);		
+	});
+	
+});
+</script>
+</block>

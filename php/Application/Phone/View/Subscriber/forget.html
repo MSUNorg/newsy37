@@ -1,0 +1,81 @@
+<extend name="Public/forgets" />
+<block name="body">
+<div class="m-pwd-wrap m-user-center-content">
+    <div class="user-center-title"><h2>找回密码</h2></div>
+    <link rel="stylesheet" href="__CSS__/resetpwd.css" />
+    <div class="modify_box">
+        <div class="bread-wrap">
+            <ul class="bread-list">
+                <li class="active">确认帐号</li><li class="gutter">&gt;</li><li class="">验证安全设置</li><li class="gutter">&gt;</li><li>重置密码</li><li class="gutter">&gt;</li><li>完成</li>
+            </ul>
+        </div>
+        <div class="m-confirm-username-wrap">
+            <span id="notice" style="line-height:40px;font-size:18px;position:absolute;top:0;left:40px;"></span>
+            <div>
+                <label>用户名:</label>
+                <div class="input-optimize">
+                    <input type="text" id="account" name="account" >
+                    <div class="placeholder">请输入您的帐号</div>
+                    <i class="clear-text"></i>
+                    <span class="error-msg"></span>
+                </div>
+            </div>
+            <input type="submit" class="submit-btn" id="forgetPassSub" value="提交">
+        </div>
+    </div> 
+</div>
+<script src="__JS__/pop.js"></script>
+<script>
+    $(function() {
+        var e = $('.input-optimize');
+        e.on('click','.placeholder',function() {
+            $(this).hide(),
+            $(this).siblings('input').focus(),
+            $(this).siblings('input').val().match(/^\s*|\s*$/g) && $(this).siblings('input').val('')
+        });
+        e.on('blur', 'input',function() {
+            var e = $(this).siblings('.placeholder');
+            0 != e.length && ('' == $(this).val() || $(this).val() == e.text()) && ($(this).val(''), e.show())
+            $(this).closest('.input-optimize').removeClass('error');
+            $(this).siblings('.error-msg').text('');
+        });
+        e.on('focus', 'input',function() {
+            var e = $(this).siblings('.placeholder');
+            0 != e.length && e.hide()
+        });
+        e.on('click', '.clear-text',function() {
+            $(this).siblings('input').val('');
+            var e = $(this).siblings('.placeholder');
+            $(this).parents('.input-optimize').removeClass('error').removeClass('correct'),
+            $(this).parents('.input-optimize').find('.error-msg').text(''),
+            0 != e.length && ('' == $(this).val() || $(this).val() == e.text()) && ($(this).val(''), e.show())
+        });
+
+        
+        $('#forgetPassSub').on('click',function() {
+            var account = $.trim($('#account').val());
+            if (account == '') {$('.error-msg').text('必填项');return false;}
+            $.ajax({
+                type:'post',
+                dataType:'json',
+                data:'account='+account,
+                url:'{:U("forget")}',
+                success:function(data) {
+                    if (parseInt(data.status) == 1 ) {
+                        if (data.phone) {                     
+                            pop('','账户正确，正在跳转。。。','',true,2000,{url:'__CONTROLLER__/findpwd/t/f/name/'+account,time:100});                           
+                        } else {
+                            pop('','<span style="color:red;margin:0 10px;">!!</span>您还没有绑定手机号码，无法自行修改，请<a href="__MODULE__/Service/index" style="padding:0 3px;color:red;">联系客服</a>','',true);
+                        }
+                    } else {
+                        pop('','<span style="color:red;margin:0 10px;">!!</span>没有此账户',{ok:'确定'},true);
+                    }
+                },
+                error:function() {
+                    pop('','服务器故障，请稍候再试。。。。',{ok:'确定'},true);
+                }
+            });
+        });
+    });
+</script>
+</block>

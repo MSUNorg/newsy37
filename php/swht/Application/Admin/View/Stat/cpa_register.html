@@ -1,0 +1,361 @@
+<extend name="Public/base"/>
+
+<block name="body">
+    <!-- 标题栏 -->
+    <div class="main-title">
+        <h2>[CPA注册统计] 列表</h2>
+    </div>
+
+    <div class="cf top_nav_list">
+        <div class="fl button_list">
+        </div>
+        <!-- 高级搜索 -->
+        <div class="search-form fr cf">
+            {:W('Search/game_list')}
+            {:W('Search/promote_list')}
+            <div class="i_list" id="" >
+                 <div class="drop-down" id="game">
+                    <if condition="I('game_name') eq ''">
+                    <input type="text" id="i_list_id" class="sort-txt" value="" placeholder="请选择游戏" />
+                    <else />
+                    <input type="text" id="i_list_id" class="sort-txt" value="{:I('game_name')}" placeholder="请选择游戏" />
+                    </if>
+                    <input type="hidden" id="i_list_idh" name="game_name" value="{:I('game_name')}" />
+                    <i class="arrow arrow-down"></i>
+                    <ul id="i_list_li" class="nav-list hidden i_list_li">
+                        <li><a href="javascript:;" value="" >全部</a></li>
+                        <volist name=":get_game_list()" id="vo">                        
+                        <li><a href="javascript:;" value="{$vo.id}" >{$vo.game_name}</a></li>
+                        </volist>
+                    </ul>
+                </div>                
+            </div>
+            <div class="i_list">
+                 <div class="drop-down" id="promote">
+                    <if condition="I('promote_name') eq ''">
+                    <input type="text" id="i_list_id" class="sort-txt" value="" placeholder="请选择所属渠道" />
+                    <else />
+                    <input type="text" id="i_list_id" class="sort-txt" value="{:I('promote_name')}" placeholder="请选择所属渠道" />
+                    </if>
+                    <input type="hidden" id="i_list_idh" name="promote_name" value="{:I('promote_name')}" />
+                    <i class="arrow arrow-down"></i>
+                    <ul id="i_list_li" class="nav-list hidden i_list_li">
+                        <li><a href="javascript:;" value="" >全部</a></li>
+                        <li><a href="javascript:;" value="0" >自然注册</a></li>
+                        <volist name=":get_promote_all()" id="vo">                        
+                        <li><a href="javascript:;" value="{$vo.id}" >{$vo.account}</a></li>
+                        </volist>
+                    </ul>
+                </div>                
+            </div>
+        <!-- <div class='sleft'>
+                <input type="text" id="time-start" name="time-start" class="text input-2x" value="{:I('time-start')}" placeholder="注册起始时间" /> -                     
+                <div class="input-append date" id="datetimepicker"  style="display:inline-block">
+                    <input type="text" id="time-end" name="time-end" class="text input-2x" value="{:I('time-end')}" placeholder="注册结束时间" />
+                    <span class="add-on"><i class="icon-th"></i></span>
+                </div>
+        </div> -->
+            <!-- <div class="sleft">
+                <a class="sch-btn" href="javascript:;" id="search" url="{:U('Stat/cpa_register','model='.$model['name'],false)}"><i class="btn-search"></i></a>
+            </div> -->
+            <div class="input-list">
+                <a class="sch-btn" href="javascript:;" id="search" url="{:U('Stat/cpa_register','model='.$model['name'],false)}">搜索</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- 数据列表 -->
+ <div class="data-table">
+        <div class="data-table table-striped">
+            <table>
+                <!-- 表头 -->
+                <thead>
+                    <tr>
+                        <th style="text-align:center">游戏名称</th>
+                        <th style="text-align:center">注册数</th>
+                        <th style="text-align:center">推广员</th>
+                        
+                    </tr>
+                </thead>
+                <!-- 列表 -->
+                <tbody>
+                    <volist name="list_data" id="data">
+                        <tr>
+                            <td style="border-right:1px solid #DDDDDD;text-align:center">{:get_game_name($data['game_appid'],'game_appid')}</td>
+                            <td style="border-right:1px solid #DDDDDD;text-align:center">{$data.count}</td>
+                            <td style="border-right:1px solid #DDDDDD;text-align:center">
+                              {:get_promote_name($data['promote_id'])}
+                            </td>
+                           
+                        </tr>
+                    </volist>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="page">
+        {$_page|default=''}
+    </div>
+</block>
+
+<block name="script">
+<link href="__STATIC__/datetimepicker/css/datetimepicker.css" rel="stylesheet" type="text/css">
+<php>if(C('COLOR_STYLE')=='blue_color') echo '<link href="__STATIC__/datetimepicker/css/datetimepicker_blue.css" rel="stylesheet" type="text/css">';</php>
+<link href="__STATIC__/datetimepicker/css/dropdown.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="__STATIC__/datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
+<script type="text/javascript" src="__STATIC__/datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js" charset="UTF-8"></script>
+<script src="__STATIC__/laypage/laypage.js"></script>
+<script type="text/javascript">
+$(function(){
+//导航高亮
+highlight_subnav('{:U('stat/cpa_register')}');
+    //搜索功能
+    $("#search").click(function(){
+        var url = $(this).attr('url');
+        var guild = $("#sch-sort-txt1").attr("data");
+        var query  = $('.search-form').find('input').serialize();
+        query = query.replace(/(&|^)(\w*?\d*?\-*?_*?)*?=?((?=&)|(?=$))/g,'');
+        query = query.replace(/^&/g,'');
+
+        if(guild != ''){
+            query += '&PromoteName=' + guild + "&";
+        }
+        if( url.indexOf('?')>0 ){
+            url += '&' + query;
+        }else{
+            url += '?' + query;
+        }
+        window.location.href = url;
+    });
+    /* 游戏名称搜索子菜单 */
+    $("#game-down").find(".drop-down").hover(function(){
+        $("#sub-sch-menu-game").removeClass("hidden");
+    },function(){
+        $("#sub-sch-menu-game").addClass("hidden");
+    });
+    $("#sub-sch-menu-game li").find("a").each(function(){
+        $(this).click(function(){
+            var text = $(this).text();
+            $("#sch-sort-txt-game").text(text).attr("data",$(this).attr("value"));
+            $("#GameName").val($(this).attr("value"));
+            $("#sub-sch-menu-game").addClass("hidden");
+            AreaBind();
+        })
+    });
+    /* 审核状态搜索子菜单 */
+    $("#reco_drow").find(".drop-down").hover(function(){
+        $("#sub-sch-menu-reco").removeClass("hidden");
+    },function(){
+        $("#sub-sch-menu-reco").addClass("hidden");
+    });
+    $("#sub-sch-menu-reco li").find("a").each(function(){
+        $(this).click(function(){
+            var text = $(this).text();
+            $("#sch-sort-txt-reco").text(text).attr("data",$(this).attr("value"));
+            $("#time").val($(this).attr("value"));
+            $("#sub-sch-menu-reco").addClass("hidden");
+        })
+    });
+    /* 区服名称搜索子菜单 */
+    $("#area-down").find(".drop-down").hover(function(){
+        $("#sub-sch-menu-area").removeClass("hidden");
+    },function(){
+        $("#sub-sch-menu-area").addClass("hidden");
+    });
+    $("#sub-sch-menu-area li").find("a").each(function(){
+        $(this).click(function(){
+            var text = $(this).text();
+            $("#sch-sort-txt-area").text(text).attr("data",$(this).attr("value"));
+            $("#sub-sch-menu-area").addClass("hidden");
+        })
+    });
+    
+
+    $("#guil-ddown .drop-down").on('click',function() {
+        var record = {:count($promotelist)};
+        popups('promotelists',record);
+    });
+
+    /* 推广员名称搜索子菜单 */
+    $("#promote-down").find(".drop-down").hover(function(){
+        $("#sub-sch-menu-promote").removeClass("hidden");
+    },function(){
+        $("#sub-sch-menu-promote").addClass("hidden");
+    });
+    $("#sub-sch-menu-promote li").find("a").each(function(){
+        $(this).click(function(){
+            var text = $(this).text();
+            $("#sch-sort-txt-promote").text(text).attr("data",$(this).attr("value"));
+            $("#sub-sch-menu-promote").addClass("hidden");
+        })
+    });
+    $('#time-start').datetimepicker({
+        format: 'yyyy-mm-dd',
+        language:"zh-CN",
+        minView:2,
+        autoclose:true
+    });
+
+    $('#datetimepicker').datetimepicker({
+       format: 'yyyy-mm-dd',
+        language:"zh-CN",
+        minView:2,
+        autoclose:true,
+        pickerPosition:'bottom-left'
+    })
+
+    //回车自动提交
+    $('.search-form').find('input').keyup(function(event){
+        if(event.keyCode===13){
+            $("#search").click();
+        }
+    });
+         function aaa(){
+        $("#sub-sch-menu-game li").find("a").each(function(){
+            $(this).click(function(){
+                var text = $(this).text();
+                $("#sch-sort-txt-game").text(text).attr("data",$(this).attr("value"));
+                $("#GameID").val($(this).attr("value"));
+                $("#sub-sch-menu-game").addClass("hidden");
+            liandong($(this).attr("value"));
+
+            })
+        });
+    }
+
+});
+function txtinput(text) {
+    $("#sch-sort-txt1").text(text).attr("data",text);
+    //$("#GameName").val(text);
+}
+function popups(ename,record) {
+    var lie = 4;
+    var row = 20,page=1;
+    var $that = $('#'+ename);
+    var n = Math.ceil(record/lie)*lie;
+    if(n>record && n > $that.find('.pcotent li').length)
+        for(var i=record;i<n;i++) {
+            $that.find('.pcotent ul').append('<li><div class="pname"><a href="javascript:;" value="" num="'+i+'" data="" >&nbsp;</a></div></li>');
+        }
+    showgamelists(ename,record,row,page);
+    $that.closest('#main-content').before('<div class="popupsbg"></div>');
+    //$that.css({'margin-left':-$(this).width()/4,'margin-top':-$(this).height()/4}).slideDown();
+    $that.css({}).slideDown();
+    
+    $that.find('.butn').on('click',function() {
+        $(this).closest('.popups').removeAttr('style').slideUp().closest('#main-content').siblings('.popupsbg').remove();
+        $that.find('.pbottom').empty();
+    });
+    
+    $that.find('.pcotent li a').on('click',function() {
+        var text = $.trim($(this).attr('value'));
+        if(text == '') return;
+        txtinput(text);
+        $that.find('.butn').click();
+    });
+    
+    $that.find('.pinput').on('keyup',function(){
+        var keyup = $.trim($(this).val());
+        if(keyup == ''){
+            showgamelists(ename,record,row,page);
+            return;
+        }
+        $that.find('.pcotent li a').each(function() {
+            var data = $(this).attr('data');
+            var val = $(this).attr('value');
+            if(val.indexOf(keyup) != -1 || data.indexOf(keyup) != -1) {
+                $(this).closest('li').show();
+            } else {
+                $(this).closest('li').hide();
+            }
+        });
+        
+    });
+}
+function showgamelists(ename,record,row,page) {
+    var $that = $('#'+ename);
+    $that.find('.pbottom').empty();
+    var _s=(page-1)*row,_e=page*row-1;
+    var total=Math.ceil(record/row);
+    $that.find('.pcotent li').each(function() {
+        var an = $(this).find('.pname a').attr('num');
+        if(an<=_e && an>=_s) {
+            $(this).show();
+        } else {
+            $(this).hide();
+        }
+    });
+    var pagelist = '<div>';
+    for(var i=1;i<=total;i++) {
+        if (page == i) {
+            pagelist += '<span class="current">'+i+'</span>';
+        } else {
+            pagelist += '<a href="javascript:;" page="'+i+'">'+i+'</a>';
+        }
+    }
+    pagelist += '<span class="rows">共 '+record+'条记录</span>';
+    pagelist += '</div>';
+    $that.find('.pbottom').append(pagelist).find('a').on('click',function(){
+        page = parseInt($(this).attr('page'));
+        if(isNaN(page)) page = 1;
+        $that.find('.pbottom').empty();
+        showgamelists(ename,record,row,page);
+    });
+}
+highlight_subnav('{:U('Cpa/cpareg')}');
+$("#game").on('click',function(event) {
+        var navlist = $(this).find('.i_list_li');
+        if (navlist.hasClass('hidden')) {
+            navlist.removeClass('hidden');
+            $(this).find('#i_list_id').focus().val('');            
+        } else {
+            navlist.addClass('hidden');
+        }
+        $(document).one("click", function(){
+            navlist.addClass('hidden');
+        });
+        event.stopPropagation();
+    });
+
+    $('#game #i_list_id').on('keyup',function(event) {
+        var val  = $.trim($(this).val()).toLowerCase();
+        $(this).closest('.drop-down').find('#i_list_idh').val(val);
+    });
+    
+    $("#game #i_list_li").find("a").each(function(){
+        $(this).click(function(){
+            var text = $.trim($(this).text()).toLowerCase();
+            $(this).closest('.drop-down').find("#i_list_id").val(text);
+            $(this).closest('.drop-down').find('#i_list_idh').val(text);
+        })
+    });
+    
+    
+    $("#promote").on('click',function(event) {
+        var navlist = $(this).find('.i_list_li');
+        if (navlist.hasClass('hidden')) {
+            navlist.removeClass('hidden');
+            $(this).find('#i_list_id').focus().val('');            
+        } else {
+            navlist.addClass('hidden');
+        }
+        $(document).one("click", function(){
+            navlist.addClass('hidden');
+        });
+        event.stopPropagation();
+    });
+
+    $('#promote #i_list_id').on('keyup',function(event) {
+        var val  = $.trim($(this).val()).toLowerCase();
+        $(this).closest('.drop-down').find('#i_list_idh').val(val);
+    });
+    
+    $("#promote #i_list_li").find("a").each(function(){
+        $(this).click(function(){
+            var text = $.trim($(this).text()).toLowerCase();
+            $(this).closest('.drop-down').find("#i_list_id").val(text);
+            $(this).closest('.drop-down').find('#i_list_idh').val(text);
+        })
+    });
+</script>
+</block>

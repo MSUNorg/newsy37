@@ -1,0 +1,84 @@
+<extend name="Public/base" />
+<block name="body" >
+<div class="main_sub wrap_w">
+    <div class="crumbs"><em>当前位置：</em><a href="{:U('Index/index')}" target="_blank">溪谷游戏</a>
+	<span> &gt; </span><a href="{:U('Game/index')}">游戏中心</a></div>
+    <div id="gameshow" class="clearfix">
+        <div class="l">
+            <div class="gameinti">
+                <div class="gameintile"> 
+					<img id="img_Icon" src="__ROOT__{$data.icon|get_cover='path'}" style="height:165px;width:165px;"> 
+					<span class="score"> {$data.Score} </span> 
+				</div>
+                <div class="gameintiri">
+
+                    <div class="gameintiritit">
+                        <h3>{$data.game_name}</h3>
+                        <p>游戏版本：{$data.version}</p>
+                        <p>游戏大小：{$data.game_size}</p>
+                        <p>游戏特征：{$data.features}</p>
+                        <p>更新时间：{$data.create_time|date="Y-m-d",###}</p>
+                    </div>
+                    <div class="gaminwex"> 
+					<span><img id="img_QRCode" src="{:U('Game/dow_url_generate?game_id='.$data['id'])}" style="height:110px;width:110px;"> <br>扫一扫 </span>
+					</div>
+                    <div class="gaindow"> 
+						<a class="doandr" href="{:U('Down/down_file?game_id='.$data['id'])}"><i></i>立即下载</a> 
+                        <a id="cuow" style="float:right;color:#D1D1D1;text-align:center;width:90px;padding-right:5px;height:40px"><i></i>错误反馈</a> 
+					</div>
+                </div>
+            </div>
+            <div class="gameincount">
+                <h3 class="gamtiti"><span>详细介绍</span></h3>
+                <div class="intro">　
+					{$data.introduction}
+				</div>
+                <h3 class="gamtiti"><span>游戏截图</span></h3>
+                <div class="gaminimg">
+                    <div class="clearfix">
+					<volist name=":explode(',',$data['screenshot'])" id='pid'>
+					<if condition='!empty($pid)'>
+					<div class="snopshot" id="snopshot4"> 
+						<img src="{$pid|get_cover='path'}" alt="{$data.game_name}截图"> 
+						<span class="elementOverlay"></span> 
+					</div>
+					</if>
+					</volist>
+					</div>
+                </div>
+            </div>
+        </div>
+        <div class="r">
+            {:W('Base/ranking');}
+        </div>
+    </div>
+</div>
+<input type="hidden" id="game_id" value="{$data.id}" />
+<input type="hidden" id="game_name" value="{$data.game_name}" />
+<script>
+$(document).ready(function(){
+   $("#cuow").click(function(){   
+    $.ajax({
+        type:'POST',
+        url:'media.php?s=/Game/error_mesg',
+        data:{'game_name':$("#game_name").val(),'game_id':$("#game_id").val()},
+        dataType:'json',
+        success:function(data){
+                if(data.msg=="ok"){
+                    alert("错误反馈成功！！我们将尽快解决");
+                }else if(data.msg=="no"){
+                      alert("您已经反馈过此问题，我们将尽快解决");
+                }else if(data.msg=="no-login"){
+                    alert("请先登录");
+                }else{
+                    alert("数据异常");
+                }
+        },
+        error:function(){
+        alert('数据错误');
+        }
+    });                      
+});   
+});
+</script>
+</block>

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<!-- saved from url=(0030)http://www.vlcms.com/m-android/ -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta charset="utf-8">
+<title>溪谷游戏 - www.vlcms.com</title>
+<meta content="安卓游戏,安卓破解游戏,android游戏,安卓手机助手" name="keywords">
+<meta content="溪谷游戏安卓手机游戏频道，提供数十万款最热门的安卓（android）游戏下载，安卓手机助手带给玩家优秀的游戏下载服务。" name="description">
+<meta content="yes" name="apple-mobile-web-app-capable">
+<meta content="yes" name="apple-touch-fullscreen">
+<meta content="telephone=no" name="format-detection">
+<meta content="black" name="apple-mobile-web-app-status-bar-style">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+<link href="/favicon.ico" rel="icon" type="image/x-icon">
+<link href="/favicon.ico" rel="index icon" type="image/x-icon">
+<link rel="stylesheet" href="__CSS__/com.css">
+<link rel="stylesheet" href="__CSS__/index.css">
+<script type="text/javascript" src="__JS__/jquery.js"></script>
+<script type="text/javascript" src="__JS__/modernizr.custom.js"></script>
+<script type="text/javascript" src="__JS__/jquery.dlmenu.js"></script>
+
+</head>
+<body>
+	<div class="mask-box"></div>
+	<if condition='($Think.const.CONTROLLER_NAME eq Gift)'>
+	<header>
+		溪谷游戏礼包
+		<a href="javascript:history.go(-1);" class="pack-back">返回</a>
+	</header>
+	<else />
+	<header class="header fixed">
+		<div class="inner">
+			<if condition='($Think.const.CONTROLLER_NAME eq Game)'>
+			<a href="javascript:history.back();" class="back" style="color:#fff;">返回</a>
+			<else />
+            <a href="{:U('Index/index')}" class="logo">溪谷游戏</a>
+			</if>
+            <div class="search">
+				<form action="/mobile.php/Search/index" method="post" class="form-search">
+					<div class="search-query">
+						<input id="keyword" name="keyword" class="ipt ipt2" type="text" maxlength="50" placeholder="搜索游戏" autocomplete="off" value="">
+						<div class="st-menu"></div>
+					</div>
+					<button type="submit" class="btn" hidefocus="true">搜索</button>
+				</form>
+			</div>
+            <div id="dl-menu" class="dl-menuwrapper">
+				<button id="dl-menu-button" class="btn-search-box J-show-btn"> 
+					<span></span>
+					<span></span>
+					<span></span>
+				</button>
+				<ul class="dl-menu">
+					<li>
+						<span class="triangle"></span>
+						<h1>单机分类</h1><a href="#">益智</a>
+						 <a href="#">射击</a>
+						   <a href="#">动作</a>
+						   <a href="#">休闲</a>
+						   <a href="#">竞速</a>
+						   <a href="#">棋牌</a>
+						   <a href="#">策略</a>
+						   <a href="#">冒险</a>
+						  <a href="#">体育</a>
+						  <div class="clear"></div>
+					</li>
+					<li>
+						<h1>网游分类</h1><a href="#">RPG</a>
+						  <a href="#">卡牌</a>
+						   <a href="#">竞技</a>
+						   <a href="#">战争</a>
+							<a href="#">养成</a> 
+			   
+						<div class="clear"></div>
+					</li>				
+				</ul>
+			</div>        
+		</div>
+		<div class="nav">
+			<ul class="unstyled">
+				<li class="<if condition='$Think.const.CONTROLLER_NAME eq Index'>active</if>">
+					<a href="{:U('Index/index')}">推荐</a></li>
+				<!-- <li class="<if condition='$Think.const.CONTROLLER_NAME eq Tag'>active</if>">
+					<a href="{:U('Tag/index')}">分类</a></li> -->
+				<li class="<if condition='$Think.const.CONTROLLER_NAME eq Sort'>active</if>">
+					<a  href="{:U('Sort/index')}">排行榜</a></li>
+				<li class="<if condition='$Think.const.CONTROLLER_NAME eq Necessary'>active</if>">
+					<a href="{:U('Necessary/index')}">精品</a></li>
+			</ul>
+		</div>
+	</header>
+	<div style="height:100px;"></div>
+	</if>
+	<script type="text/javascript">
+		$(function(){
+			$( '#dl-menu' ).dlmenu();
+		});
+	</script>
+	
+	<block name="body"></block>
+	
+	<div class="footer">
+		<div class="clear"></div>
+		<p class="copyright">
+		</p>
+	</div>
+</body>
+</html>

@@ -1,0 +1,78 @@
+<extend name="Public/base"/>
+
+<block name="body">
+	<div class="main-title">
+		<h2>媒体官网搜索优化</h2>
+	</div>
+	<div class="tab-wrap">
+		<ul class="tab-nav nav">
+            <volist name="lists" id="vo">
+            <li data-tab="tab{$i}" class="<eq name='i' value='1' >current</eq>"><a href="javascript:void(0);" >{$vo.title}</a></li>
+            </volist>
+		</ul>
+        <style>
+            .seo_txt{width:600px;line-height:24px;border:1px solid #eee;padding:3px 8px;resize:vertical;}
+            .seo_txt_s{height:24px;}
+            .seo_txt_d{height:48px;}
+            .seo_txt_m{height:72px;}
+            .infomation{margin:10px 10px;background:#eee;padding:10px;border-radius:3px;}
+            .infomation h3{font-weight:bold;}
+            .infomation p {line-height:20px;}
+        </style>
+        <div class="infomation">
+            <h3>提示</h3>
+            <p>插入的变量两边必须包括百分号" %变量% "，当游戏范围不支持该变量时，该变量
+            将不会在前台显示（变量后边的分隔符也不会显示）。以下是可用SEO变量：</p>
+            <p><strong>站点名称：</strong><span> %webname% </span></p>
+            <p><strong>游戏名称：</strong><span> %gamename% </span></p>
+            <p><strong>礼包名称：</strong><span> %giftname% </span></p>
+            <p><strong>资讯名称：</strong><span> %newsname% </span></p>
+            <p><strong>游戏类型：</strong><span> %gametype% </span></p>
+        </div>
+        <volist name="lists" id="vo">
+        <div class="tab-content">
+            <div id="tab{$i}" class="tab-pane <eq name='i' value='1' >in</eq> tab{$i}">
+                <form action="{:U('save')}" method="post" class="form-horizontal {$vo.name}">
+                    <div class="form-item">
+                        <label class="item-label">Title<span class="check-tips">（{$vo.title}标题）</span> </label>
+                        <div class="controls">
+                            <textarea name="seo_title" class="seo_txt seo_txt_s" >{$vo.seo_title}</textarea>
+                        </div>
+                    </div>
+                    <div class="form-item">
+                        <label class="item-label">Keyword<span class="check-tips">（{$vo.title}关键字）</span> </label>
+                        <div class="controls">
+                            <textarea name="seo_keyword" class="seo_txt seo_txt_d" >{$vo.seo_keyword}</textarea>
+                        </div>
+                    </div>
+                    <div class="form-item">
+                        <label class="item-label">Description<span class="check-tips">（{$vo.title}描述）</span> </label>
+                        <div class="controls">
+                            <textarea name="seo_description" class="seo_txt seo_txt_m" >{$vo.seo_description}</textarea>
+                        </div>
+                    </div>
+                    <div class="form-item">
+                        <div class="controls">
+                            <input type="hidden" name="name" value="{$vo.name}"></input>
+                            <input type="hidden" name="module" value="media"></input>                           
+                            <button type="submit" class="btn submit-btn ajax-post" target-form="{$vo.name}">确 定</button>
+                            <button class="btn btn-return" onclick="javascript:history.back(-1);return false;">返 回</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        </volist>
+	</div>
+</block>
+
+<block name="script">
+<script type="text/javascript">
+	//导航高亮
+	highlight_subnav('{:U("Seo/media")}');
+	$(function(){
+		//支持tab
+		showTab();
+	})
+</script>
+</block>

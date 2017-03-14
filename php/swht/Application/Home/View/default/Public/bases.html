@@ -1,0 +1,69 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>{:C('CH_SET_TITLE')}</title>
+		<meta name="keywords" content="{:C('CH_SET_META_KEY')}" />
+		<meta name="description" content="{:C('CH_SET_META_DESC')}" />
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<meta charset="utf-8">
+		<meta name="renderer" content="webkit">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="description" content="{:C('WEB_SITE_KEYWORD2')}">
+		<meta name="keywords" content="{:C('WEB_SITE_DESCRI2')}">
+		<link href="__CSS__/global.min.css" rel="stylesheet">
+		<link href="__CSS__/index_01.min.css" rel="stylesheet">
+		<script type="text/javascript" src="__JS__/jquery-1.11.1.min.js"></script>
+		<script type="text/javascript" src="__STATIC__/layer/layer.js" ></script>
+		<script type="text/javascript" src="__JS__/common.js"></script>
+		<!--<![endif]-->
+		<!-- 页面header钩子，一般用于加载插件CSS文件和代码 -->
+		{:hook('pageHeader')}
+	</head>
+	<body>
+		<div class="header">
+			<div class="section topBar">
+				<h1 class="hid"></h1>
+					<?php $logo = C('MT_SITE_LOGO2');$logo = get_cover($logo);$logo = $logo['path']; ?>
+					<a href="/" title="" class="logo" style="background:url(__ROOT__{$logo}) no-repeat 0 0;"></a>
+			
+				<p id="userInfo" class="uInfo">{$ad.cName}</p>
+			</div>
+			<div class="nav">
+				<ul class="section">
+					<think:nav name="nav">
+                    	<eq name="nav.pid" value="0">
+                        <li>
+                            <a href="{$nav.url|get_nav_url}" target="<eq name='nav.target' value='1'>_blank<else/>_self</eq>">{$nav.title}</a>
+                        </li>
+                        </eq>
+                    </think:nav>
+				</ul>
+			</div>
+		</div>
+		<div class="intro-con">
+			<block name="body"></block>
+		</div>
+		<div class="footer">  网络备案:{:C('CH_SET_FOR_THE_RECORD')}&nbsp;&nbsp;网络文化经营许可证编号：{:C('CH_SET_LICENSE')}
+                 版权所有:{:C('CH_SET_COPYRIGHT')}</div>
+		<div class="toolBar">
+			<ul>
+				<li><a href="mailto:tui@vlcms.com" target="_blank"><span class="ico-contact"></span>联系我们</a></li>
+				<li><a href="#" target="_blank"><span class="ico-help"></span>帮助中心</a></li>
+				<li><a href="javascript:void(0)" id="goTop"><span class="ico-gotop"></span>回到顶部</a></li>
+			</ul>
+		</div>
+		<script type="text/javascript">
+			(function(){
+				var ThinkPHP = window.Think = {
+					"ROOT"   : "__ROOT__", //当前网站地址
+					"APP"    : "__APP__", //当前项目地址
+					"PUBLIC" : "__PUBLIC__", //项目公共目录地址
+					"DEEP"   : "{:C('URL_PATHINFO_DEPR')}", //PATHINFO分割符
+					"MODEL"  : ["{:C('URL_MODEL')}", "{:C('URL_CASE_INSENSITIVE')}", "{:C('URL_HTML_SUFFIX')}"],
+					"VAR"    : ["{:C('VAR_MODULE')}", "{:C('VAR_CONTROLLER')}", "{:C('VAR_ACTION')}"]
+				}
+			})();
+		</script>
+	</body>
+</html>

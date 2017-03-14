@@ -1,0 +1,53 @@
+<extend name="Public/promote_base"/>
+
+<block name="body">
+<div id="query">
+  <div class="mod">
+    <h2>转移平台币</h2>
+    <div class="zc_for">
+      <form id="form" action="{:U('transfer')}" method="post">
+        <table width="100%" border="0" cellspacing="0" cellpadding="0">
+          <tbody>
+            <tr>
+              <td class="l"></td>
+              <td class="r">
+                <span class="pay_type_info" id="pay_type_0">
+                  可用平台币币为：<font color="#FF0000">0.00个</font>
+                </span>
+              </td>
+            </tr>
+            
+            <tr>
+              <td class="l">充值用户名：</td>
+              <td class="r">
+                <input type="text" class="name txt" id="pay_username" name="account">
+              </td>
+            </tr>
+            
+            <tr>
+              <td class="l">充值金额：</td>
+              <td class="r"><input type="text" class="name txt" id="pay_fmoney" name="amount">
+                (请输入整数)
+              </td>
+            </tr>
+            <tr>
+              <td class="l"></td>
+              <td class="r">
+                <input type="hidden" name="create_time" value="{:date('Y-m-d H:i:s')}"> 
+                <button type="submit" class="tjbnt" id="submit" >确认</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </form>
+    </div>
+  </div>
+</div>
+</block>
+<block name="script">
+  <script type="text/javascript">
+    $('#submit').click(function(){
+      $('#form').submit();
+    });
+  </script>
+</block>

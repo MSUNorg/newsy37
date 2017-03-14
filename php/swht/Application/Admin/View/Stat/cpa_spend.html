@@ -1,0 +1,180 @@
+<extend name="Public/base"/>
+
+<block name="body">
+    <!-- 标题栏 -->
+    <div class="main-title">
+        <h2>消费统计 列表</h2>
+    </div>
+	<div class="cf top_nav_list">
+		<!-- <div class="fl">
+		<empty name="model.extend">
+			<div class="tools">
+				<a class="btn" href="{:U('add?model='.$model['id'])}">新 增</a>
+				<button class="btn ajax-post confirm" target-form="ids" url="{:U('del?model='.$model['id'])}">删 除</button>
+			</div>
+		</empty>
+		</div> -->
+		<!-- 高级搜索 -->
+		<div class="search-form fr cf">
+        <div class="i_list" id="" >
+                 <div class="drop-down" id="game">
+                    <if condition="I('game_name') eq ''">
+                    <input type="text" id="i_list_id" class="sort-txt" value="" placeholder="请选择游戏" />
+                    <else />
+                    <input type="text" id="i_list_id" class="sort-txt" value="{:I('game_name')}" placeholder="请选择游戏" />
+                    </if>
+                    <input type="hidden" id="i_list_idh" name="game_name" value="{:I('game_name')}" />
+                    <i class="arrow arrow-down"></i>
+                    <ul id="i_list_li" class="nav-list hidden i_list_li">
+                        <li><a href="javascript:;" value="" >全部</a></li>
+                        <volist name=":get_game_list()" id="vo">                        
+                        <li><a href="javascript:;" value="{$vo.id}" >{$vo.game_name}</a></li>
+                        </volist>
+                    </ul>
+                </div>                
+            </div>
+            <div class="i_list">
+                 <div class="drop-down" id="promote">
+                    <if condition="I('promote_name') eq ''">
+                    <input type="text" id="i_list_id" class="sort-txt" value="" placeholder="请选择所属渠道" />
+                    <else />
+                    <input type="text" id="i_list_id" class="sort-txt" value="{:I('promote_name')}" placeholder="请选择所属渠道" />
+                    </if>
+                    <input type="hidden" id="i_list_idh" name="promote_name" value="{:I('promote_name')}" />
+                    <i class="arrow arrow-down"></i>
+                    <ul id="i_list_li" class="nav-list hidden i_list_li">
+                        <li><a href="javascript:;" value="" >全部</a></li>
+                        <li><a href="javascript:;" value="0" >自然注册</a></li>
+                        <volist name=":get_promote_all()" id="vo">                        
+                        <li><a href="javascript:;" value="{$vo.id}" >{$vo.account}</a></li>
+                        </volist>
+                    </ul>
+                </div>                
+            </div>
+			<!-- <div class="sleft"> -->
+				<!-- <input type="text" name="{$model['search_key']|default='user_account'}" class="search-input" value="{:I('user_account')}" placeholder="请输入用户账号">
+				 --><!-- <a class="sch-btn" href="javascript:;" id="search" url="{:U('stat/cpa_spend','model='.$model['name'],false)}"><i class="btn-search"></i></a> -->
+			<!-- </div> -->
+            <div class="input-list">
+                <a class="sch-btn" href="javascript:;" id="search" url="{:U('stat/cpa_spend','model='.$model['name'],false)}">搜索</a>
+            </div>
+		</div>
+	</div>
+
+
+    <div class="data-table">
+        <div class="data-table table-striped">
+            <table>
+                <!-- 表头 -->
+                <thead>
+                    <tr>
+                        <th style="text-align:center">游戏名称</th>
+                        <th style="text-align:center">充值金额</th>
+                        <th style="text-align:center">推广员</th>
+                        <th style="text-align:center">充值人数</th>
+                    </tr>
+                </thead>
+                <!-- 列表 -->
+                <tbody>
+                    <volist name="list_data" id="data">
+                        <tr>
+                            <td style="border-right:1px solid #DDDDDD;text-align:center">{:get_game_name($data['game_appid'],'game_appid')}</td>
+                            <td style="border-right:1px solid #DDDDDD;text-align:center">{$data.count}</td>
+                            <td style="border-right:1px solid #DDDDDD;text-align:center">
+                              {:get_promote_name($data['promote_id'])}
+                            </td>
+                            <td style="border-right:1px solid #DDDDDD;text-align:center">{$data.allcount}</td>
+                        </tr>
+                    </volist>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="page">
+        {$_page|default=''}
+    </div>
+</block>
+
+<block name="script">
+<script type="text/javascript">
+//导航高亮
+highlight_subnav('{:U('stat/cpa_spend')}');
+$(function(){
+	//搜索功能
+	$("#search").click(function(){
+		var url = $(this).attr('url');
+        var query  = $('.search-form').find('input').serialize();
+        query = query.replace(/(&|^)(\w*?\d*?\-*?_*?)*?=?((?=&)|(?=$))/g,'');
+        query = query.replace(/^&/g,'');
+        if( url.indexOf('?')>0 ){
+            url += '&' + query;
+        }else{
+            url += '?' + query;
+        }
+		window.location.href = url;
+	});
+
+    //回车自动提交
+    $('.search-form').find('input').keyup(function(event){
+        if(event.keyCode===13){
+            $("#search").click();
+        }
+    });
+
+    $("#game").on('click',function(event) {
+        var navlist = $(this).find('.i_list_li');
+        if (navlist.hasClass('hidden')) {
+            navlist.removeClass('hidden');
+            $(this).find('#i_list_id').focus().val('');            
+        } else {
+            navlist.addClass('hidden');
+        }
+        $(document).one("click", function(){
+            navlist.addClass('hidden');
+        });
+        event.stopPropagation();
+    });
+
+    $('#game #i_list_id').on('keyup',function(event) {
+        var val  = $.trim($(this).val()).toLowerCase();
+        $(this).closest('.drop-down').find('#i_list_idh').val(val);
+    });
+    
+    $("#game #i_list_li").find("a").each(function(){
+        $(this).click(function(){
+            var text = $.trim($(this).text()).toLowerCase();
+            $(this).closest('.drop-down').find("#i_list_id").val(text);
+            $(this).closest('.drop-down').find('#i_list_idh').val(text);
+        })
+    });
+    
+    
+    $("#promote").on('click',function(event) {
+        var navlist = $(this).find('.i_list_li');
+        if (navlist.hasClass('hidden')) {
+            navlist.removeClass('hidden');
+            $(this).find('#i_list_id').focus().val('');            
+        } else {
+            navlist.addClass('hidden');
+        }
+        $(document).one("click", function(){
+            navlist.addClass('hidden');
+        });
+        event.stopPropagation();
+    });
+
+    $('#promote #i_list_id').on('keyup',function(event) {
+        var val  = $.trim($(this).val()).toLowerCase();
+        $(this).closest('.drop-down').find('#i_list_idh').val(val);
+    });
+    
+    $("#promote #i_list_li").find("a").each(function(){
+        $(this).click(function(){
+            var text = $.trim($(this).text()).toLowerCase();
+            $(this).closest('.drop-down').find("#i_list_id").val(text);
+            $(this).closest('.drop-down').find('#i_list_idh').val(text);
+        })
+    });
+})
+</script>
+</block>

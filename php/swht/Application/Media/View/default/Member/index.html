@@ -1,0 +1,81 @@
+<extend name="Public/base" />
+<block name="body">
+<!--main-->
+<div class="wrap_w">
+  <div class="crumbs"><em>当前位置：</em><a href="{:U('Index/index')}" target="_blank">溪谷游戏</a>
+	<span> &gt; </span><a href="{:U('Subscriber/record')}">用户中心</a></div>
+  <div id="member" class="clearfix">
+    <!--左边导航-->
+    <div id="member_l">
+      <include file="Base" />
+    </div>
+    <!--左边导航END-->  
+    <div id="member_r">
+      <div id="profile" class="clearfix">
+        <div class="img"><img class="uc-avatar" src="" alt=""></div>
+        <div class="otherinfo">
+          <p>{:session('member_auth.nickname')} <span id='date'></span></p>
+          <div class="info-notice"> 
+            账户安全级别： <span class="icon-common icon-safe"></span>较高 
+            <!--<span class="sep">|</span> <span class="icon-common icon-safe-open"></span> 绑定手机 
+            <span class="sep">|</span> <span class="icon-common icon-safe-open"></span> 绑定邮箱--> 
+          </div>
+        </div>
+        <div class="customer">
+          <div id="left"><img src="__IMG__/cus.jpg" alt=""></div>
+          <div id="right">
+            我是您的专属客服<em>wsdddd</em><br>有问题可以给我
+            <a href="http://wpa.qq.com/msgrd?v=3&amp;uin=4000274365&amp;site=qq&amp;menu=yes">发消息</a>
+          </div>
+        </div>
+      </div>
+      <div id="rece_gift" class="game_mod">
+        <h3><em><a href="{:U('Game/gift_list')}" target="_black">+更多推荐礼包</a></em><span>最新礼包</span></h3>
+        <ul class="clearfix">
+          <volist name='list_gift' id='vo'>
+          <li class="block-link" title="{$vo.game_name}"> 
+            <a href="{:U('Gift/gift_list')}" target="_blank" class="icon"> 
+              <img src="__ROOT__{$vo.icon|get_cover='path'}" width="72" height="72" alt="{$vo.game_name}" border="0">
+            </a> 
+            <a href="{:U('Gift/index')}" target="_blank" class="title">
+              <span>{$vo.game_name}</span>渠道礼包
+            </a> 
+            <!-- <span class="status">剩余：<em>100%</em></span> -->
+          </li>
+          </volist>
+             
+        </ul>
+      </div>
+      <div id="rece_game" class="game_mod">
+        <h3><em><a href="{:U('Game/game_list')}" target="_black">+更多推荐游戏</a></em><span>猜您会喜欢的游戏</span></h3>
+        <ul class="clearfix">
+          <volist name='list_game' id='vo'>
+            <li class="block-link" title="{$vo.game_name}">
+            <a href="{:U('Game/gift_detail')}" target="_blank" class="icon">
+              <img src="__ROOT__{$vo.icon|get_cover='path'}" width="72" height="72" alt="{$vo.game_name}" border="0">
+            </a> 
+            <a href="{:U('Game/game_detail')}" target="_blank" class="title"><span>{$vo.game_name}</span>角色扮演</a> 
+            <span class="status"><a href="javascript:" target="_blank">立即下载</a></span>
+          </li>
+          </volist>
+			  </ul>
+      </div>
+    </div>
+  </div>
+</div>
+</block>
+<block name='script'>
+  <script language="javaScript"> 
+  $(function() {
+    now = new Date(),hour = now.getHours() 
+    if(hour < 6){$('#date').html("凌晨好！")} 
+    else if (hour < 9) {$('#date').html("早上好～")} 
+    else if (hour < 12){$('#date').html("上午好～")} 
+    else if (hour < 14){$('#date').html("中午好～")} 
+    else if (hour < 17){$('#date').html("下午好～")} 
+    else if (hour < 19){$('#date').html("傍晚好～")} 
+    else if (hour < 22){$('#date').html("晚上好～")} 
+    else {$('#date').html("夜里好～")} 
+  })
+  </script>
+</block>

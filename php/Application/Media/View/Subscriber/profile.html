@@ -1,0 +1,93 @@
+<extend name="Public/subbases" />
+<block name="body" >
+<link href="__CSS__/profile.css" rel="stylesheet" />
+<div class="m-personInfo-wrap m-user-center-content">
+	<div class="user-center-title"><h2>个人资料</h2></div>
+	<ul class="info-box">
+		<li class="item">
+			<div class="li-label">账号：</div>
+			<div class="li-content js-name-box filled">
+				<span class="js-show-spec-it filled-txt ">{$up.account}</span>
+			</div>
+		</li>
+		<li class="item">
+			<div class="li-label">昵称：</div>
+			<div class="li-content js-name-box filled">
+				<input type="text" name="nickname" class="nickname" id="nickname" data-value="{$up.nickname}" value="{$up.nickname}" />
+			</div>
+		</li>
+		<li class="item">
+			<div class="li-label">平台币余额：</div>
+			<div class="li-content js-name-box filled">
+				<span class="js-show-spec-it filled-txt ">{$up.balance}</span>
+			</div>
+		</li>
+		<!--<li class="item">
+			<div class="li-label">邮箱：</div>
+			<div class="li-content js-name-box filled">
+				<empty name="up.email">
+				<span class="js-show-spec-it filled-txt ">未绑定</span><a href="{:U('safe')}" class="bindbtn">去绑定</a>
+				<else />
+				<span class="js-show-spec-it filled-txt ">{$up.email}</span>
+				</empty>
+			</div>
+		</li>-->
+		<li class="item">
+			<div class="li-label">手机：</div>
+			<div class="li-content js-name-box filled">
+				<empty name="up.phone">
+				<span class="js-show-spec-it filled-txt ">未绑定</span><a href="{:U('safe')}" class="bindbtn">去绑定</a>
+				<else />
+				<span class="js-show-spec-it filled-txt ">{$up.phone}</span>
+				</empty>
+			</div>
+		</li>
+		<li class="item">
+			<div class="li-label">姓名：</div>
+			<div class="li-content js-name-box filled">
+				<empty name="up.real_name">
+				<span class="js-show-spec-it filled-txt ">未绑定</span><a href="{:U('safe')}" class="bindbtn">去绑定</a>
+				<else />
+				<span class="js-show-spec-it filled-txt ">{$up.real_name}</span>
+				</empty>
+			</div>
+		</li>
+		<li class="item">
+			<div class="li-label">身份证：</div>
+			<div class="li-content js-name-box filled">
+				<empty name="up.idcard">
+				<span class="js-show-spec-it filled-txt ">未绑定</span><a href="{:U('safe')}" class="bindbtn">去绑定</a>
+				<else />
+				<span class="js-show-spec-it filled-txt ">{$up.idcard}</span>
+				</empty>
+			</div>
+		</li>
+	</ul>
+	<p class="tips"> </p>
+	<a href="javascript:;" class="btn editor-btn">提交</a>
+</div>
+<script src="__JS__/pop.js"></script>
+<script>
+$(function() {
+	$('.editor-btn').on('click',function() {
+		var nickname = $.trim($('#nickname').val()),data = $.trim($('#nickname').data('value'));
+		if (nickname == '') {
+			pop('警告','昵称不能为空',{ok:'确定'},true,3000);
+			return false;
+		}
+		if (nickname == data) {
+			pop('警告','昵称修改后才能提交',{ok:'确定'},true,3000);
+			return false;
+		}
+		
+		$.post('__SELF__',{nickname:nickname},function(req) {
+			if (Number(req.status) == 1) {
+				pop('',req.info,{ok:'确定'},true,3000,{url:'__SELF__',time:400});
+			} else {
+				pop('',req.info,{ok:'确定'},true);
+			}
+		},'json');
+	});
+});
+</script>
+</block>
